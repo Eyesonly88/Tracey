@@ -18,11 +18,12 @@ $projType = $_GET["type"];
 #foreign key, bigint
 $projLeader = $_GET["lead"];
 
+# use loginService.php file from my webserver
 #connection parameters
-$connection = "mysql407.ixwebhosting.com:3306";
-$username="Armalit_service";
-$password="Sh33sha";
-$database="Armalit_tracey";
+$connection = "";
+$username="";
+$password="";
+$database="";
 
 #auto-incrementing bigint
 $projectId = "NULL";
