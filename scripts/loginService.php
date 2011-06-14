@@ -1,9 +1,10 @@
 <?php
 
-$connection = "mysql407.ixwebhosting.com:3306";
-$username="Armalit_service";
-$password="Sh33sha";
-$database="Armalit_tracey";
+#Note: Left this info out as this is a public repository. Use the same login script that is on my webserver, for testing. (It is protected there, with the values filled out)
+$connection = "";
+$username="";
+$password=""; 
+$database="";
 
 
 ?>
