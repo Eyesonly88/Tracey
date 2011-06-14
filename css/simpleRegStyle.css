@@ -1,0 +1,40 @@
+/* Sub-headers used for registration titles */
+h2
+{
+	font-size: 36px;
+	margin: 10px 0 0;
+	line-height: 36px;
+	letter-spacing: -2px;
+	color:#4876FF;
+}
+/* Seperating the two sides of registration page [left side is normal registration] [right side is openID registration] */ 
+#left-normalReg,#right-openIDReg{
+	padding-left:2em;
+	float:left;
+}
+/* styling for the label before the input fields */
+label{
+	display: inline;
+	font-size: 20px;
+	color: #666;
+	letter-spacing: -1px;
+	font-weight: bold;
+}
+/* styling the input fields */
+input{
+	border: 1px solid #D5D5C5;
+	line-height: 40px;
+	width: 95%;
+	margin-left: 2px;
+	padding: 10px;
+	font-size: 30px;
+	letter-spacing: -1px;
+	background: #F5F5E5;
+	color: #664;
+}
+/* styling the submit/register button */
+input.reg{
+	width: 40%;
+	font-size: 40px;
+	color: #88ACE0;
+}
