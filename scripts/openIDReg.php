@@ -13,6 +13,7 @@ include 'includes/headers.php';
 include 'includes/footers.php';
 include 'includes/formfunctions.php';
 include 'includes/sql_connect.php';
+include 'includes/sql_userfunctions.php';
 
 
 //check parameters
@@ -37,9 +38,9 @@ if (isset($_POST['openID'])) {
 	$openID = NULL;
 }
 
-$test = sanitizeCheck($fName);
+#$test = sanitizeCheck($fName);
 
-
+$userID = NULL;
 
 $fNameSafe = sanitize($fName);
 $lNameSafe = sanitize($lName);
@@ -80,9 +81,7 @@ if ($fNameSafe == '') {
 if (validationFail == 0) { 
 	
 	# Check if email is already in record
-	$sql_checkEmailExistence = "SELECT Email from Armalit_tracey.User WHERE Email= '" . $email . "'";
-	$result_checkEmailExistence = mysql_query($sql_checkEmailExistence, $connection);
-	if (mysql_num_rows($result_checkEmailExistence) { 
+	if (checkEmail($email) == 1) { 
 		validationFail = 1;
 		validationMessage = "Email already registered";
 	}
@@ -92,22 +91,22 @@ if (validationFail == 0) {
 if (validationFail == 0) { 
 
 	# Create user record (table: User)
-	$sql_createUserRecord = 
-	"INSERT INTO `Armalit_tracey`.`User` (`UserId`, `FirstName`, `LastName`, `Email`, `Phone`, `UserType`, `Nickname`) 
-	VALUES (NULL, '" . $fName . "', '" . $lName . "', '" . $email . "', '" . $phone . "', '" . $type . "', '" . $nick . "');";
+	$userID = createUser($fName, $lName, $email, $phone, $nick, $password, $type);
+	
 
-	# Get the UserID registered for this user
-	$sql_getRegisteredUserId = "SELECT UserId FROM Armalit_tracey.User WHERE Email = '" . $email . "'";
-
-	$result_getRegisteredUserID = mysql_query($sql_getRegisteredUserId, $connection);
 }
 
 # Create openID mapping for user if specified (table: UserOpenID)
-if (openIDProvided == 1) { 
+if (openIDProvided == 1) {
+	if ($userID != NULL) { 
 	$sql_createOpenIDMapping = 
 	"INSERT INTO Armalit_tracey.UserOpenID (UserID, OpenID)
 	VALUES (" . $userID . ", '" . $openID . "');";
 	$result_createOpenIDMapping = mysql_query($sql_createOpenIDMapping);
+	} else { 
+	
+		PRINT "Null UserID - Perhaps user was not registered properly";
+	}
 }
 
 ?>
