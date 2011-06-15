@@ -24,7 +24,7 @@ function sanitizeCheck($input) {
 /* Replace malicious code with '' */
 function sanitize($input) { 
 
-	$output = '';
+	$output = $input;
 	if (preg_match($search, '', $input) { 	
 		$output = preg_replace($search, '', $input);
 		PRINT 'Input sanitized';	
