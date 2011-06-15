@@ -5,8 +5,14 @@
 
 
 
-# DB Connection details
+# Includes
 include 'loginservice.php';
+include 'includes/sanitize.php';
+include 'includes/functions.php';
+include 'includes/headers.php';
+include 'includes/footers.php';
+include 'includes/formfunctions.php';
+
 
 # Connect to database server and select tracey database
 $connection = mysql_connect($connection,$username,$password);
@@ -43,24 +49,17 @@ if (isset($_POST['openID'])) {
 	$openID = NULL;
 }
 
+$test = sanitizeCheck($fName);
 
-$fNameSafe = preg_replace($search, '', $fName);
-$lNameSafe = preg_replace($search, '', $lName);
-$emailSafe = preg_replace($search, '', $email);
-$phoneSafe = preg_replace($search, '', $phone);
-$nickSafe = preg_replace($search, '', $nick);
-$passwordSafe = preg_replace($search, '', $password);
+
+
+$fNameSafe = sanitize($fName);
+$lNameSafe = sanitize($lName);
+$emailSafe = sanitize($email);
+$phoneSafe = sanitize($phone);
+$nickSafe = sanitize($nick);
+$passwordSafe = sanitize($password);
  
- 
- 
-# Put the result of regex tests into variables
-/*
-$fName_alphaNumericValidation = preg_match("/^[A-Za-z0-9_- ]+$/", $fName);
-$lName_alphaNumericValidation = preg_match("/^[A-Za-z0-9_- ]+$/", $lName);
-$email_validation = preg_match("/\b[A-Z0-9._%-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b/", $email);
-$phone_numericValidation = preg_match("/^[A-Za-z0-9_- ]+$/", $phone);
-$nick_alphaNumericValidation = preg_match("/^[A-Za-z0-9_- ]+$/", $nick);
-*/
 
 
 // Validation checks for the form fields using the result of regex tests (variables above)
@@ -101,6 +100,7 @@ if (validationFail == 0) {
 	}
 }
 
+/*
 if (validationFail == 0) { 
 
 	# Check if nickname already exists (unique?)
@@ -110,7 +110,7 @@ if (validationFail == 0) {
 		validationFail = 1;
 		validationMessage = "Nickname already in use";
 	}
-}
+} */
 
 if (validationFail == 0) { 
 
