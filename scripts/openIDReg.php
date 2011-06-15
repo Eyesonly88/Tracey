@@ -105,7 +105,7 @@ if (openIDProvided == 1) {
 	$result_createOpenIDMapping = mysql_query($sql_createOpenIDMapping);
 	} else { 
 	
-		PRINT "Null UserID - Perhaps user was not registered properly";
+		echo "Null UserID - Perhaps user was not registered properly";
 	}
 }
 

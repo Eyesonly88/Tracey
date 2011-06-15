@@ -16,7 +16,7 @@
 		$result_checkEmail = mysql_query($sql_checkEmail, $connection);
 		if (mysql_num_rows($result_checkEmail) { 
 			$emailExists = 1;
-			PRINT "Email already exists";
+			echo "Email already exists";
 		}
 		return $emailExists;
 	}
