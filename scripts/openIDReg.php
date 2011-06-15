@@ -17,6 +17,15 @@ $validationFail = 0;
 $validationMessage = "";
 $openIDProvided = 0;
 
+# malicious code search
+$search = array(
+    '@<script[^>]*?>.*?</script>@si',   // Strip out javascript
+    '@<[\/\!]*?[^<>]*?>@si',            // Strip out HTML tags
+    '@<style[^>]*?>.*?</style>@siU',    // Strip style tags properly
+    '@<![\s\S]*?--[ \t\n\r]*>@'         // Strip multi-line comments
+  );
+
+
 # Retrieve the POSTed parameters
 $fName = $_POST['fname'];
 $lName = $_POST['lname']; 
@@ -34,33 +43,46 @@ if (isset($_POST['openID'])) {
 	$openID = NULL;
 }
 
+
+$fNameSafe = preg_replace($search, '', $fName);
+$lNameSafe = preg_replace($search, '', $lName);
+$emailSafe = preg_replace($search, '', $email);
+$phoneSafe = preg_replace($search, '', $phone);
+$nickSafe = preg_replace($search, '', $nick);
+$passwordSafe = preg_replace($search, '', $password);
+ 
+ 
+ 
 # Put the result of regex tests into variables
+/*
 $fName_alphaNumericValidation = preg_match("/^[A-Za-z0-9_- ]+$/", $fName);
 $lName_alphaNumericValidation = preg_match("/^[A-Za-z0-9_- ]+$/", $lName);
 $email_validation = preg_match("/\b[A-Z0-9._%-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b/", $email);
 $phone_numericValidation = preg_match("/^[A-Za-z0-9_- ]+$/", $phone);
 $nick_alphaNumericValidation = preg_match("/^[A-Za-z0-9_- ]+$/", $nick);
+*/
+
 
 // Validation checks for the form fields using the result of regex tests (variables above)
-if (!$fName_alphaNumericValidation) { 
+if ($fNameSafe == '') { 
 	
 	echo "First Name validation failed.";
 	validationFail = 1;
 	validationFail = validationFail + "First Name validation failed; ")
 	
-} else if (!$lName_alphaNumericValidation) { 
+} else if ($lNameSafe == '') { 
 
 	echo "Last Name validation failed.";
 	validationFail = 1;
 	validationFail = validationFail + "Last Name validation failed;")
 	
-} else if (!$phone_numericValidation) { 
+} else if (!$phoneSafe == '') { 
 
 	echo "Phone number validation failed.";
 	validationFail = 1;
 	validationFail = validationFail + "Phone number validation failed;")
 	
-} else if (!$nick_alphaNumericValidation) { 
+} else if (!$nickSafe == '') { 
 
 	echo "Nickname validation failed.";
 	validationFail = 1;
