@@ -6,10 +6,10 @@ $search = array(
     '@<[\/\!]*?[^<>]*?>@si',            // Strip out HTML tags
     '@<style[^>]*?>.*?</style>@siU',    // Strip style tags properly
     '@<![\s\S]*?--[ \t\n\r]*>@',         // Strip multi-line comments
-	'/^[A-Za-z0-9_- ]+$/'
+	'/^[A-Za-z0-9_- ]+$/'				// non-alphanumeric
 );
 
-
+/* Check for malicious code. Return 1 if one found. */
 function sanitizeCheck($input) {
 	
 	$invalid = 0;
@@ -21,6 +21,7 @@ function sanitizeCheck($input) {
 
 } 
 
+/* Replace malicious code with '' */
 function sanitize($input) { 
 
 	$output = '';

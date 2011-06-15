@@ -12,25 +12,13 @@ include 'includes/functions.php';
 include 'includes/headers.php';
 include 'includes/footers.php';
 include 'includes/formfunctions.php';
+include 'includes/sql_connect.php';
 
-
-# Connect to database server and select tracey database
-$connection = mysql_connect($connection,$username,$password);
-$traceydb = mysql_select_db($database, $connection);
 
 //check parameters
 $validationFail = 0;
 $validationMessage = "";
 $openIDProvided = 0;
-
-# malicious code search
-$search = array(
-    '@<script[^>]*?>.*?</script>@si',   // Strip out javascript
-    '@<[\/\!]*?[^<>]*?>@si',            // Strip out HTML tags
-    '@<style[^>]*?>.*?</style>@siU',    // Strip style tags properly
-    '@<![\s\S]*?--[ \t\n\r]*>@'         // Strip multi-line comments
-  );
-
 
 # Retrieve the POSTed parameters
 $fName = $_POST['fname'];
@@ -100,17 +88,6 @@ if (validationFail == 0) {
 	}
 }
 
-/*
-if (validationFail == 0) { 
-
-	# Check if nickname already exists (unique?)
-	$sql_checkNicknameExistence = "SELECT nickname from Armalit_tracey.User WHERE nickname = '" . $nickname . "'";
-	$result_checkNicknameExistence = mysql_query($sql_checkNicknameExistence, $connection);
-	if (mysql_num_rows($result_checkNicknameExistence) { 
-		validationFail = 1;
-		validationMessage = "Nickname already in use";
-	}
-} */
 
 if (validationFail == 0) { 
 

@@ -4,7 +4,7 @@
 
 #Note 2: Don't worry about the change history showing the old password. The login service details have been changed directly in the database, so the old details in history should not work. 
 
-$connection = "";
+$server = "";
 $username="";
 $password=""; 
 $database="";
