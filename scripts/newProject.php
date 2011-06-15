@@ -18,12 +18,6 @@ $projType = $_GET["type"];
 #foreign key, bigint
 $projLeader = $_GET["lead"];
 
-# use loginService.php file from my webserver
-#connection parameters
-$connection = "";
-$username="";
-$password="";
-$database="";
 
 #auto-incrementing bigint
 $projectId = "NULL";

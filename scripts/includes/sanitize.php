@@ -1,5 +1,9 @@
 <?php
 
+/* 
+Sanitize.php Script
+Description: Functions to sanitize user inputs.
+*/
 
 $search = array(
     '@<script[^>]*?>.*?</script>@si',   // Strip out javascript

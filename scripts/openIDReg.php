@@ -6,7 +6,6 @@
 
 
 # Includes
-include 'loginservice.php';
 include 'includes/sanitize.php';
 include 'includes/functions.php';
 include 'includes/headers.php';
