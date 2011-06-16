@@ -8,15 +8,28 @@ $username = sanitize($_POST['username']);
 $password = sanitize($_POST['password']);
 $errorMessage = "";
 
-if (!empty($username))
-// authenticate user
-
-
-}else {
-// display error message
-$errorMessage = "Invalid Input";
-
-}
+	if (!empty($username)){
+	
+	// authenticate user
+	$user = authenticate_user($username,$password);
+	// if user is authenticated then the function should return 1 or true otherwise 0.
+	
+		if($user){
+		// authenticated successfully
+		$_SESSION['username'] = $username;
+		$_SESSION['password'] = $password;
+		// redirect user to members page
+		
+		}else{
+		// display error message (authenticaion failed)
+		$errorMessage = "Authentication failed";
+		}
+	
+	}else{
+	// display error message
+	$errorMessage = "Invalid Input";
+	
+	}
 
 
 ?>

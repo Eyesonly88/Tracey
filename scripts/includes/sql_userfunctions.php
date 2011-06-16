@@ -7,6 +7,13 @@
 	include 'scripts/includes/formfunctions.php';
 	include 'scripts/includes/sql_connect.php'
 
+	
+	function authenticate_user($username,$password){
+	
+	
+	}
+	
+	
 	/* Check if email exists. Returns 1 if email exists, return 0 otherwise */
 	function checkEmail($email) { 
 		
@@ -39,11 +46,13 @@
 	function createUser($fName, $lName, $email, $phone, $nick, $password, $type) { 
 		
 		$result_getRegisteredUserId = NULL;
+		// need to implement a secure hashing method .. i will edit it later
+		
 		
 		# Create user record (table: User)
 		$sql_createUserRecord = 
-		"INSERT INTO `Armalit_tracey`.`User` (`UserId`, `FirstName`, `LastName`, `Email`, `Phone`, `UserType`, `Nickname`) 
-		VALUES (NULL, '" . $fName . "', '" . $lName . "', '" . $email . "', '" . $phone . "', '" . $type . "', '" . $nick . "');";
+		"INSERT INTO `Armalit_tracey`.`User` (`UserId`, `FirstName`, `LastName`, `Email`, `Phone`, `UserType`, `Nickname`, `Password`) 
+		VALUES (NULL, '" . $fName . "', '" . $lName . "', '" . $email . "', '" . $phone . "', '" . $type . "', '" . $nick . "','" . $password . "');";
 
 		# Get the UserID registered for this user
 		$sql_getRegisteredUserId = "SELECT UserId FROM Armalit_tracey.User WHERE Email = '" . $email . "'";
