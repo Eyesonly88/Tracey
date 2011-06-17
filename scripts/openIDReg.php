@@ -29,7 +29,7 @@ $nick = $_POST['nickname'];
 $password = $_POST['password'];
 $type = "1";
 
-# Check if openID was provided
+#Check if openID was provided
 if (isset($_POST['openID'])) { 
 	$openID = $_POST['openID'];
 	$openIDProvided = 1;
@@ -47,29 +47,29 @@ $emailSafe = sanitize($email);
 $phoneSafe = sanitize($phone);
 $nickSafe = sanitize($nick);
 $passwordSafe = sanitize($password);
- 
 
 
-// Validation checks for the form fields using the result of regex tests (variables above)
-if ($fNameSafe == '') { 
+// Validation checks for the form fields after sanitization
+if (empty($fNameSafe)) { 
 	
 	echo "First Name validation failed.";
 	validationFail = 1;
 	validationFail = validationFail + "First Name validation failed; ")
 	
-} else if ($lNameSafe == '') { 
+	
+} else if (empty($lNameSafe)) { 
 
 	echo "Last Name validation failed.";
 	validationFail = 1;
 	validationFail = validationFail + "Last Name validation failed;")
 	
-} else if (!$phoneSafe == '') { 
+} else if (empty($phoneSafe)) { 
 
 	echo "Phone number validation failed.";
 	validationFail = 1;
 	validationFail = validationFail + "Phone number validation failed;")
 	
-} else if (!$nickSafe == '') { 
+} else if (empty($nickSafe)) { 
 
 	echo "Nickname validation failed.";
 	validationFail = 1;
@@ -88,22 +88,15 @@ if (validationFail == 0) {
 
 
 if (validationFail == 0) { 
-
 	# Create user record (table: User)
 	$userID = createUser($fName, $lName, $email, $phone, $nick, $password, $type);
-	
-
 }
 
 # Create openID mapping for user if specified (table: UserOpenID)
 if (openIDProvided == 1) {
 	if ($userID != NULL) { 
-	$sql_createOpenIDMapping = 
-	"INSERT INTO Armalit_tracey.UserOpenID (UserID, OpenID)
-	VALUES (" . $userID . ", '" . $openID . "');";
-	$result_createOpenIDMapping = mysql_query($sql_createOpenIDMapping);
+		$result_createOpenIDMapping = createOpenID($userID, $openID);
 	} else { 
-	
 		echo "Null UserID - Perhaps user was not registered properly";
 	}
 }
