@@ -13,16 +13,37 @@
 	
 	}
 	
-	
 	/* Check if email exists. Returns 1 if email exists, return 0 otherwise */
 	function checkEmail($email) { 
 		
 		$emailExists = 0;
-		$sql_checkEmail = "SELECT Email from Armalit_tracey.User WHERE Email= '" . $email . "'";
-		$result_checkEmail = mysql_query($sql_checkEmail, $connection);
-		if (mysql_num_rows($result_checkEmail) { 
-			$emailExists = 1;
-			echo "Email already exists";
+		$query = $connection -> stmt_init();	
+		$sql_checkEmail = "SELECT Email from Armalit_tracey.User WHERE Email=?";
+		
+		if ($query -> prepare($sql_checkEmail)) { 
+			
+			/* bind params */
+			$query -> bind_param("s", $em);
+			
+			/* Set param */
+			$em = $email;
+			
+			/* Execute the query */			
+			$query -> execute();
+			
+			/* Bind result variable to store the email */
+			$query -> bind_result($result);
+			
+			/* Fetch the results */
+			$query -> fetch();
+			
+			/* Check if the result returned equals to email we are searching for */
+			if ($result == $email) { 
+			
+				$emailExists = 1;
+				echo "Email already exists";
+			}
+			
 		}
 		return $emailExists;
 	}
@@ -77,6 +98,8 @@
 		return $result_createOpenIDMapping;
 		
 	}
+	
+	
 	
 	/* Delete user record that has the specified email*/
 	function deleteUser($email) { 
