@@ -1,6 +1,6 @@
 <?php
 
-include 'scripts/loginService.php'
+include 'scripts/loginService.php';
 
 # Connect to database server and select tracey database
 

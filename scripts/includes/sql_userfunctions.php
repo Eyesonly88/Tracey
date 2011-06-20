@@ -54,7 +54,7 @@
 		$user = NULL;
 		$sql_checkOpenID = "SELECT * FROM Armalit_tracey.UserOpenID WHERE OpenID = '" . $openID . "'";
 		$result_checkOpenID = mysql_query($sql_checkOpenID, $connection);
-		if (mysql_num_rows($result_checkEmail) { 
+		if (mysql_num_rows($result_checkEmail)) { 
 			$openIDExists = 1;
 			$user = mysql_result($result_checkOpenID, 0);
 			echo "OpenID Exists for user: " . $user;
