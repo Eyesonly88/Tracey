@@ -5,7 +5,7 @@
 	include 'scripts/includes/headers.php';
 	include 'scripts/includes/footers.php';
 	include 'scripts/includes/formfunctions.php';
-	include 'scripts/includes/sql_connect.php'
+	include 'scripts/includes/sql_connect.php';
 
 	
 	function authenticate_user($username,$password){

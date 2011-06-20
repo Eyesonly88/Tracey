@@ -53,36 +53,36 @@ $passwordSafe = sanitize($password);
 if (empty($fNameSafe)) { 
 	
 	echo "First Name validation failed.";
-	validationFail = 1;
-	validationFail = validationFail + "First Name validation failed; ")
+	$validationFail = 1;
+	$validationMessage = $validationMessage + "First Name validation failed; ";
 	
 	
 } else if (empty($lNameSafe)) { 
 
 	echo "Last Name validation failed.";
-	validationFail = 1;
-	validationFail = validationFail + "Last Name validation failed;")
+	$validationFail = 1;
+	$validationMessage = $validationMessage + "Last Name validation failed;";
 	
 } else if (empty($phoneSafe)) { 
 
 	echo "Phone number validation failed.";
-	validationFail = 1;
-	validationFail = validationFail + "Phone number validation failed;")
+	$validationFail = 1;
+	$validationMessage = $validationMessage + "Phone number validation failed;";
 	
 } else if (empty($nickSafe)) { 
 
 	echo "Nickname validation failed.";
-	validationFail = 1;
-	validationFail = validationFail + "Nickname validation failed;")
+	$validationFail = 1;
+	$validationMessage = $validationMessage + "Nickname validation failed;";
 	
 }
 
-if (validationFail == 0) { 
+if ($validationFail == 0) { 
 	
 	# Check if email is already in record
 	if (checkEmail($email) == 1) { 
-		validationFail = 1;
-		validationMessage = "Email already registered";
+		$validationFail = 1;
+		$validationMessage = "Email already registered";
 	}
 }
 
