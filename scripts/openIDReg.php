@@ -3,8 +3,6 @@
 # Description: Server-side script for registration functionality of Tracey
 # STATUS: INCOMPLETE  (Updated 6pm, 5 May 2011)
 
-
-
 # Includes
 include 'scripts/includes/sanitize.php';
 include 'scripts/includes/functions.php';

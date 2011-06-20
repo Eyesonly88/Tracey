@@ -6,6 +6,7 @@
 	include 'scripts/includes/footers.php';
 	include 'scripts/includes/formfunctions.php';
 	include 'scripts/includes/sql_connect.php';
+	include 'scripts/includes/sql_prepared.php';
 
 	
 	function authenticate_user($username,$password){
@@ -28,22 +29,17 @@
 			/* Set param */
 			$em = $email;
 			
-			/* Execute the query */			
-			$query -> execute();
+			/* Execute the query and retrieve results dynamically */			
+			$results = dynamicBindResults($query);		
 			
-			/* Bind result variable to store the email */
-			$query -> bind_result($result);
-			
-			/* Fetch the results */
-			$query -> fetch();
+			print_r($results);
 			
 			/* Check if the result returned equals to email we are searching for */
-			if ($result == $email) { 
+			if ($results[0]['Email'] == $email) { 
 			
 				$emailExists = 1;
 				echo "Email already exists";
-			}
-			
+			}		
 		}
 		return $emailExists;
 	}
@@ -51,35 +47,61 @@
 	/* Check if openID exists. If it exists, it returns the UserID of the user it is mapped to. If not, it returns NULL. */
 	function checkOpenID($openID) { 
 		
+		$openIdExists = 0;
 		$user = NULL;
-		$sql_checkOpenID = "SELECT * FROM Armalit_tracey.UserOpenID WHERE OpenID = '" . $openID . "'";
-		$result_checkOpenID = mysql_query($sql_checkOpenID, $connection);
-		if (mysql_num_rows($result_checkEmail)) { 
-			$openIDExists = 1;
-			$user = mysql_result($result_checkOpenID, 0);
-			echo "OpenID Exists for user: " . $user;
+		$query = $connection -> stmt_init();
+		$sql_checkOpenID = "SELECT * FROM Armalit_tracey.UserOpenID WHERE OpenID = ?";
+		
+		if ($query -> prepare($sql_checkOpenID)){
+			
+			$query -> bind_param("s", $oid);
+			$oid = $openID;
+			
+			$results = dynamicBindResults($query);
+			
+			print_r($results);
+			
+			#This IF statement can be improved. There are better ways for checking whether a result was found @TODO.
+			if ($results[0]['OpenID'] == $OpenID)  {
+				
+				$openIdExists = 1;
+				$user = $results[0]['UserId'];	
+							
+			}
+			
 		}
 		return $user;
-	
 	}
 
 	/* Create user record. After creating a record, the function returns the UserID that is assigned to the new user record. */
 	function createUser($fName, $lName, $email, $phone, $nick, $password, $type) { 
 		
 		$result_getRegisteredUserId = NULL;
-		// need to implement a secure hashing method .. i will edit it later
+		# need to implement a secure hashing method .. i will edit it later @TODO
 		
-		
-		# Create user record (table: User)
+		$query = $connection->stmt_init();
+		/* Create user record (table: User) */
 		$sql_createUserRecord = 
 		"INSERT INTO `Armalit_tracey`.`User` (`UserId`, `FirstName`, `LastName`, `Email`, `Phone`, `UserType`, `Nickname`, `Password`) 
 		VALUES (NULL, '" . $fName . "', '" . $lName . "', '" . $email . "', '" . $phone . "', '" . $type . "', '" . $nick . "','" . $password . "');";
-
-		# Get the UserID registered for this user
-		$sql_getRegisteredUserId = "SELECT UserId FROM Armalit_tracey.User WHERE Email = '" . $email . "'";
 		
-		$result_createUserRecord = mysql_query($sql_getRegisteredUserId, $connection);
-		$result_getRegisteredUserId = mysql_query($sql_getRegisteredUserId, $connection);
+		/* Reset the query object */
+		$query = NULL;
+		$query = $connection->stmt_init();
+		
+		# Get the UserID registered for this user
+		$sql_getRegisteredUserId = "SELECT UserId FROM Armalit_tracey.User WHERE Email = ?";
+		
+		if ($query -> prepare($sql_getRegisteredUserId)){
+			$query->bind_param("s", $em);
+			$em = $email;
+			
+			$results = dynamicBindResults($query);
+			$result_getRegisteredUserId = $results[0]['UserId'];
+			
+			#need to check if a result was returned i.e. if the user creation was successful @TODO
+		}
+		
 		
 		return $result_getRegisteredUserId;
 		
@@ -102,15 +124,45 @@
 	
 	
 	/* Delete user record that has the specified email*/
-	function deleteUser($email) { 
-	
+	function deleteUser($email) {
+		 
+		
+		$query = $connection->stmt_init();
 		/* Step one: Delete the openID Mapping from OpenID table */
+		$sql_deleteOpenID = "DELETE FROM Armalit_tracey.UserOpenID uoi INNER JOIN Armalit_tracey.User u ON u.UserID = uoi.UserID WHERE u.Email = ?";
+		
+		
+		if ($query->prepare($sql_deleteOpenID)) {
+			
+			$query->bind_param("s", $em);
+			$em = $email;
+			
+		}
+		
+		
+		/* Perform a test to confirm that the openID mapping has indeed been deleted. @TODO */
+		
+		$query = NULL;
+		$query = $connection->stmt_init();
 		
 		/* Step two: Delete the User record from User Table */
+		$sql_deleteUser = "DELETE FROM Armalit_tracey.User WHERE Email = ?";
+		
+		if ($query->prepare($sql_deleteUser)) {
+			
+			$query->bind_param("s", $em);
+			$em = $email;
+			
+			$results = dynamicBindResults($query);
+			
+			#...do something with results @TODO
+			
+		}
+		
 	
 	}	
 	
-	/* Update user information - TODO*/
+	/* Update user details- TODO*/
 	function updateUser() { 
 		
 	}
