@@ -18,6 +18,13 @@
 	function checkProjectExists() { 
 	
 	}
+	
+	
+	
+	function changeProjectStatus() { 
+	
+	
+	}
 
 	
 ?>
