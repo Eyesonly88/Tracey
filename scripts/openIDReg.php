@@ -78,7 +78,7 @@ if (empty($fNameSafe)) {
 if ($validationFail == 0) { 
 	
 	# Check if email is already in record
-	if (checkEmail($email) == 1) { 
+	if (!empty(getUserByEmail($email))) { 
 		$validationFail = 1;
 		$validationMessage = "Email already registered";
 	}

@@ -15,7 +15,7 @@
 	}
 	
 	/* Check if email exists. Returns 1 if email exists, return 0 otherwise */
-	function checkEmail($email) { 
+	function getUserByEmail($email) { 
 		
 		$emailExists = 0;
 		$userinfo = array();
@@ -43,7 +43,6 @@
 				$emailExists = 1;
 				$user = $results[0]['UserId'];
 				$userinfo = getUserById($user);
-				echo "Email already exists";
 			} else {
 				echo "Email not found";
 			}		
