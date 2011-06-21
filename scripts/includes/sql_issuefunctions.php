@@ -14,7 +14,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_prepared.php');
 
 
 	function createIssue() {
-			
+		global $connection;
 		$query = $connection->stmt_init();
 		$sql_createIssue = "";
 		
@@ -25,7 +25,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_prepared.php');
 	
 	
 	function changeIssueStatus($issueId) {
-		
+		global $connection;
 		$query = $connection->stmt_init();
 		$sql_changeIssueStatus = "";
 		
