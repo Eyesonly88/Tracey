@@ -53,7 +53,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_prepared.php');
 		$openIdExists = 0;
 		$user = NULL;
 		$query = $connection -> stmt_init();
-		$sql_checkOpenID = "SELECT * FROM Armalit_tracey.UserOpenID WHERE OpenID = ?";
+		$sql_checkOpenID = "SELECT * FROM UserOpenID WHERE OpenID = ?";
 		
 		if ($query -> prepare($sql_checkOpenID)){
 					
@@ -82,7 +82,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_prepared.php');
 	function getOpenIdByEmail($email) {
 		global $connection;	
 		$query = $connection->stmt_init();
-		$sql_getOpenId = "SELECT * FROM Armalit_tracey.UserOpenID uoi INNER JOIN Armalit_tracey.User u ON u.UserId = uoi.UserId WHERE u.Email = ?";
+		$sql_getOpenId = "SELECT * FROM UserOpenID uoi INNER JOIN User u ON u.UserId = uoi.UserId WHERE u.Email = ?";
 		$openid = "";	
 		
 		if ($query->prepare($sql_getOpenId)) {		
@@ -108,7 +108,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_prepared.php');
 		$result_getRegisteredUserId = "";
 		$query = $connection->stmt_init();
 		$sql_createUserRecord = 
-		"INSERT INTO `Armalit_tracey`.`User` (`UserId`, `FirstName`, `LastName`, `Email`, `Phone`, `UserType`, `Nickname`, `Password`) 
+		"INSERT INTO User (`UserId`, `FirstName`, `LastName`, `Email`, `Phone`, `UserType`, `Nickname`, `Password`) 
 		VALUES (NULL, ?, ?, ?, ?, ?, ?, ?);";
 			
 		if ($query->prepare($sql_createUserRecord)) {		
@@ -124,7 +124,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_prepared.php');
 		}
 		
 		# Get the UserID registered for this user
-		$sql_getRegisteredUserId = "SELECT UserId FROM Armalit_tracey.User WHERE Email = ?";
+		$sql_getRegisteredUserId = "SELECT UserId FROM User WHERE Email = ?";
 		
 		if ($query -> prepare($sql_getRegisteredUserId)){
 			$query->bind_param("s", $em);
@@ -143,7 +143,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_prepared.php');
 		
 		global $connection; 
 		
-		$sql_createOpenID = "INSERT INTO Armalit_tracey.UserOpenID (UserID, OpenID)
+		$sql_createOpenID = "INSERT INTO UserOpenID (UserID, OpenID)
 		VALUES (" . $userID . ", '" . $openID . "');";
 		#VALUES (?, ?);
 		$result_createOpenIDMapping = mysql_query($sql_createOpenIDMapping);
@@ -159,8 +159,8 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_prepared.php');
 		
 		global $connection;	
 		$query = $connection->stmt_init();
-		$sql_deleteOpenID = "DELETE FROM Armalit_tracey.UserOpenID uoi INNER JOIN Armalit_tracey.User u ON u.UserID = uoi.UserId WHERE u.Email = ?";
-		$sql_deleteUser = "DELETE FROM Armalit_tracey.User WHERE Email = ?";
+		$sql_deleteOpenID = "DELETE FROM UserOpenID uoi INNER JOIN User u ON u.UserID = uoi.UserId WHERE u.Email = ?";
+		$sql_deleteUser = "DELETE FROM User WHERE Email = ?";
 		$valid = 0;
 		$openid = "";
 		
@@ -203,7 +203,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_prepared.php');
 		global $connection;
 		$userinfo = array();
 		$query = $connection->stmt_init();
-		$sql_getUser = "SELECT * FROM Armalit_tracey.User WHERE UserId = ?";	
+		$sql_getUser = "SELECT * FROM User WHERE UserId = ?";	
 		
 		if ($query->prepare($sql_getUser)) {		
 			$query->bind_param("i", $userid);
