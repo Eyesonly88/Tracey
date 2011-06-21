@@ -66,9 +66,7 @@
 					
 			$query -> bind_param("s", $oid);
 			$oid = $openID;
-			
 			$results = dynamicBindResults($query);
-			
 			print_r($results);
 			
 			#This IF statement can be improved. There are better ways for checking whether a result was found @TODO.
@@ -92,13 +90,13 @@
 		$query = $connection->stmt_init();
 		$sql_getOpenId = "SELECT * FROM Armalit_tracey.UserOpenID uoi INNER JOIN Armalit_tracey.User u ON u.UserId = uoi.UserId WHERE u.Email = ?";
 		$openid = "";	
-		if ($query->prepare($sql_getOpenId)) {
-			
+		
+		if ($query->prepare($sql_getOpenId)) {		
 			$query->bind_param("s", $em);
 			$em = $email;			
 			$results = dynamicBindResults($query);
-			$openidinfo = $results[0];
-			
+			$openidinfo = $results[0];	
+				
 			if (!empty($openidinfo)) {			
 				$openid = $openidinfo['OpenId'];
 			}			
@@ -110,17 +108,16 @@
 	/* Create user record. After creating a record, the function returns the UserID that is assigned to the new user record. */
 	function createUser($fName, $lName, $email, $phone, $nick, $password, $type) { 
 		
-		$result_getRegisteredUserId = NULL;
+		
 		# need to implement a secure hashing method .. i will edit it later @TODO
 		
+		$result_getRegisteredUserId = "";
 		$query = $connection->stmt_init();
-		/* Create user record (table: User) */
 		$sql_createUserRecord = 
 		"INSERT INTO `Armalit_tracey`.`User` (`UserId`, `FirstName`, `LastName`, `Email`, `Phone`, `UserType`, `Nickname`, `Password`) 
 		VALUES (NULL, ?, ?, ?, ?, ?, ?, ?);";
 			
-		if ($query->prepare($sql_createUserRecord)) {
-			
+		if ($query->prepare($sql_createUserRecord)) {		
 			$query->bind_param("ssssiss", $F, $L, $E, $P, $T, $N, $pass);		
 			$F = $fName;
 			$L = $lName;
@@ -129,8 +126,7 @@
 			$T = $type;
 			$P = $phone;
 			$pass = $password;		
-			$query->execute();
-			
+			$query->execute();	
 		}
 		
 		# Get the UserID registered for this user
@@ -138,14 +134,11 @@
 		
 		if ($query -> prepare($sql_getRegisteredUserId)){
 			$query->bind_param("s", $em);
-			$em = $email;
-			
+			$em = $email;	
 			$results = dynamicBindResults($query);
-			$result_getRegisteredUserId = $results[0]['UserId'];
-			
+			$result_getRegisteredUserId = $results[0]['UserId'];	
 			#need to check if a result was returned i.e. if the user creation was successful @TODO
-		}
-		
+		}	
 		$query->close();
 		return $result_getRegisteredUserId;
 		
@@ -159,22 +152,17 @@
 		#VALUES (?, ?);
 		$result_createOpenIDMapping = mysql_query($sql_createOpenIDMapping);
 		
-		echo "OpenID Mapping created";
-		
-		return $result_createOpenIDMapping;
-		
+		echo "OpenID Mapping created";	
+		return $result_createOpenIDMapping;	
 	}
 	
 	
 	
 	/* Delete user record that has the specified email*/
-	function deleteUser($email) {
-		 
-		
+	function deleteUserByEmail($email) {	
 		$query = $connection->stmt_init();
 		$sql_deleteOpenID = "DELETE FROM Armalit_tracey.UserOpenID uoi INNER JOIN Armalit_tracey.User u ON u.UserID = uoi.UserId WHERE u.Email = ?";
 		$sql_deleteUser = "DELETE FROM Armalit_tracey.User WHERE Email = ?";
-	
 		$valid = 0;
 		$openid = "";
 		
@@ -200,7 +188,6 @@
 			echo "OpenId Mapping Deleted";
 		}
 
-		
 		/* Step two: Delete the User record from User Table */	
 		if ($query->prepare($sql_deleteUser)) {		
 			$query->bind_param("s", $em);
@@ -219,19 +206,15 @@
 		$query = $connection->stmt_init();
 		$sql_getUser = "SELECT * FROM Armalit_tracey.User WHERE UserId = ?";	
 		
-		if ($query->prepare($sql_getUser)) {
-				
+		if ($query->prepare($sql_getUser)) {		
 			$query->bind_param("i", $userid);
 			$userid = $id;
 			$results = dynamicBindResults($query);
-			$userinfo = $results[0];
-			
+			$userinfo = $results[0];		
 		}
 		$query->close();
 		return $userinfo;
 	}
-	
-	
 	
 	/* Update user details- TODO*/
 	function updateUser() { 
