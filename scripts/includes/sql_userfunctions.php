@@ -54,7 +54,7 @@
 	}
 
 	/* Check if openID exists. If it exists, it returns the UserID of the user it is mapped to. If not, it returns NULL. */
-	function checkOpenID($openID) { 
+	function getUserByOpenId($openID) { 
 		
 		$userinfo = array();
 		$openIdExists = 0;
@@ -86,7 +86,27 @@
 		# if returned array is empty, can test with empty($userinfo)
 		return $userinfo;
 	}
-
+	
+	/* Get the OpenId of a user when an email is specified */
+	function getOpenIdByEmail($email) {
+		$query = $connection->stmt_init();
+		$sql_getOpenId = "SELECT * FROM Armalit_tracey.UserOpenID uoi INNER JOIN Armalit_tracey.User u ON u.UserId = uoi.UserId WHERE u.Email = ?";
+		$openid = "";	
+		if ($query->prepare($sql_getOpenId)) {
+			
+			$query->bind_param("s", $em);
+			$em = $email;			
+			$results = dynamicBindResults($query);
+			$openidinfo = $results[0];
+			
+			if (!empty($openidinfo)) {			
+				$openid = $openidinfo['OpenId'];
+			}			
+		}	
+		return $openid;
+	}
+	
+	
 	/* Create user record. After creating a record, the function returns the UserID that is assigned to the new user record. */
 	function createUser($fName, $lName, $email, $phone, $nick, $password, $type) { 
 		
@@ -152,54 +172,57 @@
 		 
 		
 		$query = $connection->stmt_init();
-		/* Step one: Delete the openID Mapping from OpenID table */
-		$sql_deleteOpenID = "DELETE FROM Armalit_tracey.UserOpenID uoi INNER JOIN Armalit_tracey.User u ON u.UserID = uoi.UserID WHERE u.Email = ?";
-		
-		
-		if ($query->prepare($sql_deleteOpenID)) {
-			
-			$query->bind_param("s", $em);
-			$em = $email;
-			
-		}
-		
-		
-		/* Perform a test to confirm that the openID mapping has indeed been deleted. @TODO */
-		
-		$query = NULL;
-		$query = $connection->stmt_init();
-		
-		/* Step two: Delete the User record from User Table */
+		$sql_deleteOpenID = "DELETE FROM Armalit_tracey.UserOpenID uoi INNER JOIN Armalit_tracey.User u ON u.UserID = uoi.UserId WHERE u.Email = ?";
 		$sql_deleteUser = "DELETE FROM Armalit_tracey.User WHERE Email = ?";
+	
+		$valid = 0;
+		$openid = "";
 		
-		if ($query->prepare($sql_deleteUser)) {
-			
-			$query->bind_param("s", $em);
-			$em = $email;
-			
-			$results = dynamicBindResults($query);
-			
-			#...do something with results @TODO
-			
+		/* Check if this is a registered email */
+		if (empty(getUserByEmail($email))) {
+			$valid = 1;
+			echo "Email not found in database";
+			$query->close();
+			return -1;
 		}
+		
+		$openid = getOpenIdByEmail($email);
+		
+		/* Step one: Delete the openID Mapping from OpenID table */
+		if ($query->prepare($sql_deleteOpenID) && !empty($openid)) {		
+			$query->bind_param("s", $em);
+			$em = $email;	
+			$query->execute();	
+		}
+			
+		/* Perform a test to confirm that the openID mapping has indeed been deleted. */	
+		if (empty(getUserByOpenId($openid))) {
+			echo "OpenId Mapping Deleted";
+		}
+
+		
+		/* Step two: Delete the User record from User Table */	
+		if ($query->prepare($sql_deleteUser)) {		
+			$query->bind_param("s", $em);
+			$em = $email;		
+			$query->execute();					
+		}		
 		
 		$query->close();
-	
+		return 0;	
 	}	
 	
-	
+	/* Returns an array of information for a particular user based on a specified UserId */
 	function getUserById($id) {
 		
 		$userinfo = array();
 		$query = $connection->stmt_init();
-		$sql_getUser = "SELECT * FROM Armalit_tracey.User WHERE UserId = ?";
-		
+		$sql_getUser = "SELECT * FROM Armalit_tracey.User WHERE UserId = ?";	
 		
 		if ($query->prepare($sql_getUser)) {
 				
 			$query->bind_param("i", $userid);
 			$userid = $id;
-			
 			$results = dynamicBindResults($query);
 			$userinfo = $results[0];
 			
@@ -207,6 +230,8 @@
 		$query->close();
 		return $userinfo;
 	}
+	
+	
 	
 	/* Update user details- TODO*/
 	function updateUser() { 
