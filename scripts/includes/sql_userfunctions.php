@@ -18,7 +18,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_prepared.php');
 	
 	}
 	
-	/* Check if email exists. Returns array of user details if email exists, otherwise returns empty array */
+	/* Check if email exists. Returns array of user details if email exists, otherwise returns empty array. @TESTED: OK */
 	function getUserByEmail($email) { 
 	
 		global $connection;
@@ -33,10 +33,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_prepared.php');
 		$em = $email;		
 		$results = dynamicBindResults($query);	
 				
-	
-		/* Check if the result returned equals to email we are searching for */
-		if (empty($results)) { 
-			
+		if (empty($results)) { 	
 			return "";
 		}
 		if ($results[0]['Email'] == $email) { 	
@@ -64,7 +61,9 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_prepared.php');
 			$results = dynamicBindResults($query);
 			print_r($results);
 			
-			#This IF statement can be improved. There are better ways for checking whether a result was found @TODO.
+			if (empty($results)) { 
+				return "";
+			}
 			if ($results[0]['OpenID'] == $OpenID)  {
 							
 				$openIdExists = 1;
@@ -74,9 +73,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_prepared.php');
 			}
 			
 		}
-		$query->close();
 		
-		# if returned array is empty, can test with empty($userinfo)
 		return $userinfo;
 	}
 	
@@ -91,6 +88,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_prepared.php');
 			$query->bind_param("s", $em);
 			$em = $email;			
 			$results = dynamicBindResults($query);
+			if (empty($results)) { return ""; }
 			$openidinfo = $results[0];	
 				
 			if (!empty($openidinfo)) {			
@@ -132,15 +130,15 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_prepared.php');
 			$query->bind_param("s", $em);
 			$em = $email;	
 			$results = dynamicBindResults($query);
+			if (empty($results)) { return ""; }
 			$result_getRegisteredUserId = $results[0]['UserId'];	
 			#need to check if a result was returned i.e. if the user creation was successful @TODO
 		}	
-		$query->close();
 		return $result_getRegisteredUserId;
 		
 	}
 
-	/* Create openID mapping */
+	/* Create openID mapping @TODO: need to change to prepared statements */
 	function createOpenID($userID, $openID) {
 		
 		global $connection; 
@@ -156,7 +154,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_prepared.php');
 	
 	
 	
-	/* Delete user record that has the specified email*/
+	/* Delete user record that has the specified email. Returns -1 if email is not registered. */
 	function deleteUserByEmail($email) {
 		
 		global $connection;	
@@ -167,35 +165,39 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_prepared.php');
 		$openid = "";
 		
 		/* Check if this is a registered email */
-		/*if (empty(getUserByEmail($email))) {
-			$valid = 1;
-			echo "Email not found in database";
-			$query->close();
+		$temp = getUserByEmail($email);
+		if (empty($temp)) {	
 			return -1;
-		}*/
+		}
 		
 		$openid = getOpenIdByEmail($email);
 		
-		/* Step one: Delete the openID Mapping from OpenID table */
+		/* Step one: Delete the openID Mapping from OpenID table (if there is one) */
 		if ($query->prepare($sql_deleteOpenID) && !empty($openid)) {		
 			$query->bind_param("s", $em);
 			$em = $email;	
-			$query->execute();	
-		}
+			$query->execute();
 			
-		/* Perform a test to confirm that the openID mapping has indeed been deleted. */	
-		/*if (empty(getUserByOpenId($openid))) {
-			echo "OpenId Mapping Deleted";
-		}*/
+			/* Perform a test to confirm that the openID mapping has indeed been deleted. */
+			$temp = getUserByOpenId($openid);	
+			if (empty($temp)) {
+				echo "OpenId Mapping Deleted <BR />";
+			}			
+		} 
+					
 
 		/* Step two: Delete the User record from User Table */	
 		if ($query->prepare($sql_deleteUser)) {		
 			$query->bind_param("s", $em);
 			$em = $email;		
-			$query->execute();					
+			$query->execute();	
+			
+			$temp = getUserByEmail($email);
+			if (empty($temp)){ 
+				echo "User record successfully deleted <BR />";
+			}						
 		}		
-		
-		$query->close();
+
 		return 0;	
 	}	
 	
@@ -211,6 +213,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_prepared.php');
 			$query->bind_param("i", $userid);
 			$userid = $id;
 			$results = dynamicBindResults($query);
+			if (empty($results)) { return ""; }
 			$userinfo = $results[0];		
 		}
 		
