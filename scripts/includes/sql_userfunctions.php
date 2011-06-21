@@ -18,10 +18,13 @@
 	function checkEmail($email) { 
 		
 		$emailExists = 0;
+		$userinfo = array();
 		$query = $connection -> stmt_init();	
-		$sql_checkEmail = "SELECT Email from Armalit_tracey.User WHERE Email=?";
+		$sql_checkEmail = "SELECT * from Armalit_tracey.User WHERE Email=?";
 		
 		if ($query -> prepare($sql_checkEmail)) { 
+			
+			$message = "";
 			
 			/* bind params */
 			$query -> bind_param("s", $em);
@@ -38,22 +41,30 @@
 			if ($results[0]['Email'] == $email) { 
 			
 				$emailExists = 1;
+				$user = $results[0]['UserId'];
+				$userinfo = getUserById($user);
 				echo "Email already exists";
+			} else {
+				echo "Email not found";
 			}		
 		}
-		return $emailExists;
+		
+		$query->close();
+		
+		return $userinfo;
 	}
 
 	/* Check if openID exists. If it exists, it returns the UserID of the user it is mapped to. If not, it returns NULL. */
 	function checkOpenID($openID) { 
 		
+		$userinfo = array();
 		$openIdExists = 0;
 		$user = NULL;
 		$query = $connection -> stmt_init();
 		$sql_checkOpenID = "SELECT * FROM Armalit_tracey.UserOpenID WHERE OpenID = ?";
 		
 		if ($query -> prepare($sql_checkOpenID)){
-			
+					
 			$query -> bind_param("s", $oid);
 			$oid = $openID;
 			
@@ -63,14 +74,18 @@
 			
 			#This IF statement can be improved. There are better ways for checking whether a result was found @TODO.
 			if ($results[0]['OpenID'] == $OpenID)  {
-				
+							
 				$openIdExists = 1;
-				$user = $results[0]['UserId'];	
+				$userid = $results[0]['UserId'];
+				$userinfo = getUserById($userid);	
 							
 			}
 			
 		}
-		return $user;
+		$query->close();
+		
+		# if returned array is empty, can test with empty($userinfo)
+		return $userinfo;
 	}
 
 	/* Create user record. After creating a record, the function returns the UserID that is assigned to the new user record. */
@@ -83,11 +98,21 @@
 		/* Create user record (table: User) */
 		$sql_createUserRecord = 
 		"INSERT INTO `Armalit_tracey`.`User` (`UserId`, `FirstName`, `LastName`, `Email`, `Phone`, `UserType`, `Nickname`, `Password`) 
-		VALUES (NULL, '" . $fName . "', '" . $lName . "', '" . $email . "', '" . $phone . "', '" . $type . "', '" . $nick . "','" . $password . "');";
-		
-		/* Reset the query object */
-		$query = NULL;
-		$query = $connection->stmt_init();
+		VALUES (NULL, ?, ?, ?, ?, ?, ?, ?);";
+			
+		if ($query->prepare($sql_createUserRecord)) {
+			
+			$query->bind_param("ssssiss", $F, $L, $E, $P, $T, $N, $pass);		
+			$F = $fName;
+			$L = $lName;
+			$E = $email;
+			$P = $phone;
+			$T = $type;
+			$P = $phone;
+			$pass = $password;		
+			$query->execute();
+			
+		}
 		
 		# Get the UserID registered for this user
 		$sql_getRegisteredUserId = "SELECT UserId FROM Armalit_tracey.User WHERE Email = ?";
@@ -102,7 +127,7 @@
 			#need to check if a result was returned i.e. if the user creation was successful @TODO
 		}
 		
-		
+		$query->close();
 		return $result_getRegisteredUserId;
 		
 	}
@@ -112,7 +137,7 @@
 		
 		$sql_createOpenID = "INSERT INTO Armalit_tracey.UserOpenID (UserID, OpenID)
 		VALUES (" . $userID . ", '" . $openID . "');";
-	
+		#VALUES (?, ?);
 		$result_createOpenIDMapping = mysql_query($sql_createOpenIDMapping);
 		
 		echo "OpenID Mapping created";
@@ -159,8 +184,30 @@
 			
 		}
 		
+		$query->close();
 	
 	}	
+	
+	
+	function getUserById($id) {
+		
+		$userinfo = array();
+		$query = $connection->stmt_init();
+		$sql_getUser = "SELECT * FROM Armalit_tracey.User WHERE UserId = ?";
+		
+		
+		if ($query->prepare($sql_getUser)) {
+				
+			$query->bind_param("i", $userid);
+			$userid = $id;
+			
+			$results = dynamicBindResults($query);
+			$userinfo = $results[0];
+			
+		}
+		$query->close();
+		return $userinfo;
+	}
 	
 	/* Update user details- TODO*/
 	function updateUser() { 
