@@ -1,12 +1,16 @@
 <?php
-	
-	include 'scripts/includes/sanitize.php';
-	include 'scripts/includes/functions.php';
-	include 'scripts/includes/headers.php';
-	include 'scripts/includes/footers.php';
-	include 'scripts/includes/formfunctions.php';
-	include 'scripts/includes/sql_connect.php';
-	include 'scripts/includes/sql_prepared.php';
+
+include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_connect.php');
+include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sanitize.php');
+include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/functions.php');
+include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/headers.php');
+include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/footers.php');
+include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/formfunctions.php');
+include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_userfunctions.php');
+include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_projectfunctions.php');
+include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_other.php');
+include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_checks.php');
+include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_prepared.php');
 
 	
 	function authenticate_user($username,$password){
@@ -19,6 +23,7 @@
 		
 		$emailExists = 0;
 		$userinfo = array();
+		
 		$query = $connection -> stmt_init();	
 		$sql_checkEmail = "SELECT * from Armalit_tracey.User WHERE Email=?";
 		
@@ -157,12 +162,12 @@
 		$openid = "";
 		
 		/* Check if this is a registered email */
-		if (empty(getUserByEmail($email))) {
+		/*if (empty(getUserByEmail($email))) {
 			$valid = 1;
 			echo "Email not found in database";
 			$query->close();
 			return -1;
-		}
+		}*/
 		
 		$openid = getOpenIdByEmail($email);
 		
@@ -174,9 +179,9 @@
 		}
 			
 		/* Perform a test to confirm that the openID mapping has indeed been deleted. */	
-		if (empty(getUserByOpenId($openid))) {
+		/*if (empty(getUserByOpenId($openid))) {
 			echo "OpenId Mapping Deleted";
-		}
+		}*/
 
 		/* Step two: Delete the User record from User Table */	
 		if ($query->prepare($sql_deleteUser)) {		

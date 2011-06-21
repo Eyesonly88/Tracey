@@ -1,13 +1,12 @@
-<?php 
+<?php
 
-# Test out functions by including them and executing here.
-
-include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_connect.php');
 include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sanitize.php');
 include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/functions.php');
 include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/headers.php');
 include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/footers.php');
 include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/formfunctions.php');
+include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_connect.php');
+include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_connect.php');
 include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_userfunctions.php');
 include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_projectfunctions.php');
 include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_other.php');
@@ -15,28 +14,25 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_checks.php');
 include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_prepared.php');
 
 
+	function createIssue() {
+			
+		$query = $connection->stmt_init();
+		$sql_createIssue = "";
+		
+		if ($query->prepare($sql_createIssue)) {
+			
+		}
+	}
 	
-	$email = "ttc_rulz@hotmail.com";
-	$result = getUserByEmail($email);
 	
-	#echo "<pre>";
-	print_r($result);
-	#echo "</pre>";
-
-
-
-/*
-<!DOCTYPE html>  
-  
-<html lang="en">  
-<head>  
-   <meta charset="utf-8">  
-   <title>Tracey Sandbox</title>  
-</head>  
-<body>  
-
-</body>  
-</html>  
-*/
+	function changeIssueStatus($issueId) {
+		
+		$query = $connection->stmt_init();
+		$sql_changeIssueStatus = "";
+		
+		if ($query->prepare($sql_changeIssueStatus)) {
+			
+		}
+	}
 
 ?>

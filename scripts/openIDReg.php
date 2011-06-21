@@ -4,13 +4,19 @@
 # STATUS: INCOMPLETE  (Updated 6pm, 5 May 2011)
 
 # Includes
-include 'scripts/includes/sanitize.php';
-include 'scripts/includes/functions.php';
-include 'scripts/includes/headers.php';
-include 'scripts/includes/footers.php';
-include 'scripts/includes/formfunctions.php';
-include 'scripts/includes/sql_connect.php';
-include 'scripts/includes/sql_userfunctions.php';
+include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sanitize.php');
+include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/functions.php');
+include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/headers.php');
+include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/footers.php');
+include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/formfunctions.php');
+include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_connect.php');
+include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_connect.php');
+include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_userfunctions.php');
+include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_projectfunctions.php');
+include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_other.php');
+include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_checks.php');
+include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_prepared.php');
+
 
 
 //check parameters

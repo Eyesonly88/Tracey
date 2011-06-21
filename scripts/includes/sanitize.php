@@ -22,7 +22,6 @@ function sanitizeCheck($input) {
 		echo "Malicious code found";
 	}
 	return $invalid;
-
 } 
 
 /* Replace malicious code with '' */
