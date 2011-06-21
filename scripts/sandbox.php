@@ -14,16 +14,15 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_other.php');
 include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_checks.php');
 include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_prepared.php');
 
-
+	echo "<B> TRACEY SANDBOX </B> <BR />";
 	
 	$email = "ttc_rulz@hotmail.com";
 	$result = getUserByEmail($email);
-	
-	#echo "<pre>";
-	print_r($result);
-	#echo "</pre>";
+	echo "Results: <BR />";
 
-
+	echo "<B>FirstName:</B> " . $result['FirstName'] . "<BR />";
+	echo "<B>LastName:</B>  " .  $result['LastName']. "<BR />";
+	echo "<B>Nickname:</B>  " . $result['Nickname']. "<BR />";
 
 /*
 <!DOCTYPE html>  

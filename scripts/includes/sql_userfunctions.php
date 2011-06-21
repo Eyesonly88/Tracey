@@ -11,8 +11,8 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_projectfunctions.p
 include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_other.php');
 include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_checks.php');
 include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_prepared.php');
-
 	
+	#$connection = $conn;
 	function authenticate_user($username,$password){
 	
 	
@@ -20,37 +20,35 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_prepared.php');
 	
 	/* Check if email exists. Returns array of user details if email exists, otherwise returns empty array */
 	function getUserByEmail($email) { 
-		
+	
+		global $connection;
 		$emailExists = 0;
 		$userinfo = array();
+		$results = NULL;
+		$query = $connection ->stmt_init();
 		
-		$query = $connection -> stmt_init();	
-		$sql_checkEmail = "SELECT * from Armalit_tracey.User WHERE Email=?";
-		
-		if ($query -> prepare($sql_checkEmail)) { 
-
-			$query -> bind_param("s", $em);
-			$em = $email;		
-			$results = dynamicBindResults($query);			
-			#print_r($results);
+		$sql_checkEmail = "SELECT * from User WHERE Email=?";	
+		$query->prepare($sql_checkEmail);
+		$query -> bind_param("s", $em);
+		$em = $email;		
+		$results = dynamicBindResults($query);	
+				
+	
+		/* Check if the result returned equals to email we are searching for */
+		if ($results[0]['Email'] == $email) { 	
+			$emailExists = 1;
+			$user = $results[0]['UserId'];
+			$userinfo = $results[0];
+		} else {
+			echo "Email not found";
+		}		
 			
-			/* Check if the result returned equals to email we are searching for */
-			if ($results[0]['Email'] == $email) { 	
-				$emailExists = 1;
-				$user = $results[0]['UserId'];
-				$userinfo = getUserById($user);
-			} else {
-				echo "Email not found";
-			}		
-		}
-		
-		$query->close();	
 		return $userinfo;
 	}
 
 	/* Check if openID exists. If it exists, it returns the UserID of the user it is mapped to. If not, it returns NULL. */
 	function getUserByOpenId($openID) { 
-		
+		global $connection;
 		$userinfo = array();
 		$openIdExists = 0;
 		$user = NULL;
@@ -82,6 +80,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_prepared.php');
 	
 	/* Get the OpenId of a user when an email is specified */
 	function getOpenIdByEmail($email) {
+		global $connection;	
 		$query = $connection->stmt_init();
 		$sql_getOpenId = "SELECT * FROM Armalit_tracey.UserOpenID uoi INNER JOIN Armalit_tracey.User u ON u.UserId = uoi.UserId WHERE u.Email = ?";
 		$openid = "";	
@@ -105,7 +104,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_prepared.php');
 		
 		
 		# need to implement a secure hashing method .. i will edit it later @TODO
-		
+		global $connection;
 		$result_getRegisteredUserId = "";
 		$query = $connection->stmt_init();
 		$sql_createUserRecord = 
@@ -140,7 +139,9 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_prepared.php');
 	}
 
 	/* Create openID mapping */
-	function createOpenID($userID, $openID) { 
+	function createOpenID($userID, $openID) {
+		
+		global $connection; 
 		
 		$sql_createOpenID = "INSERT INTO Armalit_tracey.UserOpenID (UserID, OpenID)
 		VALUES (" . $userID . ", '" . $openID . "');";
@@ -154,7 +155,9 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_prepared.php');
 	
 	
 	/* Delete user record that has the specified email*/
-	function deleteUserByEmail($email) {	
+	function deleteUserByEmail($email) {
+		
+		global $connection;	
 		$query = $connection->stmt_init();
 		$sql_deleteOpenID = "DELETE FROM Armalit_tracey.UserOpenID uoi INNER JOIN Armalit_tracey.User u ON u.UserID = uoi.UserId WHERE u.Email = ?";
 		$sql_deleteUser = "DELETE FROM Armalit_tracey.User WHERE Email = ?";
@@ -197,6 +200,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_prepared.php');
 	/* Returns an array of information for a particular user based on a specified UserId */
 	function getUserById($id) {
 		
+		global $connection;
 		$userinfo = array();
 		$query = $connection->stmt_init();
 		$sql_getUser = "SELECT * FROM Armalit_tracey.User WHERE UserId = ?";	
@@ -207,7 +211,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_prepared.php');
 			$results = dynamicBindResults($query);
 			$userinfo = $results[0];		
 		}
-		$query->close();
+		
 		return $userinfo;
 	}
 	

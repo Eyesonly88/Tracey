@@ -15,9 +15,8 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_checks.php');
 include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_prepared.php');
 
 	
-	
 	function createProject() { 
-		
+		global $connection;
 		$query = $connection->stmt_init();
 		$sql_createProject = "";
 		
@@ -29,7 +28,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_prepared.php');
 	}
 
 	function deleteProject() {
-		
+		global $connection;
 		$query = $connection->stmt_init(); 
 		$sql_deleteProject = "";
 		
@@ -42,7 +41,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_prepared.php');
 
 
 	function modifyProject() {
-		
+		global $connection;
 		$query = $connection->stmt_init(); 
 		$sql_modifyProject = ""; 
 		
@@ -55,7 +54,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_prepared.php');
 	
 	
 	function checkProjectExists($project) {
-		
+		global $connection;
 		$query = $connection->stmt_init();
 		$sql_getProjectInfo = "";
 		
@@ -67,7 +66,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_prepared.php');
 	
 	
 	function changeProjectStatus() {
-		
+		global $connection;
 		$query = $connection->stmt_init(); 
 		$sql_changeProjectStatus = "";
 		

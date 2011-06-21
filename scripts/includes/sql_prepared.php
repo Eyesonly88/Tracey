@@ -22,6 +22,7 @@ function dynamicBindResults($stmt) {
    	   $x = array();  
     	  foreach( $row as $key => $val ) {  
      	    $x[$key] = $val;  
+			
     	  }  
    	   $results[] = $x;  
    	}  
