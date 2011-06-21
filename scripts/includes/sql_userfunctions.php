@@ -23,23 +23,14 @@
 		$sql_checkEmail = "SELECT * from Armalit_tracey.User WHERE Email=?";
 		
 		if ($query -> prepare($sql_checkEmail)) { 
-			
-			$message = "";
-			
-			/* bind params */
+
 			$query -> bind_param("s", $em);
-			
-			/* Set param */
-			$em = $email;
-			
-			/* Execute the query and retrieve results dynamically */			
-			$results = dynamicBindResults($query);		
-			
-			print_r($results);
+			$em = $email;		
+			$results = dynamicBindResults($query);			
+			#print_r($results);
 			
 			/* Check if the result returned equals to email we are searching for */
-			if ($results[0]['Email'] == $email) { 
-			
+			if ($results[0]['Email'] == $email) { 	
 				$emailExists = 1;
 				$user = $results[0]['UserId'];
 				$userinfo = getUserById($user);
@@ -48,8 +39,7 @@
 			}		
 		}
 		
-		$query->close();
-		
+		$query->close();	
 		return $userinfo;
 	}
 
