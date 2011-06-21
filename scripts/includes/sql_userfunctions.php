@@ -14,7 +14,7 @@
 	
 	}
 	
-	/* Check if email exists. Returns 1 if email exists, return 0 otherwise */
+	/* Check if email exists. Returns array of user details if email exists, otherwise returns empty array */
 	function getUserByEmail($email) { 
 		
 		$emailExists = 0;
