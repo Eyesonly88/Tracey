@@ -56,26 +56,26 @@ if (empty($fNameSafe)) {
 	
 	echo "First Name validation failed.";
 	$validationFail = 1;
-	$validationMessage = $validationMessage + "First Name validation failed; ";
+	$validationMessage = $validationMessage . "First Name validation failed; ";
 	
 	
 } else if (empty($lNameSafe)) { 
 
 	echo "Last Name validation failed.";
 	$validationFail = 1;
-	$validationMessage = $validationMessage + "Last Name validation failed; ";
+	$validationMessage = $validationMessage . "Last Name validation failed; ";
 	
 } else if (empty($phoneSafe)) { 
 
 	echo "Phone number validation failed.";
 	$validationFail = 1;
-	$validationMessage = $validationMessage + "Phone number validation failed; ";
+	$validationMessage = $validationMessage . "Phone number validation failed; ";
 	
 } else if (empty($nickSafe)) { 
 
 	echo "Nickname validation failed.";
 	$validationFail = 1;
-	$validationMessage = $validationMessage + "Nickname validation failed; ";
+	$validationMessage = $validationMessage . "Nickname validation failed; ";
 	
 }
 
