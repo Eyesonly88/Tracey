@@ -35,12 +35,14 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_prepared.php');
 				
 	
 		/* Check if the result returned equals to email we are searching for */
+		if (empty($results)) { 
+			
+			return "";
+		}
 		if ($results[0]['Email'] == $email) { 	
 			$emailExists = 1;
 			$user = $results[0]['UserId'];
 			$userinfo = $results[0];
-		} else {
-			echo "Email not found";
 		}		
 			
 		return $userinfo;
