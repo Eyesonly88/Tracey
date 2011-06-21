@@ -17,8 +17,6 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_other.php');
 include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_checks.php');
 include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_prepared.php');
 
-
-
 //check parameters
 $validationFail = 0;
 $validationMessage = "";
@@ -65,26 +63,27 @@ if (empty($fNameSafe)) {
 
 	echo "Last Name validation failed.";
 	$validationFail = 1;
-	$validationMessage = $validationMessage + "Last Name validation failed;";
+	$validationMessage = $validationMessage + "Last Name validation failed; ";
 	
 } else if (empty($phoneSafe)) { 
 
 	echo "Phone number validation failed.";
 	$validationFail = 1;
-	$validationMessage = $validationMessage + "Phone number validation failed;";
+	$validationMessage = $validationMessage + "Phone number validation failed; ";
 	
 } else if (empty($nickSafe)) { 
 
 	echo "Nickname validation failed.";
 	$validationFail = 1;
-	$validationMessage = $validationMessage + "Nickname validation failed;";
+	$validationMessage = $validationMessage + "Nickname validation failed; ";
 	
 }
 
 if ($validationFail == 0) { 
 	
 	# Check if email is already in record
-	if (!empty(getUserByEmail($email))) { 
+	$temp = getUserByEmail($email);
+	if (!empty($temp)) { 
 		$validationFail = 1;
 		$validationMessage = "Email already registered";
 	}
@@ -98,10 +97,10 @@ if (validationFail == 0) {
 
 # Create openID mapping for user if specified (table: UserOpenID)
 if (openIDProvided == 1) {
-	if ($userID != NULL) { 
+	if (!empty($userID)) { 
 		$result_createOpenIDMapping = createOpenID($userID, $openID);
 	} else { 
-		echo "Null UserID - Perhaps user was not registered properly";
+		echo "Invalid UserID - Perhaps user was not registered properly";
 	}
 }
 
