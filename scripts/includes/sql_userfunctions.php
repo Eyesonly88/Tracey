@@ -47,7 +47,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_prepared.php');
 
 	/* Generic function that returns the desired field from the user record.
 	 * For example, if you want to fetch the Salt of a user, then pass the user's e-mail as first parameter and 'Salt' as second parameter. @TESTED: OK.*/
-	function get_param_from_user($email,$param){
+	function getUserInfo($email,$param){
 		global $connection;
 		$query = $connection->stmt_init();
 		$sql_stmnt = "SELECT " .$param. " FROM User WHERE Email = ?";
