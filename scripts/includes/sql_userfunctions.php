@@ -12,59 +12,53 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_other.php');
 include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_checks.php');
 include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_prepared.php');
 	
-	function myHash($password){
-		
-		$uniqueSalt = uniqueSalt();
-		// store unique salt into user record
-		$hash = sha1($uniqueSalt . $password);
-		
-		$hashed_p = myCrypt($hash);
-		// store hashed password into user record
-	}
-	
-	function myCrypt($hash){
-	
-		// hash it 1000 times so it takes more time for attackers
-		// to build a rainbow table
+	/* hashes the hashed password 1000 times so it takes more time for attackers
+	 to build a rainbow table. @TESTED: OK.*/
+	function repeatHash($hash){
 		for ($i = 0; $i < 1000; $i++){
 			$hash = sha1($hash);
 		}
 		return $hash;
-	
 	}
 	
+	/* returns a unique 22 characters hashed string. @TESTED: OK */
 	function uniqueSalt(){
-	
 		return substr(sha1(mt_rand()), 0, 22);
-	
 	}
 	
+	/* checks if the entered password is valid or not. @TESTED: OK */
 	function checkPass($password, $email){
 		
-		// get the uniqueSalt from user record
+		$uniqueSalt = get_param_from_user($email,'Salt');
+		//echo $uniqueSalt . "<br>";
+		$hashed = repeatHash($uniqueSalt);
+		//echo $hashed . "<br>";
+		$hashed_p = get_param_from_user($email,'Password');
+		//echo $hashed_p . "<br>";
 		
-		$hash = sha1($uniqueSalt . $password);
-		$hashed = myCrypt($hash);
-		
-		// get the hased password from user record
-		
-		// compare $hashed with the hashed password in user record
-	
+		if ($hashed === $hashed_p) {
+			// user is authenticated
+			echo "Correct Password";
+		} else {
+			// user is not authenticated
+			echo "Wrong password";
+		}
 	}
-	
-	function get_user_salt($email){
+
+	/* Generic function that returns the desired field from the user record.
+	 * For example, if you want to fetch the Salt of a user, then pass the user's e-mail as first parameter and 'Salt' as second parameter. @TESTED: OK.*/
+	function get_param_from_user($email,$param){
 		global $connection;
 		$query = $connection->stmt_init();
-		$sql_stmnt = "SELECT Salt FROM User WHERE Email = ?";
+		$sql_stmnt = "SELECT " .$param. " FROM User WHERE Email = ?";
+		
 		if ($query->prepare($sql_stmnt)) {
-			
 			$query->bind_param("s", $em);
 			$em = $email;		
 			$results = dynamicBindResults($query);
-			print_r($results);
-			
-		}	
-		
+			//print_r($results);
+		}
+		return 	$results[0]["$param"];
 	}
 	
 	#$connection = $conn;
@@ -157,24 +151,28 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_prepared.php');
 	/* Create user record. After creating a record, the function returns the UserID that is assigned to the new user record. */
 	function createUser($fName, $lName, $email, $phone, $nick, $password, $type) { 
 		
-		
-		# need to implement a secure hashing method .. i will edit it later @TODO
 		global $connection;
+		
+		$uniqueSalt = uniqueSalt();
+		$hashed_s = sha1($uniqueSalt . $password);
+		$hashed_p = repeatHash($hashed_s);
+		
 		$result_getRegisteredUserId = "";
 		$query = $connection->stmt_init();
 		$sql_createUserRecord = 
-		"INSERT INTO User (`UserId`, `FirstName`, `LastName`, `Email`, `Phone`, `UserType`, `Nickname`, `Password`) 
-		VALUES (NULL, ?, ?, ?, ?, ?, ?, ?);";
+		"INSERT INTO User (`UserId`, `FirstName`, `LastName`, `Email`, `Phone`, `UserType`, `Nickname`, `Password`, `Salt`) 
+		VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?);";
 			
 		if ($query->prepare($sql_createUserRecord)) {		
-			$query->bind_param("ssssiss", $F, $L, $E, $P, $T, $N, $pass);		
+			$query->bind_param("ssssisss", $F, $L, $E, $P, $T, $N, $pass, $salt);		
 			$F = $fName;
 			$L = $lName;
 			$E = $email;
 			$P = $phone;
 			$T = $type;
-			$P = $phone;
-			$pass = $password;		
+			$N = $nick;
+			$pass = $hashed_p;
+			$salt = $hashed_s;		
 			$query->execute();	
 		}
 		

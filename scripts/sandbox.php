@@ -17,7 +17,6 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_prepared.php');
 	echo "<B> TRACEY SANDBOX </B> <BR /><BR />";
 	
 	
-	get_user_salt("test@test.com");
 	
 	
 	$id = "2";
@@ -43,7 +42,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_prepared.php');
 	#test createUser()
 	$fName = "Johnny";
 	$lName = "Depp";
-	$email = "johnny@pirates.com";
+	$email = "johnny@depp.com";
 	$phone = "12345678";
 	$nick = "Jack";
 	$password = "hi";
@@ -59,6 +58,10 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_prepared.php');
 		echo "<B> Nickname: </B>" . $result2['Nickname'] . "<BR />";
 		echo "<B> Phone: </B>" . $result2['Phone'] . "<BR />";
 	}
+	
+	// testing the checkPass()
+	
+	checkPass("hi","johnny@depp.com");
 	
 	
 	
