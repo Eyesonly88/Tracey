@@ -4,7 +4,7 @@ require_once('/scripts/includes/sanitize.php');
 if (isset($_POST['submit'])){
 
 // sanitize login details
-$username = sanitize($_POST['username']);
+$username = sanitize($_POST['email']);
 $password = sanitize($_POST['password']);
 $errorMessage = "";
 
@@ -16,7 +16,7 @@ $errorMessage = "";
 	
 		if($user){
 		// authenticated successfully
-		$_SESSION['username'] = $username;
+		$_SESSION['email'] = $username;
 		$_SESSION['password'] = $password;
 		// redirect user to members page
 		
@@ -40,7 +40,7 @@ $errorMessage = "";
 
 
 <form action="login.php" method="post">
-	<p><label for="login-username">Username: </label><input type="text" name="username" maxlength="30" value="" /></p>
+	<p><label for="login-email">E-mail: </label><input type="text" name="email" maxlength="30" value="" /></p>
 	<br>
 	<p><label for="login-password">Password: </label><input type="password" name="password" maxlength="30" value="" /></p>
 	<br>
