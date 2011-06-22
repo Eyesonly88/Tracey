@@ -148,7 +148,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_prepared.php');
 	}
 	
 	
-	/* Create user record. After creating a record, the function returns the UserID that is assigned to the new user record. */
+	/* Create user record. After creating a record, the function returns the UserID that is assigned to the new user record. @TESTED: OK */
 	function createUser($fName, $lName, $email, $phone, $nick, $password, $type) { 
 		
 		global $connection;
