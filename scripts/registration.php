@@ -63,28 +63,35 @@ $passwordSafe = sanitize($password);
 // Validation checks for the form fields after sanitization
 if (empty($fNameSafe)) { 
 	
-	echo "First Name validation failed.";
+	echo "First Name validation failed. <BR />";
 	$validationFail = 1;
 	$validationMessage = $validationMessage . "First Name validation failed; ";
 	
 	
 } else if (empty($lNameSafe)) { 
 
-	echo "Last Name validation failed.";
+	echo "Last Name validation failed. <BR />";
 	$validationFail = 1;
 	$validationMessage = $validationMessage . "Last Name validation failed; ";
 	
 } else if (empty($phoneSafe)) { 
 
-	echo "Phone number validation failed.";
+	echo "Phone number validation failed. <BR />";
 	$validationFail = 1;
 	$validationMessage = $validationMessage . "Phone number validation failed; ";
 	
 } else if (empty($nickSafe)) { 
 
-	echo "Nickname validation failed.";
+	echo "Nickname validation failed. <BR />";
 	$validationFail = 1;
 	$validationMessage = $validationMessage . "Nickname validation failed; ";
+	
+} else if (empty($emailSafe)) {
+	
+	echo "Email validation failed <BR />";
+	$validationFail = 1;
+	$validationMessage = $validationMessage . "Nickname validation failed; ";
+	
 	
 }
 
@@ -94,7 +101,7 @@ if ($validationFail == 0) {
 	$temp = getUserByEmail($email);
 	if (!empty($temp)) { 
 		$validationFail = 1;
-		$validationMessage = "Email already registered";
+		$validationMessage = "Email already registered <BR />";
 	}
 }
 

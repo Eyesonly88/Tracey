@@ -31,8 +31,8 @@ function sanitize($input) {
 
 	foreach($search as $regex) {
 		if (preg_match($regex, $output)){ 	
-			$output = preg_replace($regex, '', $input);
-			#echo 'Input sanitized';	
+			$output = "";
+			echo 'Input sanitized <BR />';	
 			return $output;
 		}
 	}
