@@ -26,7 +26,7 @@ function uniqueSalt(){
 
 }
 
-
+// testing from windows
 
 function checkPass($password, $email){
 	
