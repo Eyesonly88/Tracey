@@ -9,13 +9,12 @@ $search = array(
     '@<script[^>]*?>.*?</script>@si',   // Strip out javascript
     '@<[\/\!]*?[^<>]*?>@si',            // Strip out HTML tags
     '@<style[^>]*?>.*?</style>@siU',    // Strip style tags properly
-    '@<![\s\S]*?--[ \t\n\r]*>@',         // Strip multi-line comments
-	'/^[A-Za-z0-9_- ]+$/'				// non-alphanumeric
+    '@<![\s\S]*?--[ \t\n\r]*>@'         // Strip multi-line comments
 );
 
 /* Check for malicious code. Return 1 if one found. */
 function sanitizeCheck($input) {
-	
+	global $search;
 	$invalid = 0;
 	if (preg_match($search, $input)){ 	
 		$invalid = 1;	
@@ -26,11 +25,16 @@ function sanitizeCheck($input) {
 
 /* Replace malicious code with '' */
 function sanitize($input) { 
-
+	global $search;
+	#print_r($search);
 	$output = $input;
-	if (preg_match($search, '', $input)){ 	
-		$output = preg_replace($search, '', $input);
-		echo 'Input sanitized';	
+
+	foreach($search as $regex) {
+		if (preg_match($regex, $output)){ 	
+			$output = preg_replace($regex, '', $input);
+			#echo 'Input sanitized';	
+			return $output;
+		}
 	}
 	return $output;
 }  

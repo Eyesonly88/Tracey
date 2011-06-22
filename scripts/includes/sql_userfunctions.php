@@ -124,14 +124,14 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_prepared.php');
 		}
 		
 		# Get the UserID registered for this user
-		$sql_getRegisteredUserId = "SELECT UserId FROM User WHERE Email = ?";
+		$sql_getRegisteredUserId = "SELECT * FROM User WHERE Email = ?";
 		
 		if ($query -> prepare($sql_getRegisteredUserId)){
 			$query->bind_param("s", $em);
 			$em = $email;	
 			$results = dynamicBindResults($query);
 			if (empty($results)) { return ""; }
-			$result_getRegisteredUserId = $results[0]['UserId'];	
+			$result_getRegisteredUserId = $results[0];	
 			#need to check if a result was returned i.e. if the user creation was successful @TODO
 		}	
 		return $result_getRegisteredUserId;
@@ -201,7 +201,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_prepared.php');
 		return 0;	
 	}	
 	
-	/* Returns an array of information for a particular user based on a specified UserId */
+	/* Returns an array of information for a particular user based on a specified UserId @TESTED: OK */
 	function getUserById($id) {
 		
 		global $connection;
