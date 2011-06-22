@@ -27,13 +27,16 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_prepared.php');
 		
 	}
 
-	function deleteProject() {
+	function deleteProjectById($id) {
 		global $connection;
 		$query = $connection->stmt_init(); 
-		$sql_deleteProject = "";
+		$sql_deleteProject = "DELETE FROM Project WHERE ProjectId = ?";
 		
 		if ($query->prepare($sql_deleteProject)) {
 			
+			$query->bind_param("i", $pid);
+			$pid = $id;		
+			$query->execute();	
 			
 		}
 	

@@ -26,7 +26,7 @@ function dynamicBindResults($stmt) {
     	  }  
    	   $results[] = $x;  
    	}  
-  
+   
   	 return $results; 
 }
 

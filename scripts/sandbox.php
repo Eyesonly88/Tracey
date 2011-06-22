@@ -16,9 +16,9 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_prepared.php');
 
 	echo "<B> TRACEY SANDBOX </B> <BR /><BR />";
 	
+
 	
-	
-	
+	/*
 	$id = "2";
 	$email = "ttc_rul6@hotmail.com";
 	$result = getUserById($id);
@@ -72,7 +72,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_prepared.php');
 	
 	
 	
-	
+	*/
 /*
 <!DOCTYPE html>  
   
