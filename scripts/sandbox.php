@@ -16,6 +16,10 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_prepared.php');
 
 	echo "<B> TRACEY SANDBOX </B> <BR /><BR />";
 	
+	
+	get_user_salt("test@test.com");
+	
+	
 	$id = "2";
 	$email = "ttc_rul6@hotmail.com";
 	$result = getUserById($id);
