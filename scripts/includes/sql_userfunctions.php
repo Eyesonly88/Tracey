@@ -173,7 +173,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_prepared.php');
 			$E = $email;
 			$P = $phone;
 			$T = $type;
-			$P = $phone;
+			$N = $nick;
 			$pass = $password;		
 			$query->execute();	
 		}
