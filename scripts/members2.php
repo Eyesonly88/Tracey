@@ -10,6 +10,7 @@ confirmLogin();
 <html>
 	<body>
 		<h1>Welcome to Members Area 2!</h1>
+		<p><a href="members3.php">Go to Members Area 3 :)</a></p>
 		<p><a href="members.php">Go to Members Area 1 :)</a></p>
 		<p><a href="logout.php">Logout!</a></p>
 	</body>

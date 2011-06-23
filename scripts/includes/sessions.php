@@ -17,10 +17,10 @@
 	function confirmLogin(){
 		if (!loggedIn()) {
 	  		// redirect user to login
-	  		redirect_to('login.php');
+	  		redirect_to("../index.html");
 		} else {
 			// do nothing because user is logged in
 		}
 	}
-	
+
 ?>
