@@ -1,28 +1,29 @@
 <?php
-require_once('/scripts/includes/sanitize.php');
+include_once('/scripts/includes/sanitize.php');
 
 if (isset($_POST['submit'])){
 
 // sanitize login details
-$username = sanitize($_POST['email']);
+$email = sanitize($_POST['email']);
 $password = sanitize($_POST['password']);
 $errorMessage = "";
 
-	if (!empty($username)){
+	if (!empty($email)){
 	
 	// authenticate user
-	$user = authenticate_user($username,$password);
+	$user = checkPass($email,$password);
 	// if user is authenticated then the function should return 1 or true otherwise 0.
 	
 		if($user){
-		// authenticated successfully
-		$_SESSION['email'] = $username;
-		$_SESSION['password'] = $password;
-		// redirect user to members page
-		
+			// authenticated successfully
+			$_SESSION['email'] = $email;
+			$_SESSION['password'] = $password;
+			// redirect user to members page
+			redirect_to('members.php');
 		}else{
 		// display error message (authenticaion failed)
 		$errorMessage = "Authentication failed";
+		echo $errorMessage;
 		}
 	
 	}else{
@@ -31,24 +32,10 @@ $errorMessage = "";
 	
 	}
 
+}
 
 ?>
 
-<html>
-<head></head>
-<body>
-
-
-<form action="login.php" method="post">
-	<p><label for="login-email">E-mail: </label><input type="text" name="email" maxlength="30" value="" /></p>
-	<br>
-	<p><label for="login-password">Password: </label><input type="password" name="password" maxlength="30" value="" /></p>
-	<br>
-	<input id="submit_login" type="submit" name="submit" value="Login" />
-</form>
-
-</body>
-</html>
 
 
 
