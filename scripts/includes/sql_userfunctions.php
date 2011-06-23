@@ -12,13 +12,6 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_other.php');
 include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_checks.php');
 include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_prepared.php');
 	
-	/* Redirects the browser to the desired page(file). */
-	function redirect_to($location = NULL){
-		if (!$location == NULL){
-			header("Location: {$location}");
-			exit;
-		}
-	}
 	
 	/* hashes the hashed password 1000 times so it takes more time for attackers
 	 to build a rainbow table. @TESTED: OK.*/

@@ -1,6 +1,7 @@
 <?php
 include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sanitize.php');
 include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sessions.php');
+include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_userfunctions.php.php');
 	
 	if (loggedIn()) {
 		redirect_to('members.php');
