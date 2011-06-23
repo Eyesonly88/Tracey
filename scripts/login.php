@@ -17,7 +17,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_userfunctions.php'
 		if (!empty($email)){
 		
 		// authenticate user
-		$user = checkPass($email,$password);
+		$user = checkPass($password,$email);
 		// if user is authenticated then the function should return true otherwise false.
 		
 			if($user){
@@ -46,8 +46,6 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_userfunctions.php'
 			echo $message;
 		}
 	}
-?>
-
 ?>
 
 

@@ -10,5 +10,6 @@ confirmLogin();
 <html>
 	<body>
 		<h1>Welcome to Members Area!</h1>
+		<p><a href="logout.php">Logout!</a></p>
 	</body>
 </html>

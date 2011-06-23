@@ -1,9 +1,10 @@
 <?php 
+include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sessions.php');
 	//4 steps to close a seasion(logout)
 	
 	//.1 find session
 	
-	session_start();
+	//session_start();
 	
 	//2. unset all session vars
 	
