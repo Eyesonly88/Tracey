@@ -12,6 +12,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_other.php');
 include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_checks.php');
 include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_prepared.php');
 	
+	#$connection = $conn;
 	
 	/* hashes the hashed password 1000 times so it takes more time for attackers
 	 to build a rainbow table. @TESTED: OK.*/
@@ -62,12 +63,6 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_prepared.php');
 			//print_r($results);
 		}
 		return 	$results[0]["$param"];
-	}
-	
-	#$connection = $conn;
-	function authenticate_user($username,$password){
-	
-	
 	}
 	
 	/* Check if email exists. Returns array of user details if email exists, otherwise returns empty array. @TESTED: OK */

@@ -3,10 +3,12 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sanitize.php');
 include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sessions.php');
 include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_userfunctions.php');
 	
+	// If user is already logged in then go to members page.
 	if (loggedIn()) {
 		redirect_to('members.php');
 	}
 	
+	// check if user details are correct and log user in.
 	if (isset($_POST['submit'])){
 	
 	// sanitize login details
@@ -16,14 +18,14 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_userfunctions.php'
 	
 		if (!empty($email)){
 		
-		// authenticate user
+		// Authenticate user
 		$user = checkPass($password,$email);
-		// if user is authenticated then the function should return true otherwise false.
 		
 			if($user){
 				// authenticated successfully
 				$_SESSION['email'] = $email;
 				$_SESSION['password'] = $password;
+				
 				// redirect user to members page
 				redirect_to('members.php');
 			}else{
@@ -41,6 +43,8 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_userfunctions.php'
 
 	} else {
 		// Form wasnt submitted
+		
+		// Display logout message
 		if (isset($_GET['out']) && $_GET['out'] == 1 ){
 			$message = "You are now logged out ^^";
 			echo $message;
