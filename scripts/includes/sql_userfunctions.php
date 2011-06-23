@@ -30,11 +30,11 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_prepared.php');
 	/* checks if the entered password is valid or not. Returns true if password is correct, false otherwise. @TESTED: OK */
 	function checkPass($password, $email){
 		
-		$uniqueSalt = get_param_from_user($email,'Salt');
+		$uniqueSalt = getUserInfo($email,'Salt');
 		//echo $uniqueSalt . "<br>";
 		$hashed = repeatHash($uniqueSalt);
 		//echo $hashed . "<br>";
-		$hashed_p = get_param_from_user($email,'Password');
+		$hashed_p = getUserInfo($email,'Password');
 		//echo $hashed_p . "<br>";
 		
 		if ($hashed === $hashed_p) {
