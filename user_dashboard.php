@@ -65,6 +65,8 @@ confirmLogin();
 			</div>
 			<div id="recent_actions"><h2>Recent Actions:</h2></div>
 			<div id="users_following"></div>
+			<div id="logout"><p><a href="scripts/logout.php">Logout!</a></p></div>
+			
 			
 		</div><!-- / content -->		
 	</div><!-- / container -->
