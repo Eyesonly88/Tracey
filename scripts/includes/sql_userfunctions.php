@@ -12,6 +12,8 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_other.php');
 include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_checks.php');
 include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_prepared.php');
 	
+	#$connection = $conn;
+	
 	/* hashes the hashed password 1000 times so it takes more time for attackers
 	 to build a rainbow table. @TESTED: OK.*/
 	function repeatHash($hash){
@@ -26,22 +28,24 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_prepared.php');
 		return substr(sha1(mt_rand()), 0, 22);
 	}
 	
-	/* checks if the entered password is valid or not. @TESTED: OK */
+	/* checks if the entered password is valid or not. Returns true if password is correct, false otherwise. @TESTED: OK */
 	function checkPass($password, $email){
 		
-		$uniqueSalt = get_param_from_user($email,'Salt');
+		$uniqueSalt = getUserInfo($email,'Salt');
 		//echo $uniqueSalt . "<br>";
 		$hashed = repeatHash($uniqueSalt);
 		//echo $hashed . "<br>";
-		$hashed_p = get_param_from_user($email,'Password');
+		$hashed_p = getUserInfo($email,'Password');
 		//echo $hashed_p . "<br>";
 		
 		if ($hashed === $hashed_p) {
 			// user is authenticated
-			echo "Correct Password";
+			//echo "Correct Password";
+			return true;
 		} else {
 			// user is not authenticated
-			echo "Wrong password";
+			//echo "Wrong password";
+			return false;
 		}
 	}
 
@@ -59,12 +63,6 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_prepared.php');
 			//print_r($results);
 		}
 		return 	$results[0]["$param"];
-	}
-	
-	#$connection = $conn;
-	function authenticate_user($username,$password){
-	
-	
 	}
 	
 	/* Check if email exists. Returns array of user details if email exists, otherwise returns empty array. @TESTED: OK */
