@@ -148,15 +148,23 @@
 }
 
 #panel .content {
-	width: 960px;
+	width: 1280px;
 	margin: 0 auto;
 	padding-top: 15px;
 	text-align: left;
 	font-size: 0.85em;
 }
 
+
 #panel .content .left {
 	width: 280px;
+	float: left;
+	padding: 0 15px;
+	border-left: 1px solid #333;
+}
+
+#panel .content .left2 {
+	width: 600px;
 	float: left;
 	padding: 0 15px;
 	border-left: 1px solid #333;
