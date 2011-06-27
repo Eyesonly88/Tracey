@@ -3,15 +3,10 @@ require 'openid.php';
 try {
     $openid = new LightOpenID;
     if(!$openid->mode) {
-        if(isset($_POST['openid_identifier'])) {
-            $openid->identity = $_POST['openid_identifier'];
+        if(isset($_GET['openid_identifier'])) {
+            $openid->identity = $_GET['openid_identifier'];
             header('Location: ' . $openid->authUrl());
         }
-?>
-<form action="" method="post">
-    OpenID: <input type="text" name="openid_identifier" /> <button>Submit</button>
-</form>
-<?php
     } elseif($openid->mode == 'cancel') {
         echo 'User has canceled authentication!';
     } else {
@@ -20,3 +15,4 @@ try {
 } catch(ErrorException $e) {
     echo $e->getMessage();
 }
+?>
