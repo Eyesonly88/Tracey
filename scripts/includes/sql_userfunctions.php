@@ -33,7 +33,8 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_prepared.php');
 		
 		$uniqueSalt = getUserInfo($email,'Salt');
 		//echo $uniqueSalt . "<br>";
-		$hashed = repeatHash($uniqueSalt);
+		$hashed_s = sha1($uniqueSalt . $password);
+		$hashed = repeatHash($hashed_s);
 		//echo $hashed . "<br>";
 		$hashed_p = getUserInfo($email,'Password');
 		//echo $hashed_p . "<br>";
@@ -187,7 +188,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_prepared.php');
 			$T = $type;
 			$N = $nick;
 			$pass = $hashed_p;
-			$salt = $hashed_s;		
+			$salt = $uniqueSalt;		
 			$query->execute();	
 		}
 		
