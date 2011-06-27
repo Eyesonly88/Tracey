@@ -93,7 +93,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_prepared.php');
 	}
 
 	/* Check if openID exists. If it exists, it returns the UserID of the user it is mapped to. If not, it returns NULL. */
-	function getUserByOpenId($openID) { 
+	function getUserIdByOpenId($openID) { 
 		global $connection;
 		$userinfo = array();
 		$openIdExists = 0;
@@ -115,13 +115,30 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_prepared.php');
 							
 				$openIdExists = 1;
 				$userid = $results[0]['UserId'];
-				$userinfo = getUserById($userid);	
-							
+				$userinfo = getUserById($userid);							
 			}
-			
-		}
-		
+		}	
 		return $userinfo;
+	}
+	
+	function getOpenIdByUserId($id) {
+		global $connection;	
+		$query = $connection->stmt_init();
+		$sql_getOpenId = "SELECT * FROM UserOpenID uoi WHERE uoi.UserId = ?";
+		$openid = "";	
+		
+		if ($query->prepare($sql_getOpenId)) {		
+			$query->bind_param("s", $uid);
+			$uid = $id;			
+			$results = dynamicBindResults($query);
+			if (empty($results)) { return ""; }
+			$openidinfo = $results[0];	
+				
+			if (!empty($openidinfo)) {			
+				$openid = $openidinfo['OpenId'];
+			}			
+		}	
+		return $openid;
 	}
 	
 	/* Get the OpenId of a user when an email is specified */
@@ -190,7 +207,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_prepared.php');
 	}
 
 	/* Create openID mapping @TODO: need to change to prepared statements */
-	function createOpenID($userID, $openID) {
+	function mapOpenID($userID, $openID) {
 		
 		global $connection; 
 		
@@ -251,6 +268,11 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_prepared.php');
 
 		return 0;	
 	}	
+	
+	function deleteOpenIdByUserId($id) {
+		
+		/* @TODO */
+	}
 	
 	/* Returns an array of information for a particular user based on a specified UserId @TESTED: OK */
 	function getUserById($id) {
