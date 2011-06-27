@@ -5,7 +5,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_userfunctions.php'
 	
 	// If user is already logged in then go to members page.
 	if (loggedIn()) {
-		redirect_to('members.php');
+		redirect_to('../user_dashboard.php');
 	}
 	
 	// check if user details are correct and log user in.
