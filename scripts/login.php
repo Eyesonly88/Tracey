@@ -48,6 +48,8 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_userfunctions.php'
 		if (isset($_GET['out']) && $_GET['out'] == 1 ){
 			$message = "You are now logged out ^^";
 			echo $message;
+			sleep(2);
+			redirect_to('../index.html');
 		}
 	}
 ?>

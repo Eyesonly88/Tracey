@@ -298,5 +298,10 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_prepared.php');
 	function updateUser() { 
 		
 	}
+	
+	
+	function getCurrentUser(){
+		return $_SESSION['email'];
+	}
 
 ?>
