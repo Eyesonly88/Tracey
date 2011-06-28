@@ -24,7 +24,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_prepared.php');
 	}
 	
 	
-	function changeIssueStatus($issueId) {
+	function changeIssueStatus($issueId, $status) {
 		global $connection;
 		$query = $connection->stmt_init();
 		$sql_changeIssueStatus = "";
@@ -33,5 +33,33 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_prepared.php');
 			
 		}
 	}
+	
+	function assignIssueTo($issueid, $reporterId, $assigneeEmail) {
+		
+	}
+	
+	function modifyIssue($issueId){}
+	
+	function getIssuesByProjectId($projectid) {
+		
+	}
+	
+	function getAssignedIssuesByUserId($userid) {
+		
+	}
+	
+	function getAssignedIssuesByEmail($email){
+		
+	}
+	
+	function getWatchedIssuesByUserId($userid){
+		
+	}
+	
+	function getWatchedIssuesByEmail($email){
+		
+	}
+	
+	
 
 ?>

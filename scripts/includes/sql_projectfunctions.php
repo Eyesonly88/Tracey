@@ -78,6 +78,26 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_prepared.php');
 		}
 	
 	}
+	
+	function getProjectsByUserId($userid) {
+		
+		
+	}
+	
+	function getProjectsByEmail($email) {
+		
+		
+	}
 
+	function getWatchedProjectsByUserEmail($email) {
+		
+	}
+	
+	function getWatchedProjectsByUserId($userid) {
+			
+		
+	}
+	
+	
 	
 ?>

@@ -1,6 +1,18 @@
 <?php
 include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sessions.php');
-
+include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sessions.php');
+include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_userfunctions.php');
+include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_connect.php');
+include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sanitize.php');
+include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/functions.php');
+include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/headers.php');
+include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/footers.php');
+include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/formfunctions.php');
+include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_projectfunctions.php');
+include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_issuefunctions.php');
+include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_other.php');
+include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_checks.php');
+include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_prepared.php');
 // Confirm if user is logged in.
 confirmLogin();
 
@@ -26,7 +38,6 @@ confirmLogin();
 	<script type="text/javascript">
 		$(document).ready(function() {
 			openid.init('openid_identifier');
-			openid.setDemoMode(true); //Stops form submission for client javascript-only test purposes
 		});
 	</script>
 	
@@ -47,6 +58,20 @@ confirmLogin();
 		<div id="content" style="padding-top:100px;">
 			<h1>User Dashboard</h1>
 			<h5>This is the user dashboard.</h5>
+			<div id="nav_panel"><h4>Nav Panel</h4>
+				
+			</div>
+			<div id="tools"><h2>Tools</h2></div>
+			<div id="createproject_btn"><h4><a href="#">Create Project</a></h4></div>
+			<div id="createproject_form">
+				<form action="" method="post">
+					<h1>Create a Project</h1>
+					<label class="grey" for="name">Name:</label>
+					<input class="field" type="text" name="name" id="name" value="" size="23" />
+        			<div class="clear"></div>
+					<input type="submit" name="submit" value="Go" class="project_submit" />
+				</form> 		
+			</div>
 			
 			<div id="user_info"><h2>User Info:</h2>
 				<h5></h5>
@@ -55,17 +80,29 @@ confirmLogin();
 			<div id="user_project_info">
 				<div id="projects_belongsTo">
 					<h2>Member of Projects:</h2>
+					This div will contain a list of projects that this user is a part of (will list like 5 or something, and user will be able to 'view all' if required)
+					
+					<h5><a href="#">View All</a></h5>
 				</div>
-				<div id="projects_watches">
-					<h2>Watching Projects:</h2>
+				<div id="issue_watches">
+					<h2>Watching Issues:</h2>
+					This div will contain a list of issues the user is watching.
 				</div>
-				<div id="projects_creatorOf">
-					<h2>Created Projects:</h2>
-				</div>		
+				<div id="issue_assigned">
+					<h2>Assigned Issues:</h2>
+					This div will contain a list of issues assigned to this user.
+					
+				</div>
+	
 			</div>
-			<div id="recent_actions"><h2>Recent Actions:</h2></div>
-			<div id="users_following"></div>
-			<div id="logout"><p><a href="scripts/logout.php">Logout!</a></p></div>
+			<div id="recent_actions"><h2>Recent Actions:</h2>
+				This div will contain recent actions the user has done. e.g. create an issue, modify an issue etc.
+			</div>
+			<div id="users_following">
+				
+			</div>
+			<div id="logout"><h5>Logged in as <?php echo $_SESSION['email']; ?></h5>
+				<h5><p><a href="scripts/logout.php">Logout!</a></p></h5></div>
 			
 			
 		</div><!-- / content -->		

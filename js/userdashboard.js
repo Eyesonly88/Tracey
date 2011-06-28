@@ -1,21 +1,17 @@
 $(document).ready(function() {
-	$("#openid_form").hide();
-	$("#about").hide();
-	$("#contributors").hide();
+	$("#createproject_form").hide();
+
+	var createProjectFormVisible = 0;
 	
-	var openidshowing = 0;
-	var	moreinfoshowing = 0;
 
 	
-	$("#moreinfo").click(function () {
-		if (moreinfoshowing == 0) { 
-			$("#about").show("slow");
-			$("#contributors").show("slow");
-			moreinfoshowing = 1;
-		} else { 
-			$("#about").hide("slow");
-			$("#contributors").hide("slow");
-			moreinfoshowing = 0;
+	$("#createproject_btn").click(function () {
+		if (createProjectFormVisible == 0) {
+			$("#createproject_form").show("slow");
+			createProjectFormVisible = 1;
+		} else {
+			$("#createproject_form").hide("slow");
+			createProjectFormVisible = 0;
 		}
 	});		
 		

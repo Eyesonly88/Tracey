@@ -27,7 +27,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_userfunctions.php'
 				$_SESSION['password'] = $password;
 				
 				// redirect user to members page
-				redirect_to('members.php');
+				redirect_to('../user_dashboard.php');
 			}else{
 				// display error message (authenticaion failed)
 				$errorMessage = "Authentication failed";
