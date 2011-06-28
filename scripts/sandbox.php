@@ -16,14 +16,16 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_prepared.php');
 
 	echo "<B> TRACEY SANDBOX </B> <BR /><BR />";
 	
-
+	$email = "ttc_rulz@hotmail.com";
+	$result = createProject("test33", $email);	
 	
+	echo $result;
 	/*
 	$id = "2";
 	$email = "ttc_rul6@hotmail.com";
 	$result = getUserById($id);
 	
-	
+
 	
 	#test getUserById() 
 	if (!empty($result)) {

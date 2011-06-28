@@ -15,15 +15,25 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_checks.php');
 include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_prepared.php');
 
 	
-	function createProject() { 
+	function createProject($name, $email) { 
 		global $connection;
+		$temp = $email;
+		$user = getUserInfo("$temp", "UserId");
 		$query = $connection->stmt_init();
-		$sql_createProject = "";
+		
+		
+		$sql_createProject = "INSERT INTO Project(ProjectName, ProjectLeader) VALUES(?, ?)";
 		
 		if ($query->prepare($sql_createProject)) {
 			
+			$query->bind_param("sd", $pname, $pleader);
+			$pname = $name;
+			$pleader = $user;
+			$query->execute();
+			return "1";
 			
 		}
+		return "0";
 		
 	}
 
@@ -86,6 +96,24 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_prepared.php');
 	
 	function getProjectsByEmail($email) {
 		
+		global $connection;
+		$emailExists = 0;
+		$userinfo = array();
+		$results = NULL;
+		$query = $connection ->stmt_init();
+		
+		$sql_getProjects = "SELECT p.ProjectId, p.ProjectName, p.ProjectType, p.ProjectLeader from Project p INNER JOIN User u ON u.UserId = p.ProjectLeader WHERE Email=?";	
+		$query->prepare($sql_getProjects);
+		$query -> bind_param("s", $em);
+		$em = $email;		
+		$results = dynamicBindResults($query);	
+				
+		if (empty($results)) { 	
+			return "";
+		}
+
+		$userinfo = $results;		
+		return $userinfo;
 		
 	}
 

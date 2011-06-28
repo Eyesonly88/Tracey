@@ -1,48 +1,24 @@
 <?php
-# ~ Tracey ~ 
-# TITLE: Create New Project Script
-# LOCATION: Server-side
-# DESCRIPTION: Creates a new project record inside the database using the POSTed parameters (project name, type, leader ID etc.)
-# NOTES: Keep in mind that foreign key constraints need to match for INSERTS into tables. i.e. The project leader ID passed 
-# in as a parameter must already be an existing user in the user table.
-#
-#
-#
 
-#varchar
-$projName = $_GET["name"];
+include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_projectfunctions.php');
 
-#foreign key, bigint
-$projType = $_GET["type"];
+$projName = '';
+$projLeader = '';
+$response1 = 0;
+if (isset($_POST['name'])) { 
+	$projName = $_POST['name'];
+}
 
-#foreign key, bigint
-$projLeader = $_GET["lead"];
+if (isset($_POST['user'])) { 
+	$projLeader = $_POST['user'];
+}
 
 
-#auto-incrementing bigint
-$projectId = "NULL";
-
-#datetime
-$today = getdate();
-$creationDate = date( "Y-m-d H:i:s", $today );
-echo $today;
-
-#bigint
-$projectStatus = 0;
+$response1 = createProject($projName, $projLeader);
 
 
-#echo nl2br("- Project Info -\n");
-#echo nl2br("Name: " . $projName . "\n");
-#echo nl2br("Type: " . $projType . "\n");
-#echo nl2br("Leader: " . $projLeader . "\n");
 
-$query = "INSERT INTO `Armalit_tracey`.`Project` (`ProjectId`, `ProjectName`, `ProjectType`, `ProjectLeader`, `CreationDate`, `ProjectStatus`) 
-VALUES (NULL, '" . $projName . "', '" . $projType . "', '" . $projLeader . "'," . $creationDate . ", 0);";
-
-echo nl2br("Query: " . $query . "\n");
-
-#mysql_query($query) or die(mysql_error());
-
+echo $response1;
 
 ?>
 
