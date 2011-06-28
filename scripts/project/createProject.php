@@ -30,10 +30,6 @@ echo $today;
 #bigint
 $projectStatus = 0;
 
-#echo nl2br("Username: " . $username . "\n");
-#echo nl2br("Database: " . $database . "\n");
-mysql_connect($connection,$username,$password);
-mysql_select_db($database);
 
 #echo nl2br("- Project Info -\n");
 #echo nl2br("Name: " . $projName . "\n");
@@ -47,7 +43,6 @@ echo nl2br("Query: " . $query . "\n");
 
 #mysql_query($query) or die(mysql_error());
 
-mysql_close();
 
 ?>
 

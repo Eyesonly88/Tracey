@@ -24,5 +24,14 @@
 			// do nothing because user is logged in
 		}
 	}
+	
+	function boolConfirmLogin() {
+		if (!loggedIn()) {
+	  		// redirect user to login page
+	  		return 0;
+		} else {
+			return 1;
+		}
+	}
 
 ?>
