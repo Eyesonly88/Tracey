@@ -839,7 +839,7 @@
   $.fn.dashboard.defaults = {
     debuglevel:3,
     json_data: {},
-    loadingHtml: '<div class="loading"><img alt="Loading, please wait" src="../themes/default/loading.gif" /><p>Loading...</p></div>',
+    loadingHtml: '<div class="loading"><img alt="Hardcore Loading Action" src="../themes/default/loading.gif" /><p>Loading...</p></div>',
     emptyColumnHtml: 'Drag your widgets here',
     widgetTemplate: 'widgettemplate',
     columnPrefix: 'column-',
