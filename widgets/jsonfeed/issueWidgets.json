@@ -1,0 +1,21 @@
+{
+  "data" : [
+    {
+      "id" : "w03",
+      "title" : "Issues Assigned to User",
+      "description" : "Lists the issues that are assigned to the current user",
+      "creator" : "Tracey",
+      "url" : "widgets/userissues.php",
+      "image": ""
+
+    },
+    {
+      "id" : "w04",
+      "title" : "Reported Issues",
+      "description" : "Displays issues created by the user.",
+      "creator" : "Tracey",
+      "url" : "widgets/createdissues.php",
+      "image": ""
+    }
+  ]
+}

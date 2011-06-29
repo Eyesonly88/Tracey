@@ -38,9 +38,9 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sessions.php');
 	   type: "POST",
 	   url: "/scripts/userdashboard/getCreatedProjects.php",
 	   data: "email="+user,
-	   success: function(msg){
+	   success: function(msg2){
 	     $("#projectlist").empty();
-	     $("#projectlist").append(msg);
+	     $("#projectlist").append(msg2);
 	   }
    
  	});
