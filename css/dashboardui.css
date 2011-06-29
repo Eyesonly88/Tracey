@@ -104,13 +104,12 @@ body {
 }
 
 .headerlink {
-  color:#ffffff;
+  color:#000000;
 }
 .headerlinks {
   text-align:right;
   margin-right:20px;
   line-height:24px;
-  text-decoration:underline;
   font-weight:bold;
 }
 .headerbox {

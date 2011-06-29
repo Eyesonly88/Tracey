@@ -5,7 +5,7 @@
       "title" : "User-Created Projects",
       "description" : "Lists the projects lead by this user",
       "creator" : "Tracey",
-      "url" : "widgets/userprojects.php",
+      "url" : "/widgets/userprojects.php",
       "image": ""
 
     },
@@ -14,7 +14,7 @@
       "title" : "Assigned Project Components,
       "description" : "Displays components this user is a member of.",
       "creator" : "Tracey",
-      "url" : "widgets/usercomponents.php",
+      "url" : "/widgets/usercomponents.php",
       "image": ""
       
     }
