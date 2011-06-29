@@ -112,7 +112,7 @@ confirmLogin();
     	
      <div id="switcher"></div>
        <h1>User Dashboard </h1>
-       <h4>Logged in as <?php echo $_SESSION['email']; ?></h4>
+       <h4>Logged in as <U><?php echo $_SESSION['email']; ?></U></h4>
        
     </div>
     
