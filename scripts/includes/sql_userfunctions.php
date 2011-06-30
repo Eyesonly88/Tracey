@@ -212,13 +212,31 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_prepared.php');
 		
 		global $connection; 
 		
-		$sql_createOpenID = "INSERT INTO UserOpenID (UserID, OpenID)
-		VALUES (" . $userID . ", '" . $openID . "');";
-		#VALUES (?, ?);
-		$result_createOpenIDMapping = mysql_query($sql_createOpenIDMapping);
+		$query = $connection->stmt_init();
+		$sql_createOpenID = "INSERT INTO UserOpenID (UserID, OpenID) VALUES (?,?);";
+		if ($query->prepare($sql_createOpenID)) {
+			$query->bind_param("is", $uID, $oID);
+			$uID = $userID;
+			$oID = $openID;
+			$query->execute();
+		}
+		# Get the UserID registered for this openID user and make sure mapping was successful
+		$sql_getOpenUserId = "SELECT * FROM UserOpenID WHERE OpenID = ?";
 		
-		echo "OpenID Mapping created";	
-		return $result_createOpenIDMapping;	
+		if ($query -> prepare($sql_getOpenUserId)){
+			$query->bind_param("s", $oID);
+			$oID = $openID;	
+			$results = dynamicBindResults($query);
+			if (empty($results)) { return ""; }
+			$result_getOpenUserId = $results[0];
+			if ($result_getOpenUserId == $userID) {
+				// openID mapping was created successfully
+				return true;
+			} else {
+				return false;
+			}
+		}	
+
 	}
 	
 	
