@@ -99,26 +99,32 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_prepared.php');
 		$userinfo = array();
 		$openIdExists = 0;
 		$user = NULL;
-		$query = $connection -> stmt_init();
+		echo "im before init ";	
+		$query = $connection->stmt_init();
 		$sql_checkOpenID = "SELECT * FROM UserOpenID WHERE OpenID = ?";
-		
-		if ($query -> prepare($sql_checkOpenID)){
-					
-			$query -> bind_param("s", $oid);
-			$oid = $openID;
-			$results = dynamicBindResults($query);
-			print_r($results);
+		try {
+			if ($query->prepare($sql_checkOpenID)){
+				echo "im here";		
+				$query->bind_param("s", $oid);
+				$oid = $openID;
+				$results = dynamicBindResults($query);
+				//print_r($results);
+				echo "im before if";
+				if (empty($results)) { 
+					return "";
+				}
+				if ($results[0]['OpenID'] == $OpenID)  {
+								
+					$openIdExists = 1;
+					$userid = $results[0]['UserId'];
+					$userinfo = getUserById($userid);							
+				}
+			}
+		}catch(ErrorException $e) {
+    		echo $e->getMessage();
+		}
 			
-			if (empty($results)) { 
-				return "";
-			}
-			if ($results[0]['OpenID'] == $OpenID)  {
-							
-				$openIdExists = 1;
-				$userid = $results[0]['UserId'];
-				$userinfo = getUserById($userid);							
-			}
-		}	
+		
 		return $userinfo;
 	}
 	
@@ -223,7 +229,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_prepared.php');
 		# Get the UserID registered for this openID user and make sure mapping was successful
 		$sql_getOpenUserId = "SELECT * FROM UserOpenID WHERE OpenID = ?";
 		
-		if ($query -> prepare($sql_getOpenUserId)){
+		if ($query->prepare($sql_getOpenUserId)){
 			$query->bind_param("s", $oID);
 			$oID = $openID;	
 			$results = dynamicBindResults($query);

@@ -1,5 +1,5 @@
 <?php
-require 'openid.php';
+require_once 'openid.php';
 include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_userfunctions.php');
 try {
     $openid = new LightOpenID;
@@ -21,11 +21,16 @@ try {
 			// store the identity of the user
 			$userOpenID = $openid->identity;
 			// make sure that the provider is sending some information because some providers don't.
-			if ($results['contact/email'])	$email = $results['contact/email'];
-			if ($results['namePerson/friendly'])	$nickname =  $results['namePerson/friendly'];
+			if (!empty($results['contact/email']))	$email = $results['contact/email'];
+			if (!empty($results['namePerson/friendly']))	$nickname =  $results['namePerson/friendly'];
 			
+			echo $userOpenID . "<br>";
 			// check if identity exists first
 			$userExist = getUserIdByOpenId($userOpenID);
+			//echo $userExist;
+			//if($userExist == NULL) echo "DOESNT EXIST";
+			echo "testing that it didn't break";
+			/*
 			if (!empty($userExist)) {
 				header("Location: ../user_dashboard.php");
 			} else {
@@ -42,6 +47,8 @@ try {
 					header("Location: ../index.html");
 				}
 			}
+			*/
+			
 		} else {
 			echo "not logged in";
 		}
