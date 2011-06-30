@@ -31,6 +31,7 @@ confirmLogin();
 
         // call for the minimal dashboard
         function initDashboard() {
+          var startId = 100;
           var dashboard = $('#dashboard').dashboard({
           	
           	layoutClass:'layout',
@@ -108,21 +109,24 @@ confirmLogin();
   <div class="header_tile_image">
   	
     <div class="headerbox">
+    	
      <div id="switcher"></div>
        <h1>User Dashboard </h1>
-       <h4>Logged in as <?php echo $_SESSION['email']; ?></h4>
+       <h4>Logged in as <U><?php echo $_SESSION['email']; ?></U></h4>
+       
     </div>
-    <div class="headerlinks">
+    
+   <div class="headerlinks">
       <a class="openaddwidgetdialog headerlink" href="#">Add Widget</a>&nbsp;<span class="headerlink">|</span>&nbsp;
       <a class="editlayout headerlink" href="#">Edit layout</a>
     </div>
-   
   </div>
   <div id="nav_panel"> 
   <h5><p><a href="/scripts/authentication/logout.php">LOGOUT</a></p></h5>
   </div>
+  
   </div>
-
+	
 
   <div id="dashboard" class="dashboard">
     <div class="layout">
