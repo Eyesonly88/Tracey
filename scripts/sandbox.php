@@ -16,16 +16,37 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_prepared.php');
 
 	echo "<B> TRACEY SANDBOX </B> <BR /><BR />";
 	
-	$email = "ttc_rulz@hotmail.com";
-	$result = createProject("test33", $email);	
+	//$email = "ttc_rulz@hotmail.com";
+	//$result = createProject("test33", $email);	
 	
 	echo $result;
-	/*
-	$id = "2";
-	$email = "ttc_rul6@hotmail.com";
-	$result = getUserById($id);
 	
-
+	global $connection;
+	
+	echo "Initiating connection object... <BR />";
+	//echo $connection;
+	$userinfo = array();
+	$query = $connection->stmt_init();
+	$sql_getUser = "SELECT * FROM User WHERE UserId = ?";	
+	echo "Preparing.. <BR />";
+	$query->prepare($sql_getUser);	
+	echo "Preparing..Success <BR />";
+	echo "Binding params... <BR />";
+	$query->bind_param("i", $userid);
+	echo "Binding params...Success <BR />";
+	$userid = $id;
+	$results = dynamicBindResults($query);
+	if (empty($results)) { return ""; }
+	$userinfo = $results[0];		
+	
+	//return $userinfo;
+	$result = $userinfo;
+	
+	//$id = "1";
+	//$email = "ttc_rul6@hotmail.com";
+	//echo "Before function <BR />";
+	//$result = getUserById($id);
+	//echo "After function <BR />";
 	
 	#test getUserById() 
 	if (!empty($result)) {
@@ -35,12 +56,13 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_prepared.php');
 		echo "<B>Nickname:</B>  " . $result['Nickname']. "<BR />";
 	} else {
 		
-		echo "Email not found <BR />";
+		echo "ID not found <BR />";
 	}
 	
 	echo "<BR /><BR />";
 	
 	
+	/*
 	#test createUser()
 	$fName = "Johnny";
 	$lName = "Depp";
@@ -60,10 +82,10 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_prepared.php');
 		echo "<B> Nickname: </B>" . $result2['Nickname'] . "<BR />";
 		echo "<B> Phone: </B>" . $result2['Phone'] . "<BR />";
 	}
-	
+	*/
 	// testing the checkPass()
 	
-	checkPass("hi","johnny@depp.com");
+	//checkPass("hi","johnny@depp.com");
 	
 	
 	
@@ -74,7 +96,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_prepared.php');
 	
 	
 	
-	*/
+	
 /*
 <!DOCTYPE html>  
   

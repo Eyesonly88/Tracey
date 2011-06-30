@@ -99,8 +99,9 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_prepared.php');
 		$userinfo = array();
 		$openIdExists = 0;
 		$user = NULL;
-		echo "im before init ";	
+		echo "im before init <BR />";	
 		$query = $connection->stmt_init();
+		echo "im before prepare ";	
 		$sql_checkOpenID = "SELECT * FROM UserOpenID WHERE OpenID = ?";
 		try {
 			if ($query->prepare($sql_checkOpenID)){
