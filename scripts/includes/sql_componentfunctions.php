@@ -25,5 +25,23 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_prepared.php');
 			$query->execute();			
 		}	
 	}
+	
+	function changeComponentStatus($componentid, $statusid){	
+		
+	}
+	
+	function removeComponent($componentidbyid){
+		
+	}
+	
+	
+	function addUserToComponentById($componentid, $userid){
+		
+	}
+	
+	function addUserToComponentByEmail($componentid, $useremail){
+		
+	}
+	
 
 ?>

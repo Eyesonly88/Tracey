@@ -110,9 +110,12 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_componentfunctions
 	function changeProjectStatus($projectid, $statusid) {
 		global $connection;
 		$query = $connection->stmt_init(); 
-		$sql_changeProjectStatus = "";
+		$sql_changeProjectStatus = "UPDATE Project SET ProjectStatus = ? WHERE ProjectId = ?";
 		
-		if ($query->prepare($sql_changeProjectStatus)) {		
+		if ($query->prepare($sql_changeProjectStatus)) {
+			$query->bind_param("ii", $pstatus, $pid);
+			$pstatus = $statusid;
+			$pid = $projectid;
 		}
 	}
 	
