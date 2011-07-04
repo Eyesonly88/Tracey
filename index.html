@@ -12,6 +12,12 @@
 	<!-- stylesheets -->
   	<link rel="stylesheet" href="css/loginstyle.css" type="text/css" media="screen" />
   	<link rel="stylesheet" href="css/loginslide.css" type="text/css" media="screen" />
+  	<!-- Page styles -->
+
+
+<!-- Login Form CSS files -->
+<link type='text/css' href='css/login.css' rel='stylesheet' media='screen' />
+
   	<link type="text/css" rel="stylesheet" href="css/openid.css" />
   	    <!-- jQuery (1.6.1)- the core -->
 	<script src="js/jquery.js" type="text/javascript"></script>
@@ -31,9 +37,12 @@
 	<![endif]-->
 	 
 
-	<!-- Sliding effect -->
+	<script src="libraries/simplemodal/jquery.simplemodal-1.4.1.js" type="text/javascript"></script>
+	<script type='text/javascript' src='js/login.js'></script>
+	<script src="js/index.js" type="text/javascript"></script>
 	<script src="js/loginslide.js" type="text/javascript"></script>
-
+	
+	
 </head>
 
 <body>
@@ -115,31 +124,27 @@
 	
 </div> <!--panel -->
 
-    <div id="container">
-		<div id="content" style="padding-top:100px;">
-			<h1>Welcome</h1>
-			<h5>Tracey is still under development.</h5>
-			
-			<div id="moreinfo">MORE INFO (click)</div>
-			<div id="about">	
-			<h2>About</h2>
-			<h5>
-			Tracey is a web-based issue tracker and project management solution aimed at, but not limited to, students. It aims to bring the most obvious functionality of an issue tracker and present it to the user
-			through an aesthetic interface without clogging up the system with stacks of functions that are unlikely to be used by a student.
-			</h5>	
-			</div>
-			
-			<div id="contributors">	
-			<h2>Contributors</h2>
-			<h5>
-			Adeeb (Armalite) <BR />
-			Mohammed (Eyesonly88)<BR /> 
-			</h5> 
-			</div>
 
-				
+    <div id='container'>
+	<div id='logo'>
+		<h1>Tracey</h1>
+	</div>
+	<div id='content'>
+		<div id='login-form'>
+			<h3>Login Form</h3>
 			
-		</div><!-- / content -->		
-	</div><!-- / container -->
+		 <!-- Login form is created inside the jquery script - uses the simple modal library (check login.js)-->
+			<input type='button' name='login' value='Login' class='login demo'/>
+		</div>
+		<!-- preload the images -->
+		<div style='display:none'>
+			<img src='images/loading.gif' alt='' />
+		</div>
+	</div>
+
+
+	
+	
+	</div>
 </body>
 </html>
