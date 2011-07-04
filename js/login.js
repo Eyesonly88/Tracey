@@ -87,6 +87,11 @@ jQuery(function ($) {
 							height: h
 						}, function () {
 							$('#login-container .login-title').html(title);
+							
+							/* @TODO here: need to do an ajax call to check if a user is logged in to the session.
+							If so, then do not display the login form but either:
+							Display button to go to dashboard, or just redirect to dashboard (need to decide) */
+							
 							$('#login-container form').fadeIn(200, function () {
 								$('#login-container #login-name').focus();
 
