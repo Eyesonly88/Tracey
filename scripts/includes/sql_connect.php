@@ -4,5 +4,4 @@
 
 	$connection = new mysqli($server, $username, $password, $database) or die ('Connection Problem');
 
-
 ?>

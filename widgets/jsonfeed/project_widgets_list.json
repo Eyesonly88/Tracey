@@ -1,0 +1,20 @@
+{
+  "data" : [
+    {
+      "id" : "w01",
+      "title" : "User Projects",
+      "description" : "Projects created by user",
+      "creator" : "Tracey",
+      "url" : "widgets/userprojects.php",
+      "image": ""
+    },
+    {
+      "id" : "w02",
+      "title" : "User Components",
+      "description" : "Components assigned to user.",
+      "creator" : "Tracey",
+      "url" : "widgets/usercomponents.php",
+      "image": ""
+    }
+  ]
+}

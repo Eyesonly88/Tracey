@@ -1,5 +1,4 @@
 <?php 
-	
 
 include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sanitize.php');
 include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/functions.php');
@@ -22,8 +21,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_componentfunctions
 		$lastinsertarray = '';
 		$user = getUserInfo("$temp", "UserId");
 		$query = $connection->stmt_init();	
-		$sql_createProject = "INSERT INTO Project(ProjectName, ProjectLeader) VALUES(?, ?)";
-		$sql_createComponent = "INSER INTO component(ProjectId) VALUES (?)";	
+		$sql_createProject = "INSERT INTO Project(ProjectName, ProjectLeader) VALUES(?, ?)";	
 		$sql_getLastInsertId = "SELECT LAST_INSERT_ID() AS ID";
 		if ($query->prepare($sql_createProject)) {
 			
@@ -31,7 +29,6 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_componentfunctions
 			$pname = $name;
 			$pleader = $user;
 			$query->execute();
-			
 			$query->prepare($sql_getLastInsertId);
 			$lastinsertarray = dynamicBindResults($query);
 			$projectid = $lastinsertarray[0]['ID'];
@@ -64,7 +61,6 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_componentfunctions
 		global $connection;
 		$query = $connection->stmt_init(); 
 		$sql_deleteProject = "DELETE FROM Project p WHERE ProjectId=?";
-		
 		if ($query->prepare($sql_deleteProject)) {
 			
 			$query->bind_param("i", $pid);
@@ -77,12 +73,10 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_componentfunctions
 	function modifyProject() {
 		global $connection;
 		$query = $connection->stmt_init(); 
-		$sql_modifyProject = ""; 
-		
+		$sql_modifyProject = ""; 	
 		if ($query->prepare($sql_modifyProject))  {
 					
 		}
-	
 	}
 	
 	/* Checks if a project with $projectname exists for the user with $userid */
@@ -94,14 +88,12 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_componentfunctions
 		$query->prepare($sql_getProjectInfo);
 		$query->bind_param("ss", $name, $uid);
 		$name = $projectname;
-		$uid = $userid;
-		
+		$uid = $userid;	
 		$results = dynamicBindResults($query);
 		
 		if (empty($results)) {
 			return '';			
 		}
-		
 		return $results;
 	}
 	
@@ -169,16 +161,13 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_componentfunctions
 		$query = $connection->stmt_init();	
 		$sql_addUserToProject = "";
 		$query->prepare($sql_addUserToProject);		
-		
 	}
-	
 
 	function getWatchedProjectsByUserEmail($email) {
 		
 	}
 	
-	function getWatchedProjectsByUserId($userid) {
-			
+	function getWatchedProjectsByUserId($userid) {		
 		
 	}
 	

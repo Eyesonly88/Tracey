@@ -15,7 +15,6 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_prepared.php');
 
 	/* Adds a component to the specified project @TODO: component table needs a few more fields to be added e.g. 'ComponentName' */
 	function addComponentByProjectId($projectid){
-		
 		global $connection;
 		$query = $connection->stmt_init(); 
 		$sql_addComponent = "INSERT INTO Component(ProjectId) VALUES(?)";	
@@ -34,7 +33,6 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_prepared.php');
 		
 	}
 	
-	
 	function addUserToComponentById($componentid, $userid){
 		
 	}
@@ -43,5 +41,12 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_prepared.php');
 		
 	}
 	
+	function getWatchedComponentsByUserId($userid){	
+		
+	}
+	
+	function getWatchedComponentsByUserEmail($useremail){
+		
+	}
 
 ?>

@@ -22,25 +22,12 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_prepared.php');
 	
 	
 	global $connection;
-	createProject("SandboxTest1", "ttc_rulz@hotmail.com");
-	
-	//echo $response;
-	//$id = "1";
-	//$email = "ttc_rul6@hotmail.com";
-	//echo "Before function <BR />";
-	//$result = getUserById($id);
-	//echo "After function <BR />";
-	
+	//createProject("SandboxTest1", "ttc_rulz@hotmail.com");
 
-	//checkPass("hi","johnny@depp.com");
-	
-	
 	
 	echo "<BR /><BR />";
 	
-	
-	#test registration
-	
+
 	
 	
 	
