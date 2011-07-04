@@ -13,31 +13,57 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_projectfunctions.p
 include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_other.php');
 include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_checks.php');
 include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_prepared.php');
+include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_componentfunctions.php');
 
-	
+	/* Create a project (and a default component) with projectname: $name, and projectleader: userid of the user with email: $email */
 	function createProject($name, $email) { 
 		global $connection;
 		$temp = $email;
+		$lastinsertarray = '';
 		$user = getUserInfo("$temp", "UserId");
-		$query = $connection->stmt_init();
-		
-		
-		$sql_createProject = "INSERT INTO Project(ProjectName, ProjectLeader) VALUES(?, ?)";	
+		$query = $connection->stmt_init();	
+		$sql_createProject = "INSERT INTO Project(ProjectName, ProjectLeader) VALUES(?, ?)";
+		$sql_createComponent = "INSER INTO component(ProjectId) VALUES (?)";	
+		$sql_getLastInsertId = "SELECT LAST_INSERT_ID() AS ID";
 		if ($query->prepare($sql_createProject)) {
 			
 			$query->bind_param("sd", $pname, $pleader);
 			$pname = $name;
 			$pleader = $user;
 			$query->execute();
-			return "1";		
+			
+			$query->prepare($sql_getLastInsertId);
+			$lastinsertarray = dynamicBindResults($query);
+			$projectid = $lastinsertarray[0]['ID'];
+			
+			/* Using the id of the last created project, add a component to this project (this is the default component) */
+			addComponentByProjectId($projectid);
+			return "1";
 		}
 		return "0";	
 	}
-
+	
+	/* Delete the project with the specified name with the specified user */
+	function deleteProjectByName($pname, $userid) {
+	
+		global $connection;
+		$query = $connection->stmt_init(); 
+		$sql_deleteProject = "DELETE FROM Project p INNER JOIN User u ON u.UserId = p.ProjectLeader WHERE ProjectName=? AND User=?";	
+		if ($query->prepare($sql_deleteProject)) {
+			
+			$query->bind_param("si", $name, $uid);
+			$name = $pname;		
+			$uid = $userid;
+			$query->execute();			
+		}
+	
+	}
+	
+	/* Delete a project with the specified project id */
 	function deleteProjectById($id) {
 		global $connection;
 		$query = $connection->stmt_init(); 
-		$sql_deleteProject = "DELETE FROM Project WHERE ProjectId = ?";
+		$sql_deleteProject = "DELETE FROM Project p WHERE ProjectId=?";
 		
 		if ($query->prepare($sql_deleteProject)) {
 			
@@ -135,12 +161,11 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_prepared.php');
 		
 	}
 	
-	function addUserToProject($projectid, $useremail) {
-			
+	function addUserToProject($projectid, $useremail) {		
 		global $connection;
 		$query = $connection->stmt_init();	
 		$sql_addUserToProject = "";
-			
+		$query->prepare($sql_addUserToProject);		
 		
 	}
 	

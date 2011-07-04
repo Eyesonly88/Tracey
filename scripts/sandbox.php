@@ -22,22 +22,9 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_prepared.php');
 	
 	
 	global $connection;
-	$results = '';
-	$projectname = 'Test1';
-	$response = '';
-	$results = checkProjectExistsByName($projectname);	
-	if (empty($results)) { return 'No project with name ' . $projectname . ' found.'; } else { echo 'Project found <BR />'; } 
+	createProject("SandboxTest1", "ttc_rulz@hotmail.com");
 	
-	foreach($results as $row){
-			$response = $response . '<tr> ';
-			$response = $response . '<td align="center"> ' . $row['ProjectId'] . ' </td>';
-			$response = $response . '<td align="center"> ' . $row['ProjectName'] . ' </td>';
-			$response = $response . ' </tr>';
-	}
-	$response = $response . '</table>';	
-	
-	
-	echo $response;
+	//echo $response;
 	//$id = "1";
 	//$email = "ttc_rul6@hotmail.com";
 	//echo "Before function <BR />";
