@@ -1,20 +1,39 @@
 $(document).ready(function() {
-	//$('#login-container').hide();
+
+	$(".login-container").hide();
+	$(".register-form").hide();
+		$("#login").hoverIntent( 
+			function(){
+
+				showLogin();
+			}
+			,
+			function(){
+				if(active != 1){ 
+					hideLogin();
+				}		
+			}
+		)
+		$("#register").hoverIntent( 
+			function(){
+			$(".register-form").fadeIn(200);
+			$('#nickname').focus();
+			},
+			function(){
+				$(".register-form").fadeOut(200);
+			}
+		)
+
 	afterShow();
-	$('#logininput input.login, #logininput a.login').hover(function (e) {
-				//e.preventDefault();
-				///alert("HI!!!!!!");
-	
-			showLogin();
-			
-			
-		});
 });
 
+var active = 0;
 var message = '';
 
 function showLogin() { 
-	$('#logininput').fadeOut(200);
+
+	$('#login-container').fadeIn(200);
+	
 	//alert("SUP!");
 	if ($.browser.mozilla) {
 		$('#login-container .login-button').css({
@@ -28,54 +47,24 @@ function showLogin() {
 		});
 	}
 
-	// dynamically determine height
-	var h = 150;
-	if ($('#login-subject').length) {
-		h += 26;
-	}
-	if ($('#login-cc').length) {
-		h += 22;
-	}
-
-	var title = $('#login-container .login-title').html();
-	//$('#login-container .login-title').html('Loading...');
-	$('#login-container').fadeIn(200, function () {
-		
-			$('#login-container .login-content').animate({
-				height: h
-			}, function () {
-				$('#login-container .login-title').html(title);
+	var title = $('#login-container .login-title').html();	
+	$('#login-container form').show();
+	$('#login-container').fadeIn(300);
+	$('#login-container .login-title').html(title);
 				
-				/* @TODO here: need to do an ajax call to check if a user is logged in to the session.
-				If so, then do not display the login form but either:
-				Display button to go to dashboard, or just redirect to dashboard (need to decide) */
+	/* @TODO here: need to do an ajax call to check if a user is logged in to the session.
+	If so, then do not display the login form but either:
+	Display button to go to dashboard, or just redirect to dashboard (need to decide) */
 				
-				$('#login-container form').fadeIn(200, function () {
-					$('#login-container #login-name').focus();
-
-
-					// fix png's for IE 6
-					/*if ($.browser.msie && $.browser.version < 7) {
-						$('#login-container .login-button').each(function () {
-							if ($(this).css('backgroundImage').match(/^url[("']+(.*\.png)[)"']+$/i)) {
-								var src = RegExp.$1;
-								$(this).css({
-									backgroundImage: 'none',
-									filter: 'progid:DXImageTransform.Microsoft.AlphaImageLoader(src="' +  src + '", sizingMethod="crop")'
-								});
-							}
-						});
-					}*/
-				});			
-		});
-	});
-	
+	$('#login-container #login-email').focus();
 
 }
-	
+
+/* Function that sets up all the elements and event handlers present inside the login form div */
 function afterShow() { 
 	$('#login-container .login-send').click(function (e) {
 		e.preventDefault();
+		active = 1;
 		// validate form
 		if (validate()) {
 			var msg = $('#login-container .login-message');
@@ -83,8 +72,12 @@ function afterShow() {
 				msg.removeClass('login-error').empty();
 			});
 			$('#login-container .login-title').fadeIn(400);
-			$('#login-container .login-title').html('Checking details...');
-			$('#login-container form').fadeOut(200);
+			$('#login-container .login-loading').fadeIn(200, function(){
+				
+				$('#login-container .login-title').html('Checking details...');
+				$('#login-container form').fadeOut(200);
+			});
+				
 			$('#login-container .login-content').animate({
 				height: '80px'
 			}, function () {
@@ -106,6 +99,7 @@ function afterShow() {
 							if (data == 1){
 									$('#login-container .login-title').html('Invalid Input');
 									('#login-container .login-title').fadeOut(400);
+									active = 0;
 								} else if (data == 2){
 									
 									$('#login-container form').fadeIn(200);
@@ -121,6 +115,7 @@ function afterShow() {
 									$('#login-container .login-message').animate({
 										height: '30px'
 									}, showError());
+									active = 0;
 								
 								} else {
 									$('#login-container .login-loading').fadeOut(200, function () {
@@ -129,61 +124,48 @@ function afterShow() {
 										
 										/* Loads the 'loading' animation image and waits for 1 second before redirecting :7 */
 										$('#login-container .login-loading').fadeIn(200, function (){
+											active = 0;
 											setTimeout(function(){window.location.replace(data);}, 1000) 
 										});
 	
 									});
-								}
-							
+								}		
 						},
 						error: "Error"
 					}); //end of ajax
 				});
 			});
+			
 		}
 		else {
+			active = 1;
 			if ($('#login-container .login-message:visible').length > 0) {
 				var msg = $('#login-container .login-message div');
 				msg.fadeOut(200, function () {
 					msg.empty();
 					showError();
 					msg.fadeIn(200);
+					active = 0;
 				});
 			}
 			else {
 				$('#login-container .login-message').animate({
 					height: '30px'
 				}, showError());
+				active = 0;
 			}
 			
 		}
 	});
 	
-	$('#login-container .login-cancel').click(function (e) { 
-		
-		hideLogin();
-		
-		
-		
-		
-	});
 }
 
 
 function hideLogin() { 
 	
 	$('#login-container .login-message').fadeOut();
-			//$('#login-container .login-title').html('Closing...');
-			$('#login-container form').fadeOut(200);
-			$('#login-container .login-content').animate({
-				height: 40
-			});
-			 //function () {
-				//$('#login-container').fadeOut(200, function () {
-					
-				//});
-			//});
-			$('#logininput').fadeIn(200);
+	$('#login-container').fadeOut(200);
+			
 }
 		
 function error(){

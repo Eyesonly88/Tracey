@@ -21,11 +21,11 @@
 		)
 		$("#register").hoverIntent( 
 			function(){
-			$(".register-form").show();
+			$(".register-form").fadeIn(200);
 			$('#nickname').focus();
 			},
 			function(){
-				$(".register-form").hide();
+				$(".register-form").fadeOut(200);
 			}
 		)
 	});
