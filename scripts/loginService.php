@@ -3,7 +3,7 @@
 global $server,$username,$password,$database;
 
 
-$server = "localhost:3306";
+$server = "localhost";
 $username="root";
 $password="";
 $database="tracey";

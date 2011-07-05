@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+	<head>
+			<link rel="stylesheet" href="/css/customStyle.css" type="text/css" media="screen, projection">
+			<title>Tracey!</title>
+			<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
+			<script src="js/jquery.hoverIntent.js"></script>
+	<script>
+	
+	$(document).ready(function(){
+		$(".login-form").hide();
+		$(".register-form").hide();
+		$("#login").hoverIntent( 
+			function(){
+			$(".login-form").show();
+			$('#email').focus();
+			},
+			function(){
+				$(".login-form").hide();
+			}
+		)
+		$("#register").hoverIntent( 
+			function(){
+			$(".register-form").show();
+			$('#nickname').focus();
+			},
+			function(){
+				$(".register-form").hide();
+			}
+		)
+	});
+	</script>
+
+	</head>
+		
+
+	<body class="custom">
+		<div id="header-area">
+			
+			
+				<div id="header">
+					<div class="menu-container">
+						<!-- Menu items = Home, About, Help -->
+						<ul class="menu">
+							<li><a href="#">Home</a></li>
+							<li><a href="#">About</a></li>
+							<li><a href="#">Help</a></li>
+						</ul>
+					</div>
+					
+					<ul id="nav">
+						<!-- Load Navigation items ..
+							1. Logged in user = Account, Themes, Logout Button.
+							2. Visitor = Login, Register.
+						-->
+						<li id="login">
+							<a href="#">
+								<h3>Login to Tracey</h3>
+								<span>Or Use OpenID to Login</span>	
+							</a>
+							<div class="login-form">
+								<form action="./scripts/authentication/login.php" method="post">
+									<label class="grey" for="email">Email:</label>
+									<input class="field" type="text" name="email" id="email" value="" size="23" />
+									<label class="grey" for="password">Password:</label>
+									<input class="field" type="password" name="password" id="password" size="23" />
+					            	<label><input name="rememberme" id="rememberme" type="checkbox" checked="checked" value="forever" /> &nbsp;Remember me</label>
+				        			<div class="clear"></div>
+									<input type="submit" name="submit" value="Login" class="bt_login" />
+									<a id="lost-pwd" href="#">Lost your password?</a>
+								</form> 
+							</div>
+						</li>
+						<li id="register">
+							<a href="#">
+								<h3>Register</h3>
+								<span>Takes 3 seconds</span>	
+							</a>
+							<div class="register-form">
+								<!-- Register Form -->
+								<form action="./scripts/registration/registration.php" method="post">			
+									<label class="grey" for="nickname">Nickname:</label>
+									<input class="field" type="text" name="nickname" id="nickname" value="" size="23" />
+									<label class="grey" for="email">Email:</label>
+									<input class="field" type="text" name="email" id="email" size="23" />
+									<label class="grey" for="password">Password:</label>
+									<input class="field" type="password" name="password" id="password" size="23" />
+									<input type="submit" name="submit" value="Register" class="bt_register" />
+									
+									
+								</form>
+							</div>
+						</li>
+					</ul>
+				</div>
+			
+			
+		</div>
+	</body>
+</html>
