@@ -1,3 +1,8 @@
+<?php 
+
+
+
+?>
 
 <!DOCTYPE html>
 
@@ -38,8 +43,8 @@
 	 
 
 	<script src="libraries/simplemodal/jquery.simplemodal-1.4.1.js" type="text/javascript"></script>
-	<script type='text/javascript' src='js/login.js'></script>
-
+	<!-- <script type='text/javascript' src='js/login2.js'></script> -->
+	<script src="js/index.js" type="text/javascript"></script>
 	<script src="js/loginslide.js" type="text/javascript"></script>
 	
 	
@@ -129,9 +134,30 @@
 	<div id='logo'>
 	</div>
 	<div id='content'>
-		<div id='login-form' style='align:center; padding-left:40%; padding-top:40%;'>
+		<div id='login-container'>
 			
+					<div class='login-top'></div>
+					<div class='login-content'>
+						<h1 class='login-title'>Login:</h1>
+						<div class='login-loading' style='display:none'></div>
+						<div class='login-message' style='display:none'></div>
+						<form action='#' style='display:none'>
+							<label for='login-email'>*Email:</label>
+							<input type='text' id='login-email' class='login-input' name='email' tabindex='1002' />							
+							<label for='login-password'>Password:</label>
+							<input type='password' id='login-password' class='login-input' name='password' value='' tabindex='1003' />	
+							<label>&nbsp;</label>
+							<button type='submit' class='login-send login-button' tabindex='1006'>Send</button>
+							<button type='submit' class='login-cancel login-button' tabindex='1007'>Cancel</button>
+							<br/>
+						</form>
+					</div>
+		
+					
 		 <!-- Login form is created inside the jquery script - uses the simple modal library (check login.js)-->
+			
+		</div>
+		<div id='logininput'>
 			<input type='button' name='login' value='Login' class='login demo' style='background:#333333; color:#DDDDDD; width:60px; height:40px; align:center; border:none;'/>
 		</div>
 		<!-- preload the images -->

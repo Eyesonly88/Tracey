@@ -16,11 +16,11 @@ jQuery(function ($) {
 	var login = {
 		message: null,
 		init: function () {
-			$('#login-form input.login, #login-form a.login').click(function (e) {
-				e.preventDefault();
-				
+			$('#login-form input.login, #login-form a.login').hover(function (e) {
+				//e.preventDefault();
+				//alert("HI!!!!!!");
 				/* This variable stores the HTML of the login form. This is used to generate the login form in the popup dialog */
-				var loginform = 
+				/*var loginform = 
 				"<div style='display:none'>" +
 					"<div class='login-top'></div>"+
 						"<div class='login-content'>"+
@@ -39,9 +39,9 @@ jQuery(function ($) {
 							"</form>"+
 						"</div>"+
 				"</div>";
-		
+				*/
 				/* create a modal dialog (using the simple modal library) with the login form above */
-				$(loginform).modal({
+				$('#login-form').modal({
 					closeHTML: "<a href='#' title='Close' class='modal-close'>x</a>",
 					position: ["15%",],
 					overlayId: 'login-overlay',
@@ -50,6 +50,7 @@ jQuery(function ($) {
 					onShow: login.show,
 					onClose: login.close
 				});	
+			
 			});
 		},
 		
@@ -80,7 +81,7 @@ jQuery(function ($) {
 
 			var title = $('#login-container .login-title').html();
 			$('#login-container .login-title').html('Loading...');
-			dialog.overlay.fadeIn(200, function () {
+			//dialog.overlay.fadeIn(200, function () {
 				dialog.container.fadeIn(200, function () {
 					dialog.data.fadeIn(200, function () {
 						$('#login-container .login-content').animate({
@@ -112,7 +113,7 @@ jQuery(function ($) {
 						});
 					});
 				});
-			});
+			//});
 		},
 		
 		/* function to be executed for login.show. This contains the ajax call to login2.php to authenticate (as long as field validation passes)*/
