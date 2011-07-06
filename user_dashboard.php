@@ -99,6 +99,22 @@ confirmLogin();
       });
 
     </script>
+    <script>
+    $(document).ready(function() {
+    	$(".notifications-form").hide();
+		$("#notifications").hoverIntent( 
+			function(){
+				$(".notifications-form").fadeIn(200);
+			}
+			,
+			function(){
+				$(".notifications-form").fadeOut(200);
+			}
+		)
+		
+		});
+		
+    </script>
 	<link rel="stylesheet" type="text/css" href="css/customStyle.css" />
     <link rel="stylesheet" type="text/css" href="css/dashboardui.css" />
     <link rel="stylesheet" type="text/css" href="libraries/dashboard/themes/default/jquery-ui-1.8.2.custom.css" />
@@ -122,6 +138,19 @@ confirmLogin();
 							1. Logged in user = Account, Themes, Logout Button.
 							2. Visitor = Login, Register.
 						-->
+						<li id="notifications">
+							
+							<div id="notification-icon">
+								<?php // @todo: write a function to request the number of notifications to be display and output it here ?>
+								<h3>1</h3>
+							</div>
+							
+							<div id="notifications-container" class="notifications-form">
+								<div id="notifications-content">
+									<span>Join Project X by Magneto. ACCEPT or REJECT.</span>
+								</div>
+							</div>
+						</li>
 						<li id="login">
 							<a href="#">
 								<h3>Account Settings</h3>
