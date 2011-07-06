@@ -35,18 +35,20 @@ padding-right: 0px;
 padding-top: 0px;
 
 }
-.custom .page { background: transparent ;
+.custom .page {
+background: transparent ;
 margin: 0 auto;
 padding-right: 0em;
 padding-left: 0em;
 padding-top: 0em;
-height: inherit}
+height: inherit
+}
 
 
 /* Header Area */
 
 /* the header background area is currently black/red. Can be easily changed to whatever we decide on. */
-.custom #header-area { background: url(../images/header_area.png) repeat-x ;
+.custom #header-area { background: url(../images/tracey_header_area_blue.png) repeat-x ;
 width:	inherit;
 height:	110px;
 margin: 0px;
