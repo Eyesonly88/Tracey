@@ -79,17 +79,13 @@ padding: 0px;
         #nav a:hover span, #login:hover span, #register:hover span { color: #F1F4F7; }
     #nav li a:hover, #login:hover a, #register:hover a { }
     
-#nav .login-form, #nav .register-form { background: #251C17; border: .35em solid rgba(0, 0, 0, .3); border-top: 0; display: none; float: left; right: -.3em; position: absolute; top: 6em; z-index: 10; -moz-border-radius-bottomleft: .6em; -moz-border-radius-bottomright: .6em; -webkit-border-bottom-left-radius: .6em; -webkit-border-bottom-right-radius: .6em }
+#nav .login-form, #nav .register-form, #nav .notifications-form { background: #251C17; border: .35em solid rgba(0, 0, 0, .3); border-top: 0; display: none; float: left; right: -.3em; position: absolute; top: 6em; z-index: 10; -moz-border-radius-bottomleft: .6em; -moz-border-radius-bottomright: .6em; -webkit-border-bottom-left-radius: .6em; -webkit-border-bottom-right-radius: .6em }
     #nav .login-form a, #nav .register-form a { display: inline; height: auto; padding: 0; text-shadow: none }
         #nav .login-form a:hover, #nav .register-form a:hover { background: none; border: 0; margin: 0 }
 
-#login:hover, #register:hover { -moz-box-shadow: 0 0 7px #222; -webkit-box-shadow: 0 0 7px #222 }
+#login:hover, #register:hover, #notifications:hover { -moz-box-shadow: 0 0 7px #222; -webkit-box-shadow: 0 0 7px #222 }
 
-#nav .notifications-form, #nav .login-form, #nav .register-form { background: #EEE; border: 0.35em solid rgba(0, 0, 0, 0.3); border-top: 0; display: none; float: left; right: -.3em; position: absolute; top: 6em; z-index: 10; -moz-border-radius-bottomleft: .6em; -moz-border-radius-bottomright: .6em; -webkit-border-bottom-left-radius: .6em; -webkit-border-bottom-right-radius: .6em }
- #nav .notifications-form a, #nav .login-form a, #nav .register-form a { display: inline; height: auto; padding: 0; text-shadow: none }
-#nav .notifications-form a:hover, #nav .login-form a:hover, #nav .register-form a:hover { background: none; border: 0; margin: 0 }
 
-#login:hover, #register:hover, #notifications:hover{ -moz-box-shadow: 0 0 7px #222; -webkit-box-shadow: 0 0 7px #222 }
 /** Login Form and Login Item in Nav **/
 
 #login .login-form { padding: 1em 1.1em 2em 12em; width: 26.9em }
@@ -175,12 +171,13 @@ font-weight: bold;
 
 /* Notifications Form and Notification Items */
 
-#notifications .notifications-form { padding: 0em 1.1em 2em 12em; width: 26.9em ;}
+#notifications .notifications-form { padding: 0em 1.1em 2em 12em; width: 26.9em ; }
 #notifications #notification-icon {
 	background-image: url(../images/cardboard.png);
 	background-repeat: no-repeat;
 	height:60px;
 	width: 80px;
+	
 }
 #notifications #notification-icon h3{
 	text-align: center;

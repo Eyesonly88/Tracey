@@ -147,7 +147,7 @@ confirmLogin();
 							
 							<div id="notifications-container" class="notifications-form">
 								<div id="notifications-content">
-									<span>Join Project X by Magneto. ACCEPT or REJECT.</span>
+									<span style="color: #F1F4F7;">Join Project X by Magneto. ACCEPT or REJECT.</span>
 								</div>
 							</div>
 						</li>
