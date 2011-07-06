@@ -58,15 +58,138 @@ var message = '';
 /* Shows the login container */
 function showRegister() { 
 	
+	$('#register-container').fadeIn(200);
 	
+	//alert("SUP!");
+	if ($.browser.mozilla) {
+		$('#register-container .register-button').css({
+			'padding-bottom': '2px'
+		});
+	}
+	// input field font size
+	if ($.browser.safari) {
+		$('#register-container .register-input').css({
+			'font-size': '.9em'
+		});
+	}
+
+	var title = $('#register-container .register-title').html();	
+	$('#register-container form').show();
+	$('#register-container').fadeIn(300);
+	$('#register-container .login-title').html(title);
+				
+	/* @TODO here: need to do an ajax call to check if a user is logged in to the session.
+	If so, then do not display the login form but either:
+	Display button to go to dashboard, or just redirect to dashboard (need to decide) */
+				 
+	$('#register-container #register-email').focus();
 }
 
 function prepareRegister() { 
 	
+	$('#register-container .register-send').click(function (e) {
+		e.preventDefault();
+		active = 1;
+		// validate form
+		if (validate()) {
+			var msg = $('#register-container .register-message');
+			msg.fadeOut(function () {
+				msg.removeClass('register-error').empty();
+			});
+			
+			$('#register-container .register-title').fadeIn(200);
+			$('#register-container .register-title').html('Checking details...');
+			$('#register-container form').fadeOut(200);
+			$('#register-container .register-content').animate({
+						height: '50px'
+			}, function() { 
+				$('#register-container .register-loading').fadeIn(200, function(){
+							
+					/* This is the jquery AJAX call to login2.php to serialize the form data 
+					and authenticate the user using this data. The success function gets the 'return' data
+					from login2.php, which in this case is the url to redirect to. The success function
+					then performs a javascript redirection to the specified url. */
+					$.ajax({
+						url: 'scripts/authentication/login2.php' ,
+						data: $('#register-container form').serialize() + '&action=send',
+						type: 'post',
+						cache: false,
+						dataType: 'text',
+						success: function (data) {
+							
+							/* If the input is invalid */
+							if (data == 1){
+									$('#register-container .register-title').html('Invalid Input');
+									('#register-container .register-title').fadeOut(400);
+									active = 0;
+									
+							/* If authentication fails */		
+							} else if (data == 2){
+									
+								$('#register-container form').fadeIn(200);
+								$('#register-container .register-content').animate({
+									height: '180px'});
+									
+								$('#register-container .register-title').fadeOut(400);
+								$('#register-container .register-loading').fadeOut(200);
+								
+								var msg = $('#register-container .register-message div');
+								message += 'Authentication Failed';
+								$('#register-container .register-message').animate({
+									height: '30px'
+								}, function() { 
+									showError();
+
+								}); 
+								active = 0;
+								
+							/* If authentication succeeds (i.e. callback data is not 1 or 2) 
+							- callback data contains redirection url */	
+							} else {
+								$('#register-container .register-loading').fadeOut(200, function () {
+														
+									$('#register-container .register-title').html('Logging in...');
+									$('#register-container .register-loading').fadeIn(200, function (){
+										active = 0;
+										
+										/* Wait for 1 second before redirecting */
+										setTimeout(function(){window.location.replace(data);}, 1000); 
+									});
+
+								});
+								}		
+						},
+						error: "Error"
+					}); //end of ajax
+				});
+			});		
+		}
+		else {
+			active = 1;
+			if ($('#register-container .register-message:visible').length > 0) {
+				var msg = $('#register-container .register-message div');
+				msg.fadeOut(200, function () {
+					msg.empty();
+					showError();
+					msg.fadeIn(200);
+					active = 0;
+				});
+			}
+			else {
+				$('#register-container .register-message').animate({
+					height: '30px'
+				}, showError());
+				active = 0;
+			}
+			
+		}
+	});
+	
 }
 
 function hideRegister() {
-	
+	$('#register-container .register-message').fadeOut();
+	$('#register-container').fadeOut(200);
 	
 }
 
