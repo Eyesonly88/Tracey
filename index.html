@@ -4,7 +4,7 @@
 			<link rel="stylesheet" href="/css/customStyle.css" type="text/css" media="screen, projection">
 		
 			<title>Tracey!</title>
-			<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
+			<script src="js/jquery.js"></script>
 			<script src="js/jquery.hoverIntent.js"></script>
 			<script src="js/loginpanel.js"></script>
 	<script>
@@ -54,7 +54,6 @@
 										<br/>
 									</form>
 								</div>
-						
 							</div>
 						</li>
 						<li id="register">
@@ -62,6 +61,25 @@
 								<h3>Register</h3>
 								<span>Takes 3 seconds</span>	
 							</a>
+							
+							<div id='register-container' class='register-form'>
+								<h1 class='register-title'></h1>
+								<div class='register-top'></div>
+								<div class='register-content'>
+									<div class='register-loading' style='display:none'></div>
+									<div class='register-message' style='display:none'></div>
+									<form action='#' style='display:none'>
+										<label for='register-email' class='grey'>Email:</label>
+										<input type='text' id='register-email' class='register-input field' name='email' tabindex='1002' />							
+										<label for='register-password' class='grey'>Password:</label>
+										<input type='password' id='register-password' class='register-input field' name='password' value='' tabindex='1003' />	
+										<label>&nbsp;</label>
+										<button type='submit' class='register-send register-button bt_login' tabindex='1006'>Login</button>
+										<br/>
+									</form>
+								</div>
+							</div>
+							
 							<div class="register-form">
 								<!-- Register Form -->
 								<form action="./scripts/registration/registration.php" method="post">			
