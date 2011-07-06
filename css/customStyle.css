@@ -115,7 +115,6 @@ padding: 6px;
 -moz-border-radius: 3px;
 -webkit-border-radius: 3px;
 border-radius: 3px;
-border: 1px solid #CCC;
 font: 13px Arial,sans-serif;
 }
 
@@ -163,6 +162,7 @@ font-weight: bold;
 #login-container .login-message {text-align:center;}
 #login-container .login-error {font-size:14px; font-weight:bold; line-height:18px; margin: 10px 0; color:#333; width:175px;display: block; text-align: center; float: left; clear: left;}
 
+
 /* Dashboard Styles */
 
 #switcher {
@@ -173,3 +173,14 @@ font-weight: bold;
 #switcher span{
 	font-size: 1.0em;
 }
+
+.focusField{
+        border:solid 3px #660000;
+        background:#414141;
+        color:#FFFFFF;
+ }
+.idleField{
+        background:#414141;
+        color: #AAAAAA;
+        border: solid 2px #DFDFDF;
+ }

@@ -1,5 +1,28 @@
 $(document).ready(function() {
-
+	
+	/* Set focus settings for text input fields */
+	$('input[type="text"]').addClass("idleField");
+	$('input[type="text"]').focus(function() {
+		$(this).removeClass("idleField").addClass("focusField");
+        
+    });
+    $('input[type="text"]').blur(function() {
+    	$(this).removeClass("focusField").addClass("idleField");
+       
+    });
+    
+    /* Set focus settings for password input fields */
+    $('input[type="password"]').addClass("idleField");
+	$('input[type="password"]').focus(function() {
+		$(this).removeClass("idleField").addClass("focusField");
+        
+    });
+    $('input[type="password"]').blur(function() {
+    	$(this).removeClass("focusField").addClass("idleField");
+ 
+    });
+    
+    /* Setup hover settings and event handlers */
 	$(".login-container").hide();
 	$(".register-form").hide();
 		$("#login").hoverIntent( 
@@ -23,12 +46,29 @@ $(document).ready(function() {
 				$(".register-form").fadeOut(200);
 			}
 		)
-
+	
+	/* Set up the login form elements in the background (so that they load up quickly upon hover) */
 	afterShow();
 });
 
 var active = 0;
 var message = '';
+
+
+/* Shows the login container */
+function showRegister() { 
+	
+	
+}
+
+function prepareRegister() { 
+	
+}
+
+function hideRegister() {
+	
+	
+}
 
 function showLogin() { 
 
@@ -55,7 +95,7 @@ function showLogin() {
 	/* @TODO here: need to do an ajax call to check if a user is logged in to the session.
 	If so, then do not display the login form but either:
 	Display button to go to dashboard, or just redirect to dashboard (need to decide) */
-				
+				 
 	$('#login-container #login-email').focus();
 
 }
@@ -80,67 +120,64 @@ function afterShow() {
 			}, function() { 
 				$('#login-container .login-loading').fadeIn(200, function(){
 							
-							/* This is the jquery AJAX call to login2.php to serialize the form data 
-							and authenticate the user using this data. The success function gets the 'return' data
-							from login2.php, which in this case is the url to redirect to. The success function
-							then performs a javascript redirection to the specified url. */
-							$.ajax({
-								url: 'scripts/authentication/login2.php' ,
-								data: $('#login-container form').serialize() + '&action=send',
-								type: 'post',
-								cache: false,
-								dataType: 'text',
-								success: function (data) {
+					/* This is the jquery AJAX call to login2.php to serialize the form data 
+					and authenticate the user using this data. The success function gets the 'return' data
+					from login2.php, which in this case is the url to redirect to. The success function
+					then performs a javascript redirection to the specified url. */
+					$.ajax({
+						url: 'scripts/authentication/login2.php' ,
+						data: $('#login-container form').serialize() + '&action=send',
+						type: 'post',
+						cache: false,
+						dataType: 'text',
+						success: function (data) {
+							
+							/* If the input is invalid */
+							if (data == 1){
+									$('#login-container .login-title').html('Invalid Input');
+									('#login-container .login-title').fadeOut(400);
+									active = 0;
 									
+							/* If authentication fails */		
+							} else if (data == 2){
 									
-									if (data == 1){
-											$('#login-container .login-title').html('Invalid Input');
-											('#login-container .login-title').fadeOut(400);
-											active = 0;
-										} else if (data == 2){
-											
-											$('#login-container form').fadeIn(200);
-											$('#login-container .login-content').animate({
-												height: '180px'});
-												
-											/* Fade out the previous status message and the animated 'loading' image */
-											$('#login-container .login-title').fadeOut(400);
-											$('#login-container .login-loading').fadeOut(200);
-											
-											var msg = $('#login-container .login-message div');
-											message += 'Authentication Failed';
-											$('#login-container .login-message').animate({
-												height: '30px'
-											}, function() { 
-												showError();
-	
-											}); 
-											active = 0;
+								$('#login-container form').fadeIn(200);
+								$('#login-container .login-content').animate({
+									height: '180px'});
+									
+								$('#login-container .login-title').fadeOut(400);
+								$('#login-container .login-loading').fadeOut(200);
+								
+								var msg = $('#login-container .login-message div');
+								message += 'Authentication Failed';
+								$('#login-container .login-message').animate({
+									height: '30px'
+								}, function() { 
+									showError();
+
+								}); 
+								active = 0;
+								
+							/* If authentication succeeds (i.e. callback data is not 1 or 2) 
+							- callback data contains redirection url */	
+							} else {
+								$('#login-container .login-loading').fadeOut(200, function () {
+														
+									$('#login-container .login-title').html('Logging in...');
+									$('#login-container .login-loading').fadeIn(200, function (){
+										active = 0;
 										
-										} else {
-											$('#login-container .login-loading').fadeOut(200, function () {
-																	
-												$('#login-container .login-title').html('Logging in...');
-												
-												/* Loads the 'loading' animation image and waits for 1 second before redirecting :7 */
-												$('#login-container .login-loading').fadeIn(200, function (){
-													active = 0;
-													setTimeout(function(){window.location.replace(data);}, 1000); 
-												});
-			
-											});
-										}		
-								},
-								error: "Error"
-							}); //end of ajax
-					
-				
-		
-		});
-	});
-				
-			
-			
+										/* Wait for 1 second before redirecting */
+										setTimeout(function(){window.location.replace(data);}, 1000); 
+									});
+
+								});
+								}		
+						},
+						error: "Error"
+					}); //end of ajax
+				});
+			});		
 		}
 		else {
 			active = 1;
@@ -165,7 +202,7 @@ function afterShow() {
 	
 }
 
-
+/* Hides the login container */
 function hideLogin() { 
 	
 	$('#login-container .login-message').fadeOut();
@@ -174,9 +211,7 @@ function hideLogin() {
 }
 		
 function error(){
-
-		alert(xhr.statusText);
-	
+	alert(xhr.statusText);
 }
 
 function validate(){
@@ -185,15 +220,13 @@ function validate(){
 
 	var email = $('#login-container #login-email').val();
 	if (!email) {
-		message += 'Email is required. ';
+		message += 'Email is required.';
 	}
 	else {
 		if (!validateEmail(email)) {
-			message += 'Email is invalid. ';
+			message += 'Email is invalid.';
 		}
 	}
-
-
 
 	if (message.length > 0) {
 		return false;
@@ -248,10 +281,5 @@ function validateEmail(email) {
 function showError(){
 	$('#login-container .login-message')
 		.html($('<div class="login-error"></div>').append(message))
-		.fadeIn(200, function() { 
-			
-			
-			
-		});
-	
+		.fadeIn(200);
 }
