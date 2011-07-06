@@ -71,70 +71,75 @@ function afterShow() {
 			msg.fadeOut(function () {
 				msg.removeClass('login-error').empty();
 			});
-			$('#login-container .login-title').fadeIn(400);
-			$('#login-container .login-loading').fadeIn(200, function(){
-				
-				$('#login-container .login-title').html('Checking details...');
-				$('#login-container form').fadeOut(200);
-			});
-				
+			
+			$('#login-container .login-title').fadeIn(200);
+			$('#login-container .login-title').html('Checking details...');
+			$('#login-container form').fadeOut(200);
 			$('#login-container .login-content').animate({
-				height: '80px'
-			}, function () {
-				$('#login-container .login-loading').fadeIn(200, function () {
-					
-					/* This is the jquery AJAX call to login2.php to serialize the form data 
-					and authenticate the user using this data. The success function gets the 'return' data
-					from login2.php, which in this case is the url to redirect to. The success function
-					then performs a javascript redirection to the specified url. */
-					$.ajax({
-						url: 'scripts/authentication/login2.php' ,
-						data: $('#login-container form').serialize() + '&action=send',
-						type: 'post',
-						cache: false,
-						dataType: 'text',
-						success: function (data) {
+						height: '50px'
+			}, function() { 
+				$('#login-container .login-loading').fadeIn(200, function(){
 							
-							
-							if (data == 1){
-									$('#login-container .login-title').html('Invalid Input');
-									('#login-container .login-title').fadeOut(400);
-									active = 0;
-								} else if (data == 2){
+							/* This is the jquery AJAX call to login2.php to serialize the form data 
+							and authenticate the user using this data. The success function gets the 'return' data
+							from login2.php, which in this case is the url to redirect to. The success function
+							then performs a javascript redirection to the specified url. */
+							$.ajax({
+								url: 'scripts/authentication/login2.php' ,
+								data: $('#login-container form').serialize() + '&action=send',
+								type: 'post',
+								cache: false,
+								dataType: 'text',
+								success: function (data) {
 									
-									$('#login-container form').fadeIn(200);
-									$('#login-container .login-content').animate({
-										height: '150px'});
-										
-									/* Fade out the previous status message and the animated 'loading' image */
-									$('#login-container .login-title').fadeOut(400);
-									$('#login-container .login-loading').fadeOut(200);
 									
-									var msg = $('#login-container .login-message div');
-									message += 'Authentication Failed';
-									$('#login-container .login-message').animate({
-										height: '30px'
-									}, showError());
-									active = 0;
-								
-								} else {
-									$('#login-container .login-loading').fadeOut(200, function () {
-															
-										$('#login-container .login-title').html('Logging in...');
-										
-										/* Loads the 'loading' animation image and waits for 1 second before redirecting :7 */
-										$('#login-container .login-loading').fadeIn(200, function (){
+									if (data == 1){
+											$('#login-container .login-title').html('Invalid Input');
+											('#login-container .login-title').fadeOut(400);
 											active = 0;
-											setTimeout(function(){window.location.replace(data);}, 1000) 
-										});
+										} else if (data == 2){
+											
+											$('#login-container form').fadeIn(200);
+											$('#login-container .login-content').animate({
+												height: '180px'});
+												
+											/* Fade out the previous status message and the animated 'loading' image */
+											$('#login-container .login-title').fadeOut(400);
+											$('#login-container .login-loading').fadeOut(200);
+											
+											var msg = $('#login-container .login-message div');
+											message += 'Authentication Failed';
+											$('#login-container .login-message').animate({
+												height: '30px'
+											}, function() { 
+												showError();
 	
-									});
-								}		
-						},
-						error: "Error"
-					}); //end of ajax
-				});
-			});
+											}); 
+											active = 0;
+										
+										} else {
+											$('#login-container .login-loading').fadeOut(200, function () {
+																	
+												$('#login-container .login-title').html('Logging in...');
+												
+												/* Loads the 'loading' animation image and waits for 1 second before redirecting :7 */
+												$('#login-container .login-loading').fadeIn(200, function (){
+													active = 0;
+													setTimeout(function(){window.location.replace(data);}, 1000); 
+												});
+			
+											});
+										}		
+								},
+								error: "Error"
+							}); //end of ajax
+					
+				
+		
+		});
+	});
+				
+			
 			
 		}
 		else {
@@ -243,6 +248,10 @@ function validateEmail(email) {
 function showError(){
 	$('#login-container .login-message')
 		.html($('<div class="login-error"></div>').append(message))
-		.fadeIn(200);
+		.fadeIn(200, function() { 
+			
+			
+			
+		});
 	
 }
