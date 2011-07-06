@@ -12,11 +12,11 @@
 		$(".register-form").hide();
 		$("#login").hoverIntent( 
 			function(){
-			$(".login-form").show();
+			$(".login-form").fadeIn(200);
 			$('#email').focus();
 			},
 			function(){
-				$(".login-form").hide();
+				$(".login-form").fadeOut(200);
 			}
 		)
 		$("#register").hoverIntent( 
