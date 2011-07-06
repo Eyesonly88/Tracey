@@ -7,11 +7,7 @@ text-decoration: none;
 }
 body {
 color: #3D3D3D;
-}
-body {
 font-family: Helvetica, Arial, sans-serif;
-}
-body {
 font-size: 10px;
 }
 h1, h2, h3, h6 {
@@ -33,6 +29,7 @@ padding-bottom: 0px;
 padding-left: 0px;
 padding-right: 0px;
 padding-top: 0px;
+font-size: 10px;
 
 }
 .custom .page {
@@ -70,7 +67,7 @@ padding: 0px;
 
 /* MAIN NAV MENU (SHARED STYLES)-> Login, Register or Account, Themes .. */
 
-#nav { float: right; list-style: none; margin-top: 5em }
+#nav { float: right; list-style: none; margin-top: 5em ;font-size: 10px;}
     #nav li { float: left; margin-left: 1em; position: relative; padding-right: 1em }
         #nav li a { display: block; height: 4.4em; padding: .8em 1.1em }
             #nav li a:hover, #login:hover, #register:hover { background: #251C17 url(images/nav_over.png) repeat-x top }
@@ -164,8 +161,25 @@ font-weight: bold;
 
 #login-container .login-loading {background:url(../images/loading6.gif) no-repeat; height:55px; margin:-14px 0 0 190px; padding:0; position:absolute; width:54px; z-index:8000; }
 #login-container .login-message {text-align:center;}
+
 #login-container .login-error {font-size:14px; font-weight:bold; line-height:18px; margin: 10px 0; color:#F1F4F7; width:175px;display: block; text-align: center; float: left; clear: left;}
 #login-container .login-title {color:#F1F4F7;}
+
+#login-container .login-error {font-size:14px; font-weight:bold; line-height:18px; margin: 10px 0; color:#333; width:175px;display: block; text-align: center; float: left; clear: left;}
+
+
+/* Dashboard Styles */
+
+#switcher {
+	margin: 1em;
+	width: 100px;
+	height: 15px;
+}
+#switcher span{
+	font-size: 1.0em;
+}
+
+
 .focusField{
         border:solid 2px #F1F4F7;
         background:#414141;
@@ -174,5 +188,10 @@ font-weight: bold;
 .idleField{
         background:#414141;
         color: #AAAAAA;
+
         border: solid 2px #251C17;
  }
+
+        border: solid 2px #DFDFDF;
+ }
+
