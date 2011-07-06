@@ -6,7 +6,7 @@ confirmLogin();
 
 ?>
 
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
   <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
@@ -16,7 +16,8 @@ confirmLogin();
     <script type="text/javascript" src="libraries/dashboard/lib/jquery-ui-1.8.2.custom.min.js"></script>
     <script type="text/javascript" src="libraries/dashboard/jquery.dashboard.js"></script>
     <script type="text/javascript" src="libraries/dashboard/lib/themeroller.js"></script>
-
+	<script src="js/jquery.hoverIntent.js"></script>
+	<script src="js/loginpanel.js"></script>
     <script type="text/javascript">
       // This is the code for definining the dashboard
       $(document).ready(function() {
@@ -98,34 +99,61 @@ confirmLogin();
       });
 
     </script>
-
+	<link rel="stylesheet" type="text/css" href="css/customStyle.css" />
     <link rel="stylesheet" type="text/css" href="css/dashboardui.css" />
     <link rel="stylesheet" type="text/css" href="libraries/dashboard/themes/default/jquery-ui-1.8.2.custom.css" />
 
   </head>
 
-  <body>
-	
-  <div class="header_tile_image">
-  	
-    <div class="headerbox">
-    	
-     <div id="switcher"></div>
-       <h1>User Dashboard </h1>
-       <h4>Logged in as <U><?php echo $_SESSION['email']; ?></U></h4>
-       
-    </div>
-    
-   <div class="headerlinks">
-      <a class="openaddwidgetdialog headerlink" href="#">Add Widget</a>&nbsp;<span class="headerlink">|</span>&nbsp;
-      <a class="editlayout headerlink" href="#">Edit layout</a>
-    </div>
-  </div>
-  <div id="nav_panel"> 
-  <h5><p><a href="/scripts/authentication/logout.php">LOGOUT</a></p></h5>
-  </div>
+  <body class="custom">
+		<div id="header-area">
+				<div id="header">
+					<div class="menu-container">
+						<!-- Menu items = Home, About, Help -->
+						<ul class="menu">
+							<li><a href="#">Home</a></li>
+							<li><a href="#">About</a></li>
+							<li><a href="#">Help</a></li>
+						</ul>
+					</div>
+					
+					<ul id="nav">
+						<!-- Load Navigation items ..
+							1. Logged in user = Account, Themes, Logout Button.
+							2. Visitor = Login, Register.
+						-->
+						<li id="login">
+							<a href="#">
+								<h3>Account Settings</h3>
+								<span>Change account details or Logout</span>	
+							</a>
+							<div id='login-container' class='login-form'>
+								<h1 class='login-title'></h1>
+								<div class='login-top'></div>
+								<div class='login-content'>
+									<label>Logged in as <U><?php echo $_SESSION['email']; ?></U></label>
+									<label><span><a href="/scripts/authentication/logout.php">LOGOUT</a></span></label>
+								</div>
+							</div>
+						</li>
+						<li id="register">
+							<a href="#">
+								<h3>Widgets and Layout</h3>
+								<span>Add widgets or Edit Layout</span>	
+							</a>
+							<div class="register-form">
+								<div id="switcher"></div>
+								<a class="openaddwidgetdialog headerlink" href="#"><label>Add Widget</label></a>
+      							<a class="editlayout headerlink" href="#"><label>Edit Layout</label></a>
+							</div>
+						</li>
+					</ul>
+				</div>
+			
+			
+		</div>
   
-  </div>
+  
 	
 
   <div id="dashboard" class="dashboard">
