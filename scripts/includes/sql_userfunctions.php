@@ -73,11 +73,11 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_prepared.php');
 		$emailExists = 0;
 		$userinfo = array();
 		$results = NULL;
-		$query = $connection ->stmt_init();
+		$query = $connection->stmt_init();
 		
 		$sql_checkEmail = "SELECT * from User WHERE Email=?";	
 		$query->prepare($sql_checkEmail);
-		$query -> bind_param("s", $em);
+		$query->bind_param("s", $em);
 		$em = $email;		
 		$results = dynamicBindResults($query);	
 				
