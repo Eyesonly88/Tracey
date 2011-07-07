@@ -19,8 +19,18 @@
 	function confirmLogin(){
 		if (!loggedIn()) {
 	  		// redirect user to login page
-	  		redirect_to("../index.html");
+	  		redirect_to("../index.php");
 		} else {
+			// do nothing because user is logged in
+		}
+	}
+	
+	function confirmLogin2(){
+		if (!loggedIn()) {
+	  		// redirect user to login page
+	  		
+		} else {
+			redirect_to("../user_dashboard.php");
 			// do nothing because user is logged in
 		}
 	}

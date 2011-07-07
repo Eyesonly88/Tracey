@@ -1,3 +1,11 @@
+<?php
+include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sessions.php');
+include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_notificationfn.php');
+
+confirmLogin2();
+
+?>
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -10,10 +18,8 @@
 	<script>
 	//Put all the jquery stuff in loginpanel.js
 	</script>
-
 	</head>
 		
-
 	<body class="custom">
 		<div id="header-area">
 			
