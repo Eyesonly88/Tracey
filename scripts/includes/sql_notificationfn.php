@@ -10,8 +10,11 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_checks.php');
 include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_prepared.php');
 
 /*
- * Returns the count of notifications sent to a user (ReceiverId), using the e-mail of the logged in user.
- * Returns 0 if no notifications are found related to the e-mail of the user, otherwise returns the number of notifications.
+ * A function that returns the total number of notifications given to a user (Receiver).
+ * @return: the count of notifications sent to a user (ReceiverId), using the e-mail of the logged in user.
+ * 			0 if no notifications are found related to the e-mail of the user.
+ * 			-1 if error happened during the prepared statement, otherwise returns the number of notifications.
+ * @param:	$email:	The e-mail address of the receiver.
  * @TESTED:OK
  */
 function getNotifCountByEmail($email){
@@ -22,29 +25,98 @@ function getNotifCountByEmail($email){
 	
 	// count the sum of notification ids related to the userID in Receiver Column in notification table
 	$sql_stmnt = "SELECT COUNT(ReceiverId) FROM notification WHERE ReceiverId=?";
-	$query->prepare($sql_stmnt);
-	$query->bind_param("i", $userID);	
-	$results = dynamicBindResults($query);
-	
-	// if no ids were found then no notifications are sent to user and hence display 0
-	// otherwise display the number of notifications related to the receiver.
-	if (empty($results)) { 	
-		return 0;
-	}
-	else {
-		return $results[0]['COUNT(ReceiverId)'];
+	if($query->prepare($sql_stmnt)){
+		$query->bind_param("i", $userID);	
+		$results = dynamicBindResults($query);
+		
+		// if no ids were found then no notifications are sent to user and hence display 0
+		// otherwise display the number of notifications related to the receiver.
+		if (empty($results)) { 	
+			return 0;
+		}
+		else {
+			return $results[0]['COUNT(ReceiverId)'];
+		}
+	} else {
+		// error happened while fetching the count of notifications
+		return -1;
 	}
 	
 }
 
-function setNotifStatus($email, $status){
+/**
+ * A function that returns the result set of all notifications related to the recevier.
+ * @return	""(empty) if nothing is returned, -1 if error happened during the prepared statement, the result set otherwise.
+ * @param:	$email : The e-mail address of the receiver
+ */
+function getAllNotifDetails($email){
+	global $connection;
 	
+	$result = getUserByEmail($email);
+	$userID = $result['UserId'];
 	
+	$query = $connection->stmt_init();
+	$sql_stmnt = "SELECT * FROM notification WHERE ReceiverId = ?";
+	
+	if($query->prepare($sql_stmnt)){
+		$query->bind_param("i", $userID);	
+		$results = dynamicBindResults($query);
+		if (empty($results)) { 	
+			return "";
+		}
+		else {
+			// returns all the results (notifications) with all of their details (columns)
+			return $results;
+		}
+	} else {
+		// error happened while fetching the count of notifications
+		return -1;
+	}
+	
+}
+
+/**
+ * A function that updates the status of a notification.
+ * @return 	true if successful, false otherwise.
+ * @param:	$stauts: An integer number representing the new StatusId of the notification.
+ * 			$notif_id: A unique integer number representing the notification id of the notification we are trying to change.
+ */
+function setNotifStatus($status, $notif_id){
+	global $connection;
+	
+	$query = $connection->stmt_init();
+	$sql_stmnt = "UPDATE notification SET StatusId = ? WHERE Id = ?";
+	
+	if($query->prepare($sql_stmnt)){
+		$query->bind_param("ii", $status,$notif_id);	
+		$query->execute();
+	}else {
+		// update operation failed.
+		return false;
+	}
+	
+	$sql_checkStatus = "SELECT StatusId FROM notification WHERE Id = ?";
+	if ($query->prepare($sql_checkStatus)) {		
+		$query->bind_param("i", $notif_id);	
+		$result = dynamicBindResults($query);
+		if(!empty($result)){
+			if($result[0]['StatusId'] == $status){
+				// The update operation was successful
+				return true;
+			}else{
+				// The update operation was not successful
+				return false;
+			}
+		}else{
+			// getting column information for that record failed.
+			return false;
+		}
+	}
 	
 }
 /**
  * A function to send notification from Sender to Receiver. The nofitication type is a Project Invitation.
- * Returns BOOLEAN, true if successful, false otherwise.
+ * @return:	true if successful, false otherwise.
  * @param: 	$senderEmail = The e-mail of user issuing the project invitation to the other user (Receiver).
  * 			$receiverEmail = The e-mail of user receiving the invitation from project manager.
  * 			$projectId = The id of the project that the sender is inviting the receiver to.
@@ -93,7 +165,7 @@ function sendNotifByProject($senderEmail, $receiverEmail, $projectId){
 }
 /**
  * A function to send notification from Sender to Receiver. The nofitication type is an Issue Assigned.
- * Returns BOOLEAN, true if successful, false otherwise.
+ * @return:	true if successful, false otherwise.
  * @param: 	$senderEmail = The e-mail of user creating the issue assigned to the other user (Receiver).
  * 			$receiverEmail = The e-mail of user receiving the assigned issue from project manager.
  * 			$issueId = The id of the issue that the sender has assigned to the receiver.
