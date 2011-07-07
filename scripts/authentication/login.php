@@ -49,7 +49,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_userfunctions.php'
 			$message = "You are now logged out ^^";
 			echo $message;
 			sleep(2);
-			redirect_to('../../index.html');
+			redirect_to('../../index.php');
 		}
 	}
 ?>
