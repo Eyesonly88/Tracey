@@ -1,6 +1,7 @@
 
 <?php
 include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sessions.php');
+include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_notificationfn.php');
 
 confirmLogin();
 
@@ -141,13 +142,19 @@ confirmLogin();
 						<li id="notifications">
 							
 							<div id="notification-icon">
-								<?php // @todo: write a function to request the number of notifications to be display and output it here ?>
-								<h3>1</h3>
+								<h3>
+								<?php // @todo: write a function to request the number of notifications to be display and output it here
+								
+								echo getNotifCountByEmail($_SESSION['email']);
+								
+								?>
+								</h3>
 							</div>
 							
 							<div id="notifications-container" class="notifications-form">
 								<div id="notifications-content">
 									<span style="color: #F1F4F7;">Join Project X by Magneto. ACCEPT or REJECT.</span>
+									
 								</div>
 							</div>
 						</li>
