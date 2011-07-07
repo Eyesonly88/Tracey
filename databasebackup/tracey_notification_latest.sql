@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jul 07, 2011 at 06:26 AM
+-- Generation Time: Jul 07, 2011 at 06:39 AM
 -- Server version: 5.5.8
 -- PHP Version: 5.3.5
 
@@ -175,8 +175,8 @@ CREATE TABLE IF NOT EXISTS `notification` (
   `TypeEntityId` int(11) NOT NULL,
   `StatusId` int(11) NOT NULL,
   PRIMARY KEY (`Id`),
-  KEY `TypeId` (`TypeId`),
-  KEY `StatusId` (`StatusId`)
+  KEY `status_id` (`StatusId`),
+  KEY `type_id` (`TypeId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 --
@@ -398,8 +398,8 @@ ALTER TABLE `milestone`
 -- Constraints for table `notification`
 --
 ALTER TABLE `notification`
-  ADD CONSTRAINT `notification_ibfk_2` FOREIGN KEY (`StatusId`) REFERENCES `notificationstatus` (`Id`),
-  ADD CONSTRAINT `notification_ibfk_1` FOREIGN KEY (`TypeId`) REFERENCES `notificationtype` (`Id`);
+  ADD CONSTRAINT `status_id` FOREIGN KEY (`StatusId`) REFERENCES `notificationstatus` (`Id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `type_id` FOREIGN KEY (`TypeId`) REFERENCES `notificationtype` (`Id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `project`
