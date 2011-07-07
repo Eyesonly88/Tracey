@@ -39,18 +39,21 @@ $(document).ready(function() {
 	);
 	$("#register").hoverIntent( 
 			function(){
-				//showRegister();
-				$(".register-form").fadeIn(200);
-				$('#nickname').focus();
+				showRegister();
+				//$(".register-form").fadeIn(200);
+				//$('#nickname').focus();
 			},
 			function(){
-				//hideRegister();
-				$(".register-form").fadeOut(200);
+				if(active != 1){ 
+					hideRegister();
+				}
+				//$(".register-form").fadeOut(200);
 			}
 	);
 	
 	/* Set up the login form elements in the background (so that they load up quickly upon hover) */
 	afterShow();
+	prepareRegister();
 });
 
 var active = 0;
@@ -93,14 +96,14 @@ function prepareRegister() {
 		e.preventDefault();
 		active = 1;
 		// validate form
-		if (validate()) {
+		if (validateRegister()) {
 			var msg = $('#register-container .register-message');
 			msg.fadeOut(function () {
 				msg.removeClass('register-error').empty();
 			});
 			
 			$('#register-container .register-title').fadeIn(200);
-			$('#register-container .register-title').html('Checking details...');
+			$('#register-container .register-title').html('Submitting details...');
 			$('#register-container form').fadeOut(200);
 			$('#register-container .register-content').animate({
 						height: '50px'
@@ -112,12 +115,14 @@ function prepareRegister() {
 					from login2.php, which in this case is the url to redirect to. The success function
 					then performs a javascript redirection to the specified url. */
 					$.ajax({
-						url: 'scripts/authentication/login2.php' ,
-						data: $('#register-container form').serialize() + '&action=send',
+						url: 'scripts/registration/registration.php' ,
+						data: $('#register-container form').serialize(),
 						type: 'post',
 						cache: false,
 						dataType: 'text',
 						success: function (data) {
+							
+							//alert('Callback data: ' + data);
 							
 							/* If the input is invalid */
 							if (data == 1){
@@ -125,7 +130,7 @@ function prepareRegister() {
 									('#register-container .register-title').fadeOut(400);
 									active = 0;
 									
-							/* If authentication fails */		
+							/* If email already exists */		
 							} else if (data == 2){
 									
 								$('#register-container form').fadeIn(200);
@@ -136,11 +141,11 @@ function prepareRegister() {
 								$('#register-container .register-loading').fadeOut(200);
 								
 								var msg = $('#register-container .register-message div');
-								message += 'Authentication Failed';
+								message += 'Email already exists';
 								$('#register-container .register-message').animate({
 									height: '30px'
 								}, function() { 
-									showError();
+									showRegisterError();
 
 								}); 
 								active = 0;
@@ -150,12 +155,30 @@ function prepareRegister() {
 							} else {
 								$('#register-container .register-loading').fadeOut(200, function () {
 														
-									$('#register-container .register-title').html('Logging in...');
+									$('#register-container .register-title').html('Creating User...');
 									$('#register-container .register-loading').fadeIn(200, function (){
-										active = 0;
+										
 										
 										/* Wait for 1 second before redirecting */
-										setTimeout(function(){window.location.replace(data);}, 1000); 
+										setTimeout(function(){
+											$('#register-container .register-title').fadeOut(200, function(){
+												$('#register-container .register-title').html(data);
+												$('#register-container .register-title').fadeIn(200);
+												$('#register-container .register-loading').fadeOut(200, function(){
+													
+													setTimeout(function(){												
+														setTimeout(function(){
+															$('#register-container .register-title').fadeOut(200, function(){
+																$('#register-container .register-title').empty();	
+															});	
+															hideRegister();	
+														}, 2000)
+														active = 0;
+													}, 1500);
+												})
+											})
+											
+										}, 1000); 
 									});
 
 								});
@@ -172,7 +195,7 @@ function prepareRegister() {
 				var msg = $('#register-container .register-message div');
 				msg.fadeOut(200, function () {
 					msg.empty();
-					showError();
+					showRegisterError();
 					msg.fadeIn(200);
 					active = 0;
 				});
@@ -180,7 +203,7 @@ function prepareRegister() {
 			else {
 				$('#register-container .register-message').animate({
 					height: '30px'
-				}, showError());
+				}, showRegisterError());
 				active = 0;
 			}
 			
@@ -339,11 +362,13 @@ function error(){
 	alert(xhr.statusText);
 }
 
-function validate(){
+function validateRegister(){
 	
 	message = '';
-
-	var email = $('#login-container #login-email').val();
+	
+	var email = $('#register-container #register-email').val();
+	var nickname = $('#register-container #register-nickname').val();
+	var password = $('#register-container #register-password').val();
 	if (!email) {
 		message += 'Email is required.';
 	}
@@ -352,7 +377,35 @@ function validate(){
 			message += 'Email is invalid.';
 		}
 	}
+	if (!nickname) { 
+		message += 'Nickname is required';
+	}
+	if (!password) { 
+		message += 'Password is required';
+	}
+	if (message.length > 0) {
+		return false;
+	}
+	else {
+		return true;
+	}
+}
 
+function validate(){
+	
+	message = '';
+
+	var email = $('#login-container #login-email').val();
+
+	if (!email) {
+		message += 'Email is required.';
+	}
+	else {
+		if (!validateEmail(email)) {
+			message += 'Email is invalid.';
+		}
+	}
+	
 	if (message.length > 0) {
 		return false;
 	}
@@ -401,6 +454,12 @@ function validateEmail(email) {
 
 	return true;
 		
+}
+
+function showRegisterError(){
+	$('#register-container .register-message')
+		.html($('<div class="register-error"></div>').append(message))
+		.fadeIn(200);
 }
 
 function showError(){

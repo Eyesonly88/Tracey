@@ -163,11 +163,17 @@ font-weight: bold;
 
 #login-container .login-loading {background:url(../images/loading6.gif) no-repeat; height:55px; margin:-14px 0 0 190px; padding:0; position:absolute; width:54px; z-index:8000; }
 #login-container .login-message {text-align:center; color:#F1F4F7;}
-
 #login-container .login-error {font-size:14px; font-weight:bold; line-height:18px; margin: 10px 0; color:#F1F4F7; width:175px;display: block; text-align: center; float: left; clear: left;}
 #login-container .login-title {color:#F1F4F7;}
-
 #login-container .login-error {font-size:14px; font-weight:bold; line-height:18px; margin: 10px 0; color:#F1F4F7; width:175px;display: block; text-align: center; float: left; clear: left;}
+
+
+#register-container .register-loading {background:url(../images/loading6.gif) no-repeat; height:55px; margin:-14px 0 0 190px; padding:0; position:absolute; width:54px; z-index:8000; }
+#register-container .register-message {text-align:center; color:#F1F4F7;}
+#register-container .register-error {font-size:14px; font-weight:bold; line-height:18px; margin: 10px 0; color:#F1F4F7; width:175px;display: block; text-align: center; float: left; clear: left;}
+#register-container .register-title {color:#F1F4F7;}
+#register-container .register-error {font-size:14px; font-weight:bold; line-height:18px; margin: 10px 0; color:#F1F4F7; width:175px;display: block; text-align: center; float: left; clear: left;}
+
 
 /* Notifications Form and Notification Items */
 

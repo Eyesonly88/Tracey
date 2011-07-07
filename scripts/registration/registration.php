@@ -17,9 +17,17 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_other.php');
 include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_checks.php');
 include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_prepared.php');
 
+/* 
+ * ERROR CODES:
+ * 
+ * 1 = Validation Failed
+ * 2 = Email is already registered
+ * 
+ * */
+
 //check parameters
 $validationFail = 0;
-$validationMessage = "";
+$callbackMsg = "";
 $openIDProvided = 0;
 
 $fName = "";
@@ -82,7 +90,7 @@ if (isset($_POST['openID'])) {
 
 $userID = NULL;
 
-
+$callbackMsg = '';
 
 $emailSafe = sanitize($email);
 $nickSafe = sanitize($nick);
@@ -92,34 +100,34 @@ $passwordSafe = sanitize($password);
 // Validation checks for the form fields after sanitization
 if (empty($fNameSafe) && isset($_POST['fname'])) { 
 	
-	echo "First Name validation failed. <BR />";
+
 	$validationFail = 1;
-	$validationMessage = $validationMessage . "First Name validation failed; ";
+	$callbackMsg = 1;
 	
 	
 } else if (empty($lNameSafe) && isset($_POST['lname'])) { 
 
-	echo "Last Name validation failed. <BR />";
+	//echo "Last Name validation failed. <BR />";
 	$validationFail = 1;
-	$validationMessage = $validationMessage . "Last Name validation failed; ";
+	$callbackMsg = 1;
 	
 } else if (empty($phoneSafe) && isset($_POST['phone'])) { 
 
-	echo "Phone number validation failed. <BR />";
+	//echo "Phone number validation failed. <BR />";
 	$validationFail = 1;
-	$validationMessage = $validationMessage . "Phone number validation failed; ";
+	$callbackMsg = 1;
 	
 } else if (empty($nickSafe)) { 
 
-	echo "Nickname validation failed. <BR />";
+	//echo "Nickname validation failed. <BR />";
 	$validationFail = 1;
-	$validationMessage = $validationMessage . "Nickname validation failed; ";
+	$callbackMsg = 1;
 	
 } else if (empty($emailSafe)) {
 	
-	echo "Email validation failed <BR />";
+	//echo "Email validation failed <BR />";
 	$validationFail = 1;
-	$validationMessage = $validationMessage . "Nickname validation failed; ";
+	$callbackMsg = 1;
 	
 	
 }
@@ -130,7 +138,7 @@ if ($validationFail == 0) {
 	$temp = getUserByEmail($email);
 	if (!empty($temp)) { 
 		$validationFail = 1;
-		$validationMessage = "Email already registered <BR />";
+		$callbackMsg = 2;
 	}
 }
 
@@ -138,7 +146,7 @@ if ($validationFail == 0) {
 if ($validationFail == 0) { 
 	# Create user record (table: User)
 	$user = createUser($fNameSafe, $lNameSafe, $emailSafe, $phoneSafe, $nickSafe, $password, $type);
-	echo "User with email " . $emailSafe . " registered with ID: " . $user['UserId'] . "<BR />";
+	$callbackMsg = "User with email " . $emailSafe . " registered with ID: " . $user['UserId'] . "<BR />";
 }
 
 # Create openID mapping for user if specified (table: UserOpenID)
@@ -146,10 +154,10 @@ if ($openIDProvided == 1) {
 	if (!empty($userID)) { 
 		$result_createOpenIDMapping = createOpenID($userID, $openID);
 	} else { 
-		echo "Invalid UserID - Perhaps user was not registered properly";
+		$callbackMsg = 3;
 	}
 }
 
-echo $validationMessage;
+echo $callbackMsg;
 
 ?>
