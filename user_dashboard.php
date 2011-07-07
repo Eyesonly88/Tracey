@@ -86,7 +86,8 @@ confirmLogin();
 								<div class='login-top'></div>
 								<div class='login-content'>
 									<label>Logged in as <U><?php echo $_SESSION['email']; ?></U></label>
-									<label><span><a href="/scripts/authentication/logout.php">LOGOUT</a></span></label>
+									<label><span><a href="/scripts/authentication/logout.php"><img src="images/tracey-button.png"/></a></span></label>
+
 								</div>
 							</div>
 						</li>
