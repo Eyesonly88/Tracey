@@ -143,10 +143,9 @@ confirmLogin();
 							
 							<div id="notification-icon">
 								<h3>
-								<?php // @todo: write a function to request the number of notifications to be display and output it here
-								
-								echo getNotifCountByEmail($_SESSION['email']);
-								
+								<?php
+									// returns the number of notifications for the logged in user
+									echo getNotifCountByEmail($_SESSION['email']);
 								?>
 								</h3>
 							</div>
