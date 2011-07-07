@@ -25,7 +25,7 @@ $(document).ready(function() {
     /* Setup hover settings and event handlers */
 	$(".login-container").hide();
 	$(".register-form").hide();
-		$("#login").hoverIntent( 
+	$("#login").hoverIntent( 
 			function(){
 
 				showLogin();
@@ -36,16 +36,18 @@ $(document).ready(function() {
 					hideLogin();
 				}		
 			}
-		)
-		$("#register").hoverIntent( 
+	);
+	$("#register").hoverIntent( 
 			function(){
-			$(".register-form").fadeIn(200);
-			$('#nickname').focus();
+				//showRegister();
+				$(".register-form").fadeIn(200);
+				$('#nickname').focus();
 			},
 			function(){
+				//hideRegister();
 				$(".register-form").fadeOut(200);
 			}
-		)
+	);
 	
 	/* Set up the login form elements in the background (so that they load up quickly upon hover) */
 	afterShow();
