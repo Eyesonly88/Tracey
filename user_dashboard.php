@@ -21,6 +21,7 @@ confirmLogin();
 		<script src="js/jquery.hoverIntent.js"></script>
 		<script src="js/loginpanel.js"></script>
 		<script src="js/definedashboard.js"></script>
+		<script src="js/notification.js"></script>
 		<script>$(document).ready( function() {
 				$(".notifications-form").hide();
 				$("#notifications").hoverIntent( function() {
@@ -81,7 +82,23 @@ confirmLogin();
 											echo getEntityNameByProjectId($result['TypeEntityId']);
 											echo "] by ";
 											echo getSenderName($result['SenderId']);
-											echo ". ACCEPT OR REJECT<br>";
+											echo ". ";
+											
+									?>
+									
+									<form action='#' class="accept-notif-form">
+										<input type="hidden" name="AcceptId" value="2" />
+										<input type="hidden" name="NotificationId" value="2" />
+										<button type='submit' class='notification-send'>Accept</button>
+									</form>
+									
+									<form class="reject-notif-form">
+										<input type="hidden" name="RejectId" value="3" />
+										<input type="hidden" name="NotificationId" value="<?php echo $result['Id'];?>" />
+										<button type='submit' class='notification-send'>Reject</button>
+									</form>
+									
+									<?php
 										} else {
 											// don't display notification
 										}
