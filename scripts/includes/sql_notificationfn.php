@@ -22,8 +22,8 @@ function getSenderName($s_id){
 			return "";
 		}
 		else {
-			// returns the name the Sender of the notification.
-			return $results[0];
+			// returns the Sender's nickname who created the notification.
+			return $results[0]['Nickname'];
 		}
 	} else {
 		// error happened while fetching the count of notifications
@@ -32,49 +32,50 @@ function getSenderName($s_id){
 }
 
 
-
-function getEntityNameByID($en_id){
+function getEntityNameByIssueId($en_id){
+	global $connection;
+	/*
+	 *  need to get issue name from issue id implemented first
+	$query = $connection->stmt_init();
+	$sql_stmnt = "SELECT Name FROM notificationtype WHERE Id = ?";
+	
+	if($query->prepare($sql_stmnt)){
+		$query->bind_param("i", $n_id);	
+		$results = dynamicBindResults($query);
+		if (empty($results)) { 	
+			return "";
+		}
+		else {
+			// returns the name of the notication type.
+			return $results[0];
+		}
+	} else {
+		// error happened while fetching the count of notifications
+		return -1;
+	}
+	*/
+}
+function getEntityNameByProjectId($en_id){
 	global $connection;
 	
 	$query = $connection->stmt_init();
-	if ($en_id == 1) {
-		// call the project table
-		$sql_stmnt = "SELECT ProjectName FROM project WHERE ProjectId = ?";
-		if($query->prepare($sql_stmnt)){
-			$query->bind_param("i", $en_id);	
-			$results = dynamicBindResults($query);
-			if (empty($results)) { 	
-				return "";
-			}
-			else {
-				// returns the name of the notication type (Name of Project).
-				return $results[0];
-			}
-		} else {
-			// error happened while fetching the count of notifications
-			return -1;
+
+	$sql_stmnt = "SELECT ProjectName FROM project WHERE ProjectId = ?";
+	if($query->prepare($sql_stmnt)){
+		$query->bind_param("i", $en_id);	
+		$results = dynamicBindResults($query);
+		if (empty($results)) { 	
+			return "";
 		}
-	}else if ($en_id == 2){
-		// call the issue table
-		// need to get issue name from issue id implemented first
-		/*
-		$sql_stmnt = "SELECT Name FROM notificationtype WHERE Id = ?";
-		if($query->prepare($sql_stmnt)){
-			$query->bind_param("i", $n_id);	
-			$results = dynamicBindResults($query);
-			if (empty($results)) { 	
-				return "";
-			}
-			else {
-				// returns all the results (notifications) with all of their details (columns)
-				return $results[0];
-			}
-		} else {
-			// error happened while fetching the count of notifications
-			return -1;
+		else {
+			// returns the name of the notication type (Name of Project).
+			return $results[0]['ProjectName'];
 		}
-		*/
+	} else {
+		// error happened while fetching the count of notifications
+		return -1;
 	}
+
 }
 
 function getNotifNameByID($n_id){
@@ -91,7 +92,7 @@ function getNotifNameByID($n_id){
 		}
 		else {
 			// returns the name of the notication type.
-			return $results[0];
+			return $results[0]['Name'];
 		}
 	} else {
 		// error happened while fetching the count of notifications

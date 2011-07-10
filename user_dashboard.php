@@ -68,7 +68,23 @@ confirmLogin();
 
 						<div id="notifications-container" class="notifications-form">
 							<div id="notifications-content">
-								<span style="color: #F1F4F7;">Join Project X by Magneto. ACCEPT or REJECT.</span>
+								<span style="color: #F1F4F7;">
+									<?php
+									// get all notifications for user
+									$resultSet = getAllNotifDetails($_SESSION['email']);
+									foreach ($resultSet as $result) {
+										//print_r($result);
+										
+										echo getNotifNameByID($result['TypeId']);
+										echo " ";
+										echo getEntityNameByProjectId($result['TypeEntityId']);
+										echo " by ";
+										echo getSenderName($result['SenderId']);
+										echo ". ACCEPT OR REJECT<br>";
+										 
+									}
+									?>
+								</span>
 
 							</div>
 						</div>
