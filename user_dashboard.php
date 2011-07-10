@@ -86,9 +86,9 @@ confirmLogin();
 											
 									?>
 									
-									<form action='#' class="accept-notif-form">
-										<input type="hidden" name="AcceptId" value="2" />
-										<input type="hidden" name="NotificationId" value="2" />
+									<form action='#' id="accept-notif-form">
+										<input type="text" name="AcceptId" value="2" />
+										<input type="text" name="NotificationId" value="2" />
 										<button type='submit' class='notification-send'>Accept</button>
 									</form>
 									

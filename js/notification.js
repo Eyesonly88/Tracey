@@ -1,11 +1,11 @@
 $(document).ready(function() {
 	
-	$('.accept-notif-form .notification-send').click(function (e) {
+	$('#accept-notif-form .notification-send').click(function (e) {
 		//alert("You clicked Accept Son");
-		e.preventDefault();
+		//e.preventDefault();
 		$.ajax({
 			url: 'scripts/notification/notification.php' ,
-			data: $('#notifications-container form .accept-notif-form').serialize(),
+			data: $('#notifications-container form #accept-notif-form').serialize(),
 			type: 'post',
 			cache: false,
 			dataType: 'text',

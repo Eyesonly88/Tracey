@@ -2,7 +2,7 @@
 include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sanitize.php');
 include_once ($_SERVER['DOCUMENT_ROOT'] . '/scripts/includes/sql_notificationfn.php');
 
-$callbackMsg = 'default';
+$callbackMsg = 'default ';
 
 if (isset($_POST['AcceptId'])){
 	// accept the notification
@@ -33,5 +33,5 @@ if (isset($_POST['AcceptId'])){
 	}
 }
 
-echo $callbackMsg;
+echo isset($_POST['AcceptId']);
 ?>
