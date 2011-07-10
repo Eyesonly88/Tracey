@@ -177,7 +177,7 @@ font-weight: bold;
 
 /* Notifications Form and Notification Items */
 
-#notifications .notifications-form { padding: 0em 1.1em 2em 12em; width: 26.9em ; }
+#notifications .notifications-form { padding: 0em 1.1em 2em 12em; width: 42.9em ; }
 #notifications #notification-icon {
 	background-image: url(../images/cardboard.png);
 	background-repeat: no-repeat;
