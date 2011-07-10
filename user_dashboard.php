@@ -47,8 +47,24 @@ confirmLogin();
 						<li>
 							<a href="#">About</a>
 						</li>
+
+						<li id="register">
+							
+							<a href="#">
+								<h3>Widgets and Layout</h3>
+								<span>Add widgets or Edit Layout</span>	
+							</a>
+							<div class="register-form">
+								<div id="switcher"></div>
+								<a class="openaddwidgetdialog headerlink" href="#"><label>Add Widget</label></a>
+      							<a class="editlayout headerlink" href="#"><label>Edit Layout</label></a>
+							</div>
+							</div>
+							</div>
+
 						<li>
 							<a href="#">Help</a>
+
 						</li>
 					</ul>
 				</div>
