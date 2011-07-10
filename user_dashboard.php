@@ -87,15 +87,13 @@ confirmLogin();
 											
 									?>
 									
-									<form action='#' id="accept-notif-form">
-										<input type="text" name="AcceptId" value="2" />
-										<input type="text" name="NotificationId" value="2" />
+									<form action='#' class="accept-notif-form">
+										<input type="hidden" name="NotificationId" class="notif-id-input" value="<?php echo $result['Id'];?>" />
 										<button type='submit' class='notification-send'>Accept</button>
 									</form>
 									
-									<form class="reject-notif-form">
-										<input type="hidden" name="RejectId" value="3" />
-										<input type="hidden" name="NotificationId" value="<?php echo $result['Id'];?>" />
+									<form action='#' class="reject-notif-form">
+										<input type="hidden" name="NotificationId" class="notif-id-input" value="<?php echo $result['Id'];?>" />
 										<button type='submit' class='notification-send'>Reject</button>
 									</form>
 									

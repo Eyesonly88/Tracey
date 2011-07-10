@@ -115,8 +115,8 @@ function getNotifCountByEmail($email){
 	$query = $connection->stmt_init();
 	$userID = $result['UserId'];
 	
-	// count the sum of notification ids related to the userID in Receiver Column in notification table
-	$sql_stmnt = "SELECT COUNT(ReceiverId) FROM notification WHERE ReceiverId=?";
+	// count the sum of new notification ids related to the userID in Receiver Column in notification table
+	$sql_stmnt = "SELECT COUNT(ReceiverId) FROM notification WHERE ReceiverId=? AND StatusId = 1";
 	if($query->prepare($sql_stmnt)){
 		$query->bind_param("i", $userID);	
 		$results = dynamicBindResults($query);
