@@ -9,6 +9,97 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_other.php');
 include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_checks.php');
 include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_prepared.php');
 
+function getSenderName($s_id){
+	global $connection;
+	
+	$query = $connection->stmt_init();
+	// call the project table
+	$sql_stmnt = "SELECT Nickname FROM user WHERE UserId = ?";
+	if($query->prepare($sql_stmnt)){
+		$query->bind_param("i", $s_id);	
+		$results = dynamicBindResults($query);
+		if (empty($results)) { 	
+			return "";
+		}
+		else {
+			// returns the name the Sender of the notification.
+			return $results[0];
+		}
+	} else {
+		// error happened while fetching the count of notifications
+		return -1;
+	}
+}
+
+
+
+function getEntityNameByID($en_id){
+	global $connection;
+	
+	$query = $connection->stmt_init();
+	if ($en_id == 1) {
+		// call the project table
+		$sql_stmnt = "SELECT ProjectName FROM project WHERE ProjectId = ?";
+		if($query->prepare($sql_stmnt)){
+			$query->bind_param("i", $en_id);	
+			$results = dynamicBindResults($query);
+			if (empty($results)) { 	
+				return "";
+			}
+			else {
+				// returns the name of the notication type (Name of Project).
+				return $results[0];
+			}
+		} else {
+			// error happened while fetching the count of notifications
+			return -1;
+		}
+	}else if ($en_id == 2){
+		// call the issue table
+		// need to get issue name from issue id implemented first
+		/*
+		$sql_stmnt = "SELECT Name FROM notificationtype WHERE Id = ?";
+		if($query->prepare($sql_stmnt)){
+			$query->bind_param("i", $n_id);	
+			$results = dynamicBindResults($query);
+			if (empty($results)) { 	
+				return "";
+			}
+			else {
+				// returns all the results (notifications) with all of their details (columns)
+				return $results[0];
+			}
+		} else {
+			// error happened while fetching the count of notifications
+			return -1;
+		}
+		*/
+	}
+}
+
+function getNotifNameByID($n_id){
+	global $connection;
+	
+	$query = $connection->stmt_init();
+	$sql_stmnt = "SELECT Name FROM notificationtype WHERE Id = ?";
+	
+	if($query->prepare($sql_stmnt)){
+		$query->bind_param("i", $n_id);	
+		$results = dynamicBindResults($query);
+		if (empty($results)) { 	
+			return "";
+		}
+		else {
+			// returns the name of the notication type.
+			return $results[0];
+		}
+	} else {
+		// error happened while fetching the count of notifications
+		return -1;
+	}
+}
+
+
 /*
  * A function that returns the total number of notifications given to a user (Receiver).
  * @return: the count of notifications sent to a user (ReceiverId), using the e-mail of the logged in user.
