@@ -74,13 +74,18 @@ confirmLogin();
 									$resultSet = getAllNotifDetails($_SESSION['email']);
 									foreach ($resultSet as $result) {
 										//print_r($result);
+										// display notification iff its new
+										if ($result['StatusId'] == 1) {
+											echo getNotifNameByID($result['TypeId']);
+											echo " [";
+											echo getEntityNameByProjectId($result['TypeEntityId']);
+											echo "] by ";
+											echo getSenderName($result['SenderId']);
+											echo ". ACCEPT OR REJECT<br>";
+										} else {
+											// don't display notification
+										}
 										
-										echo getNotifNameByID($result['TypeId']);
-										echo " ";
-										echo getEntityNameByProjectId($result['TypeEntityId']);
-										echo " by ";
-										echo getSenderName($result['SenderId']);
-										echo ". ACCEPT OR REJECT<br>";
 										 
 									}
 									?>
