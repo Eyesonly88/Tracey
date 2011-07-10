@@ -45,7 +45,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_componentfunctions
 	
 		global $connection;
 		$query = $connection->stmt_init(); 
-		$sql_deleteProject = "DELETE FROM Project p INNER JOIN User u ON u.UserId = p.ProjectLeader WHERE ProjectName=? AND User=?";	
+		$sql_deleteProject = "DELETE FROM Project p INNER JOIN User u ON u.UserId = p.ProjectLeader WHERE p.ProjectName=? AND u.UserId=?";	
 		if ($query->prepare($sql_deleteProject)) {
 			
 			$query->bind_param("si", $name, $uid);

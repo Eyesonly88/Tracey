@@ -102,7 +102,7 @@ confirmLogin();
 						<h3>Widgets and Layout</h3>
 						<span>Add widgets or Edit Layout</span>
 						</a>
-						<div class="register-form">
+						<div id='register-container' class="register-form">
 							<div id="switcher">
 							</div>
 							<a class="openaddwidgetdialog headerlink" href="#">
