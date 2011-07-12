@@ -18,14 +18,14 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_prepared.php');
  * @return: true if successful, false otherwise.
  * @TESTED:OK
  */
-	function createIssue($compId, $reporterId, $assigneeId, $issueTypeId, $PriorityId, $issueStatusId) {
+	function createIssue($compId, $name, $desc, $reporterId, $assigneeId, $issueTypeId, $PriorityId, $issueStatusId) {
 		global $connection;
 		$query = $connection->stmt_init();
-		$sql_createIssue = "INSERT INTO issue (`IssueId`, `ComponentId`, `ReporterId`, `AssigneeId`, `IssueType`, `Priority`, `CreationDate`, `IssueStatus`, `ResolvedDate`, `LastModificationDate`) 
-		VALUES (NULL, ?, ?, ?, ?, ?, NOW(), ?, NULL, NOW());";
+		$sql_createIssue = "INSERT INTO issue (`IssueId`, `ComponentId`, `Name`, `Description`, `ReporterId`, `AssigneeId`, `IssueType`, `Priority`, `CreationDate`, `IssueStatus`, `ResolvedDate`, `LastModificationDate`) 
+		VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, NOW(), ?, NULL, NOW());";
 		
 		if ($query->prepare($sql_createIssue)) {
-			$query->bind_param("iiiiii", $compId, $reporterId, $assigneeId, $issueTypeId, $PriorityId, $issueStatusId);
+			$query->bind_param("issiiiii", $compId, $name, $desc, $reporterId, $assigneeId, $issueTypeId, $PriorityId, $issueStatusId);
 			$query->execute();
 			return true;
 		} else {
@@ -77,8 +77,27 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_prepared.php');
 			return false;
 		}
 	}
-	
-	function modifyIssue($issueId){}
+/*
+ * A function that modifies an issue.
+ * @param:	$compId:	The project component Id. The other parameters are self-explanatory.
+ * @return: true if successful, false otherwise.
+ * @TESTED:OK
+ */		
+	function modifyIssue($issueId, $compId, $name, $desc, $reporterId, $assigneeId, $issueTypeId, $PriorityId, $issueStatusId){
+		
+		global $connection;
+		$query = $connection->stmt_init();
+		$sql_stmnt = "UPDATE issue SET ComponentId = ?, Name = ?, Description = ?, AssigneeId = ?, IssueType = ?, Priority = ?, IssueStatus = ?, LastModificationDate = NOW() WHERE IssueId = ? AND ReporterId = ?";
+		if ($query->prepare($sql_stmnt)) {
+			$query->bind_param("issiiiiii", $compId, $name, $desc, $assigneeId, $issueTypeId, $PriorityId, $issueStatusId, $issueId, $reporterId);	
+			$query->execute();
+			return true;
+		}else {
+			// update operation failed.
+			return false;
+		}
+		
+	}
 	
 /*
  * A function that returns all the issues under a project including all of its components.
@@ -88,6 +107,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_prepared.php');
  * @param:	$projectid:	The Id of the project that has the issues.
  * @TESTED:OK
  */
+
 	function getIssuesByProjectId($projectid) {
 		global $connection;
 	
