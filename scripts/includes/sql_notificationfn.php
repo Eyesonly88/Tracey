@@ -166,6 +166,7 @@ function getNotifCountByEmail($email){
  * A function that returns the result set of all notifications related to the recevier.
  * @return	""(empty) if nothing is returned, -1 if error happened during the prepared statement, the result set otherwise.
  * @param:	$email : The e-mail address of the receiver
+ * @TESTED:OK
  */
 function getAllNotifDetails($email){
 	global $connection;
@@ -198,6 +199,7 @@ function getAllNotifDetails($email){
  * @return 	true if successful, false otherwise.
  * @param:	$stauts: An integer number representing the new StatusId of the notification.
  * 			$notif_id: A unique integer number representing the notification id of the notification we are trying to change.
+ * @TESTED:OK
  */
 function setNotifStatus($status, $notif_id){
 	global $connection;
