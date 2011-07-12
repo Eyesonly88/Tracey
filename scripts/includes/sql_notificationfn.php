@@ -9,6 +9,15 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_other.php');
 include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_checks.php');
 include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_prepared.php');
 
+/*
+ * A function that returns the nickname of the Sender(Creator) of the notification.
+ * @return: nothing if there are no notifications
+ * 			the Sender name of the notificaion.
+ * 			-1 if error happened during the prepared statement.
+ * @param:	$en_id:	The Entity Id of the notification (ProjectId).
+ * @TESTED:OK
+ */
+
 function getSenderName($s_id){
 	global $connection;
 	
@@ -31,38 +40,54 @@ function getSenderName($s_id){
 	}
 }
 
+/*
+ * A function that returns the name of the entity of the notification such as (Issue Name) related to the notification.
+ * @return: nothing if there are no notifications
+ * 			the Project name of the notificaion type.
+ * 			-1 if error happened during the prepared statement.
+ * @param:	$en_id:	The Entity Id of the notification (IssueId).
+ */
 
 function getEntityNameByIssueId($en_id){
 	global $connection;
-	/*
-	 *  need to get issue name from issue id implemented first
+
 	$query = $connection->stmt_init();
-	$sql_stmnt = "SELECT Name FROM notificationtype WHERE Id = ?";
+	$sql_stmnt = "SELECT Name FROM issue WHERE IssueId = ?";
 	
 	if($query->prepare($sql_stmnt)){
-		$query->bind_param("i", $n_id);	
+		$query->bind_param("i", $en_id);	
 		$results = dynamicBindResults($query);
 		if (empty($results)) { 	
 			return "";
 		}
 		else {
-			// returns the name of the notication type.
-			return $results[0];
+			// returns the name of the Issue.
+			return $results[0]['Name'];
 		}
 	} else {
 		// error happened while fetching the count of notifications
 		return -1;
 	}
-	*/
+	
 }
-function getEntityNameByProjectId($en_id){
+
+/*
+ * A function that returns the name of the entity of the notification such as (Project Title) related to the notification.
+ * @return: nothing if there are no notifications
+ * 			the Project name of the notificaion type.
+ * 			-1 if error happened during the prepared statement.
+ * @param:	$p_id:	The Entity Id of the notification (ProjectId).
+ * @TESTED:OK
+ */
+
+function getEntityNameByProjectId($p_id){
 	global $connection;
 	
 	$query = $connection->stmt_init();
 
 	$sql_stmnt = "SELECT ProjectName FROM project WHERE ProjectId = ?";
 	if($query->prepare($sql_stmnt)){
-		$query->bind_param("i", $en_id);	
+		$query->bind_param("i", $p_id);	
 		$results = dynamicBindResults($query);
 		if (empty($results)) { 	
 			return "";
@@ -77,7 +102,14 @@ function getEntityNameByProjectId($en_id){
 	}
 
 }
-
+/*
+ * A function that returns the name of the notification type such as ProjectInvite or IssueAssigned.
+ * @return: nothing if there are no notifications
+ * 			the name of the notificaion type.
+ * 			-1 if error happened during the prepared statement.
+ * @param:	$n_id:	The Id of the notification.
+ * @TESTED:OK
+ */
 function getNotifNameByID($n_id){
 	global $connection;
 	
@@ -140,6 +172,7 @@ function getNotifCountByEmail($email){
  * A function that returns the result set of all notifications related to the recevier.
  * @return	""(empty) if nothing is returned, -1 if error happened during the prepared statement, the result set otherwise.
  * @param:	$email : The e-mail address of the receiver
+ * @TESTED:OK
  */
 function getAllNotifDetails($email){
 	global $connection;
@@ -172,6 +205,7 @@ function getAllNotifDetails($email){
  * @return 	true if successful, false otherwise.
  * @param:	$stauts: An integer number representing the new StatusId of the notification.
  * 			$notif_id: A unique integer number representing the notification id of the notification we are trying to change.
+ * @TESTED:OK
  */
 function setNotifStatus($status, $notif_id){
 	global $connection;
