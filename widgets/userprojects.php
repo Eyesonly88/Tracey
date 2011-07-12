@@ -5,7 +5,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sessions.php');
 ?>
 
 <!--<link rel="stylesheet" href="/libraries/flexigrid/css/flexigrid.css" type="text/css"> -->
-<link rel="stylesheet" href="/libraries/datatables/media/css/demo_table.css" type="text/css">
+<link rel="stylesheet" href="/libraries/datatables/media/css/demo_table_jui.css" type="text/css">
 <script src="/widgets/widgetjs/userprojects.js" type="text/javascript"></script>
 <!--<script src="/libraries/flexigrid/js/flexigrid.js" type="text/javascript"></script> -->
 <script src="/libraries/dataTables/media/js/jquery.dataTables.js" type="text/javascript"></script>
@@ -56,8 +56,8 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sessions.php');
 		"bSort": false,
 		"bInfo": false,
 		"bAutoWidth": false,
-		"bStateSave": true 
-		
+		"bStateSave": true, 
+		"oSearch": {"sSearch": "Initial search"}
   	
   	});
   }
@@ -115,6 +115,28 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sessions.php');
  	});
   }
   
+  function initUserProjects(user){
+  $.ajax({
+  	   cache: "false",
+	   type: "POST",
+	   url: "/scripts/userdashboard/getCreatedProjects.php",
+	   data: "email="+user,
+	   success: function(msg2){
+	     $("#projectlist").empty();
+	     $("#projectlist").append(msg2);
+	     setupFlexTable();
+	     
+	     $(".p_dashboard_button").click(function() { 
+	     	
+	     	$(this).empty();
+	     	$(this).append("Redirecting...");
+	     
+	     });
+	   }
+   
+ 	});
+  }
+  
   function initialSetup() {
   $.ajax({
   	   cache: "false",
@@ -122,8 +144,8 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sessions.php');
 	   url: "/scripts/authentication/getCurrentUser.php",
 	   success: function(msg){
 	     setUser(msg);
-	     getUserProjects(msg);
-	     setupFlexTable();
+	     initUserProjects(msg);
+	     
 	   }
    
  	});
