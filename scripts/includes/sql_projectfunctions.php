@@ -162,6 +162,44 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_componentfunctions
 		$sql_addUserToProject = "";
 		$query->prepare($sql_addUserToProject);		
 	}
+	
+	function checkUserBelongsToProject($projectid, $email) {
+		
+		global $connection; 
+		$query = $connection -> stmt_init();
+		
+		
+		/* Check if user is project leader. */
+		$sql = "SELECT * FROM project p INNER JOIN user u ON p.ProjectLeader = u.UserId WHERE p.ProjectId = ? AND u.Email = ?";
+		$query->prepare($sql);
+		$query->bind_param("is", $pid, $em);
+		$pid = $projectid;
+		$em = $email;
+		$results = dynamicBindResults($query);
+		if (!empty($results)) {
+			return 1;
+		}	
+		
+		/* Check if user belongs to a module in the project */
+		$sql = "
+		SELECT * 
+		FROM usercomponent uc 
+		INNER JOIN component c ON c.ComponentId = uc.ComponentId 
+		INNER JOIN project p ON c.ProjectId = p.ProjectId
+		INNER JOIN user u ON u.UserId = uc.UserID
+		WHERE u.Email = ? AND p.ProjectId = ?";
+		$query->prepare($sql);
+		$query->bind_param("si", $em, $pid);
+		$em = $email;
+		$pid = $projectid;
+		$results = dynamicBindResults($query);
+		if (empty($results)) {
+			return 'Not a member of project';
+		} else {
+			return 1;
+		}
+		
+	}
 
 	function getWatchedProjectsByUserEmail($email) {
 		

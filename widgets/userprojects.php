@@ -3,15 +3,64 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sessions.php');
 
 
 ?>
+
+<!--<link rel="stylesheet" href="/libraries/flexigrid/css/flexigrid.css" type="text/css"> -->
+<link rel="stylesheet" href="/libraries/datatables/media/css/demo_table.css" type="text/css">
 <script src="/widgets/widgetjs/userprojects.js" type="text/javascript"></script>
+<!--<script src="/libraries/flexigrid/js/flexigrid.js" type="text/javascript"></script> -->
+<script src="/libraries/dataTables/media/js/jquery.dataTables.js" type="text/javascript"></script>
+
+
 <script type="text/javascript">
   
   var currentUser = "";
   getCurrentUser();
+  initialSetup();
+  
+  $('.project_submit').click(function(){ 
+  	createProject();
+  })
   function setUser(msg){ 
   	currentUser = msg;	
   }
   
+  function setupFlexTable(){
+  	/*$('.projlistflex').flexigrid({
+  	
+  	 colModel : [
+                        {display: 'ID', name : 'p_id', width : 40, sortable : true, align: 'left'},
+                        {display: 'Name', name : 'p_name', width : 150, sortable : true, align: 'left'},
+                        {display: 'Type', name : 'p_type', width : 150, sortable : true, align: 'left'},
+                 		{display: 'Dashboard Link', name : 'p_dashboard_button', width : 100, sortable : true, align: 'center'},
+                ],
+       
+        sortname: "p_id",
+        sortorder: "asc",
+        title: "Projects Created by " + currentUser,
+
+		   showTableToggleBtn: false,
+
+  		resizable: false,
+        width: 490,
+        height: 'auto',
+        singleSelect: true
+
+  	
+  	});*/
+  	
+  	$('#projectlist').dataTable({
+  		
+  		"bPaginate": false,
+		"bLengthChange": false,
+		"bFilter": true,
+		"bSort": false,
+		"bInfo": false,
+		"bAutoWidth": false,
+		"bStateSave": true 
+		
+  	
+  	});
+  }
   
   function createProject() { 
   
@@ -41,6 +90,14 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sessions.php');
 	   success: function(msg2){
 	     $("#projectlist").empty();
 	     $("#projectlist").append(msg2);
+	     $('#projectlist').fnDraw();
+	     
+	     $(".p_dashboard_button").click(function() { 
+	     	
+	     	$(this).empty();
+	     	$(this).append("Redirecting...");
+	     
+	     });
 	   }
    
  	});
@@ -58,23 +115,19 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sessions.php');
  	});
   }
   
-  function getCreatedProjects() {
+  function initialSetup() {
   $.ajax({
   	   cache: "false",
 	   type: "POST",
 	   url: "/scripts/authentication/getCurrentUser.php",
 	   success: function(msg){
-	     $("#title").append("<h4>Projects related to User: " + msg + "</h4>");
 	     setUser(msg);
 	     getUserProjects(msg);
+	     setupFlexTable();
 	   }
    
  	});
  }
- 
- getCreatedProjects();
-	
-
 	
 </script>
 
@@ -113,15 +166,17 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sessions.php');
 
 <div id="contents">
 <div id="title"></div>
-<div id="projectlist"></div>
-	<div id="createproject_btn"><h4><a href="#">Create Project</a></h4></div>
+<table id="projectlist" class="display" ></table>
+	
+</div>
+<BR /><BR />
+<div id="createproject_btn"><h4><a href="#">Create Project</a></h4></div>
 			<div id="createproject_form">
 				<form action="" method="post">
 					<h1>Create a Project</h1>
 					<label class="grey" for="name">Name:</label>
 					<input class="field" type="text" name="name" id="name" value="" size="23" />
         			<div class="clear"></div>
-					<input type="button" onclick="createProject()" name="submit" value="Go" class="project_submit" />
+					<input type="button"  name="submit" value="Go" class="project_submit" />
 				</form> 		
 			</div>
-</div>

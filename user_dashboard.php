@@ -20,7 +20,7 @@ confirmLogin();
 		<script type="text/javascript" src="libraries/dashboard/lib/themeroller.js"></script>
 		<script src="js/jquery.hoverIntent.js"></script>
 		<script src="js/loginpanel.js"></script>
-		<script src="js/definedashboard.js"></script>
+		<script src="js/define_userdashboard.js"></script>
 		<script src="js/notification.js"></script>
 		<script>$(document).ready( function() {
 				$(".notifications-form").hide();

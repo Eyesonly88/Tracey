@@ -26,27 +26,33 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_prepared.php');
 	}
 	
 	function changeComponentStatus($componentid, $statusid){	
-		
+		global $connection;
+		$query = $connection->stmt_init();	
 	}
 	
 	function removeComponent($componentidbyid){
-		
+		global $connection;
+		$query = $connection->stmt_init();	
 	}
 	
 	function addUserToComponentById($componentid, $userid){
-		
+		global $connection;
+		$query = $connection->stmt_init();	
 	}
 	
 	function addUserToComponentByEmail($componentid, $useremail){
-		
+		global $connection;
+		$query = $connection->stmt_init();	
 	}
 	
 	function getWatchedComponentsByUserId($userid){	
-		
+		global $connection;
+		$query = $connection->stmt_init();	
 	}
 	
 	function getWatchedComponentsByUserEmail($useremail){
-		
+		global $connection;
+		$query = $connection->stmt_init();	
 	}
 
 ?>
