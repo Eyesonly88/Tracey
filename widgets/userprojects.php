@@ -123,8 +123,8 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sessions.php');
 	   data: "email="+user,
 	   success: function(msg2){
 	     $("#projectlist").empty();
-	     $("#projectlist").append(msg2);
-	     setupFlexTable();
+	     $("#projectlist").append(msg2, function(){ setupFlexTable(); });
+	     
 	     
 	     $(".p_dashboard_button").click(function() { 
 	     	
