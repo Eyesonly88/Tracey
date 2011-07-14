@@ -338,6 +338,19 @@ function sendNotifByIssue($senderEmail, $receiverEmail, $issueId){
 	
 	
 }
+/*
+ * A function that sends an email to a receiver(s)
+ * @param:	$msg:	Defines the message to be sent. Each line should be separated with a LF (\n). 
+ * 					Lines should not exceed 70 characters
+ * NOTE: PHP requires an email system to be setup in order to use this function. More details -> http://www.w3schools.com/php/php_ref_mail.asp
+ */
+function sendNotifByEmail($receiverEmail, $senderEmail, $msg){
+	$results = getUserByEmail($senderEmail);
+	$senderName = $results[0]['Nickname'];
+	$subject = $senderName + " Would like to invite you to join Tracey!";
+	mail($receiverEmail,$subject,$msg);
+	
+}
 
 
 
