@@ -57,7 +57,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sessions.php');
 		"bInfo": false,
 		"bAutoWidth": false,
 		"bStateSave": true, 
-		"oSearch": {"sSearch": "Initial search"}
+		"oSearch": {"sSearch": ""}
   	
   	});
   }
@@ -123,8 +123,8 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sessions.php');
 	   data: "email="+user,
 	   success: function(msg2){
 	     $("#projectlist").empty();
-	     $("#projectlist").append(msg2, function(){ setupFlexTable(); });
-	     
+	     $("#projectlist").append(msg2);
+	     setupFlexTable();
 	     
 	     $(".p_dashboard_button").click(function() { 
 	     	
