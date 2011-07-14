@@ -68,20 +68,18 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_prepared.php');
 	
 	/* Check if email exists. Returns array of user details if email exists, otherwise returns empty array. @TESTED: OK */
 	function getUserByEmail($email) { 
-	
 		global $connection;
 		$emailExists = 0;
 		$userinfo = array();
 		$results = NULL;
 		$query = $connection->stmt_init();
 		
-		$sql_checkEmail = "SELECT * from User WHERE Email=?";	
+		$sql_checkEmail = "SELECT * from user WHERE Email=?";	
 		$query->prepare($sql_checkEmail);
-		$query->bind_param("s", $em);
-		$em = $email;		
-		$results = dynamicBindResults($query);	
-				
-		if (empty($results)) { 	
+		$query->bind_param("s", $email);
+			
+		$results = dynamicBindResults($query);			
+		if (empty($results)) {
 			return "";
 		}
 		if ($results[0]['Email'] == $email) { 	

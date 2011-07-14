@@ -113,7 +113,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_prepared.php');
 	
 		$query = $connection->stmt_init();
 	
-		$sql_stmnt = "SELECT IssueId FROM issue as i, component as c WHERE i.ComponentId = c.ComponentId AND c.ProjectId = ?";
+		$sql_stmnt = "SELECT * FROM issue as i, component as c WHERE i.ComponentId = c.ComponentId AND c.ProjectId = ?";
 		if($query->prepare($sql_stmnt)){
 			$query->bind_param("i", $projectid);	
 			$results = dynamicBindResults($query);
@@ -144,7 +144,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_prepared.php');
 	
 		$query = $connection->stmt_init();
 	
-		$sql_stmnt = "SELECT IssueId FROM issue WHERE AssigneeId = ?";
+		$sql_stmnt = "SELECT * FROM issue WHERE AssigneeId = ?";
 		if($query->prepare($sql_stmnt)){
 			$query->bind_param("i", $userid);	
 			$results = dynamicBindResults($query);
@@ -172,11 +172,11 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_prepared.php');
  
 	function getAssignedIssuesByEmail($email){
 		global $connection;
-	
 		$query = $connection->stmt_init();
 		$result = getUserByEmail($email);
+
 		$assigneeId = $result['UserId'];
-		$sql_stmnt = "SELECT IssueId FROM issue WHERE AssigneeId = ?";
+		$sql_stmnt = "SELECT * FROM issue WHERE AssigneeId = ?";
 		if($query->prepare($sql_stmnt)){
 			$query->bind_param("i", $assigneeId);	
 			$results = dynamicBindResults($query);
