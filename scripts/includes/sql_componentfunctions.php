@@ -33,26 +33,90 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_prepared.php');
 	function removeComponent($componentidbyid){
 		global $connection;
 		$query = $connection->stmt_init();	
+		$sql_removeComponent = "DELETE FROM component WHERE ComponentId = ?";
+		if ($query->prepare($sql_removeComponent)) {
+			$query->bind_param("i", $componentidbyid);	
+			$query->execute();
+			return true;
+		}else {
+			// update operation failed.
+			return false;
+		}
 	}
 	
 	function addUserToComponentById($componentid, $userid){
 		global $connection;
 		$query = $connection->stmt_init();	
+		
+		$sql_stmnt = "INSERT INTO usercomponent (`UserID`, `ComponentID`) VALUES (?, ?);";
+		
+		if ($query->prepare($sql_stmnt)) {
+			$query->bind_param("ii", $userid, $componentid);
+			$query->execute();
+			return true;
+		} else {
+			return false;
+		}
 	}
 	
 	function addUserToComponentByEmail($componentid, $useremail){
 		global $connection;
 		$query = $connection->stmt_init();	
+		$result = getUserByEmail($useremail);
+		$userId = $result['UserId'];
+		$sql_stmnt = "INSERT INTO usercomponent (`UserID`, `ComponentID`) VALUES (?, ?);";
+		
+		if ($query->prepare($sql_stmnt)) {
+			$query->bind_param("ii", $userId, $componentid);
+			$query->execute();
+			return true;
+		} else {
+			return false;
+		}
 	}
 	
 	function getWatchedComponentsByUserId($userid){	
 		global $connection;
-		$query = $connection->stmt_init();	
+		$query = $connection->stmt_init();
+		
+		$sql_stmnt = "SELECT ComponentId FROM componentwatches WHERE UserId = ?";
+		if($query->prepare($sql_stmnt)){
+			$query->bind_param("i", $userid);	
+			$results = dynamicBindResults($query);
+			if (empty($results)) { 	
+				return "";
+			}
+			else {
+				// returns all the issues in arrays within the results array
+				return $results;
+			}
+		} else {
+			// error happened while fetching the count of notifications
+			return -1;
+		}	
 	}
 	
 	function getWatchedComponentsByUserEmail($useremail){
 		global $connection;
 		$query = $connection->stmt_init();	
+		
+		$result = getUserByEmail($useremail);
+		$userId = $result['UserId'];
+		$sql_stmnt = "SELECT ComponentId FROM componentwatches WHERE UserId = ?";
+		if($query->prepare($sql_stmnt)){
+			$query->bind_param("i", $userId);	
+			$results = dynamicBindResults($query);
+			if (empty($results)) { 	
+				return "";
+			}
+			else {
+				// returns all the issues in arrays within the results array
+				return $results;
+			}
+		} else {
+			// error happened while fetching the count of notifications
+			return -1;
+		}
 	}
 
 ?>
