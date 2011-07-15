@@ -4,13 +4,13 @@
     "id":1,
     "title" : "Project Widgets",
     "amount" : 2,
-    "url" : "/widgets/jsonfeed/project_widgets_list.json"
+    "url" : "/widgets/jsonfeed/projectdashboard_json/project_widgets_list.json"
   },
   {
     "id":2,
     "title" : "Issue Widgets",
     "amount": 2,
-    "url" : "/widgets/jsonfeed/issue_widgets_list.json"
+    "url" : "/widgets/jsonfeed/projectdashboard_json/issue_widgets_list.json"
   }
 ]
 }

@@ -1,26 +1,20 @@
 {
 "layout": "layout5",
 "data" : [
-  {
-    "title" : "Projects YOU Lead",
-    "id" : "widget1",
-    "column" : "first",
-    "open" : true,
-    "url" : "/widgets/userprojects.php"
-  },
+ 
   {
     "title" : "Issues Assigned to You",
     "id" : "widget2",
     "column" : "first",
     "open" : true,
-    "url" : "/widgets/userissues.php"
+    "url" : "/widgets/projectdashboard_widgets/userissues.php"
   },
   {
     "title" : "Issues Created by You",
     "id" : "widget3",
     "column" : "second",
     "open" : true,
-    "url" : "/widgets/createdissues.php"
+    "url" : "/widgets/projectdashboard_widgets/createdissues.php"
   }
   
   

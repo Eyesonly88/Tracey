@@ -6,7 +6,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sessions.php');
 
 
 ?>
-<script src="widgets/widgetjs/userprojects.js" type="text/javascript"></script>
+<script src="widgets/projectdashboard_widgets/widgetjs/userprojects.js" type="text/javascript"></script>
 <script type="text/javascript">
   
 

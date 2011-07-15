@@ -6,7 +6,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sessions.php');
 
 <!--<link rel="stylesheet" href="/libraries/flexigrid/css/flexigrid.css" type="text/css"> -->
 <link rel="stylesheet" href="/libraries/datatables/media/css/demo_table_jui.css" type="text/css">
-<script src="/widgets/widgetjs/userprojects.js" type="text/javascript"></script>
+<script src="/widgets/userdashboard_widgets/widgetjs/userprojects.js" type="text/javascript"></script>
 <!--<script src="/libraries/flexigrid/js/flexigrid.js" type="text/javascript"></script> -->
 <script src="/libraries/dataTables/media/js/jquery.dataTables.js" type="text/javascript"></script>
 

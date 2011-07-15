@@ -1,12 +1,12 @@
 <?php
 
-# Widget that displays the issues created by the current user.
+#widget that displays issues assigned to a user
 
 include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sessions.php');
 
 
 ?>
-<script src="widgets/widgetjs/userprojects.js" type="text/javascript"></script>
+
 <script type="text/javascript">
   
 
@@ -47,7 +47,6 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sessions.php');
 
 </style>
 
-<div id="contents">
-<h4>Issues:</h4>
-
+<div id="contents"><h4>Issues:</h4>
 </div>
+

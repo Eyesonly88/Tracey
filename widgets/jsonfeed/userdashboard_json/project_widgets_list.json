@@ -5,7 +5,7 @@
       "title" : "User Projects",
       "description" : "Projects created by user",
       "creator" : "Tracey",
-      "url" : "widgets/userprojects.php",
+      "url" : "widgets/userdashboard_widgets/userprojects.php",
       "image": ""
     },
     {
@@ -13,7 +13,7 @@
       "title" : "User Components",
       "description" : "Components assigned to user.",
       "creator" : "Tracey",
-      "url" : "widgets/usercomponents.php",
+      "url" : "widgets/userdashboard_widgets/usercomponents.php",
       "image": ""
     }
   ]

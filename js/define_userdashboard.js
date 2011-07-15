@@ -15,10 +15,10 @@
           	
           	layoutClass:'layout',
           	
-            json_data : { url: "/widgets/jsonfeed/defaultwidgets.json" },
+            json_data : { url: "/widgets/jsonfeed/userdashboard_json/defaultwidgets.json" },
             
             addWidgetSettings: {
-              widgetDirectoryUrl:"/widgets/jsonfeed/widgetcategories.json"
+              widgetDirectoryUrl:"/widgets/jsonfeed/userdashboard_json/widgetcategories.json"
             },
 
             // Definition of the layout

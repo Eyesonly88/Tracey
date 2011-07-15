@@ -5,7 +5,7 @@
       "title" : "Reported Issues",
       "description" : "Issues reported by user",
       "creator" : "Tracey",
-      "url" : "widgets/createdissues.php",
+      "url" : "widgets/userdashboard_widgets/createdissues.php",
       "image": ""
     },
     {
@@ -13,7 +13,7 @@
       "title" : "Assigned Issues",
       "description" : "Issues assigned to user",
       "creator" : "Tracey",
-      "url" : "widgets/userissues.php",
+      "url" : "widgets/userdashboard_widgets/userissues.php",
       "image": ""
     }
   ]
