@@ -25,29 +25,8 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sessions.php');
   }
   
   function setupFlexTable(){
-  	/*$('.projlistflex').flexigrid({
   	
-  	 colModel : [
-                        {display: 'ID', name : 'p_id', width : 40, sortable : true, align: 'left'},
-                        {display: 'Name', name : 'p_name', width : 150, sortable : true, align: 'left'},
-                        {display: 'Type', name : 'p_type', width : 150, sortable : true, align: 'left'},
-                 		{display: 'Dashboard Link', name : 'p_dashboard_button', width : 100, sortable : true, align: 'center'},
-                ],
-       
-        sortname: "p_id",
-        sortorder: "asc",
-        title: "Projects Created by " + currentUser,
-
-		   showTableToggleBtn: false,
-
-  		resizable: false,
-        width: 490,
-        height: 'auto',
-        singleSelect: true
-
-  	
-  	});*/
-  	
+  	/* Apply datatable library to the list of tables. */
   	$('#projectlist').dataTable({
   		
   		"bPaginate": false,
@@ -62,6 +41,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sessions.php');
   	});
   }
   
+  /* Creates a project (via Ajax) */
   function createProject() { 
   
   	var projectName = document.getElementById('name').value;
@@ -81,6 +61,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sessions.php');
   
   }
   
+  /* Get list of projects created by the user (via Ajax) */
   function getUserProjects(user){
   	$.ajax({
   	   cache: "false",
@@ -103,6 +84,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sessions.php');
  	});
   }
   
+  /* Get the currently logged in user */
   function getCurrentUser(){
   	$.ajax({
   	   cache: "false",
@@ -115,6 +97,8 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sessions.php');
  	});
   }
   
+  /* This is the initial function call that is executed when the widget is ready. 
+ 	Sets up the initial list of projects. */
   function initUserProjects(user){
   $.ajax({
   	   cache: "false",
@@ -137,6 +121,8 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sessions.php');
  	});
   }
   
+  /* The first initial function call, which calls 2 other 
+ 	functions to set up the initial state of the widget*/
   function initialSetup() {
   $.ajax({
   	   cache: "false",

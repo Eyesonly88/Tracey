@@ -15,7 +15,8 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_prepared.php');
 include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_componentfunctions.php');
 
 	/* Create a project (and a default component) with projectname: $name, and projectleader: userid of the user with email: $email */
-	function createProject($name, $email) { 
+	function createProject($name, $email) {
+		 
 		global $connection;
 		$temp = $email;
 		$lastinsertarray = '';
@@ -58,6 +59,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_componentfunctions
 	
 	/* Delete a project with the specified project id */
 	function deleteProjectById($id) {
+		
 		global $connection;
 		$query = $connection->stmt_init(); 
 		$sql_deleteProject = "DELETE FROM Project p WHERE ProjectId=?";
@@ -71,6 +73,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_componentfunctions
 
 
 	function modifyProject() {
+		
 		global $connection;
 		$query = $connection->stmt_init(); 
 		$sql_modifyProject = ""; 	
@@ -81,6 +84,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_componentfunctions
 	
 	/* Checks if a project with $projectname exists for the user with $userid */
 	function checkProjectExistsByName($projectname, $userid) {
+		
 		global $connection;
 		$query = $connection->stmt_init();
 		$results = '';
@@ -100,6 +104,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_componentfunctions
 	
 	/* Updates the status of the selected project ($projectid) with the status that corresponds to $statusid */
 	function changeProjectStatus($projectid, $statusid) {
+		
 		global $connection;
 		$query = $connection->stmt_init(); 
 		$sql_changeProjectStatus = "UPDATE Project SET ProjectStatus = ? WHERE ProjectId = ?";
@@ -156,7 +161,8 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_componentfunctions
 		
 	}
 	
-	function addUserToProject($projectid, $useremail) {		
+	function addUserToProject($projectid, $useremail) {	
+
 		global $connection;
 		$query = $connection->stmt_init();	
 		$sql_addUserToProject = "";
