@@ -36,9 +36,11 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sessions.php');
 		"bInfo": false,
 		"bAutoWidth": false,
 		"bStateSave": true, 
+		"bDestroy": true,
 		"oSearch": {"sSearch": ""}
   	
   	});
+  	//$("#projectlist").fnDraw();
   }
   
   /* Creates a project (via Ajax) */
@@ -71,13 +73,13 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sessions.php');
 	   success: function(msg2){
 	     $("#projectlist").empty();
 	     $("#projectlist").append(msg2);
-	     $('#projectlist').fnDraw();
+	     setupFlexTable();
 	     
 	     $(".p_dashboard_button").click(function() { 
 	     	
 	     	$(this).empty();
 	     	$(this).append("Redirecting...");
-	     
+	     	
 	     });
 	   }
    
