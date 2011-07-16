@@ -53,5 +53,36 @@ function editComment($commentId, $content){
 	}
 }
 
+/*
+ * A function that returns all comments for an issue.
+ * @return: nothing if there are no comments found for that issue
+ * 			the result with all the comments.
+ * 			-1 if error happened during the prepared statement.
+ * @param:	$issueId:	The Id of the issue we are trying to retrieve its comments.
+ * @TESTED:OK
+ */
+
+function retrieveCommentsforIssue($issueId){
+	global $connection;
+	
+	$query = $connection->stmt_init();
+	$sql_stmnt = "SELECT UserId, CommentContent, CreationDate, ModificationDate FROM comment WHERE IssueId = ?";
+	
+	if($query->prepare($sql_stmnt)){
+		$query->bind_param("i", $issueId);	
+		$results = dynamicBindResults($query);
+		if (empty($results)) { 	
+			return "";
+		}
+		else {
+			// returns all the issues in arrays within the results array
+			return $results;
+		}
+	} else {
+		// error happened while fetching the count of notifications
+		return -1;
+	}
+}
+
 
 ?>
