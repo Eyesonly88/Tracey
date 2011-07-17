@@ -213,6 +213,171 @@ font-weight: bold;
         border: solid 2px #251C17;
  }
 
-        border: solid 2px #DFDFDF;
- }
+/* Issue Styles */
+/*
+ * IssueWrap contains everything
+ * Each container in the issuewrap div contains 3 components (Title, Edit button, box containig the content)
+ * The comment container is different from the other 3 containers in that it doesn't need Edit button (instead it has Submit button)
+ * The SPAN element is representing the edit/submit button because it allows for having nice effects and works on multiple browsers such as I.E
+ * 
+ */
+.custom #issuewrap{
+	display: inline-block;
+	background: white;
+	border: 0.3em solid #372823;
+	margin-left: 22em;
+	margin-top: 2em;
+	width:800px;
+	padding-bottom:5em;
+}
+.custom #issuewrap #issue-info-container{
+	width: 600px;
+	height: 150px; 
+	margin-left: 9em;
+	
+}
+.custom #issuewrap #issue-desc-container{
+	width: 600px;
+	height: 150px; 
+	margin-left: 9em;
+	margin-top: 10em;
+	margin-bottom:2em;
+}
+.custom #issuewrap #issue-attach-container{
+	width: 600px;
+	height: 75px; 
+	margin-left: 9em;
+	margin-top: 9em;
+}
 
+.custom #issuewrap #issue-comment-container{
+	width: 600px;
+	height: 100px; 
+	margin-right: 11em;
+	margin-top: 6em;
+	float: right;
+}
+.custom #issuewrap #issue-info-container #issue-info{
+	background: #F8F8F8;
+	border-bottom-left-radius: 0.5em;
+	border-bottom-right-radius: 0.5em;
+	border: 0.3em solid gray;
+	width: inherit;
+	height: inherit;
+	
+	
+}
+
+.custom #issuewrap #issue-desc-container #issue-desc{
+	background: #F8F8F8;
+	border-bottom-left-radius: 0.5em;
+	border-bottom-right-radius: 0.5em;
+	border: 0.3em solid gray;
+	width: inherit;
+	height: inherit;
+}
+
+.custom #issuewrap #issue-attach-container #issue-attach{
+	background: #F8F8F8;
+	border-bottom-left-radius: 0.5em;
+	border-bottom-right-radius: 0.5em;
+	border: 0.3em solid gray;
+	width: inherit;
+	height: inherit;
+	float: left;
+	position: relative;
+}
+
+.custom #issuewrap #issue-comment-container #issue-create-comment{
+	background: #F8F8F8 ;
+	border-top-left-radius: 0.5em;
+	border-top-right-radius: 0.5em;
+	width: inherit;
+	height: inherit;
+}
+
+.custom #issuewrap #issue-comment-container #issue-create-comment textarea{
+	width: 555px;
+	height: 60px;
+	padding-top:1em;
+	padding-left:1em;
+	margin:1em;
+	color: #000000;
+}
+.custom #issuewrap #issue-comment-container span{
+	/*float: left;*/
+	display: inline-block;
+	/*padding-left:0.5em;
+	padding-bottom:0.2em;
+	padding-right:0.5em;
+	padding-top:0.2em;*/
+	padding:0.5em;
+	font-size: large;
+	float: right;
+	border: 0.2em solid #F8F8F8;
+	border-bottom: none;
+	border-bottom-left-radius: 0.5em;
+	border-bottom-right-radius: 0.5em;
+	background: white;
+}
+
+.custom #issuewrap #issue-info-container h3, #issue-desc-container h3, #issue-attach-container h3{
+	/*float: left;*/
+	display: inline-block;
+	padding:0.2em;
+	font-size: large;
+	text-align: left;
+}
+.custom #issuewrap #issue-info-container span{
+	/*float: left;*/
+	display: inline-block;
+	padding-left:0.5em;
+	padding-bottom:0.2em;
+	padding-right:0.5em;
+	padding-top:0.2em;
+	font-size: large;
+	float: right;
+	border: 0.2em solid gray;
+	border-bottom: none;
+	border-top-left-radius: 0.5em;
+	border-top-right-radius: 0.5em;
+	background: white;
+}
+.custom #issuewrap #issue-desc-container span{
+	/*float: left;*/
+	display: inline-block;
+	margin-top:0.6em;
+	padding-left:0.5em;
+	padding-bottom:0.2em;
+	padding-right:0.5em;
+	padding-top:0.2em;
+	font-size: large;
+	float: right;
+	border: 0.2em solid gray;
+	border-bottom: none;
+	border-top-left-radius: 0.5em;
+	border-top-right-radius: 0.5em;
+	background: white;
+}
+
+.custom #issuewrap #issue-attach-container span{
+	/*float: left;*/
+	display: inline-block;
+	padding-left:0.5em;
+	padding-bottom:0.2em;
+	padding-right:0.5em;
+	padding-top:0.2em;
+	font-size: large;
+	margin-top:0.6em;
+	float: right;
+	border: 0.2em solid gray;
+	border-bottom: none;
+	border-top-left-radius: 0.5em;
+	border-top-right-radius: 0.5em;
+	background: white;
+}
+.custom #issuewrap h3{
+	text-align: center;
+	font-size: large;
+	padding:0.5em;
+}
