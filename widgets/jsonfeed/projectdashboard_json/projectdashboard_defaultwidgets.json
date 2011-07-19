@@ -3,18 +3,18 @@
 "data" : [
  
   {
-    "title" : "Issues Assigned to You",
+    "title" : "Project Issues",
     "id" : "widget2",
     "column" : "first",
     "open" : true,
-    "url" : "/widgets/projectdashboard_widgets/userissues.php"
+    "url" : "/widgets/projectdashboard_widgets/projectissues.php"
   },
   {
-    "title" : "Issues Created by You",
+    "title" : "Project Components",
     "id" : "widget3",
     "column" : "second",
     "open" : true,
-    "url" : "/widgets/projectdashboard_widgets/createdissues.php"
+    "url" : "/widgets/projectdashboard_widgets/projectcomponents.php"
   }
   
   

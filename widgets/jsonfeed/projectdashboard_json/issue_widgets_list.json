@@ -1,19 +1,11 @@
 {
   "data" : [
     {
-      "id" : "w03",
-      "title" : "Reported Issues",
-      "description" : "Issues reported by user",
-      "creator" : "Tracey",
-      "url" : "widgets/projectdashboard_widgets//createdissues.php",
-      "image": ""
-    },
-    {
       "id" : "w04",
-      "title" : "Assigned Issues",
-      "description" : "Issues assigned to user",
+      "title" : "Project Issues",
+      "description" : "Issues related to this project",
       "creator" : "Tracey",
-      "url" : "widgets/projectdashboard_widgets//userissues.php",
+      "url" : "widgets/projectdashboard_widgets/projectissues.php",
       "image": ""
     }
   ]

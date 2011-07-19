@@ -1,6 +1,6 @@
 <?php
 
-#widget that displays issues assigned to a user
+#widget that displays issues related to a project
 
 include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sessions.php');
 

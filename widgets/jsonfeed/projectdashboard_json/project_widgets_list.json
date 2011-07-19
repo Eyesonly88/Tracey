@@ -1,19 +1,11 @@
 {
   "data" : [
     {
-      "id" : "w01",
-      "title" : "User Projects",
-      "description" : "Projects created by user",
-      "creator" : "Tracey",
-      "url" : "widgets/projectdashboard_widgets/userprojects.php",
-      "image": ""
-    },
-    {
       "id" : "w02",
-      "title" : "User Components",
-      "description" : "Components assigned to user.",
+      "title" : "Project Components",
+      "description" : "Components of this project.",
       "creator" : "Tracey",
-      "url" : "widgets/projectdashboard_widgets/usercomponents.php",
+      "url" : "widgets/projectdashboard_widgets/projectcomponents.php",
       "image": ""
     }
   ]
