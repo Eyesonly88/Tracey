@@ -5,8 +5,10 @@ confirmLogin();
 
 $projectid = -1;
 
+/* Get the projectid and store it in session (if it is set) */
 if (isset($_GET['id'])){	
 	$projectid = $_GET['id'];
+	$_SESSION['projectid'] = $projectid;
 } else {
 	 return -1; 
 }
