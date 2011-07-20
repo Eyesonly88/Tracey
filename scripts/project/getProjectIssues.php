@@ -6,7 +6,7 @@
 	
 	$email = '';
 	$result = '';
-	$response = '';
+	$response = '<thead><tr><th>Issue</th><th>Component</th><th>Reporter</th><th>Assignee</th><th>Type</th><th>Priority</th><th>Status</th><th>Link</th></tr></thead>';
 	if (isset($_POST['id'])){
 		$projectid = $_POST['id'];		
 		$result = getIssuesByProjectId($projectid);
@@ -14,6 +14,7 @@
 	
 	
 	if (!(empty($result))) {
+		$response = '';
 		//$response = '<table class="projlistflex"  border="1" cellpadding="3" cellspacing="0">';
 
 		$response = $response . '<thead><tr><th>Issue</th><th>Component</th><th>Reporter</th><th>Assignee</th><th>Type</th><th>Priority</th><th>Status</th><th>Link</th></tr></thead>';
@@ -31,7 +32,7 @@
 			$response = $response . '</tr>';
 		}
 		$response = $response . '</tbody>';		
-	}
+	} 
 	
 	
 	echo $response;
