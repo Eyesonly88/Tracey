@@ -11,7 +11,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sessions.php');
   
 	
 	var projectid = $('#projectid').val();
-	alert(projectid);
+	//alert(projectid);
 	
  
 
