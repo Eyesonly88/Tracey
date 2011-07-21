@@ -14,15 +14,12 @@ $(document).ready(function() {
 			cache: false,
 			dataType: 'text',
 			success: function (data) {
-				
-				// remove the form if an action is taken (Accept or Reject)
-				// for some reason, this is not fading out ....
 				if(data == 1){
 					
 					$('.login-content #confirm-inv-msg').empty();
 					$('.login-content #confirm-inv-msg').append("Done!");
 					$('.login-content #confirm-inv-msg').fadeIn().delay(2000).fadeOut('slow'); 
-					$('.login-content input #receiver-email').val().empty();
+					$('.login-content #receiver-email').attr("value","");
 				} else if (data == -1){
 					
 				}

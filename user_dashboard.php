@@ -131,7 +131,7 @@ confirmLogin();
 									<form action="" id="projectInvite-form">
 									 	
 										<label>Receiver's e-mail:
-										<input type="text" name="receiveremail" id="receiver-email"/>
+										<input type="text" name="receiveremail" id="receiver-email" value=""/>
 										</label>
 										<label>Project:
 											<select name="projectid" id="projectid-selector">
