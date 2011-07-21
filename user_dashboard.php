@@ -126,17 +126,18 @@ confirmLogin();
 								<label>Logged in as <?php	echo $_SESSION['email'];?></label>
 								<label></label>
 								<h3>Invite People</h3>
-									<form action="#" method="post">
+									<form action="" id="projectInvite-form">
 									 	
 										<label>Receiver's e-mail:
-										<input type="text" name="email"/>
+										<input type="text" name="receiveremail" id="receiver-email"/>
 										</label>
 										<label>Project:
-											<select>
+											<select id="projectid-selector">
 												<option value="Project1">Project1</option>
 											</select>
-											<input type="hidden" name="userEmail" value="<?php echo $_SESSION['email']; ?>"/>
-											<input type="submit" value="Invite"/>
+											<input type="hidden" name="senderemail" id="sender-email" value="<?php echo $_SESSION['email']; ?>" />
+											<button type="submit" id="inv-button"><img src="images/accept.png" /></button>
+											<p id="confirm-inv-msg"></p>
 										</label>	
 
 								</form>
