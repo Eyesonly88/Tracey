@@ -5,8 +5,10 @@ confirmLogin();
 
 $projectid = -1;
 
+/* Get the projectid and store it in session (if it is set) */
 if (isset($_GET['id'])){	
 	$projectid = $_GET['id'];
+	$_SESSION['projectid'] = $projectid;
 } else {
 	 return -1; 
 }
@@ -19,7 +21,7 @@ if (isset($_GET['id'])){
 <html>
 	<head>
 		<meta http-equiv="content-type" content="text/html; charset=utf-8">
-		<title>Project Dashboard</title>
+		<title>Dashboard: Project <?php echo $projectid; ?></title>
 
 		<link rel="stylesheet" type="text/css" href="css/customStyle.css" />
 		<link rel="stylesheet" type="text/css" href="css/dashboardui.css" />
@@ -54,7 +56,7 @@ if (isset($_GET['id'])){
 	<input type='hidden' id="pid" value="<?php echo $projectid; ?>" /> 
 	<input type='hidden' id="user" value="<?php echo $_SESSION['email']; ?>" />
 	
-	<div id="testcontent">SUP!!!. You are now on the project dashboard for project: <?php echo $projectid; ?></div>.
+	<!--<div id="testcontent">SUP!!!. You are now on the project dashboard for project: <?php echo $projectid; ?></div>.-->
 	
 	
 
@@ -66,7 +68,7 @@ if (isset($_GET['id'])){
 					<!-- Menu items = Home, About, Help -->
 					<ul class="menu">
 						<li>
-							<a href="#">Home</a>
+							<a href="/user_dashboard.php">Home</a>
 						</li>
 						<li>
 							<a href="#">About</a>

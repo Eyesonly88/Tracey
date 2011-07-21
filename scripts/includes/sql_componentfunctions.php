@@ -96,6 +96,26 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_prepared.php');
 		}	
 	}
 	
+	function getComponentsByProjectId($projectid){
+		global $connection;
+		$query = $connetion->stmt_init();
+		
+		$result = getUserByEmail($useremail);
+		$userid = $result['UserId'];
+		$sql_stmt = "SELECT * FROM component c INNER JOIN project p ON c.ProjectID = p.ProjectId WHRE p.ProjectId = ?";
+		
+		$query->prepare($sql_stmt);
+		$query->bind_param("i", $id);
+		$id = $projectid;
+		$result = dynamicBindResults($query);
+		if (empty($result)){
+			return '';
+		} else {
+			return $results;
+		}
+		
+	}
+	
 	function getWatchedComponentsByUserEmail($useremail){
 		global $connection;
 		$query = $connection->stmt_init();	

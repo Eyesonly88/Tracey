@@ -1,6 +1,6 @@
 <?php
 
-#widget that displays issues assigned to a user
+# Widget that displays the components that are a part of a project
 
 include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sessions.php');
 
@@ -9,8 +9,11 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sessions.php');
 
 <script type="text/javascript">
   
-
-  });
+	
+	var projectid = $('#projectid').val();
+	//alert(projectid);
+	
+ 
 
 </script>
 
@@ -47,6 +50,16 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sessions.php');
 
 </style>
 
-<div id="contents"><h4>Issues:</h4>
+<div id="contents">
+	
+	<h4>Components:</h4>
+	<input type="hidden" id="projectid" value=<?php echo $_SESSION['projectid']; ?> />
+	<div id="title"></div>
+	<table id="componentlist" class="display" ></table>
+
 </div>
 
+
+	
+
+<BR /><BR />
