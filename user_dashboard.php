@@ -49,7 +49,9 @@ confirmLogin();
 						</li>
 						<li>
 							<a href="#">Help</a>
-
+						</li>
+						<li>
+							<a href="/scripts/authentication/logout.php">Logout!</a>
 						</li>
 					</ul>
 				</div>
@@ -120,17 +122,24 @@ confirmLogin();
 							<div class='login-top'>
 							</div>
 							<div class='login-content'>
-								<label>
-									Logged in as
-									<U>
-										<?php	echo $_SESSION['email'];?>
-									</U>
-								</label>
-								<label>
-									<span>
-										<a href="/scripts/authentication/logout.php">LOGOUT</a>
-									</span>
-								</label>
+								<h3>User Info</h3>
+								<label>Logged in as <?php	echo $_SESSION['email'];?></label>
+								<label></label>
+								<h3>Invite People</h3>
+									<form action="#" method="post">
+									 	
+										<label>Receiver's e-mail:
+										<input type="text" name="email"/>
+										</label>
+										<label>Project:
+											<select>
+												<option value="Project1">Project1</option>
+											</select>
+											<input type="hidden" name="userEmail" value="<?php echo $_SESSION['email']; ?>"/>
+											<input type="submit" value="Invite"/>
+										</label>	
+
+								</form>
 							</div>
 						</div>
 					</li>

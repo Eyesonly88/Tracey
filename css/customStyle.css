@@ -95,7 +95,7 @@ clear: right;
 padding: 15px 5px 0;
 font-size: 0.95em;
 text-decoration: underline;}
-#login .login-form h3, #register .register-form h3 { font-size: 3em; font-weight: bold; line-height: .8em; text-shadow: 1px 1px 1px #FFF; text-transform: none }
+#login .login-form h3, #register .register-form h3 { font-size: 3em; font-weight: bold; line-height: .8em; text-shadow: 1px 1px 1px #FFF; text-transform: none ; text-align: left;}
 
 #login label { 
 		color: #F1F4F7; font-size: 1.45em; line-height: 1.2em; margin-top: .7em; text-shadow: 1px 1px 1px #251C17; float: left;
