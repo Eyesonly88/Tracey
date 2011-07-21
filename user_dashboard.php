@@ -1,6 +1,7 @@
 <?php
 include_once ($_SERVER['DOCUMENT_ROOT'] . '/scripts/includes/sessions.php');
 include_once ($_SERVER['DOCUMENT_ROOT'] . '/scripts/includes/sql_notificationfn.php');
+include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_projectfunctions.php');
 
 confirmLogin();
 ?>
@@ -22,6 +23,7 @@ confirmLogin();
 		<script src="js/loginpanel.js"></script>
 		<script src="js/define_userdashboard.js"></script>
 		<script src="js/notification.js"></script>
+		<script src="js/invite.js"></script>
 		<script>$(document).ready( function() {
 				$(".notifications-form").hide();
 				$("#notifications").hoverIntent( function() {
@@ -132,11 +134,16 @@ confirmLogin();
 										<input type="text" name="receiveremail" id="receiver-email"/>
 										</label>
 										<label>Project:
-											<select id="projectid-selector">
-												<option value="Project1">Project1</option>
+											<select name="projectid" id="projectid-selector">
+												<?php 
+													$resultSet = getProjectsByEmail($_SESSION['email']);
+													foreach ($resultSet as $result){
+														echo "<option value=\"" . $result['ProjectId'] ."\">" . $result['ProjectName'] . "</option>";
+													}
+												?>
 											</select>
 											<input type="hidden" name="senderemail" id="sender-email" value="<?php echo $_SESSION['email']; ?>" />
-											<button type="submit" id="inv-button"><img src="images/accept.png" /></button>
+											<input type="button"  name="submit" value="Invite" id="inv-button" />
 											<p id="confirm-inv-msg"></p>
 										</label>	
 

@@ -8,9 +8,9 @@ $callbackMsg = '';
 if (isset($_POST['receiveremail'])){
 
 	$receiverEmail = sanitize($_POST['receiveremail']);
-	$projectId = sanitize($_POST['projectid-selector']);
+	$projectId = $_POST['projectid'];
 	$senderEmail = sanitize($_POST['senderemail']);
-	/*
+	
 	if(sendNotifByProject($senderEmail, $receiverEmail, $projectId)){
 		// sending notification was succesful
 		$callbackMsg = 1;
@@ -19,8 +19,8 @@ if (isset($_POST['receiveremail'])){
 		// sending notification failed
 		$callbackMsg = -1;
 	}
-	*/
-	$callbackMsg = $receiverEmail . $projectId . $senderEmail ;
+
+	$callbackMsg = 1 ;
 	
 	
 } /*else if (isset($_POST['RejectId'])){

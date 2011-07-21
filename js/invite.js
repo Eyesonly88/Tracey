@@ -9,20 +9,20 @@ $(document).ready(function() {
 		//e.preventDefault(); //-> if it is uncommented. then the page won't refresh and the notification won't be removed.
 		$.ajax({
 			url: 'scripts/invite/invite.php' ,
-			data:  "receiveremail="+ $('label input#receiver-email').val() +"&projectid=" + $('label#projectid-selector').val() + "&senderemail="+ $('label input#sender-email').val(),
+			data:  "receiveremail="+ $('label input#receiver-email').val() +"&projectid=" + $('select option:selected').val() + "&senderemail="+ $('label input#sender-email').val(),
 			type: 'post',
 			cache: false,
 			dataType: 'text',
 			success: function (data) {
-				//alert("msg = " + data);
+				
 				// remove the form if an action is taken (Accept or Reject)
 				// for some reason, this is not fading out ....
 				if(data == 1){
-					alert("WTF");
-					$('#logincontent p #confirm-inv-msg').html(data);
-					$('#logincontent p #confirm-inv-msg').fadeIn(400);
-					setTimeout(1000);
-					$('#logincontent p #confirm-inv-msg').fadeOut(400);
+					
+					$('.login-content #confirm-inv-msg').empty();
+					$('.login-content #confirm-inv-msg').append("Done!");
+					$('.login-content #confirm-inv-msg').fadeIn().delay(2000).fadeOut('slow'); 
+					$('.login-content input #receiver-email').val().empty();
 				} else if (data == -1){
 					
 				}
