@@ -67,38 +67,35 @@ confirmLogin();
 
 						<div id="notification-icon">
 							<h3>
-							<?php		// returns the number of notifications for the logged in user
-								echo getNotifCountByEmail($_SESSION['email']);?>
+							<?php echo getNotifCountByEmail($_SESSION['email']);?>
 							</h3>
 						</div>
 
 						<div id="notifications-container" class="notifications-form">
 							<div id="notifications-content">
 								<span style="color: #F1F4F7;">
+									
 									<?php
 									// get all notifications for user
 									$resultSet = getAllNotifDetails($_SESSION['email']);
 									foreach ($resultSet as $result) {
-										//print_r($result);
+										// print_r($result);
 										// display notification iff its new
 										if ($result['StatusId'] == 1) {
+											echo "<p id=\"notif-msg-{$result['Id']}\">";
 											echo getNotifNameByID($result['TypeId']);
 											echo " [";
 											echo getEntityNameByProjectId($result['TypeEntityId']);
 											echo "] by ";
 											echo getSenderName($result['SenderId']);
-											echo ". ";
+											echo ".</p> ";
 											
 									?>
 									
-									<form action='#' class="accept-notif-form">
+									<form action='' id="notif-form">
 										<input type="hidden" name="NotificationId" class="notif-id-input" value="<?php echo $result['Id'];?>" />
-										<button type='submit' class='notification-send'>Accept</button>
-									</form>
-									
-									<form action='#' class="reject-notif-form">
-										<input type="hidden" name="NotificationId" class="notif-id-input" value="<?php echo $result['Id'];?>" />
-										<button type='submit' class='notification-send'>Reject</button>
+										<input type='button' name="submit" id='notif-accept-button' value="Accept">
+										<input type='button' name="submit" id='notif-reject-button' value="Reject">
 									</form>
 									
 									<?php

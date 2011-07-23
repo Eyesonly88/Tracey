@@ -1,29 +1,35 @@
-$(document).ready(function() {
-	/*
-	 * This file sends a function call to a php script. It passes two arguments to the script "AcceptId" and "NotificationId".
+/*
+	 * This file sends a function call to a php script. It passes two arguments to the script "AcceptId"/"RejectId" and "NotificationId".
 	 * Those arguments are used to change the status of the notification.
-	 * The animation is lacking for now. I tried to implement the animation but was didn't work.
-	 * @TODO: For the time being, this is working as expected. However, a good improvement is to make only the div containing the form to refresh and not the whole page.
-	 * @TODO: Adding a bit of animation would be good too.
+	 * When the user clicks on accept/reject button, then the script does the operation and then hides the specific notification.
 	 * @author:Mohammed.
 	 */
-	$('.accept-notif-form .notification-send').click(function (e) {
-		//alert("You clicked Accept Son");
-		//e.preventDefault(); -> if it is uncommented. then the page won't refresh and the notification won't be removed.
+
+$(document).ready(function() {
+	
+
+	$('#notifications-container form #notif-accept-button').click(function (e) {
+		
+		var notifForm = $(this).parent();
+		var notifId = notifForm.children('.notif-id-input').val();
+		var notifMsg = notifForm.parent().children('#notif-msg-'+notifId);
+		var notifCount = $('#notification-icon h3').text();
+		
 		$.ajax({
 			url: 'scripts/notification/notification.php' ,
-			data:  "AcceptId=2&NotificationId=" + $('.notif-id-input').val(),
+			data:  "AcceptId=2&NotificationId=" + notifId,
 			type: 'post',
 			cache: false,
 			dataType: 'text',
 			success: function (data) {
-				//alert("msg = " + data);
-				// remove the form if an action is taken (Accept or Reject)
-				// for some reason, this is not fading out ....
+
 				if(data == 1){
-					$('form .accept-notif-form').fadeOut(400);
+					notifCount = parseInt(notifCount) - 1;
+					$('#notification-icon h3').text(notifCount);
+					notifForm.fadeOut(400);
+					notifMsg.fadeOut(400);
 				} else if (data == -1){
-					$('form .reject-notif-form').fadeOut(400);
+					// accepting failed	
 				}
 			},
 			error: "Error"
@@ -32,21 +38,28 @@ $(document).ready(function() {
 		
 	});
 	
-	$('.reject-notif-form .notification-send').click(function (e) {
-		//alert("You clicked Reject Son");
+	$('#notifications-container form #notif-reject-button').click(function (e) {
+		
+		var notifForm = $(this).parent();
+		var notifId = notifForm.children('.notif-id-input').val();
+		var notifMsg = notifForm.parent().children('#notif-msg-'+notifId);
+		var notifCount = $('#notification-icon h3').text();
+		
 		$.ajax({
 			url: 'scripts/notification/notification.php' ,
-			data: "RejectId=3&NotificationId=" + $('.notif-id-input').val(),
+			data: "RejectId=3&NotificationId=" + notifId,
 			type: 'post',
 			cache: false,
 			dataType: 'text',
 			success: function (data) {
-				//alert("msg = " + data);
-				// remove the form if an action is taken (Accept or Reject)
+
 				if(data == 1){
-					$('form .accept-notif-form').fadeOut(400);
+					notifCount = parseInt(notifCount) - 1;
+					$('#notification-icon h3').text(notifCount);
+					notifForm.fadeOut(400);
+					notifMsg.fadeOut(400);
 				} else if (data == -1){
-					$('form .reject-notif-form').fadeOut(400);
+					// rejecting failed
 				}
 			},
 			error: "Error"

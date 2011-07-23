@@ -15,7 +15,7 @@ if (isset($_POST['AcceptId'])){
 		$callbackMsg = 1;
 		
 	}else{
-		// chaning status failed
+		// changing status failed
 		$callbackMsg = -1;
 	}
 	
