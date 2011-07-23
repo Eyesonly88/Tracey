@@ -17,13 +17,13 @@ $projectid = '';
 	if (isset($_POST['id'])){
 		$projectid = $_POST['id'];		
 		$result = getComponentsByProjectId($projectid);
-		$response = json_encode($result);
+		
 	}
 	
-	
 	if (!empty($result)){
-		
-		
+		$response = json_encode($result);
+	} else {
+		$response = -1;
 	}
 	
 	
