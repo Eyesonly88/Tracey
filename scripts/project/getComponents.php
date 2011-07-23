@@ -17,6 +17,7 @@ $projectid = '';
 	if (isset($_POST['id'])){
 		$projectid = $_POST['id'];		
 		$result = getComponentsByProjectId($projectid);
+		$response = json_encode($result);
 	}
 	
 	
