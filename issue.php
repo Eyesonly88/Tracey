@@ -103,7 +103,16 @@ confirmLogin();
 				<h3>Attached Files</h3>
 				<span >Edit</span>
 				<div id="issue-attach">
-					
+					<form action="attach.php" method="post" enctype="multipart/form-data">
+					<p>Allowed file types are: jpg/gif/png, doc/docx, ppt/pptx, xls/xlsx, pdf, txt.<br /><br />
+					<input type="file" name="attachments[]" /><br />
+					<input type="file" name="attachments[]" /><br />
+					<input type="file" name="attachments[]" /><br />
+					<input type="file" name="attachments[]" /><br />
+					<input type="file" name="attachments[]" />
+					<input type="submit" value="Send" /> 
+					</p>
+					</form>
 				</div>
 			</div>
 			
