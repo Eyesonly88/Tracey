@@ -44,24 +44,8 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sessions.php');
   
   /* Creates a project (via Ajax) */
  
+
   
-  /* Get list of projects created by the user (via Ajax) */
-  function getUserProjects(user){
-  	$.ajax({
-  	   cache: "false",
-	   type: "POST",
-	   url: "/scripts/project/getProjectIssues.php",
-	   data: "id="+projectid,
-	   success: function(msg2){
-	     $("#projectlist").empty();
-	     $("#projectlist").append(msg2);
-	     setupFlexTable();
-	     
-	   
-	   }
-   
- 	});
-  }
   
   /* Get the currently logged in user */
   function getCurrentUser(){

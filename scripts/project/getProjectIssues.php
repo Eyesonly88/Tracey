@@ -20,11 +20,13 @@
 		$response = $response . '<thead><tr><th>Issue</th><th>Component</th><th>Reporter</th><th>Assignee</th><th>Type</th><th>Priority</th><th>Status</th><th>Link</th></tr></thead>';
 		$response = $response . '<tbody>';	
 		foreach($result as $row){
+			$reporterEmail = getUserInfoById($row['ReporterId'], "Email");
+			$assigneeEmail = getUserInfoById($row['AssigneeId'], "Email");
 			$response = $response . '<tr>';
 			$response = $response . '<td class="i_id" name="p_id" align="center">' . $row['IssueId'] . '</td>';
 			$response = $response . '<td class="i_component" name="i_component" align="center">' . $row['ComponentId'] . '</td>';
-			$response = $response . '<td class="i_reporter" name="i_reporter" align="center">' . $row['ReporterId'] . '</td>';
-			$response = $response . '<td class="i_assignee" name="i_assignee" align="center">' . $row['AssigneeId'] . '</td>';
+			$response = $response . '<td class="i_reporter" name="i_reporter" align="center">' . $reporterEmail . '</td>';
+			$response = $response . '<td class="i_assignee" name="i_assignee" align="center">' . $assigneeEmail . '</td>';
 			$response = $response . '<td class="i_type" name="i_type" align="center">' . $row['IssueType'] . '</td>';
 			$response = $response . '<td class="i_priority" name="i_priority" align="center">' . $row['Priority'] . '</td>';
 			$response = $response . '<td class="i_status" name="i_status" align="center">' . $row['IssueStatus'] . '</td>';

@@ -215,6 +215,28 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_componentfunctions
 		
 	}
 	
+	function getProjectNameById($id) {
+		
+		global $connection;
+		$emailExists = 0;
+		$userinfo = array();
+		$results = '';
+		$query = $connection ->stmt_init();	
+		$sql_getProjects = "SELECT p.ProjectName FROM Project p WHERE p.ProjectId = ?";	
+		$query->prepare($sql_getProjects);
+		$query -> bind_param("i", $pid);
+		$pid = $id;		
+		$results = dynamicBindResults($query);	
+				
+		if (empty($results)) { 	
+			return '';
+		}
+		
+		$userinfo = $results;		
+		return $userinfo;
+			
+		
+	}
 	
 	
 ?>

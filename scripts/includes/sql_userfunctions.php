@@ -66,6 +66,20 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_prepared.php');
 		return 	$results[0]["$param"];
 	}
 	
+	function getUserInfoById($id, $param){
+		global $connection;
+		$query = $connection->stmt_init();
+		$sql_stmnt = "SELECT " .$param. " FROM User WHERE UserId = ?";
+		
+		if ($query->prepare($sql_stmnt)) {
+			$query->bind_param("i", $userid);
+			$userid = $id;		
+			$results = dynamicBindResults($query);
+			//print_r($results);
+		}
+		return 	$results[0]["$param"];
+	}
+	
 	/* Check if email exists. Returns array of user details if email exists, otherwise returns empty array. @TESTED: OK */
 	function getUserByEmail($email) { 
 		global $connection;
