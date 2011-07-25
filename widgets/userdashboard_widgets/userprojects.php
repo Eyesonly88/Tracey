@@ -29,13 +29,14 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sessions.php');
   	/* Apply datatable library to the list of tables. */
   	$('#projectlist').dataTable({
   		
+  		
   		"bPaginate": false,
 		"bLengthChange": false,
 		"bFilter": true,
 		"bSort": false,
-		"bInfo": false,
+	
 		"bAutoWidth": false,
-		"bStateSave": true, 
+		
 		"bDestroy": true,
 		"oSearch": {"sSearch": ""}
   	
