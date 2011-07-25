@@ -1,5 +1,5 @@
 {
-"layout": "layout5",
+"layout": "layout2",
 "data" : [
   {
     "title" : "Projects YOU Lead",
@@ -11,7 +11,7 @@
   {
     "title" : "Issues Assigned to You",
     "id" : "widget2",
-    "column" : "first",
+    "column" : "second",
     "open" : true,
     "url" : "/widgets/userdashboard_widgets/userissues.php"
   },
