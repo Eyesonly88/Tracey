@@ -19,6 +19,9 @@ confirmLogin();
 		<script type="text/javascript" src="libraries/dashboard/lib/jquery-ui-1.8.2.custom.min.js"></script>
 		<script type="text/javascript" src="libraries/dashboard/jquery.dashboard.js"></script>
 		<script type="text/javascript" src="libraries/dashboard/lib/themeroller.js"></script>
+		<link rel="stylesheet" href="/libraries/datatables/media/css/demo_table_jui.css" type="text/css">
+<!--<script src="/libraries/flexigrid/js/flexigrid.js" type="text/javascript"></script> -->
+<script src="/libraries/dataTables/media/js/jquery.dataTables.js" type="text/javascript"></script>
 		<script src="js/jquery.hoverIntent.js"></script>
 		<script src="js/loginpanel.js"></script>
 		<script src="js/define_userdashboard.js"></script>

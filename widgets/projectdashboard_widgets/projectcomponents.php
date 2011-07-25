@@ -36,7 +36,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sessions.php');
   	currentUser = msg;	
   }
   
-  function setupFlexTable(){
+  function setupFlexTable1(){
   	
   	/* Apply datatable library to the list of tables. */
   	$('#componentlist').dataTable({
@@ -49,7 +49,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sessions.php');
 		"bAutoWidth": false,
 		"bStateSave": true, 
 		"bDestroy": true,
-		"oSearch": {"sSearch": ""}
+		"oSearch": {"ProjectComponentSearch": ""}
   	
   	});
   	//$("#projectlist").fnDraw();
@@ -85,7 +85,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sessions.php');
 	  
 	     $("#componentlist").empty();
 	     $("#componentlist").append(msg2);
-	     setupFlexTable();
+	     setupFlexTable1();
 	     
 	   }
    

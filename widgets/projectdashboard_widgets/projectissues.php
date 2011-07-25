@@ -23,10 +23,10 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sessions.php');
   	currentUser = msg;	
   }
   
-  function setupFlexTable(){
+  function setupFlexTable2(){
   	
   	/* Apply datatable library to the list of tables. */
-  	$('#projectlist').dataTable({
+  	$('#projectlist2').dataTable({
   		
   		"bPaginate": false,
 		"bLengthChange": false,
@@ -36,7 +36,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sessions.php');
 		"bAutoWidth": false,
 		"bStateSave": true, 
 		"bDestroy": true,
-		"oSearch": {"sSearch": ""}
+		"oSearch": {"ProjectIssueSearch": ""}
   	
   	});
   	//$("#projectlist").fnDraw();
@@ -70,9 +70,9 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sessions.php');
 	   data: "id="+id,
 	   success: function(msg2){
 	  
-	     $("#projectlist").empty();
-	     $("#projectlist").append(msg2);
-	     setupFlexTable();
+	     $("#projectlist2").empty();
+	     $("#projectlist2").append(msg2);
+	     setupFlexTable2();
 	     
 	   }
    
@@ -136,6 +136,6 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sessions.php');
 <div id="contents"><h4>Issues:</h4>
 	<input type="hidden" id="projectid" value=<?php echo $_SESSION['projectid']; ?> />
 	<div id="title"></div>
-	<table id="projectlist" class="display" ></table>
+	<table id="projectlist2" class="display" ></table>
 </div>
 

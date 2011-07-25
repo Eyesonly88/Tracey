@@ -7,14 +7,18 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sessions.php');
 
 ?>
 <link rel="stylesheet" href="/libraries/datatables/media/css/demo_table_jui.css" type="text/css">
-<link rel="stylesheet" href="/libraries/shadowbox/shadowbox.css" type="text/css">
+
 <!--<script src="/libraries/flexigrid/js/flexigrid.js" type="text/javascript"></script> -->
 <script src="/libraries/dataTables/media/js/jquery.dataTables.js" type="text/javascript"></script>
+<link rel="stylesheet" href="/libraries/shadowbox/shadowbox.css" type="text/css">
 <script src="/libraries/shadowbox/shadowbox.js" type="text/javascript"></script>
 <script type="text/javascript">
   
-  Shadowbox.init();
-  $("#viewissue_interface").hide();
+  Shadowbox.init({
+
+   		 	skipSetup: true
+  	});
+  //$("#viewissue_interface").hide();
   var currentUser = "";
   getCurrentUser();
   initialSetup();
@@ -23,11 +27,10 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sessions.php');
   	currentUser = msg;	
   }
   
-  function setupFlexTable(){
+  function setupFlexTable2(){
   	
   	/* Apply datatable library to the list of tables. */
   	$('#issuelist').dataTable({
-  		
   		"bPaginate": false,
 		"bLengthChange": false,
 		"bFilter": true,
@@ -36,9 +39,12 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sessions.php');
 		"bAutoWidth": false,
 		"bStateSave": true, 
 		"bDestroy": true,
-		"oSearch": {"sSearch": ""}
+		"oSearch": {"UserIssueSearch": ""}
+  		
   	
   	});
+  	
+  	//alert("FUCK!");
   	//$("#projectlist").fnDraw();
   }
   
@@ -73,11 +79,9 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sessions.php');
 	  
 	     $("#issuelist").empty();
 	     $("#issuelist").append(msg2);
-	     setupHandlers();
-	     setupFlexTable();
-	     
-	 
-	     
+	      setupHandlers();
+	     setupFlexTable2();
+	          
 	   }
    
  	});
@@ -86,25 +90,86 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sessions.php');
   
   function setupHandlers(){
   
+
    $(".i_viewissue").click(function(){  
    		
    		var issueid = $(this).attr("id");
-   		$("#viewissue_interface").empty();
-   		$("#viewissue_interface").append("<div id='testinterface' >" + issueid + "</div>");
-   		 Shadowbox.open({
-        	content:    "<div> BLAB LABLABLABLABALBA </div>",
-        player:     "html",
-        title:      "Welcome",
-        height:     350,
-        width:      350
+   		//$("#viewissue_interface").empty();
+   		//$("#viewissue_interface").append("<div id='testinterface' >" + issueid + "</div>");
+   		$("#viewissue_interface").show();
+   		Shadowbox.open({
+        	content:    generateIssueInterface(issueid),
+        	player:     "html",
+        	title:      "View Issue",
+        	height:     960,
+        	width:     808
     	});
+    	
 
    		//alert(issueid);
-   		
-   		
-   
+
    
    });
+
+  }
+  
+  
+  function generateIssueInterface(issueid){ 
+  	
+  	// UNDER CONSTRUCTION -: get list of users in project, list of components. Make drop down lists based on this.
+  	// Also - get default issue values and set them into the form.
+  	
+  	var id = issueid;
+  	
+  	var html = '<body>' +	
+  		'<div id="viewissue_interface" type="hidden" style="align:left;">'+
+	'<div id="issuewrap">'+
+			'<h3>Issue: ' + issueid + '</h3>'+
+			'<div id="issue-info-container">'+
+				'<h3>Issue Information</h3>'+
+				'<span >Edit</span>'+
+				'<div id="issue-info">'+
+					
+				'</div>'+
+			'</div>'+
+			
+			'<div id="issue-desc-container">'+
+				'<h3>Issue Description</h3>'+
+				'<span >Edit</span>'+
+				'<div id="issue-desc">'+
+					
+				'</div>'+
+			'</div>'+
+			
+			'<div id="issue-attach-container">'+
+				'<h3>Attached Files</h3>'+
+				'<span >Edit</span>'+
+				'<div id="issue-attach">'+
+					'<form action="attach.php" method="post" enctype="multipart/form-data">'+
+					'<p>Allowed file types are: jpg/gif/png, doc/docx, ppt/pptx, xls/xlsx, pdf, txt.<br /><br />'+
+					'<input type="file" name="attachments[]" /><br />'+
+					'<input type="file" name="attachments[]" /><br />'+
+					'<input type="file" name="attachments[]" /><br />'+
+					'<input type="file" name="attachments[]" /><br />'+
+					'<input type="file" name="attachments[]" />'+
+					'<input type="submit" value="Send" /> '+
+					'</p>'+
+					'</form>'+
+				'</div>'+
+			'</div>'+
+			
+			'<div id="issue-comment-container">'+
+				'<div id="issue-create-comment">'+
+					'<textarea placeholder="Insert your comment here ...">'+
+
+					'</textarea>'+
+				'</div>'+
+				'<span>Submit Comment</span>'+
+			'</div>'+
+		'</div> </body>';
+  	
+  		
+  	return html;
   
   }
   
@@ -161,8 +226,13 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sessions.php');
 </style>
 
 
-<div id="viewissue_interface"></div>
+
 <div id="contents"><h4>Issues:</h4>
 
 	<table id="issuelist" class="display" ></table>
 </div>
+
+
+
+</div>
+
