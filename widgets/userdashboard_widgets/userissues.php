@@ -7,11 +7,14 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sessions.php');
 
 ?>
 <link rel="stylesheet" href="/libraries/datatables/media/css/demo_table_jui.css" type="text/css">
+<link rel="stylesheet" href="/libraries/shadowbox/shadowbox.css" type="text/css">
 <!--<script src="/libraries/flexigrid/js/flexigrid.js" type="text/javascript"></script> -->
 <script src="/libraries/dataTables/media/js/jquery.dataTables.js" type="text/javascript"></script>
+<script src="/libraries/shadowbox/shadowbox.js" type="text/javascript"></script>
 <script type="text/javascript">
   
- 
+  Shadowbox.init();
+  $("#viewissue_interface").hide();
   var currentUser = "";
   getCurrentUser();
   initialSetup();
@@ -70,11 +73,39 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sessions.php');
 	  
 	     $("#issuelist").empty();
 	     $("#issuelist").append(msg2);
+	     setupHandlers();
 	     setupFlexTable();
+	     
+	 
 	     
 	   }
    
  	});
+  }
+  
+  
+  function setupHandlers(){
+  
+   $(".i_viewissue").click(function(){  
+   		
+   		var issueid = $(this).attr("id");
+   		$("#viewissue_interface").empty();
+   		$("#viewissue_interface").append("<div id='testinterface' >" + issueid + "</div>");
+   		 Shadowbox.open({
+        	content:    "<div> BLAB LABLABLABLABALBA </div>",
+        player:     "html",
+        title:      "Welcome",
+        height:     350,
+        width:      350
+    	});
+
+   		//alert(issueid);
+   		
+   		
+   
+   
+   });
+  
   }
   
   /* The first initial function call, which calls 2 other 
@@ -129,6 +160,8 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sessions.php');
 
 </style>
 
+
+<div id="viewissue_interface"></div>
 <div id="contents"><h4>Issues:</h4>
 
 	<table id="issuelist" class="display" ></table>
