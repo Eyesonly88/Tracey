@@ -19,6 +19,10 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sessions.php');
    		 	skipSetup: true
   	});
   
+  $('#hiddencontents_issue').hide();
+  
+  var issuehtml = $('#hiddencontents_issue').html();
+  //alert(issuehtml);
   var projectid = $('#projectid').val();
   var currentUser = "";
   getCurrentUser();
@@ -58,85 +62,41 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sessions.php');
    $(".i_p_viewissue").click(function(){  
    		
    		var issueid = $(this).attr("id");
-   		//$("#viewissue_interface").empty();
-   		//$("#viewissue_interface").append("<div id='testinterface' >" + issueid + "</div>");
-   		$("#viewissue_interface").show();
+   		
+   		var issueJS = "<script type=text/javascript>"+ 
+   				"$('#btn_saveissue').click(function() {"+
+		
+					"alert('hi');"+
+				"});"+
+   		"</scr" + "ipt>";
+   	
+   		//todo: Set up all the handlers in the hidden issue interface, before showing it on the lightbox.
+   		$('#issuenum').empty();
+   		$('#issuenum').append('<h3>Issue: ' + issueid + '</h3>');
+   		
+   		issueobj = $('#hiddencontents_issue');
+   		issuehtml = issueobj.html();
+   		
+   		issueinterface = issueJS + "<body>" + issuehtml + "<button id='btn_saveissue'>Hello there.</button>" + "</body>";
    		Shadowbox.open({
-        	content:    generateIssueInterface(issueid),
+        	//content:    generateIssueInterface(issueid),
+        	content:	issueinterface,
         	player:     "html",
         	title:      "View Issue",
         	height:     960,
         	width:     808
     	});
     	
-
+    	//alert (issueinterface);
+    	
+		//$('#btn_saveissue').click(function() { 
+		
+			//alert("SUP!!!!!!");
+		//});
    		//alert(issueid);
    });
 
   }
-  
-  
-  function generateIssueInterface(issueid){ 
-  	
-  	// UNDER CONSTRUCTION -: get list of users in project, list of components. Make drop down lists based on this.
-  	// Also - get default issue values and set them into the form.
-  	
-  	var id = issueid;
-  	
-  	var html = '<body>' +	
-  		'<div id="viewissue_interface" type="hidden" style="align:left;">'+
-	'<div id="issuewrap">'+
-			'<h3>Issue: ' + issueid + '</h3>'+
-			'<div id="issue-info-container">'+
-				'<h3>Issue Information</h3>'+
-				'<span >Edit</span>'+
-				'<div id="issue-info">'+
-					
-				'</div>'+
-			'</div>'+
-			
-			'<div id="issue-desc-container">'+
-				'<h3>Issue Description</h3>'+
-				'<span >Edit</span>'+
-				'<div id="issue-desc">'+
-					
-				'</div>'+
-			'</div>'+
-			
-			'<div id="issue-attach-container">'+
-				'<h3>Attached Files</h3>'+
-				'<span >Edit</span>'+
-				'<div id="issue-attach">'+
-					'<form action="attach.php" method="post" enctype="multipart/form-data">'+
-					'<p>Allowed file types are: jpg/gif/png, doc/docx, ppt/pptx, xls/xlsx, pdf, txt.<br /><br />'+
-					'<input type="file" name="attachments[]" /><br />'+
-					'<input type="file" name="attachments[]" /><br />'+
-					'<input type="file" name="attachments[]" /><br />'+
-					'<input type="file" name="attachments[]" /><br />'+
-					'<input type="file" name="attachments[]" />'+
-					'<input type="submit" value="Send" /> '+
-					'</p>'+
-					'</form>'+
-				'</div>'+
-			'</div>'+
-			
-			'<div id="issue-comment-container">'+
-				'<div id="issue-create-comment">'+
-					'<textarea placeholder="Insert your comment here ...">'+
-
-					'</textarea>'+
-				'</div>'+
-				'<span>Submit Comment</span>'+
-			'</div>'+
-		'</div> </body>';
-  	
-  		
-  	return html;
-  
-  }
-  
-  
-  
   
   
   /* Get the currently logged in user */
@@ -230,5 +190,54 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sessions.php');
 	<input type="hidden" id="projectid" value=<?php echo $_SESSION['projectid']; ?> />
 	<div id="title"></div>
 	<table id="projectlist2" class="display" ></table>
+</div>
+<div id="hiddencontents_issue" type="hidden">
+	
+	<div id="issuewrap">
+			<div id="issuenum"></div>
+			<div id="issue-info-container">
+				<h3>Issue Information</h3>
+				<span >Edit</span>
+				<div id="issue-info">
+					
+				</div>
+			</div>
+			
+			<div id="issue-desc-container">
+				<h3>Issue Description</h3>
+				<span >Edit</span>
+				<div id="issue-desc">
+					
+				</div>
+			</div>
+			
+			<div id="issue-attach-container">
+				<h3>Attached Files</h3>
+				<span >Edit</span>
+				<div id="issue-attach">
+					<form action="attach.php" method="post" enctype="multipart/form-data">
+					<p>Allowed file types are: jpg/gif/png, doc/docx, ppt/pptx, xls/xlsx, pdf, txt.<br /><br />
+					<input type="file" name="attachments[]" /><br />
+					<input type="file" name="attachments[]" /><br />
+					<input type="file" name="attachments[]" /><br />
+					<input type="file" name="attachments[]" /><br />
+					<input type="file" name="attachments[]" />
+					<input type="submit" value="Send" /> 
+					</p>
+					</form>
+				</div>
+			</div>
+			
+			<div id="issue-comment-container">
+				<div id="issue-create-comment">
+					<textarea placeholder="Insert your comment here ...">
+
+					</textarea>
+				</div>
+				<span>Submit Comment</span>
+			</div>
+			
+	
+		</div>
 </div>
 
