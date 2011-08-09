@@ -29,15 +29,25 @@ confirmLogin();
 		<script src="js/invite.js"></script>
 		<script>$(document).ready( function() {
 				$(".notifications-form").hide();
+				$(".createProject-form").hide();
+				
 				$("#notifications").hoverIntent( function() {
 					$(".notifications-form").fadeIn(200);
 				}
 				, function() {
 					$(".notifications-form").fadeOut(200);
 				}
-				)
-
-			});</script>
+				);
+				
+				$("#createProject").hoverIntent( function() {
+					$(".createProject-form").fadeIn(200);
+				}
+				, function() {
+					$(".createProject-form").fadeOut(200);
+				}
+				
+				);
+				});</script>
 	</head>
 
 	<body class="custom">
@@ -104,6 +114,8 @@ confirmLogin();
 									<?php
 										} else {
 											// don't display notification
+											if (getNotifCountByEmail($_SESSION['email']) == 0)
+												echo "<span>You don't have any notifications.</span>";
 										}
 										
 										 
@@ -114,6 +126,32 @@ confirmLogin();
 							</div>
 						</div>
 					</li>
+					
+					<li id="createProject">
+						<a href="#">
+						<h3>Create Project</h3>
+						<span>Create projects quickly!</span>
+						</a>
+						<div id='createProject-container' class="createProject-form">
+							<div id="createProject-content">
+								<form action="" id="projectCreate-form">
+										 	
+											<label>Project Name:
+											<input type="text" name="projectname" id="project-name" value=""/>
+											</label>
+											<label>
+												<input type="hidden" name="projectLeaderEmail" id="projectLeader-email" value="<?php echo $_SESSION['email']; ?>" />
+												<input type="button"  name="submit" value="Create" id="crtproject-button" />
+												<p id="confirm-inv-msg"></p>
+											</label>	
+	
+								</form>
+							
+							</div>
+							
+						</div>
+					</li>
+					
 					<li id="login">
 						<a href="#">
 						<h3>Account Settings</h3>

@@ -31,4 +31,31 @@ $(document).ready(function() {
 		
 	});
 	
+	$('#createProject-content p #confirm-inv-msg').hide();
+	$('#projectCreate-form #inv-button').click(function (e) {
+		
+		$.ajax({
+			url: 'scripts/project/createProject.php' ,
+			data:  "name="+ $('label input#project-name').val() +"&email=" + $('label input#projectLeader-email').val(),
+			type: 'post',
+			cache: false,
+			dataType: 'text',
+			success: function (data) {
+				if(data == 1){
+					// Project created successfully. Display message and update.
+					$('createProject-content #confirm-inv-msg').empty();
+					$('createProject-content #confirm-inv-msg').append("Project Created!");
+					$('createProject-content #confirm-inv-msg').fadeIn().delay(2000).fadeOut('slow'); 
+					$('createProject-content #project-name').attr("value","");
+				} else if (data == -1){
+					$('createProject-content #confirm-inv-msg').empty();
+					$('createProject-content #confirm-inv-msg').append("Error happended!");
+					$('createProject-content #confirm-inv-msg').fadeIn().delay(2000).fadeOut('slow'); 
+				}
+			},
+			error: "Error"
+		});
+		
+	});
+	
 });

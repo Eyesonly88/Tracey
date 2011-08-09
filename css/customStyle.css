@@ -79,11 +79,11 @@ padding: 0px;
         #nav a:hover span, #login:hover span, #register:hover span { color: #F1F4F7; }
     #nav li a:hover, #login:hover a, #register:hover a { }
     
-#nav .login-form, #nav .register-form, #nav .notifications-form { background: #251C17; border: .35em solid rgba(0, 0, 0, .3); border-top: 0; display: none; float: left; right: -.3em; position: absolute; top: 6em; z-index: 10; -moz-border-radius-bottomleft: .6em; -moz-border-radius-bottomright: .6em; -webkit-border-bottom-left-radius: .6em; -webkit-border-bottom-right-radius: .6em }
+#nav .login-form, #nav .register-form, #nav .notifications-form, #nav .createProject-form { background: #251C17; border: .35em solid rgba(0, 0, 0, .3); border-top: 0; display: none; float: left; right: -.3em; position: absolute; top: 6em; z-index: 10; -moz-border-radius-bottomleft: .6em; -moz-border-radius-bottomright: .6em; -webkit-border-bottom-left-radius: .6em; -webkit-border-bottom-right-radius: .6em }
     #nav .login-form a, #nav .register-form a { display: inline; height: auto; padding: 0; text-shadow: none }
         #nav .login-form a:hover, #nav .register-form a:hover { background: none; border: 0; margin: 0 }
 
-#login:hover, #register:hover, #notifications:hover { -moz-box-shadow: 0 0 7px #222; -webkit-box-shadow: 0 0 7px #222 }
+#login:hover, #register:hover, #notifications:hover, #createProject:hover { -moz-box-shadow: 0 0 7px #222; -webkit-box-shadow: 0 0 7px #222 }
 
 
 /** Login Form and Login Item in Nav **/
@@ -187,6 +187,14 @@ font-weight: bold;
 }
 #notifications #notification-icon h3{
 	text-align: center;
+}
+
+/* Create Project Styles */
+
+#createProject .createProject-form { padding: 0em 1.1em 2em 12em; width: 26.9em }
+#createProject label { 
+		color: #F1F4F7; font-size: 1.45em; line-height: 1.2em; margin-top: .7em; text-shadow: 1px 1px 1px #251C17; float: left;
+		padding-top: 8px; clear: both; width: 280px; display: block;
 }
 
 /* Dashboard Styles */
