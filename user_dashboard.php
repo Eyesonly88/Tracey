@@ -137,7 +137,7 @@ confirmLogin();
 								<form action="" id="projectCreate-form">
 										 	
 											<label>Project Name:
-											<input type="text" name="projectname" id="project-name" value=""/>
+											<input type="text" name="projectname" id="createproject-name" value=""/>
 											</label>
 											<label>
 												<input type="hidden" name="projectLeaderEmail" id="projectLeader-email" value="<?php echo $_SESSION['email']; ?>" />

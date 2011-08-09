@@ -5,14 +5,10 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_projectfunctions.p
 $projName = '';
 $projLeaderEmail = '';
 $response1 = -1;
-if (isset($_POST['name'])) { 
+if (isset($_POST['name']) && isset($_POST['email'])) { 
 	$projName = $_POST['name'];
-}
-
-if (isset($_POST['email'])) { 
 	$projLeaderEmail = $_POST['email'];
 }
-
 
 $response1 = createProject($projName, $projLeaderEmail);
 
