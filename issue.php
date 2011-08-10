@@ -1,6 +1,11 @@
 <?php
 include_once ($_SERVER['DOCUMENT_ROOT'] . '/scripts/includes/sessions.php');
 
+$issueid = '';
+if (isset($_GET['id'])){
+	$issueid = $_GET['id'];	
+}
+
 confirmLogin();
 ?>
 
@@ -19,70 +24,10 @@ confirmLogin();
 	</head>
 
 	<body class="custom">
-		<div id="header-area">
-			<div id="header">
-				<div class="menu-container">
-					<!-- Menu items = Home, About, Help -->
-					<ul class="menu">
-						<li>
-							<a href="#">Home</a>
-						</li>
-						<li>
-							<a href="#">About</a>
-						</li>
-						<li>
-							<a href="#">Help</a>
-
-						</li>
-					</ul>
-				</div>
-
-				<ul id="nav">
-					<!-- Load Navigation items ..
-					1. Logged in user = Account, Themes, Logout Button.
-					2. Visitor = Login, Register.
-					-->
-					
-					<li id="login">
-						<a href="#">
-						<h3>Account Settings</h3>
-						<span>Change account settings or Logout</span>
-						</a>
-						<div id='login-container' class='login-form'>
-							<h1 class='login-title'></h1>
-							<div class='login-top'>
-							</div>
-							<div class='login-content'>
-							<label>
-									Logged in as
-									<U>
-										<?php	echo $_SESSION['email'];?>
-									</U>
-								</label>
-								<label>
-									<span>
-										<a href="/scripts/authentication/logout.php">LOGOUT</a>
-									</span>
-								</label>
-							</div>
-						</div>
-					</li>
-					<li id="register">
-						<a href="#">
-						<h3>New Issue</h3>
-						<span>Create a new issue</span>
-						</a>
-						<div id='register-container' class="register-form">
-						<label>Display new issue fields</label>
-						</div>
-					</li>
-				</ul>
-			</div>
-
-		</div>
+		
 		<!-- Body here -->
 		<div id="issuewrap">
-			<h3>Add Project Dashboard</h3>
+			<h3>Issue: <?php echo $issueid; ?> </h3>
 			<div id="issue-info-container">
 				<h3>Issue Information</h3>
 				<span >Edit</span>

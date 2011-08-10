@@ -16,7 +16,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sessions.php');
   
    Shadowbox.init({
 
-   		 	skipSetup: true
+   		 	//skipSetup: true
   	});
   
   $('#hiddencontents_issue').hide();
@@ -59,7 +59,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sessions.php');
   function setupHandlers(){
   
 
-   $(".i_p_viewissue").click(function(){  
+   /*$(".i_p_viewissue").click(function(){  
    		
    		var issueid = $(this).attr("id");
    		
@@ -85,7 +85,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sessions.php');
         	title:      "View Issue",
         	height:     960,
         	width:     808
-    	});
+    	});*/
     	
     	//alert (issueinterface);
     	
@@ -94,7 +94,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sessions.php');
 			//alert("SUP!!!!!!");
 		//});
    		//alert(issueid);
-   });
+   //});
 
   }
   
@@ -191,6 +191,9 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sessions.php');
 	<div id="title"></div>
 	<table id="projectlist2" class="display" ></table>
 </div>
+
+
+
 <div id="hiddencontents_issue" type="hidden">
 	
 	<div id="issuewrap">
