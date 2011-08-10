@@ -3,18 +3,14 @@
 include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_projectfunctions.php');
 
 $projName = '';
-$projLeader = '';
-$response1 = 0;
-if (isset($_POST['name'])) { 
+$projLeaderEmail = '';
+$response1 = -1;
+if (isset($_POST['name']) && isset($_POST['email'])) { 
 	$projName = $_POST['name'];
+	$projLeaderEmail = $_POST['email'];
 }
 
-if (isset($_POST['user'])) { 
-	$projLeader = $_POST['user'];
-}
-
-
-$response1 = createProject($projName, $projLeader);
+$response1 = createProject($projName, $projLeaderEmail);
 
 
 

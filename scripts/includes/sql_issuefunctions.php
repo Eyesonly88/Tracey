@@ -255,6 +255,27 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_prepared.php');
 		}
 	}
 	
+	function getIssue($issueId){
+		global $connection;
+	
+		$query = $connection->stmt_init();
+		$sql_stmnt = "SELECT * FROM issue WHERE IssueId = ?";
+		if($query->prepare($sql_stmnt)){
+			$query->bind_param("i", $userId);	
+			$results = dynamicBindResults($query);
+			if (empty($results)) { 	
+				return "";
+			}
+			else {
+				// returns all the issues in arrays within the results array
+				return $results;
+			}
+		} else {
+			// error happened while fetching the count of notifications
+			return -1;
+		}
+	}
+	
 	
 
 ?>

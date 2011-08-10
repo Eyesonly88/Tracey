@@ -32,7 +32,14 @@ confirmLogin();
 				<h3>Issue Information</h3>
 				<span >Edit</span>
 				<div id="issue-info">
-					
+					<label>Reporter:</label>
+					<label>Assignee:</label>
+					<label>Issue Type:</label>
+					<label>Priority:</label>
+					<label>Issue Status:</label>
+					<label>Creation Date:</label>
+					<label>Resolved Date:</label>
+					<label>Last Modification Date:</label>
 				</div>
 			</div>
 			
@@ -40,7 +47,9 @@ confirmLogin();
 				<h3>Issue Description</h3>
 				<span >Edit</span>
 				<div id="issue-desc">
-					
+					<?php 
+					// get issue description
+					?>
 				</div>
 			</div>
 			
