@@ -16,7 +16,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sessions.php');
   
   Shadowbox.init({
 
-   		 	skipSetup: true
+   		 	//skipSetup: true
   	});
   //$("#viewissue_interface").hide();
   var currentUser = "";
@@ -90,7 +90,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sessions.php');
   
   function setupHandlers(){
   
-
+	/*
    $(".i_viewissue").click(function(){  
    		
    		var issueid = $(this).attr("id");
@@ -110,7 +110,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sessions.php');
 
    
    });
-
+*/
   }
   
   
