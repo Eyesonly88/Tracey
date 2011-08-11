@@ -223,7 +223,7 @@ font-weight: bold;
 
 
 
-/* Issue Styles */
+/* Issue Styles and Creating Project*/
 /*
  * IssueWrap contains everything
  * Each container in the issuewrap div contains 3 components (Title, Edit button, box containig the content)
@@ -231,7 +231,24 @@ font-weight: bold;
  * The SPAN element is representing the edit/submit button because it allows for having nice effects and works on multiple browsers such as I.E
  * 
  */
-.custom #issuewrap{
+
+.custom #projectwrap label{
+	color: black; font-size: 1.45em; line-height: 1.2em;float: left;
+	clear: both; width: 400px; height: 100px;display: block; 
+}
+
+.custom #projectwrap label input{
+	margin-left:2em;
+	margin-bottom:1em;
+	padding:.5em;
+	background: black;
+	color: white;
+}
+.custom #projectwrap label p{
+	float:left;
+	margin-right:1em;
+}
+.custom #issuewrap, .custom #projectwrap{
 	display: inline-block;
 	background: white;
 	border: 0.3em solid #372823;
@@ -240,7 +257,7 @@ font-weight: bold;
 	width:800px;
 	padding-bottom:5em;
 }
-.custom #issuewrap #issue-info-container{
+.custom #issuewrap #issue-info-container, .custom #projectwrap #createproject-info-container{
 	width: 600px;
 	height: 150px; 
 	margin-left: 9em;
@@ -395,7 +412,7 @@ font-weight: bold;
 	padding-top:0.2em;
 }
 
-.custom #issuewrap h3{
+.custom #issuewrap h3, .custom #projectwrap h3 {
 	text-align: center;
 	font-size: large;
 	padding:0.5em;
