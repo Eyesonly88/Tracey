@@ -27,9 +27,6 @@ confirmLogin();
 ?>
 
 
-<!DOCTYPE html>
-<html>
-	<head>
 		<meta http-equiv="content-type" content="text/html; charset=utf-8">
 		<title>Issue: <?php echo $issueid; ?> </title>
 
@@ -39,10 +36,11 @@ confirmLogin();
 		<script src="js/jquery.hoverIntent.js"></script>
 		<script src="js/loginpanel.js"></script>
 	
-	</head>
+
 	<script type="text/javascript">
 
 			//alert("BLA!");
+			//$('#issuewrap').hide();
 			$('#confirm_btn').click(function(){
 				alert('blakbldsagflsdfg');
 			
@@ -50,6 +48,9 @@ confirmLogin();
 			
 			//alert("BLA!");
 		</script>
+
+<html>
+	
 	<body class="custom">
 		
 		<!-- Body here -->
