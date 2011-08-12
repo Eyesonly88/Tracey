@@ -261,7 +261,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_prepared.php');
 		$query = $connection->stmt_init();
 		$sql_stmnt = "SELECT * FROM issue WHERE IssueId = ?";
 		if($query->prepare($sql_stmnt)){
-			$query->bind_param("i", $userId);	
+			$query->bind_param("i", $issueId);	
 			$results = dynamicBindResults($query);
 			if (empty($results)) { 	
 				return "";
@@ -276,6 +276,24 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_prepared.php');
 		}
 	}
 	
+	function getIssueStatuses(){
+		global $connection;
+		$query = $connection->stmt_init();
+		$sql_stmnt = "SELECT * FROM issuestatus";
+		if($query->prepare($sql_stmnt)){
+			$results = dynamicBindResults($query);
+			if (empty($results)) { 	
+				return "";
+			}
+			else {
+				// returns all the issues in arrays within the results array
+				return $results;
+			}
+		} else {
+			// error happened while fetching the count of notifications
+			return -1;
+		}
+	}
 	
 
 ?>

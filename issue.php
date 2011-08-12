@@ -1,28 +1,55 @@
 <?php
 include_once ($_SERVER['DOCUMENT_ROOT'] . '/scripts/includes/sessions.php');
-
+include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_issuefunctions.php');
+include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_userfunctions.php');
 $issueid = '';
+$issuearray = '';
+$issueinfo = '';
+$issuestatusarray = '';
 if (isset($_GET['id'])){
 	$issueid = $_GET['id'];	
+	
+	
+	$issuearray = getIssue($issueid);
+	$issueinfo = $issuearray[0];
+	
+	$reporterEmail = getUserInfoById($issueinfo['ReporterId'], "Email");
+	$assigneeEmail = getUserInfoById($issueinfo['AssigneeId'], "Email");
+	
+	/* Stores array of possible issue statuses */
+	$issuestatusarray = getIssueStatuses();
+	
 }
+
+
 
 confirmLogin();
 ?>
+
 
 <!DOCTYPE html>
 <html>
 	<head>
 		<meta http-equiv="content-type" content="text/html; charset=utf-8">
-		<title>Issue Dashboard</title>
+		<title>Issue: <?php echo $issueid; ?> </title>
 
 		<link rel="stylesheet" type="text/css" href="css/customStyle.css" />
 		<script type="text/javascript" src="libraries/dashboard/lib/jquery-1.4.2.min.js"></script>
 		<script type="text/javascript" src="libraries/dashboard/lib/jquery-ui-1.8.2.custom.min.js"></script>
 		<script src="js/jquery.hoverIntent.js"></script>
 		<script src="js/loginpanel.js"></script>
-
+	
 	</head>
+	<script type="text/javascript">
 
+			//alert("BLA!");
+			$('#confirm_btn').click(function(){
+				alert('blakbldsagflsdfg');
+			
+			});
+			
+			//alert("BLA!");
+		</script>
 	<body class="custom">
 		
 		<!-- Body here -->
@@ -32,12 +59,12 @@ confirmLogin();
 				<h3>Issue Information</h3>
 				<span >Edit</span>
 				<div id="issue-info">
-					<label>Reporter:</label>
-					<label>Assignee:</label>
-					<label>Issue Type:</label>
-					<label>Priority:</label>
-					<label>Issue Status:</label>
-					<label>Creation Date:</label>
+					<label>Reporter: <?php echo $reporterEmail; ?> </label>
+					<label>Assignee: <?php echo $assigneeEmail; ?></label>
+					<label>Issue Type: <?php echo $issueinfo['IssueType']; ?></label>
+					<label>Priority: <?php echo $issueinfo['Priority']; ?></label>
+					<label>Issue Status: <?php echo $issueinfo['IssueStatus']; ?></label>
+					<label>Creation Date:<?php echo $issueinfo['CreationDate']; ?></label>
 					<label>Resolved Date:</label>
 					<label>Last Modification Date:</label>
 				</div>
@@ -78,6 +105,8 @@ confirmLogin();
 				</div>
 				<span>Submit Comment</span>
 			</div>
+			
+			<button id="confirm_btn">Save</button>
 		</div>
 
 	</body>
