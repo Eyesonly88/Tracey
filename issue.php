@@ -106,9 +106,9 @@ confirmLogin();
 				<h3>Issue Description</h3>
 				<span >Edit</span>
 				<div id="issue-desc">
-					<?php 
-					// get issue description
-					?>
+					
+					<textarea rows="5" cols="20" wrap="virtual" id="issuedescription" style="width:599px; height:149px;" maxlength="2000"><?php echo $issueinfo['Description']; ?></textarea>
+					
 				</div>
 			</div>
 			
