@@ -1,4 +1,16 @@
 <?php
+
+
+/* The interface for creating or modifying an issue.
+ * 
+ * 
+ * @todo: 	-Get list of components that should be selectable through a drop down menu when creating / modifying issue.
+ * 			-Get list of users that belong to the above component/project so they can be selectable through a drop down menu as well
+ * 			-Make a drop down menu out of the available statuses that can be chosen.
+ * 			-Same as above, but for priority and issue type as well.
+ * 
+ * */
+
 include_once ($_SERVER['DOCUMENT_ROOT'] . '/scripts/includes/sessions.php');
 include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_issuefunctions.php');
 include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_userfunctions.php');

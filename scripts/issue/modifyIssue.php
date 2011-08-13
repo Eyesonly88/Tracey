@@ -7,6 +7,7 @@
  * -1: No user specified in _POST['user'] / user not logged in
  * -2: The currently logged in user is not the reporter nor the assignee of the issue. Therefore, not allowed to modify.
  * -3: One of: the reporter email, assignee email, the issue itself, or the currently logged in user was not found.
+ * -4: The modify issue call failed (returned false, which means the server-side script failed to run the prepared statement to update the database)
  * 
  * */
 
@@ -86,7 +87,11 @@ if (!empty($issue) && !empty($reporterEmail) && !empty($assigneeEmail) && !empty
 	}
 	
 	$modifyissueresult = modifyIssue($issueId, $component, $name, $desccription, $reporterId, $assigneeId, $issuetype, $priority, $issuestatus);
-		
+	
+	if (!($modifyissueresult)){
+		return -4;
+	}
+	
 } else {	
 	return -3;
 }
