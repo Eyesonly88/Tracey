@@ -20,9 +20,11 @@ confirmLogin();
 		<script src="js/jquery.ui.core.js"></script>
 		<script src="js/jquery.ui.widget.js"></script>
 		<script src="js/jquery.ui.datepicker.js"></script>
+		<script src="js/jquery.ui.button.js"></script>
 		<script>
 			$(function() {
 				$( "#project-datepicker" ).datepicker();
+				$( "input:submit, button", ".custom" ).button();
 			});
 			
 			
@@ -53,7 +55,8 @@ confirmLogin();
 					</label>
 					<label>
 						<input type="hidden" name="projectLeaderEmail" id="projectLeader-email" value="<?php echo $_SESSION['email']; ?>" />
-						<input type="button"  name="submit" value="Create" id="crtproject-button" />
+						<input type="submit"  name="submit" value="Create" />
+						<button>testing button</button>
 						<p id="confirm-inv-msg"></p>
 					</label>
 				</div>
