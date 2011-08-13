@@ -89,43 +89,42 @@ if (isset($_GET['id'])){
 
 						<div id="notification-icon">
 							<h3>
-							<?php		// returns the number of notifications for the logged in user
-								echo getNotifCountByEmail($_SESSION['email']);?>
+							<?php echo getNotifCountByEmail($_SESSION['email']);?>
 							</h3>
 						</div>
 
 						<div id="notifications-container" class="notifications-form">
 							<div id="notifications-content">
 								<span style="color: #F1F4F7;">
+									
 									<?php
 									// get all notifications for user
 									$resultSet = getAllNotifDetails($_SESSION['email']);
 									foreach ($resultSet as $result) {
-										//print_r($result);
+										// print_r($result);
 										// display notification iff its new
 										if ($result['StatusId'] == 1) {
+											echo "<p id=\"notif-msg-{$result['Id']}\">";
 											echo getNotifNameByID($result['TypeId']);
 											echo " [";
 											echo getEntityNameByProjectId($result['TypeEntityId']);
 											echo "] by ";
 											echo getSenderName($result['SenderId']);
-											echo ". ";
+											echo ".</p> ";
 											
 									?>
 									
-									<form action='#' class="accept-notif-form">
+									<form action='' id="notif-form">
 										<input type="hidden" name="NotificationId" class="notif-id-input" value="<?php echo $result['Id'];?>" />
-										<button type='submit' class='notification-send'>Accept</button>
-									</form>
-									
-									<form action='#' class="reject-notif-form">
-										<input type="hidden" name="NotificationId" class="notif-id-input" value="<?php echo $result['Id'];?>" />
-										<button type='submit' class='notification-send'>Reject</button>
+										<input type='button' name="submit" id='notif-accept-button' value="Accept">
+										<input type='button' name="submit" id='notif-reject-button' value="Reject">
 									</form>
 									
 									<?php
 										} else {
 											// don't display notification
+											if (getNotifCountByEmail($_SESSION['email']) == 0)
+												echo "<span>You don't have any notifications.</span>";
 										}
 										
 										 
@@ -136,6 +135,7 @@ if (isset($_GET['id'])){
 							</div>
 						</div>
 					</li>
+					
 					<li id="login">
 						<a href="#">
 						<h3>Account Settings</h3>
@@ -146,17 +146,30 @@ if (isset($_GET['id'])){
 							<div class='login-top'>
 							</div>
 							<div class='login-content'>
-								<label>
-									Logged in as
-									<U>
-										<?php	echo $_SESSION['email'];?>
-									</U>
-								</label>
-								<label>
-									<span>
-										<a href="/scripts/authentication/logout.php">LOGOUT</a>
-									</span>
-								</label>
+								<h3>User Info</h3>
+								<label>Logged in as <?php	echo $_SESSION['email'];?></label>
+								<label></label>
+								<h3>Invite People</h3>
+									<form action="" id="projectInvite-form">
+									 	
+										<label>Receiver's e-mail:
+										<input type="text" name="receiveremail" id="receiver-email" value=""/>
+										</label>
+										<label>Project:
+											<select name="projectid" id="projectid-selector">
+												<?php 
+													$resultSet = getProjectsByEmail($_SESSION['email']);
+													foreach ($resultSet as $result){
+														echo "<option value=\"" . $result['ProjectId'] ."\">" . $result['ProjectName'] . "</option>";
+													}
+												?>
+											</select>
+											<input type="hidden" name="senderemail" id="sender-email" value="<?php echo $_SESSION['email']; ?>" />
+											<input type="button"  name="submit" value="Invite" id="inv-button" />
+											<p id="confirm-inv-msg"></p>
+										</label>	
+
+								</form>
 							</div>
 						</div>
 					</li>
@@ -184,7 +197,17 @@ if (isset($_GET['id'])){
 			</div>
 
 		</div>
-
+		
+		<div id="user-box">
+			
+			<div id="createIssue-createComponent-container">
+				<input type="button" id="createIssue-button" value="Create Issue" />
+				<input type="button" id="createComponent-button" value="Create Component" />
+			</div>
+			
+			
+		</div>
+		
 		<div id="dashboard" class="dashboard">
 			<div class="layout">
 				<div class="column first column-first">

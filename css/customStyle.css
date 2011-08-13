@@ -51,16 +51,40 @@ margin: 0px;
 padding: 0px;
 }
 
-.custom #user-box input[type=button]{ 
+.custom #user-box #createIssue-createComponent-container, .custom #user-box #createProject-container{ 
 float:none;
 display:block;
 margin-left:auto;
 margin-right:auto;
 margin-top:2em;
-vertical-align:middle;
+width:25%;
 text-align: center;
-width: 10%;
 font-size: 1.75em;
+border: none;
+}
+
+.custom #user-box #createProject-container #createProject-button{
+float:none;
+display:block;
+margin-left:auto;
+margin-right:auto;
+width:40%;
+text-align: center;
+border: none;
+}
+
+.custom #user-box #createIssue-createComponent-container #createIssue-button{ 
+float:left;
+margin-left:1em;
+width:40%;
+text-align: center;
+border: none;
+}
+
+.custom #user-box #createIssue-createComponent-container #createComponent-button{ 
+float:right;
+width:50%;
+text-align: center;
 border: none;
 }
 

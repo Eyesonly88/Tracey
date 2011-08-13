@@ -216,9 +216,9 @@ confirmLogin();
 		
 		<div id="user-box">
 			
-			<form id="create-project">
+			<div id="createProject-container">
 				<input type="button" id="createProject-button" value="Create Project" />
-			</form>
+			</div>
 			
 		</div>
 
