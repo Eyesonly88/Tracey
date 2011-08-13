@@ -16,6 +16,7 @@ confirmLogin();
 		<title>Issue Dashboard</title>
 
 		<link rel="stylesheet" type="text/css" href="css/customStyle.css" />
+		<link rel="stylesheet" type="text/css" href="css/jquery-ui-1.8.15.custom.css" />
 		<script type="text/javascript" src="libraries/dashboard/lib/jquery-1.4.2.min.js"></script>
 		<script type="text/javascript" src="libraries/dashboard/lib/jquery-ui-1.8.2.custom.min.js"></script>
 		<script src="js/jquery.hoverIntent.js"></script>
@@ -25,9 +26,9 @@ confirmLogin();
 		<script src="js/jquery.ui.widget.js"></script>
 		<script src="js/jquery.ui.datepicker.js"></script>
 		<script>
-			$(document).ready(function() {
-				$( "#projectwrap #createproject-info-container #project-info #project-datepicker" ).datepicker();
-			}
+			$(function() {
+				$( "#project-datepicker" ).datepicker();
+			});
 			
 			
 		</script>
