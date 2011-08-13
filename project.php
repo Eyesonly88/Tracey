@@ -24,9 +24,7 @@ confirmLogin();
 		<script>
 			$(function() {
 				$( "#project-datepicker" ).datepicker();
-				$( "input:submit, button", ".custom" ).button();
 			});
-			
 			
 		</script>
 
@@ -55,8 +53,7 @@ confirmLogin();
 					</label>
 					<label>
 						<input type="hidden" name="projectLeaderEmail" id="projectLeader-email" value="<?php echo $_SESSION['email']; ?>" />
-						<input type="submit"  name="submit" value="Create" />
-						<button>testing button</button>
+						<input type="button"  name="submit" value="Create Project" />
 						<p id="confirm-inv-msg"></p>
 					</label>
 				</div>
