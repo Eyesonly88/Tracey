@@ -6,6 +6,13 @@ $issueid = '';
 $issuearray = '';
 $issueinfo = '';
 $issuestatusarray = '';
+
+/* 1 = create new issue */
+$action = 0;
+
+/* 0 = view only, 1 = can edit/save changes */
+$permission = 0;
+$issuestatusarray = getIssueStatuses();
 if (isset($_GET['id'])){
 	$issueid = $_GET['id'];	
 	
@@ -17,16 +24,25 @@ if (isset($_GET['id'])){
 	$assigneeEmail = getUserInfoById($issueinfo['AssigneeId'], "Email");
 	
 	/* Stores array of possible issue statuses */
-	$issuestatusarray = getIssueStatuses();
+	
 	
 }
 
-
+if (isset($_GET['action'])){
+	if ($_GET['action'] = 'create'){
+		
+		$action = 1;
+	
+	}
+	
+}
 
 confirmLogin();
 ?>
 
-
+<!DOCTYPE html>
+<html>
+	<head>
 		<meta http-equiv="content-type" content="text/html; charset=utf-8">
 		<title>Issue: <?php echo $issueid; ?> </title>
 
@@ -35,23 +51,38 @@ confirmLogin();
 		<script type="text/javascript" src="libraries/dashboard/lib/jquery-ui-1.8.2.custom.min.js"></script>
 		<script src="js/jquery.hoverIntent.js"></script>
 		<script src="js/loginpanel.js"></script>
-	
 
 	<script type="text/javascript">
-
-			//alert("BLA!");
-			//$('#issuewrap').hide();
-			$('#confirm_btn').click(function(){
-				alert('blakbldsagflsdfg');
 			
+			$(document).ready(function() {
+				
+				var action = $('#action').val();
+				//alert(action);
+				$('#confirm_btn').click(function(){
+					//alert('blakbldsagflsdfg');
+					var issueid = $('#issueid').val();
+					var reporter = $('#input_reporter').val();
+					var assignee = $('#input_assignee').val();
+					var issuetype = $('#input_issuetype').val();
+					var priority = $('#input_priority').val();
+					if (action == 0) {
+						
+						//@todo: AJAX call that sends the issue information to modify the issue
+					
+					} else if (action == 1) { 
+					
+						//@todo: AJAX call that sends the issue information to CREATE a new issue
+					}				
+				});
 			});
-			
-			//alert("BLA!");
-		</script>
 
-<html>
-	
+		</script>
+</head>
 	<body class="custom">
+		
+		<input type='hidden' id="issueid" value="<?php echo $issueid; ?>" /> 
+		<input type='hidden' id="permission" value="<?php echo $permission; ?>" /> 
+		<input type='hidden' id="action" value="<?php echo $action; ?>" /> 
 		
 		<!-- Body here -->
 		<div id="issuewrap">
@@ -60,14 +91,14 @@ confirmLogin();
 				<h3>Issue Information</h3>
 				<span >Edit</span>
 				<div id="issue-info">
-					<label>Reporter: <?php echo $reporterEmail; ?> </label>
-					<label>Assignee: <?php echo $assigneeEmail; ?></label>
-					<label>Issue Type: <?php echo $issueinfo['IssueType']; ?></label>
-					<label>Priority: <?php echo $issueinfo['Priority']; ?></label>
-					<label>Issue Status: <?php echo $issueinfo['IssueStatus']; ?></label>
-					<label>Creation Date:<?php echo $issueinfo['CreationDate']; ?></label>
-					<label>Resolved Date:</label>
-					<label>Last Modification Date:</label>
+					<label>Reporter:</label> <input id="input_reporter" value="<?php echo $reporterEmail; ?>"/> <BR/>
+					<label>Assignee: </label> <input id="input_assignee"  value="<?php echo $assigneeEmail; ?>" /><BR />
+					<label>Issue Type:</label><input id="input_issuetype"  value=" <?php echo $issueinfo['IssueType']; ?>"/> <BR />
+					<label>Priority:</label><input id="input_priority"  value="<?php echo $issueinfo['Priority']; ?>"/> <BR />
+					<label>Issue Status: </label><input id="input_issuestatus"  value="<?php echo $issueinfo['IssueStatus']; ?>"/> <BR />
+					<label>Creation Date: <?php echo $issueinfo['CreationDate']; ?></label><BR />
+					<label>Resolved Date:</label> <BR />
+					<label>Last Modification Date:</label> <BR />
 				</div>
 			</div>
 			
