@@ -233,20 +233,26 @@ font-weight: bold;
  */
 
 .custom #projectwrap label{
-	color: black; font-size: 1.45em; line-height: 1.2em;float: left;
-	clear: both; width: 400px; height: 100px;display: block; 
+	color: #372823; font-size: 1.45em; line-height: 1.2em;float: left;
+	clear: both; width: 350px; height: 50px;display: block; 
+}
+.custom #projectwrap label select{
+	color: #372823; 
+	font-size: 1em; 
+	line-height: 1.2em;
+	float: right;
 }
 
 .custom #projectwrap label input{
-	margin-left:2em;
-	margin-bottom:1em;
+	float:right;
+	margin-bottom:.5em;
 	padding:.5em;
-	background: black;
+	background: #372823;
 	color: white;
 }
 .custom #projectwrap label p{
 	float:left;
-	margin-right:1em;
+	margin-right:3em;
 }
 .custom #issuewrap, .custom #projectwrap{
 	display: inline-block;

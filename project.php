@@ -20,6 +20,17 @@ confirmLogin();
 		<script type="text/javascript" src="libraries/dashboard/lib/jquery-ui-1.8.2.custom.min.js"></script>
 		<script src="js/jquery.hoverIntent.js"></script>
 		<script src="js/loginpanel.js"></script>
+		<script src="js/jquery-ui-1.8.15.custom.min.js"></script>
+		<script src="js/jquery.ui.core.js"></script>
+		<script src="js/jquery.ui.widget.js"></script>
+		<script src="js/jquery.ui.datepicker.js"></script>
+		<script>
+			$(document).ready(function() {
+				$( "#projectwrap #createproject-info-container #project-info #project-datepicker" ).datepicker();
+			}
+			
+			
+		</script>
 
 	</head>
 
@@ -37,10 +48,13 @@ confirmLogin();
 					</label>
 					
 					<label><p>Project Type:</p>
-						<input type="text" name="projecttype" id="createproject-type" value=""/>
+						<select name="project-type">
+							<option value="solo">Solo Project</option>
+							<option value="team">Team Project</option>
+						</select>
 					</label>
 					<label><p>Project Due Date:</p>
-						<input type="text" name="projectduedate" id="createproject-duedate" value=""/>
+						<input type="text" name="projectduedate" id="project-datepicker" value=""/>
 					</label>
 					<label>
 						<input type="hidden" name="projectLeaderEmail" id="projectLeader-email" value="<?php echo $_SESSION['email']; ?>" />
