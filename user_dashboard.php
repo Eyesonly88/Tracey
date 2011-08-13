@@ -213,6 +213,14 @@ confirmLogin();
 			</div>
 
 		</div>
+		
+		<div id="user-box">
+			
+			<form id="create-project">
+				<input type="button" id="createProject-button" value="Create Project" />
+			</form>
+			
+		</div>
 
 		<div id="dashboard" class="dashboard">
 			<div class="layout">

@@ -43,6 +43,26 @@ padding-top: 0em;
 height: inherit
 }
 
+/* User Box Area */
+.custom #user-box { 
+width:	inherit;
+height:	110px;
+margin: 0px;
+padding: 0px;
+}
+
+.custom #user-box input[type=button]{ 
+float:none;
+display:block;
+margin-left:auto;
+margin-right:auto;
+margin-top:2em;
+vertical-align:middle;
+text-align: center;
+width: 10%;
+font-size: 1.75em;
+border: none;
+}
 
 /* Header Area */
 
