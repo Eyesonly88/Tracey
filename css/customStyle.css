@@ -232,29 +232,29 @@ font-weight: bold;
  * 
  */
 
-.custom #projectwrap label{
+.custom #projectwrap label, .custom #componentwrap label{
 	color: #372823; font-size: 1.45em; line-height: 1.2em;float: left;
 	clear: both; width: 350px; height: 50px;display: block; 
 }
-.custom #projectwrap label select{
+.custom #projectwrap label select, .custom #componentwrap label select{
 	color: #372823; 
 	font-size: 1em; 
 	line-height: 1.2em;
 	float: right;
 }
 
-.custom #projectwrap label input{
+.custom #projectwrap label input, .custom #componentwrap label input{
 	float:right;
 	margin-bottom:.5em;
 	padding:.5em;
 	background: #372823;
 	color: white;
 }
-.custom #projectwrap label p{
+.custom #projectwrap label p, .custom #componentwrap label p{
 	float:left;
 	margin-right:3em;
 }
-.custom #issuewrap, .custom #projectwrap{
+.custom #issuewrap, .custom #projectwrap, .custom #componentwrap{
 	display: inline-block;
 	background: white;
 	border: 0.3em solid #372823;
@@ -263,7 +263,7 @@ font-weight: bold;
 	width:800px;
 	padding-bottom:5em;
 }
-.custom #issuewrap #issue-info-container, .custom #projectwrap #createproject-info-container{
+.custom #issuewrap #issue-info-container, .custom #projectwrap #createproject-info-container, .custom #componentwrap #createcomponent-info-container{
 	width: 600px;
 	height: 150px; 
 	margin-left: 9em;
@@ -418,7 +418,7 @@ font-weight: bold;
 	padding-top:0.2em;
 }
 
-.custom #issuewrap h3, .custom #projectwrap h3 {
+.custom #issuewrap h3, .custom #projectwrap h3, .custom #componentwrap h3  {
 	text-align: center;
 	font-size: large;
 	padding:0.5em;

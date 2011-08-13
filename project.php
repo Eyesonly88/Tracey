@@ -1,11 +1,6 @@
 <?php
 include_once ($_SERVER['DOCUMENT_ROOT'] . '/scripts/includes/sessions.php');
 
-$issueid = '';
-if (isset($_GET['id'])){
-	$issueid = $_GET['id'];	
-}
-
 confirmLogin();
 ?>
 
@@ -13,7 +8,7 @@ confirmLogin();
 <html>
 	<head>
 		<meta http-equiv="content-type" content="text/html; charset=utf-8">
-		<title>Issue Dashboard</title>
+		<title>Create Project</title>
 
 		<link rel="stylesheet" type="text/css" href="css/customStyle.css" />
 		<link rel="stylesheet" type="text/css" href="css/jquery-ui-1.8.15.custom.css" />
@@ -42,7 +37,6 @@ confirmLogin();
 			<h3>Create New Project</h3>
 			<div id="createproject-info-container">
 				
-				<!-- <span >Edit</span> -->
 				<div id="project-info">
 					<label><p>Project Name:</p>
 						<input type="text" name="projectname" id="createproject-name" value=""/>
