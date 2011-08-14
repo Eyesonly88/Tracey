@@ -238,5 +238,34 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_componentfunctions
 		
 	}
 	
+	function getProjectMembers($id) {
+				
+		global $connection;
+		$emailExists = 0;
+		$userinfo = array();
+		$results = '';
+		$query = $connection ->stmt_init();	
+		$sql_getProjects = "SELECT u.UserId, u.FirstName, u.LastName, u.Email 
+							FROM project p
+							INNER JOIN component c ON c.ProjectId = p.ProjectId
+							INNER JOIN usercomponent uc ON uc.ComponentID = c.ComponentId
+							INNER JOIN user u ON u.UserId = uc.UserID
+							WHERE p.ProjectId = ?";	
+		$query->prepare($sql_getProjects);
+		$query -> bind_param("i", $pid);
+		$pid = $id;		
+		$results = dynamicBindResults($query);	
+				
+		if (empty($results)) { 	
+			return '';
+		}
+		
+		$userinfo = $results;		
+		return $userinfo;	
+		
+	}
+	
+	
+	
 	
 ?>

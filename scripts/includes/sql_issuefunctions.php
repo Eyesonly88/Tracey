@@ -281,6 +281,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_prepared.php');
 		$query = $connection->stmt_init();
 		$sql_stmnt = "SELECT * FROM issuestatus";
 		if($query->prepare($sql_stmnt)){
+			
 			$results = dynamicBindResults($query);
 			if (empty($results)) { 	
 				return "";
@@ -293,6 +294,73 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_prepared.php');
 			// error happened while fetching the count of notifications
 			return -1;
 		}
+	}
+	
+	function getIssuePriorities(){
+		global $connection;
+		$query = $connection->stmt_init();
+		$sql_stmnt = "SELECT * FROM issuepriority";
+		if($query->prepare($sql_stmnt)){
+			
+			$results = dynamicBindResults($query);
+			if (empty($results)) { 	
+				return "";
+			}
+			else {
+				// returns all the issues in arrays within the results array
+				return $results;
+			}
+		} else {
+			// error happened while fetching the count of notifications
+			return -1;
+		}
+	}
+	
+	function getIssueTypes(){
+		global $connection;
+		$query = $connection->stmt_init();
+		$sql_stmnt = "SELECT * FROM issuetype";
+		if($query->prepare($sql_stmnt)){
+			
+			$results = dynamicBindResults($query);
+			if (empty($results)) { 	
+				return "";
+			}
+			else {
+				// returns all the issues in arrays within the results array
+				return $results;
+			}
+		} else {
+			// error happened while fetching the count of notifications
+			return -1;
+		}
+	}
+	
+	
+	function getProjectByIssueId($issueid) {
+		global $connection;
+		$query = $connection->stmt_init();
+		$sql_stmnt = "SELECT p.ProjectId, p.ProjectName, p.ProjectType, p.ProjectLeader 
+					FROM project p 
+					INNER JOIN component c ON c.ProjectId = p.ProjectId 
+					INNER JOIN issue i ON i.ComponentId = c.ComponentId
+					WHERE i.IssueId = ?";
+		if($query->prepare($sql_stmnt)){
+			$id = $issueid;
+			$query->bind_param("i", $id);			
+			$results = dynamicBindResults($query);
+			if (empty($results)) { 	
+				return "";
+			}
+			else {
+				// returns all the issues in arrays within the results array
+				return $results;
+			}
+		} else {
+			// error happened while fetching the count of notifications
+			return -1;
+		}
+		
 	}
 	
 

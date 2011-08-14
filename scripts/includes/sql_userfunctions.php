@@ -56,7 +56,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_prepared.php');
 		global $connection;
 		$query = $connection->stmt_init();
 		$sql_stmnt = "SELECT " .$param. " FROM User WHERE Email = ?";
-		
+		$results = array();
 		if ($query->prepare($sql_stmnt)) {
 			$query->bind_param("s", $em);
 			$em = $email;		
