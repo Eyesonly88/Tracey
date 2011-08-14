@@ -34,8 +34,16 @@ if (isset($_GET['id'])){
 		<script src="js/define_projectdashboard.js"></script>
 		<script src="js/projectdashboard_panel.js"></script>
 		<script src="js/notification.js"></script>
+		<link rel="stylesheet" href="/libraries/shadowbox/shadowbox.css" type="text/css">
+		<script src="/libraries/shadowbox/shadowbox.js" type="text/javascript"></script>
+		
 		
 		<script>$(document).ready( function() {
+		
+				Shadowbox.init({
+
+   		 			//skipSetup: true
+  				});
 				$(".notifications-form").hide();
 				$("#notifications").hoverIntent( function() {
 					$(".notifications-form").fadeIn(200);
@@ -201,7 +209,7 @@ if (isset($_GET['id'])){
 		<div id="user-box">
 			
 			<div id="createIssue-createComponent-container">
-				<input type="button" id="createIssue-button" value="Create Issue" />
+				<a class="create_btn" id="createIssue-button" rel="shadowbox[Mixed]" href="issue.php?action=create">Create Issue</a>
 				<input type="button" id="createComponent-button" value="Create Component" />
 			</div>
 			

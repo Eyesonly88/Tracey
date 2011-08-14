@@ -21,8 +21,8 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_prepared.php');
 	function createIssue($compId, $name, $desc, $reporterId, $assigneeId, $issueTypeId, $PriorityId, $issueStatusId) {
 		global $connection;
 		$query = $connection->stmt_init();
-		$sql_createIssue = "INSERT INTO issue (`IssueId`, `ComponentId`, `Name`, `Description`, `ReporterId`, `AssigneeId`, `IssueType`, `Priority`, `CreationDate`, `IssueStatus`, `ResolvedDate`, `LastModificationDate`) 
-		VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, NOW(), ?, NULL, NOW());";
+		$sql_createIssue = "INSERT INTO issue (`IssueId`, `ComponentId`, `name`, `Description`, `ReporterId`, `AssigneeId`, `IssueType`, `Priority`, `IssueStatus`) 
+		VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?);";
 		
 		if ($query->prepare($sql_createIssue)) {
 			$query->bind_param("issiiiii", $compId, $name, $desc, $reporterId, $assigneeId, $issueTypeId, $PriorityId, $issueStatusId);
@@ -87,12 +87,12 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_prepared.php');
 		
 		global $connection;
 		$query = $connection->stmt_init();
-		$sql_stmnt = "UPDATE issue SET ComponentId = ?, Name = ?, Description = ?, AssigneeId = ?, IssueType = ?, Priority = ?, IssueStatus = ?, LastModificationDate = NOW() WHERE IssueId = ? AND ReporterId = ?";
+		$sql_stmnt = "UPDATE issue SET ComponentId = ?, name = ?, Description = ?, AssigneeId = ?, ReporterId = ?, IssueType = ?, Priority = ?, IssueStatus = ? WHERE IssueId = ?";
 		if ($query->prepare($sql_stmnt)) {
-			$query->bind_param("issiiiiii", $compId, $name, $desc, $assigneeId, $issueTypeId, $PriorityId, $issueStatusId, $issueId, $reporterId);	
+			$query->bind_param("issiiiiii", $compId, $name, $desc, $assigneeId, $reporterId, $issueTypeId, $PriorityId, $issueStatusId, $issueId);	
 			$query->execute();
 			return true;
-		}else {
+		} else {
 			// update operation failed.
 			return false;
 		}

@@ -25,9 +25,12 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_prepared.php');
 	
 	global $connection;
 	//createProject("SandboxTest1", "ttc_rulz@hotmail.com");
-	echo editComment(2,"This is a modified comment yo!");
+	//echo editComment(2,"This is a modified comment yo!");
 	//print_r(getAssignedIssuesByEmail("mo@mo.com"));
-	echo "<BR /><BR />";
+	
+	
+	$val = modifyIssue(3, 1, "sup", "nothing", 23, 21, 1, 1, 1);
+	echo $val . "<BR /><BR />";
 	
 
 	

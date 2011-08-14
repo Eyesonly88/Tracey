@@ -499,3 +499,35 @@ font-weight: bold;
 	padding:0.5em;
 }
 
+/* Clone of iphone type button - to use in a class */
+
+.create_btn {
+	float:right;
+      font-family: "Helvetica Neue", Helvetica, sans-serif;
+      font-size: 1.3em;
+      font-weight: bold;
+      width: 50%;
+      height: 50px;
+      border: 3px solid #282726;
+      background: -webkit-gradient( linear, left top, left bottom, from(#e2e2e2), to(#8c8a88), color-stop(0.5, #acadae), color-stop(0.5, #82807e) );
+      margin: 0 0 3px 0;
+      text-shadow: 0px 1px 0 #cecece;
+      -webkit-background-origin: padding-box;
+      -webkit-background-clip: border-box;
+      -webkit-border-radius: 8px;
+    }
+
+.create_btn:hover, .create_btn.cancel,
+.create_btn:active, .create_btn.cancel:active {
+      color: #fff;
+      text-shadow: none;
+}
+
+.create_btn:hover, .create_btn.cancel:hover {
+      background: -webkit-gradient( linear, left top, left bottom, from(#aaaee5), to(#10006d), color-stop(0.5, #1F3B97), color-stop(0.5, #081f6f) );
+    }
+
+.create_btn.cancel {
+      background: -webkit-gradient( linear, left top, left bottom, from(#5c5c5b), to(#1e1b16), color-stop(0.2, #1e1b16) );
+      margin-top: 6px;
+    }

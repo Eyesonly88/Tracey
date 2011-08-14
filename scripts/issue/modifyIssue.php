@@ -24,11 +24,11 @@ $assigneeEmail = '';
 $reporterId = '';
 $component = '';
 $assigneeId = '';
-$issuetype =  '';
-$issuestatus = '';
-$priority = '';
-$description = '';
-$name = '';
+$issuetype =  '1';
+$issuestatus = '1';
+$priority = '1';
+$description = 'Enter description...';
+$name = 'Untitled';
 
 $issuearray = '';
 $issue = '';

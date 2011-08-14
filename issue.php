@@ -90,7 +90,7 @@ confirmLogin();
 					var component = $('#input_component').val();
 					if (action == 0) {
 						
-						//@todo: AJAX call that sends the issue information to modify the issue
+						//AJAX call that sends the issue information to modify the issue
 						
 						$.ajax({
 					  	   cache: "false",
@@ -114,9 +114,31 @@ confirmLogin();
 					   
 					 	});
 					
-					} else if (action == 1) { 
+					} else { 
 					
-						//@todo: AJAX call that sends the issue information to CREATE a new issue
+						//AJAX call that sends the issue information to CREATE a new issue
+						
+						$.ajax({
+					  	   cache: "false",
+						   type: "POST",
+						   url: "/scripts/issue/createIssue.php",
+						   data: "reporter="+reporter+"&assignee="+assignee+"&type="+issuetype+"&status="+issuestatus+"&component="+component+"&priority="+priority+"&name="+title+"&description="+description,
+						   success: function(msg){
+						  
+						  	if (msg == "1"){
+						     	$("#issuewrap").hide("slow");
+						     	$("#statusinfo").append("<h2> Issue created. </h2><BR />");
+						     	$("#statusinfo").show("slow");
+							} else {
+								$("#issuewrap").hide("slow");
+						     	$("#statusinfo").append("<h2> Something went horribly wrong: " + msg + "</h2><BR />");
+						     	$("#statusinfo").show("slow");
+							}
+						    // setupFlexTable2();
+						          
+						   }
+					   
+					 	});
 					}				
 				});
 			});
@@ -125,14 +147,14 @@ confirmLogin();
 </head>
 	<body class="custom">
 		
-		<input type='hidden' id="issueid" value="<?php echo $issueid; ?>" /> 
-		<input type='hidden' id="permission" value="<?php echo $permission; ?>" /> 
-		<input type='hidden' id="action" value="<?php echo $action; ?>" /> 
+		<input type='hidden' id="issueid" value="<?php  if ($action == 0){ echo $issueid;} ?>" /> 
+		<input type='hidden' id="permission" value="<?php { echo $permission; } ?>" /> 
+		<input type='hidden' id="action" value="<?php { echo $action; } ?>" /> 
 		
 		<!-- Body here -->
 		<div id="issuewrap">
 			<h3>Issue: <?php echo $issueid; ?> </h3>
-			<label>Issue Title: </label><input id="input_title"><?php echo $issueinfo['name']; ?></input> <BR />
+			<label>Issue Title: </label><input id="input_title" value="<?php if ($action == 0) { echo $issueinfo['name']; } ?>"/> <BR />
 			<div id="issue-info-container">
 				<h3>Issue Information</h3>
 				<span >Edit</span>
@@ -140,7 +162,11 @@ confirmLogin();
 					<label>Reporter:</label> 
 					<select name="reporterid" id="input_reporter">
 									<?php 
+									if ($action == 0){
 										$resultSet = getProjectMembers($projectinfo['ProjectId']);
+									} else {
+										$resultSet = getProjectMembers($_SESSION['projectid']);
+									}
 										foreach ($resultSet as $result){
 											if ($result['UserId'] == $reporterId){
 												echo "<option value=\"" . $result['UserId'] ."\" selected>" . $result['FirstName'] . ' ' . $result['LastName'] . "</option>";
@@ -154,7 +180,11 @@ confirmLogin();
 					<label>Assignee: </label> 
 					<select name="assigneeid" id="input_assignee">
 									<?php 
+									if ($action == 0){
 										$resultSet = getProjectMembers($projectinfo['ProjectId']);
+									} else {
+										$resultSet = getProjectMembers($_SESSION['projectid']);
+									}
 										foreach ($resultSet as $result){
 											if ($result['UserId'] == $assigneeId){
 												echo "<option value=\"" . $result['UserId'] ."\" selected>" . $result['FirstName'] . ' ' . $result['LastName'] . "</option>";
@@ -167,25 +197,33 @@ confirmLogin();
 					<label>Issue Type:</label>
 					<select name="reporterid" id="input_issuetype">
 									<?php 
+								
 										$resultSet = $issuetypearray;
 										foreach ($resultSet as $result){
-											if ($result['Id'] == $issueinfo['IssueType']){
-												echo "<option value=\"" . $result['Id'] ."\" selected>" . $result['Name'] . "</option>"; 
+											if (($action == 0) && $result['Id'] == $issueinfo['IssueType']){
+												echo "<option value=\"" . $result['ID'] ."\" selected>" . $result['Name'] . "</option>"; 
 											} else {
-												echo "<option value=\"" . $result['Id'] ."\">" . $result['Name'] . "</option>"; 
+												echo "<option value=\"" . $result['ID'] ."\">" . $result['Name'] . "</option>"; 
 											}
 										}
+									
 									?>
 					</select> <BR/>
 					<label>Component:</label>
 					<select name="reporterid" id="input_component">
 									<?php 
-										$resultSet = getComponentsByProjectId($projectinfo['ProjectId']);
+									
+										
+										if ($action == 0){
+											$resultSet = getComponentsByProjectId($projectinfo['ProjectId']);
+										} else {
+											$resultSet = getComponentsByProjectId($_SESSION['projectid']);
+										}
 										foreach ($resultSet as $result){
-											if ($result['ComponentId'] == $issueinfo['ComponentId']) {
+											if (($action == 0) && $result['ComponentId'] == $issueinfo['ComponentId']) {
 												echo "<option value=\"" . $result['ComponentId'] ."\" selected>" . $result['Name'] . "</option>"; 
 											} else {
-												echo "<option value=\"" . $result['ComponentsId'] ."\">" . $result['Name'] . "</option>"; 
+												echo "<option value=\"" . $result['ComponentId'] ."\">" . $result['Name'] . "</option>"; 
 											}
 										}
 									?>
@@ -195,10 +233,10 @@ confirmLogin();
 									<?php 
 										$resultSet = $issuepriorityarray;
 										foreach ($resultSet as $result){
-											if ($result['Id'] == $issueinfo['Priority']){
-												echo "<option value=\"" . $result['Id'] ."\" selected>" . $result['Name'] . "</option>"; 
+											if (($action == 0) && $result['Id'] == $issueinfo['Priority']){
+												echo "<option value=\"" . $result['ID'] ."\" selected>" . $result['Name'] . "</option>"; 
 											} else {
-												echo "<option value=\"" . $result['Id'] ."\">" . $result['Name'] . "</option>"; 
+												echo "<option value=\"" . $result['ID'] ."\">" . $result['Name'] . "</option>"; 
 											}
 										}
 									?>
@@ -208,15 +246,15 @@ confirmLogin();
 									<?php 
 										$resultSet = $issuestatusarray;
 										foreach ($resultSet as $result){
-											if ($result['Id'] == $issueinfo['IssueStatus']) {
-												echo "<option value=\"" . $result['Id'] ."\" selected>" . $result['Name'] . "</option>"; 
+											if (($action == 0) && $result['Id'] == $issueinfo['IssueStatus']) {
+												echo "<option value=\"" . $result['ID'] ."\" selected>" . $result['Name'] . "</option>"; 
 											} else {
-												echo "<option value=\"" . $result['Id'] ."\">" . $result['Name'] . "</option>"; 
+												echo "<option value=\"" . $result['ID'] ."\">" . $result['Name'] . "</option>"; 
 											}
 										}
 									?>
 					</select> <BR/>
-					<label>Creation Date: <?php echo $issueinfo['CreationDate']; ?></label><BR />
+					<label>Creation Date: <?php if ($action == 0){ echo $issueinfo['CreationDate']; } ?></label><BR />
 					<label>Resolved Date:</label> <BR />
 					<label>Last Modification Date:</label> <BR />
 				</div>
@@ -227,7 +265,7 @@ confirmLogin();
 				<span >Edit</span>
 				<div id="issue-desc">
 					
-					<textarea rows="5" cols="20" wrap="virtual" id="input_description" style="width:599px; height:149px;" maxlength="2000"><?php echo $issueinfo['Description']; ?></textarea>
+					<textarea rows="5" cols="20" wrap="virtual" id="input_description" style="width:599px; height:149px;" maxlength="2000"><?php if ($action == 0){echo $issueinfo['Description'];} ?></textarea>
 					
 				</div>
 			</div>
