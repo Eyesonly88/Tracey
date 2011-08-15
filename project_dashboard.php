@@ -209,7 +209,7 @@ if (isset($_GET['id'])){
 		<div id="user-box">
 			
 			<div id="createIssue-createComponent-container">
-				<a class="create_btn" id="createIssue-button" rel="shadowbox[Mixed]" href="issue.php?action=create">Create Issue</a>
+				<a rel="shadowbox[Mixed];width=900" href="issue.php?action=create"><input type="button" id="createIssue-button" value="Create Issue" /></a>
 				<input type="button" id="createComponent-button" value="Create Component" />
 			</div>
 			

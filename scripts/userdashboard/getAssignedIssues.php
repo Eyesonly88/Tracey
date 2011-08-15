@@ -36,7 +36,7 @@
 			$response = $response . '<td class="i_type" name="i_type" align="center">' . $row['IssueType'] . '</td>';
 			$response = $response . '<td class="i_priority" name="i_priority" align="center">' . $row['Priority'] . '</td>';
 			$response = $response . '<td class="i_status" name="i_status" align="center">' . $row['IssueStatus'] . '</td>';
-			$response = $response . '<td class="i_viewissue" name="i_viewissue_button" id="' . $row['IssueId'] . '" align="center"><a rel="shadowbox[Mixed]" href="issue.php?id='. $row['IssueId'] . '">View Issue</a></td>';
+			$response = $response . '<td class="i_viewissue" name="i_viewissue_button" id="' . $row['IssueId'] . '" align="center"><a rel="shadowbox[Mixed];width=900" href="issue.php?id='. $row['IssueId'] . '">View Issue</a></td>';
 			$response = $response . '</tr>';
 		}
 		$response = $response . '</tbody>';		

@@ -153,8 +153,8 @@ confirmLogin();
 		
 		<!-- Body here -->
 		<div id="issuewrap">
-			<h3>Issue: <?php echo $issueid; ?> </h3>
-			<label>Issue Title: </label><input id="input_title" value="<?php if ($action == 0) { echo $issueinfo['name']; } ?>"/> <BR />
+			<h3>Issue: <input id="input_title" value="<?php if ($action == 0) { echo $issueinfo['name']; } ?>"/> </h3>
+			<!-- <label>Issue Title: </label> --> 
 			<div id="issue-info-container">
 				<h3>Issue Information</h3>
 				<span >Edit</span>
@@ -175,7 +175,7 @@ confirmLogin();
 											}
 										}
 									?>
-					</select> <BR/>
+					</select>
 					
 					<label>Assignee: </label> 
 					<select name="assigneeid" id="input_assignee">
@@ -193,7 +193,7 @@ confirmLogin();
 											}
 										}
 									?>
-					</select> <BR/>
+					</select> 
 					<label>Issue Type:</label>
 					<select name="reporterid" id="input_issuetype">
 									<?php 
@@ -208,7 +208,7 @@ confirmLogin();
 										}
 									
 									?>
-					</select> <BR/>
+					</select> <br>
 					<label>Component:</label>
 					<select name="reporterid" id="input_component">
 									<?php 
@@ -227,7 +227,7 @@ confirmLogin();
 											}
 										}
 									?>
-					</select> <BR/>
+					</select> 
 					<label>Priority:</label>
 					<select name="reporterid" id="input_priority">
 									<?php 
@@ -240,7 +240,7 @@ confirmLogin();
 											}
 										}
 									?>
-					</select> <BR/>
+					</select> 
 					<label>Issue Status: </label> 
 					<select name="reporterid" id="input_issuestatus">
 									<?php 
@@ -253,10 +253,14 @@ confirmLogin();
 											}
 										}
 									?>
-					</select> <BR/>
-					<label>Creation Date: <?php if ($action == 0){ echo $issueinfo['CreationDate']; } ?></label><BR />
-					<label>Resolved Date:</label> <BR />
-					<label>Last Modification Date:</label> <BR />
+					</select> 
+					
+					<div id="issue-dates">
+						<label>Creation Date: <?php if ($action == 0){ echo $issueinfo['CreationDate']; } ?></label>
+						<label>Resolved Date:</label> 
+						<label>Last Modification Date:</label> 
+					</div>
+					
 				</div>
 			</div>
 			
@@ -264,8 +268,10 @@ confirmLogin();
 				<h3>Issue Description</h3>
 				<span >Edit</span>
 				<div id="issue-desc">
-					
-					<textarea rows="5" cols="20" wrap="virtual" id="input_description" style="width:599px; height:149px;" maxlength="2000"><?php if ($action == 0){echo $issueinfo['Description'];} ?></textarea>
+					<textarea placeholder="Insert your comment here ...">
+					<?php if ($action == 0){echo $issueinfo['Description'];} ?>
+					</textarea>
+					<!-- <textarea rows="5" cols="20" wrap="virtual" id="input_description" style="width:599px; height:149px;" maxlength="2000"><?php if ($action == 0){echo $issueinfo['Description'];} ?></textarea> -->
 					
 				</div>
 			</div>
@@ -286,6 +292,11 @@ confirmLogin();
 					</form>
 				</div>
 			</div>
+			<div id="issue-confirm-button">
+				<button id="confirm_btn">Save</button>
+				<!-- <input type='button' value="Save"> -->
+			</div>
+			
 			
 			<div id="issue-comment-container">
 				<div id="issue-create-comment">
@@ -295,8 +306,8 @@ confirmLogin();
 				</div>
 				<span>Submit Comment</span>
 			</div>
-			<BR />
-			<button id="confirm_btn">Save</button>
+			
+			
 		</div>
 		<div id="statusinfo" type="hidden"></div>
 	</body>
