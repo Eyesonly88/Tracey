@@ -16,10 +16,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sessions.php');
   var currentUser = "";
   getCurrentUser();
   initialSetup();
-  
-  $('.project_submit').click(function(){ 
-  	createProject();
-  })
+ 
   function setUser(msg){ 
   	currentUser = msg;	
   }
@@ -44,25 +41,6 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sessions.php');
   	//$("#projectlist").fnDraw();
   }
   
-  /* Creates a project (via Ajax) */
-  function createProject() { 
-  
-  	var projectName = document.getElementById('name').value;
-  	var user = currentUser;
- 
-  	$.ajax({
-  	   cache: "false",
-	   type: "POST",
-	   url: "scripts/project/createProject.php",
-	   data: "name="+projectName+"&user="+user,
-	   success: function(msg){
-	     getUserProjects(user);
-	   }
-   
- 	});
-
-  
-  }
   
   /* Get list of projects created by the user (via Ajax) */
   function getUserProjects(user){
@@ -181,13 +159,3 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sessions.php');
 	
 </div>
 <BR /><BR />
-<div id="createproject_btn"><h4><a href="#">Create Project</a></h4></div>
-			<div id="createproject_form">
-				<form action="" method="post">
-					<h1>Create a Project</h1>
-					<label class="grey" for="name">Name:</label>
-					<input class="field" type="text" name="name" id="name" value="" size="23" />
-        			<div class="clear"></div>
-					<input type="button"  name="submit" value="Go" class="project_submit" />
-				</form> 		
-			</div>

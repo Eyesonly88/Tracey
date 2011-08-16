@@ -15,19 +15,22 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_prepared.php');
 include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_componentfunctions.php');
 
 	/* Create a project (and a default component) with projectname: $name, and projectleader: userid of the user with email: $email */
-	function createProject($name, $email) {
+	function createProject($name, $email, $type, $hours, $due) {
 		 
 		global $connection;
 		$temp = $email;
 		$lastinsertarray = '';
+		//return $temp;
 		$user = getUserInfo("$temp", "UserId");
+		
 		$query = $connection->stmt_init();	
-		$sql_createProject = "INSERT INTO Project(ProjectName, ProjectLeader) VALUES(?, ?)";	
+		$sql_createProject = "INSERT INTO Project(ProjectName, ProjectType, ProjectLeader) VALUES(?, ?, ?)";	
 		$sql_getLastInsertId = "SELECT LAST_INSERT_ID() AS ID";
 		if ($query->prepare($sql_createProject)) {
 			
-			$query->bind_param("sd", $pname, $pleader);
+			$query->bind_param("sid", $pname, $ptype, $pleader);
 			$pname = $name;
+			$ptype = $type;
 			$pleader = $user;
 			$query->execute();
 			$query->prepare($sql_getLastInsertId);
@@ -35,10 +38,21 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_componentfunctions
 			$projectid = $lastinsertarray[0]['ID'];
 			
 			/* Using the id of the last created project, add a component to this project (this is the default component) */
-			addComponentByProjectId($projectid);
-			return "1";
+			addComponentByProjectId($projectid, $hours, $due);
+			return 1;
 		}
-		return "0";	
+		return 0;	
+	}
+	
+	function getAllProjectTypes() {
+		global $connection; 
+		$query = $connection->stmt_init();	
+		$sql_projectTypes = "SELECT * FROM projecttype";
+		if ($query->prepare($sql_projectTypes)) {
+			$result = dynamicBindResults($query);
+			if (empty($result)){ return ''; }
+			return $result;
+		}
 	}
 	
 	/* Delete the project with the specified name with the specified user */
@@ -71,7 +85,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_componentfunctions
 		}
 	}
 
-
+	/* @todo */
 	function modifyProject() {
 		
 		global $connection;

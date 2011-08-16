@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Aug 15, 2011 at 01:31 p.m.
+-- Generation Time: Aug 16, 2011 at 02:55 p.m.
 -- Server version: 5.5.8
 -- PHP Version: 5.3.5
 
@@ -31,21 +31,23 @@ CREATE TABLE IF NOT EXISTS `component` (
   `ProjectId` bigint(20) NOT NULL DEFAULT '0',
   `CreationDate` datetime DEFAULT NULL,
   `RequiredHours` bigint(20) DEFAULT NULL,
+  `DueDate` date DEFAULT NULL,
   PRIMARY KEY (`ComponentId`,`ProjectId`),
   KEY `ComponentId` (`ComponentId`),
   KEY `project` (`ProjectId`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=59 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=70 ;
 
 --
 -- Dumping data for table `component`
 --
 
-INSERT INTO `component` (`Name`, `ComponentId`, `ProjectId`, `CreationDate`, `RequiredHours`) VALUES
-('Comp1', 54, 119, NULL, NULL),
-('Comp2', 55, 120, NULL, NULL),
-('Comp3', 56, 121, NULL, NULL),
-('Comp4', 57, 122, NULL, NULL),
-('Comp5', 58, 123, NULL, NULL);
+INSERT INTO `component` (`Name`, `ComponentId`, `ProjectId`, `CreationDate`, `RequiredHours`, `DueDate`) VALUES
+('Comp1', 54, 119, NULL, NULL, NULL),
+('Comp2', 55, 120, NULL, NULL, NULL),
+('Comp3', 56, 121, NULL, NULL, NULL),
+('Comp4', 57, 122, NULL, NULL, NULL),
+('Comp5', 58, 123, NULL, NULL, NULL),
+('Default', 69, 138, NULL, 500, '2011-08-13');
 
 -- --------------------------------------------------------
 
@@ -294,7 +296,7 @@ CREATE TABLE IF NOT EXISTS `project` (
   `ProjectStatus` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`ProjectId`),
   KEY `projectlead` (`ProjectLeader`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=124 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=139 ;
 
 --
 -- Dumping data for table `project`
@@ -305,7 +307,28 @@ INSERT INTO `project` (`ProjectId`, `ProjectName`, `ProjectType`, `ProjectLeader
 (120, 'Project2', NULL, 21, NULL, NULL),
 (121, 'Project3', NULL, 21, NULL, NULL),
 (122, 'HelloByronProject', NULL, 21, NULL, NULL),
-(123, 'SupWatdoProject', NULL, 21, NULL, NULL);
+(123, 'SupWatdoProject', NULL, 21, NULL, NULL),
+(138, 'testcreate', 1, 21, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `projecttype`
+--
+
+CREATE TABLE IF NOT EXISTS `projecttype` (
+  `Id` int(20) NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `projecttype`
+--
+
+INSERT INTO `projecttype` (`Id`, `name`) VALUES
+(1, 'solo'),
+(2, 'team');
 
 -- --------------------------------------------------------
 

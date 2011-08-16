@@ -13,13 +13,15 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_checks.php');
 include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_prepared.php');
 
 	/* Adds a component to the specified project @TODO: component table needs a few more fields to be added e.g. 'ComponentName' */
-	function addComponentByProjectId($projectid){
+	function addComponentByProjectId($projectid, $hours, $due){
 		global $connection;
 		$query = $connection->stmt_init(); 
-		$sql_addComponent = "INSERT INTO Component(ProjectId) VALUES(?)";	
+		$sql_addComponent = "INSERT INTO Component(name, ProjectId, RequiredHours, DueDate) VALUES('Default', ?, ?, ?)";	
 		if ($query->prepare($sql_addComponent)) {		
-			$query->bind_param("i", $pid);	
+			$query->bind_param("ids", $pid, $requiredhours, $duedate);	
 			$pid = $projectid;
+			$requiredhours = $hours;
+			$duedate =  date("Y-m-d", strtotime($due));
 			$query->execute();			
 		}	
 	}

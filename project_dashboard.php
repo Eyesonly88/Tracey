@@ -39,10 +39,10 @@ if (isset($_GET['id'])){
 		
 		
 		<script>$(document).ready( function() {
-		
+				
+				Shadowbox.clearCache();
 				Shadowbox.init({
-
-   		 			//skipSetup: true
+						displayNav: false
   				});
 				$(".notifications-form").hide();
 				$("#notifications").hoverIntent( function() {

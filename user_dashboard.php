@@ -28,6 +28,14 @@ confirmLogin();
 		<script src="js/notification.js"></script>
 		<script src="js/invite.js"></script>
 		<script>$(document).ready( function() {
+				
+				Shadowbox.clearCache();
+				Shadowbox.init({
+					displayNav: false
+  				});
+  				
+  				
+  				
 				$(".notifications-form").hide();
 				$(".createProject-form").hide();
 				
@@ -217,7 +225,8 @@ confirmLogin();
 		<div id="user-box">
 			
 			<div id="createProject-container">
-				<input type="button" id="createProject-button" value="Create Project" />
+				<a rel="shadowbox[Mixed];width=830;height=300;" href="project.php?action=create"><input type="button" id="createProject-button" value="Create Project" /></a>
+		
 			</div>
 			
 		</div>

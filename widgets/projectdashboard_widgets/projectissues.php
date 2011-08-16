@@ -6,6 +6,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sessions.php');
 
 
 ?>
+<head>
 <link rel="stylesheet" href="/libraries/datatables/media/css/demo_table_jui.css" type="text/css">
 <!--<script src="/libraries/flexigrid/js/flexigrid.js" type="text/javascript"></script> -->
 <script src="/libraries/dataTables/media/js/jquery.dataTables.js" type="text/javascript"></script>
@@ -13,10 +14,10 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sessions.php');
 <script src="/libraries/shadowbox/shadowbox.js" type="text/javascript"></script>
 <script type="text/javascript">
   
-  
+  Shadowbox.clearCache();
    Shadowbox.init({
 
-   		 	//skipSetup: true
+   		displayNav: "false"
   	});
   
   $('#hiddencontents_issue').hide();
@@ -152,7 +153,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sessions.php');
 
 
 </script>
-
+</head>
 <style>
   h5 span {
     color:#666666;

@@ -70,10 +70,16 @@ confirmLogin();
 		<script type="text/javascript" src="libraries/dashboard/lib/jquery-ui-1.8.2.custom.min.js"></script>
 		<script src="js/jquery.hoverIntent.js"></script>
 		<script src="js/loginpanel.js"></script>
+		<link rel="stylesheet" href="/libraries/shadowbox/shadowbox.css" type="text/css">
+		<script src="/libraries/shadowbox/shadowbox.js" type="text/javascript"></script>
 
 	<script type="text/javascript">
 			
-			$(document).ready(function() {
+	
+			$(document).ready(function() {			
+				
+				/* This function lets you change the content shown inside a shadowbox to show the content in 'path' */
+
 				
 				var action = $('#action').val();
 				//alert(action);
