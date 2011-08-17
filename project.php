@@ -79,7 +79,7 @@ $projecttypes = getAllProjectTypes();
 
 	</head>
 
-	<body class="custom">
+	<body>
 		
 		<!-- Body here -->
 		<div id="projectwrap">
