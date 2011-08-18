@@ -363,5 +363,40 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_prepared.php');
 		
 	}
 	
+	function logIssueHours($issueid, $issuehours, $description, $user) {
+		global $connection;
+		$query = $connection->stmt_init();
+		$sql_stmnt = "INSERT INTO issuehour (`IssueHourId`, `IssueId`, `Hours`, `Description`,  `UserId`) VALUES (NULL, ?, ?, ?,  ?);";
+		if($query->prepare($sql_stmnt)){
+		
+			$query->bind_param("iisi", $id, $hours, $desc, $userid);		
+			$id = $issueid;
+			$hours = $issuehours;
+			$desc = $description;
+			
+			//echo "" . $id . " " . $hours . " " . $desc;
+			
+			$userid = getUserInfo($user,"UserId");	
+			//echo " " . $id . " " . $hours . " " . $desc . " " . $userid;
+			$query->execute();
+			return 1;
+		} else {
+			// error happened while fetching the count of notifications
+			return -1;
+		}
+
+	}
+	
+	function getHoursSpentOnIssue($issueid) {
+		
+		global $connection;
+		
+		//@todo: query to calculate the total number of hours spent on an issue
+		// this is calculated by summing up all the hour values of all records inside
+		// the issuehour table for the particular issue (issue id = $issueid)
+		
+		
+	}
+	
 
 ?>

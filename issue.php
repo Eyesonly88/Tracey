@@ -19,6 +19,8 @@ $issuestatusarray = '';
 $projectarray = '';
 $projectinfo = '';
 
+$theissueid = '';
+
 $component = '';
 /* 1 = create new issue */
 $action = 0;
@@ -32,7 +34,7 @@ $reporterid = '';
 $assigneeid = '';
 if (isset($_GET['id'])){
 	$issueid = $_GET['id'];	
-	
+	$theissueid = $issueid;
 	
 	$issuearray = getIssue($issueid);
 	$issueinfo = $issuearray[0];
@@ -79,7 +81,10 @@ confirmLogin();
 			$(document).ready(function() {			
 				
 				/* This function lets you change the content shown inside a shadowbox to show the content in 'path' */
-
+				Shadowbox.clearCache();
+				Shadowbox.init({
+						displayNav: false
+  				});
 				
 				var action = $('#action').val();
 				//alert(action);
@@ -161,10 +166,14 @@ confirmLogin();
 		<div id="issuewrap">
 			<h3>Issue: <input id="input_title" value="<?php if ($action == 0) { echo $issueinfo['name']; } ?>"/> </h3>
 			<!-- <label>Issue Title: </label> --> 
+			
+			
 			<div id="issue-info-container">
+				
 				<h3>Issue Information</h3>
 				<span >Edit</span>
 				<div id="issue-info">
+					
 					<label>Reporter:</label> 
 					<select name="reporterid" id="input_reporter">
 									<?php 
@@ -267,6 +276,10 @@ confirmLogin();
 						<label>Last Modification Date:</label> 
 					</div>
 					
+					
+					
+					
+					
 				</div>
 			</div>
 			
@@ -281,6 +294,8 @@ confirmLogin();
 					
 				</div>
 			</div>
+			
+		
 			
 			<div id="issue-attach-container">
 				<h3>Attached Files</h3>
@@ -315,6 +330,10 @@ confirmLogin();
 			
 			
 		</div>
+		<div id="issue-loghours-container">
+				
+				<a id="loghours" rel="shadowbox[Mixed];height=240" href="logissuehour.php?id=<?php echo $theissueid;  ?>"><h3>Log Hours </h3></a> 
+			</div>
 		<div id="statusinfo" type="hidden"></div>
 	</body>
 </html>

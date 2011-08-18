@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Aug 16, 2011 at 02:55 p.m.
+-- Generation Time: Aug 18, 2011 at 01:32 p.m.
 -- Server version: 5.5.8
 -- PHP Version: 5.3.5
 
@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS `component` (
   PRIMARY KEY (`ComponentId`,`ProjectId`),
   KEY `ComponentId` (`ComponentId`),
   KEY `project` (`ProjectId`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=70 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=71 ;
 
 --
 -- Dumping data for table `component`
@@ -47,7 +47,8 @@ INSERT INTO `component` (`Name`, `ComponentId`, `ProjectId`, `CreationDate`, `Re
 ('Comp3', 56, 121, NULL, NULL, NULL),
 ('Comp4', 57, 122, NULL, NULL, NULL),
 ('Comp5', 58, 123, NULL, NULL, NULL),
-('Default', 69, 138, NULL, 500, '2011-08-13');
+('Default', 69, 138, NULL, 500, '2011-08-13'),
+('Default', 70, 139, NULL, 500, '2011-08-20');
 
 -- --------------------------------------------------------
 
@@ -104,6 +105,30 @@ INSERT INTO `issue` (`IssueId`, `ComponentId`, `ReporterId`, `AssigneeId`, `Issu
 (6, 55, 21, 23, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (7, 55, 23, 22, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (10, 54, 21, 23, 2, 3, NULL, 3, NULL, NULL, 'fadsfzfzv', 'stsdrg436');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `issuehour`
+--
+
+CREATE TABLE IF NOT EXISTS `issuehour` (
+  `IssueHourId` bigint(255) NOT NULL AUTO_INCREMENT,
+  `IssueId` bigint(11) NOT NULL,
+  `Hours` bigint(100) DEFAULT NULL,
+  `Description` varchar(1000) DEFAULT NULL,
+  `UserId` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`IssueHourId`),
+  KEY `issuehourissueidINDEX` (`IssueId`) USING BTREE,
+  KEY `issuehouruserid` (`UserId`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
+
+--
+-- Dumping data for table `issuehour`
+--
+
+INSERT INTO `issuehour` (`IssueHourId`, `IssueId`, `Hours`, `Description`, `UserId`) VALUES
+(10, 5, 5, 'read books for 5 hours', 21);
 
 -- --------------------------------------------------------
 
@@ -296,7 +321,7 @@ CREATE TABLE IF NOT EXISTS `project` (
   `ProjectStatus` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`ProjectId`),
   KEY `projectlead` (`ProjectLeader`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=139 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=140 ;
 
 --
 -- Dumping data for table `project`
@@ -308,7 +333,8 @@ INSERT INTO `project` (`ProjectId`, `ProjectName`, `ProjectType`, `ProjectLeader
 (121, 'Project3', NULL, 21, NULL, NULL),
 (122, 'HelloByronProject', NULL, 21, NULL, NULL),
 (123, 'SupWatdoProject', NULL, 21, NULL, NULL),
-(138, 'testcreate', 1, 21, NULL, NULL);
+(138, 'testcreate', 1, 21, NULL, NULL),
+(139, 'sup', 1, 21, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -459,6 +485,13 @@ ALTER TABLE `issue`
   ADD CONSTRAINT `issuetype` FOREIGN KEY (`IssueType`) REFERENCES `issuetype` (`ID`) ON DELETE CASCADE,
   ADD CONSTRAINT `priority` FOREIGN KEY (`Priority`) REFERENCES `issuepriority` (`ID`) ON DELETE CASCADE,
   ADD CONSTRAINT `reporter` FOREIGN KEY (`ReporterId`) REFERENCES `user` (`UserId`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `issuehour`
+--
+ALTER TABLE `issuehour`
+  ADD CONSTRAINT `issuehourissueid` FOREIGN KEY (`IssueId`) REFERENCES `issue` (`IssueId`) ON DELETE CASCADE,
+  ADD CONSTRAINT `issuehouruserid` FOREIGN KEY (`UserId`) REFERENCES `user` (`UserId`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `milestone`

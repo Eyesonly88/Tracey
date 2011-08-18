@@ -348,6 +348,14 @@ font-weight: bold;
 	padding:0.5em;
 	width:300px;
 }
+
+.custom #issuewrap #issue-loghours-container{
+	width: 600px;
+	height: 100px; 
+	margin-left: 9em;
+	
+}
+
 .custom #issuewrap #issue-info-container, #projectwrap #createproject-info-container, #componentwrap #createcomponent-info-container{
 	width: 600px;
 	height: 150px; 
@@ -547,7 +555,7 @@ font-weight: bold;
 	padding-top:0.2em;
 }
 
-.custom #issuewrap h3, .custom #projectwrap h3, .custom #componentwrap h3  {
+.custom #issuewrap h3,  #projectwrap h3, .custom #componentwrap h3  {
 	text-align: center;
 	font-size: large;
 	padding:0.5em;
