@@ -45,13 +45,21 @@ if (isset($_GET['id'])){
 						displayNav: false
   				});
 				$(".notifications-form").hide();
+				$(".invite-form").hide();
 				$("#notifications").hoverIntent( function() {
 					$(".notifications-form").fadeIn(200);
 				}
 				, function() {
 					$(".notifications-form").fadeOut(200);
 				}
-				)
+			);
+			$("#Invite").hoverIntent( function() {
+					$(".invite-form").fadeIn(200);
+				}
+				, function() {
+					$(".invite-form").fadeOut(200);
+				}
+			);
 
 			});</script>
 		
@@ -120,15 +128,16 @@ if (isset($_GET['id'])){
 											echo getSenderName($result['SenderId']);
 											echo ".</p> ";
 											
-									?>
+											if (!(getNotifNameByID($result['TypeId']) == "IssueAssigned")){
+												
+												echo "<form action='' id=\"notif-form\">";
+												echo "<input type=\"hidden\" name=\"NotificationId\" class=\"notif-id-input\" value=\"{$result['Id']}\">";
+												echo "<input type='button' name=\"submit\" id='notif-accept-button' value=\"Accept\">";
+												echo "<input type='button' name=\"submit\" id='notif-reject-button' value=\"Reject\">";
+												echo "</form>";
+												
+											} 
 									
-									<form action='' id="notif-form">
-										<input type="hidden" name="NotificationId" class="notif-id-input" value="<?php echo $result['Id'];?>" />
-										<input type='button' name="submit" id='notif-accept-button' value="Accept">
-										<input type='button' name="submit" id='notif-reject-button' value="Reject">
-									</form>
-									
-									<?php
 										} else {
 											// don't display notification
 											if (getNotifCountByEmail($_SESSION['email']) == 0)
@@ -144,6 +153,38 @@ if (isset($_GET['id'])){
 						</div>
 					</li>
 					
+					<li id="Invite">
+						<a href="#">
+						<h3>Invite Members</h3>
+						<span>Invite people to your project</span>
+						</a>
+						<div id='invite-container' class='invite-form'>
+							<div class='invite-content'>
+								<form action="" id="projectInvite-form">
+									 	
+										<label>Receiver's e-mail:
+										<input type="text" name="receiveremail" id="receiver-email" value=""/>
+										</label>
+										<label>Project:
+											<select name="projectid" id="projectid-selector">
+												<?php 
+													$resultSet = getProjectsByEmail($_SESSION['email']);
+													foreach ($resultSet as $result){
+														echo "<option value=\"" . $result['ProjectId'] ."\">" . $result['ProjectName'] . "</option>";
+													}
+												?>
+											</select>
+											<input type="hidden" name="senderemail" id="sender-email" value="<?php echo $_SESSION['email']; ?>" />
+											<input type="button"  name="submit" value="Invite" id="inv-button" />
+											<p id="confirm-inv-msg"></p>
+										</label>	
+
+								</form>
+							</div>
+						</div>
+					</li>
+					
+					
 					<li id="login">
 						<a href="#">
 						<h3>Account Settings</h3>
@@ -157,6 +198,9 @@ if (isset($_GET['id'])){
 								<h3>User Info</h3>
 								<label>Logged in as <?php	echo $_SESSION['email'];?></label>
 								<label></label>
+								
+								<!--
+								
 								<h3>Invite People</h3>
 									<form action="" id="projectInvite-form">
 									 	
@@ -178,6 +222,8 @@ if (isset($_GET['id'])){
 										</label>	
 
 								</form>
+								
+								-->
 							</div>
 						</div>
 					</li>

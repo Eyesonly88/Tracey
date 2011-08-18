@@ -27,6 +27,8 @@ confirmLogin();
 		<script src="js/define_userdashboard.js"></script>
 		<script src="js/notification.js"></script>
 		<script src="js/invite.js"></script>
+		<link rel="stylesheet" href="/libraries/shadowbox/shadowbox.css" type="text/css">
+		<script src="/libraries/shadowbox/shadowbox.js" type="text/javascript"></script>
 		<script>$(document).ready( function() {
 				
 				Shadowbox.clearCache();
@@ -34,10 +36,7 @@ confirmLogin();
 					displayNav: false
   				});
   				
-  				
-  				
 				$(".notifications-form").hide();
-				$(".createProject-form").hide();
 				
 				$("#notifications").hoverIntent( function() {
 					$(".notifications-form").fadeIn(200);
@@ -45,7 +44,7 @@ confirmLogin();
 				, function() {
 					$(".notifications-form").fadeOut(200);
 				}
-				);
+				)
 				
 				});</script>
 	</head>
@@ -103,32 +102,17 @@ confirmLogin();
 											echo getSenderName($result['SenderId']);
 											echo ".</p> ";
 											
-									?>
-									<?php 
-									if (!(getNotifNameByID($result['TypeId']) == "IssueAssigned")){
-										
-										echo "<form action='' id=\"notif-form\">";
-										echo "<input type=\"hidden\" name=\"NotificationId\" class=\"notif-id-input\" value=\"{$result['Id']}\">";
-										echo "<input type='button' name=\"submit\" id='notif-accept-button' value=\"Accept\">";
-										echo "<input type='button' name=\"submit\" id='notif-reject-button' value=\"Reject\">";
-										echo "</form>";
-										
-									} else{
-										// don't show action.
-									}
 									
-									?>
-									<!-- 
-										
-										<form action='' id="notif-form">
-										<input type="hidden" name="NotificationId" class="notif-id-input" value="<?php echo $result['Id'];?>" />
-										<input type='button' name="submit" id='notif-accept-button' value="Accept">
-										<input type='button' name="submit" id='notif-reject-button' value="Reject">
-									</form>
-										
-										-->
+											if (!(getNotifNameByID($result['TypeId']) == "IssueAssigned")){
+												
+												echo "<form action='' id=\"notif-form\">";
+												echo "<input type=\"hidden\" name=\"NotificationId\" class=\"notif-id-input\" value=\"{$result['Id']}\">";
+												echo "<input type='button' name=\"submit\" id='notif-accept-button' value=\"Accept\">";
+												echo "<input type='button' name=\"submit\" id='notif-reject-button' value=\"Reject\">";
+												echo "</form>";
+												
+											} 
 									
-									<?php
 										} else {
 											// don't display notification
 											if (getNotifCountByEmail($_SESSION['email']) == 0)
@@ -157,27 +141,7 @@ confirmLogin();
 								<h3>User Info</h3>
 								<label>Logged in as <?php	echo $_SESSION['email'];?></label>
 								<label></label>
-								<h3>Invite People</h3>
-									<form action="" id="projectInvite-form">
-									 	
-										<label>Receiver's e-mail:
-										<input type="text" name="receiveremail" id="receiver-email" value=""/>
-										</label>
-										<label>Project:
-											<select name="projectid" id="projectid-selector">
-												<?php 
-													$resultSet = getProjectsByEmail($_SESSION['email']);
-													foreach ($resultSet as $result){
-														echo "<option value=\"" . $result['ProjectId'] ."\">" . $result['ProjectName'] . "</option>";
-													}
-												?>
-											</select>
-											<input type="hidden" name="senderemail" id="sender-email" value="<?php echo $_SESSION['email']; ?>" />
-											<input type="button"  name="submit" value="Invite" id="inv-button" />
-											<p id="confirm-inv-msg"></p>
-										</label>	
-
-								</form>
+								
 							</div>
 						</div>
 					</li>
