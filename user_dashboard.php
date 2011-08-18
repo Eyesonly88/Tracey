@@ -47,14 +47,6 @@ confirmLogin();
 				}
 				);
 				
-				$("#createProject").hoverIntent( function() {
-					$(".createProject-form").fadeIn(200);
-				}
-				, function() {
-					$(".createProject-form").fadeOut(200);
-				}
-				
-				);
 				});</script>
 	</head>
 
@@ -112,12 +104,29 @@ confirmLogin();
 											echo ".</p> ";
 											
 									?>
+									<?php 
+									if (!(getNotifNameByID($result['TypeId']) == "IssueAssigned")){
+										
+										echo "<form action='' id=\"notif-form\">";
+										echo "<input type=\"hidden\" name=\"NotificationId\" class=\"notif-id-input\" value=\"{$result['Id']}\">";
+										echo "<input type='button' name=\"submit\" id='notif-accept-button' value=\"Accept\">";
+										echo "<input type='button' name=\"submit\" id='notif-reject-button' value=\"Reject\">";
+										echo "</form>";
+										
+									} else{
+										// don't show action.
+									}
 									
-									<form action='' id="notif-form">
+									?>
+									<!-- 
+										
+										<form action='' id="notif-form">
 										<input type="hidden" name="NotificationId" class="notif-id-input" value="<?php echo $result['Id'];?>" />
 										<input type='button' name="submit" id='notif-accept-button' value="Accept">
 										<input type='button' name="submit" id='notif-reject-button' value="Reject">
 									</form>
+										
+										-->
 									
 									<?php
 										} else {
@@ -132,31 +141,6 @@ confirmLogin();
 								</span>
 
 							</div>
-						</div>
-					</li>
-					
-					<li id="createProject">
-						<a href="#">
-						<h3>Create Project</h3>
-						<span>Create projects quickly!</span>
-						</a>
-						<div id='createProject-container' class="createProject-form">
-							<div id="createProject-content">
-								<form action="" id="projectCreate-form">
-										 	
-											<label>Project Name:
-											<input type="text" name="projectname" id="createproject-name" value=""/>
-											</label>
-											<label>
-												<input type="hidden" name="projectLeaderEmail" id="projectLeader-email" value="<?php echo $_SESSION['email']; ?>" />
-												<input type="button"  name="submit" value="Create" id="crtproject-button" />
-												<p id="confirm-inv-msg"></p>
-											</label>	
-	
-								</form>
-							
-							</div>
-							
 						</div>
 					</li>
 					

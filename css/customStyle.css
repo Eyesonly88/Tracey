@@ -57,7 +57,7 @@ display:block;
 margin-left:auto;
 margin-right:auto;
 margin-top:2em;
-width:25%;
+/*width:25%;*/
 text-align: center;
 font-size: 1.75em;
 border: none;
@@ -66,24 +66,27 @@ border: none;
 .custom #user-box #createProject-container #createProject-button{
 float:none;
 display:block;
-margin-left:auto;
+margin-left:42.5%;
 margin-right:auto;
-width:40%;
+/*width:40%;*/
 text-align: center;
 border: none;
 }
 
 .custom #user-box #createIssue-createComponent-container #createIssue-button{ 
 float:left;
-margin-left:1em;
-width:40%;
+display:block;
+margin-left:36%;
+margin-right:auto;
+/*width:40%;*/
 text-align: center;
 border: none;
 }
 
 .custom #user-box #createIssue-createComponent-container #createComponent-button{ 
-float:right;
-width:50%;
+float:left;
+margin-left:1em;
+/*width:50%;*/
 text-align: center;
 border: none;
 }
@@ -221,7 +224,7 @@ font-weight: bold;
 
 /* Notifications Form and Notification Items */
 
-#notifications .notifications-form { padding: 0em 1.1em 2em 12em; width: 42.9em ; }
+#notifications .notifications-form { padding: 0em 1.1em 2em 1em; width: 47em ; }
 #notifications #notification-icon {
 	background-image: url(../images/cardboard.png);
 	background-repeat: no-repeat;
@@ -231,6 +234,16 @@ font-weight: bold;
 }
 #notifications #notification-icon h3{
 	text-align: center;
+}
+#notifications #notifications-content p{
+	float:left;
+	margin-right:1em;
+	/*display: block;*/
+}
+#notifications #notifications-content input[type=button]{
+	float:left;
+	/*margin-bottom:1em; 
+	display: block;*/
 }
 
 /* Create Project Styles */
@@ -268,12 +281,14 @@ font-weight: bold;
 /* iPhone style button */
 
 .custom input[type=button] {
-	float:right;
+	/*float:right;*/
       font-family: "Helvetica Neue", Helvetica, sans-serif;
       font-size: 1.3em;
       font-weight: bold;
-      width: 50%;
+      /*width: 50%;*/
       height: 50px;
+      padding-left:0.5em;
+      padding-right:0.5em;
       border: 3px solid #282726;
       background: -webkit-gradient( linear, left top, left bottom, from(#e2e2e2), to(#8c8a88), color-stop(0.5, #acadae), color-stop(0.5, #82807e));
       background: -moz-linear-gradient(top, (#e2e2e2), (#8c8a88));
