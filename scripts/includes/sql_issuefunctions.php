@@ -27,6 +27,9 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_prepared.php');
 		if ($query->prepare($sql_createIssue)) {
 			$query->bind_param("issiiiii", $compId, $name, $desc, $reporterId, $assigneeId, $issueTypeId, $PriorityId, $issueStatusId);
 			$query->execute();
+			// send notification for to the receiver of the newly created issue
+			$issueId = mysql_insert_id();
+			sendNotifByIssue($reporterId, $assigneeId, $issueId);
 			return true;
 		} else {
 			return false;

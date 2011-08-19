@@ -1,6 +1,7 @@
 <?php 
 include_once ($_SERVER['DOCUMENT_ROOT'] . '/scripts/includes/sessions.php');
 include_once ($_SERVER['DOCUMENT_ROOT'] . '/scripts/includes/sql_notificationfn.php');
+include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_projectfunctions.php');
 confirmLogin();
 
 $projectid = -1;
@@ -34,6 +35,7 @@ if (isset($_GET['id'])){
 		<script src="js/define_projectdashboard.js"></script>
 		<script src="js/projectdashboard_panel.js"></script>
 		<script src="js/notification.js"></script>
+		<script src="js/invite.js"></script>
 		<link rel="stylesheet" href="/libraries/shadowbox/shadowbox.css" type="text/css">
 		<script src="/libraries/shadowbox/shadowbox.js" type="text/javascript"></script>
 		
@@ -166,16 +168,21 @@ if (isset($_GET['id'])){
 										<input type="text" name="receiveremail" id="receiver-email" value=""/>
 										</label>
 										<label>Project:
+											
 											<select name="projectid" id="projectid-selector">
 												<?php 
+												
 													$resultSet = getProjectsByEmail($_SESSION['email']);
 													foreach ($resultSet as $result){
 														echo "<option value=\"" . $result['ProjectId'] ."\">" . $result['ProjectName'] . "</option>";
 													}
+												 
+												
 												?>
 											</select>
+											
 											<input type="hidden" name="senderemail" id="sender-email" value="<?php echo $_SESSION['email']; ?>" />
-											<input type="button"  name="submit" value="Invite" id="inv-button" />
+											<input type="button"  name="submit" value="Invite" id="inv-button"/>
 											<p id="confirm-inv-msg"></p>
 										</label>	
 
