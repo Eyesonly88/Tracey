@@ -86,7 +86,7 @@ if (isset($_GET['id'])){
 					<!-- Menu items = Home, About, Help -->
 					<ul class="menu">
 						<li>
-							<a href="/user_dashboard.php">Home</a>
+							<a href="/user_dashboard.php">User Dashboard</a>
 						</li>
 						<li>
 							<a href="#">About</a>
