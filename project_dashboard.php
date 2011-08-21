@@ -93,7 +93,9 @@ if (isset($_GET['id'])){
 						</li>
 						<li>
 							<a href="#">Help</a>
-
+						</li>
+						<li>
+							<a href="/scripts/authentication/logout.php">Logout!</a>
 						</li>
 					</ul>
 				</div>
@@ -122,6 +124,7 @@ if (isset($_GET['id'])){
 										// print_r($result);
 										// display notification iff its new
 										if ($result['StatusId'] == 1) {
+											echo "<div class=\"notif-msg-block\">";
 											echo "<p id=\"notif-msg-{$result['Id']}\">";
 											echo getNotifNameByID($result['TypeId']);
 											echo " [";
@@ -139,7 +142,7 @@ if (isset($_GET['id'])){
 												echo "</form>";
 												
 											} 
-									
+											echo "</div>";
 										} else {
 											// don't display notification
 											if (getNotifCountByEmail($_SESSION['email']) == 0)
@@ -195,7 +198,7 @@ if (isset($_GET['id'])){
 					<li id="login">
 						<a href="#">
 						<h3>Account Settings</h3>
-						<span>Change account details or Logout</span>
+						<span>User details</span>
 						</a>
 						<div id='login-container' class='login-form'>
 							<h1 class='login-title'></h1>

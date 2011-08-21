@@ -5,7 +5,7 @@ $(document).ready(function() {
 	 */
 	$('.invite-content p #confirm-inv-msg').hide();
 	$('#Invite #projectInvite-form #inv-button').click(function (e) {
-		alert("HI");
+		//alert("HI");
 		$.ajax({
 			url: 'scripts/invite/invite.php' ,
 			data:  "receiveremail="+ $('label input#receiver-email').val() +"&projectid=" + $('select option:selected').val() + "&senderemail="+ $('label input#sender-email').val(),

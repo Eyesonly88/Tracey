@@ -259,6 +259,12 @@ font-weight: bold;
 /* Notifications Form and Notification Items */
 
 #notifications .notifications-form { padding: 0em 1.1em 2em 1em; width: 47em ; }
+
+#notifications .notif-msg-block {
+	display:block;
+	float:left;
+}
+
 #notifications #notification-icon {
 	background-image: url(../images/cardboard.png);
 	background-repeat: no-repeat;
