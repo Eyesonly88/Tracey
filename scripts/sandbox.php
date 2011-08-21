@@ -29,8 +29,10 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_prepared.php');
 	//print_r(getAssignedIssuesByEmail("mo@mo.com"));
 	
 	
-	$val = modifyIssue(3, 1, "sup", "nothing", 23, 21, 1, 1, 1);
-	echo $val . "<BR /><BR />";
+	$val = getProjectMembers(144);
+	
+	print_r($val);
+	//echo $val . "<BR /><BR />";
 	
 
 	
