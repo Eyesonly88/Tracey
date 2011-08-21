@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Aug 18, 2011 at 01:32 p.m.
+-- Generation Time: Aug 22, 2011 at 01:41 a.m.
 -- Server version: 5.5.8
 -- PHP Version: 5.3.5
 
@@ -32,23 +32,29 @@ CREATE TABLE IF NOT EXISTS `component` (
   `CreationDate` datetime DEFAULT NULL,
   `RequiredHours` bigint(20) DEFAULT NULL,
   `DueDate` date DEFAULT NULL,
+  `IsDefault` int(11) DEFAULT NULL,
   PRIMARY KEY (`ComponentId`,`ProjectId`),
   KEY `ComponentId` (`ComponentId`),
   KEY `project` (`ProjectId`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=71 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=76 ;
 
 --
 -- Dumping data for table `component`
 --
 
-INSERT INTO `component` (`Name`, `ComponentId`, `ProjectId`, `CreationDate`, `RequiredHours`, `DueDate`) VALUES
-('Comp1', 54, 119, NULL, NULL, NULL),
-('Comp2', 55, 120, NULL, NULL, NULL),
-('Comp3', 56, 121, NULL, NULL, NULL),
-('Comp4', 57, 122, NULL, NULL, NULL),
-('Comp5', 58, 123, NULL, NULL, NULL),
-('Default', 69, 138, NULL, 500, '2011-08-13'),
-('Default', 70, 139, NULL, 500, '2011-08-20');
+INSERT INTO `component` (`Name`, `ComponentId`, `ProjectId`, `CreationDate`, `RequiredHours`, `DueDate`, `IsDefault`) VALUES
+('Comp1', 54, 119, NULL, NULL, NULL, NULL),
+('Comp2', 55, 120, NULL, NULL, NULL, NULL),
+('Comp3', 56, 121, NULL, NULL, NULL, NULL),
+('Comp4', 57, 122, NULL, NULL, NULL, NULL),
+('Comp5', 58, 123, NULL, NULL, NULL, NULL),
+('Default', 69, 138, NULL, 500, '2011-08-13', NULL),
+('Default', 70, 139, NULL, 500, '2011-08-20', NULL),
+('Default', 71, 140, NULL, 5, '2011-08-22', NULL),
+('Default', 72, 141, NULL, 5, '2011-08-24', NULL),
+('Default', 73, 142, NULL, 50, '2011-08-10', NULL),
+('Default', 74, 143, NULL, 500, '2011-08-31', NULL),
+('Default', 75, 144, NULL, 333, '2011-08-29', NULL);
 
 -- --------------------------------------------------------
 
@@ -231,7 +237,7 @@ CREATE TABLE IF NOT EXISTS `notification` (
   PRIMARY KEY (`Id`),
   KEY `status_id` (`StatusId`),
   KEY `type_id` (`TypeId`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=18 ;
 
 --
 -- Dumping data for table `notification`
@@ -243,7 +249,18 @@ INSERT INTO `notification` (`Id`, `SenderId`, `ReceiverId`, `TypeId`, `TypeEntit
 (3, 22, 23, 2, 12, 1),
 (4, 22, 21, 1, 2, 2),
 (5, 23, 21, 1, 2, 3),
-(6, 22, 21, 1, 2, 1);
+(6, 22, 21, 1, 2, 2),
+(7, 21, 21, 1, 119, 2),
+(8, 21, 21, 1, 119, 1),
+(9, 21, 21, 1, 120, 1),
+(10, 21, 21, 1, 121, 1),
+(11, 21, 21, 1, 119, 3),
+(12, 21, 21, 1, 123, 3),
+(13, 21, 21, 1, 139, 3),
+(14, 21, 21, 1, 123, 1),
+(15, 24, 21, 1, 141, 2),
+(16, 24, 21, 1, 142, 2),
+(17, 24, 21, 1, 144, 2);
 
 -- --------------------------------------------------------
 
@@ -321,7 +338,7 @@ CREATE TABLE IF NOT EXISTS `project` (
   `ProjectStatus` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`ProjectId`),
   KEY `projectlead` (`ProjectLeader`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=140 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=145 ;
 
 --
 -- Dumping data for table `project`
@@ -334,7 +351,12 @@ INSERT INTO `project` (`ProjectId`, `ProjectName`, `ProjectType`, `ProjectLeader
 (122, 'HelloByronProject', NULL, 21, NULL, NULL),
 (123, 'SupWatdoProject', NULL, 21, NULL, NULL),
 (138, 'testcreate', 1, 21, NULL, NULL),
-(139, 'sup', 1, 21, NULL, NULL);
+(139, 'sup', 1, 21, NULL, NULL),
+(140, 'Another Test Project', 1, 21, NULL, NULL),
+(141, 'test', 1, 24, NULL, NULL),
+(142, 'john doe project 1', 2, 24, NULL, NULL),
+(143, 'projectusertest', 2, 24, NULL, NULL),
+(144, 'project for adeeb', 2, 24, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -391,7 +413,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `Salt` varchar(255) NOT NULL,
   PRIMARY KEY (`UserId`),
   KEY `user_usertype` (`UserType`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=24 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=25 ;
 
 --
 -- Dumping data for table `user`
@@ -400,7 +422,8 @@ CREATE TABLE IF NOT EXISTS `user` (
 INSERT INTO `user` (`UserId`, `FirstName`, `LastName`, `Email`, `Phone`, `UserType`, `Nickname`, `Password`, `Salt`) VALUES
 (21, 'Adeeb', 'Rahman', 'ttc_rulz@hotmail.com', 0, 1, 'Armalite', '01a5f11f60ec37402c740c90fc901840ff10cf6d', '7637ab7d2675e59628efce'),
 (22, 'Random', 'Dude', 'random@random.com', 0, 1, 'Random', '8bcda560d747e29632013e36614f59943365175e', 'a3e076c0b29f6ceed5079c'),
-(23, 'Mido', 'Basim', 'mo@mo.com', 0, 1, 'mo', '6ce174da3a2cc409a4a4ddd7bb06180df2173a37', 'c8c685b65a06446ed6ca87');
+(23, 'Mido', 'Basim', 'mo@mo.com', 0, 1, 'mo', '6ce174da3a2cc409a4a4ddd7bb06180df2173a37', 'c8c685b65a06446ed6ca87'),
+(24, '', '', 'john@doe.com', 0, 1, 'student', 'd5d05fbf89ee9491fe5f419e8c9c4b7ff33c7400', '4659f6646e7d3cfd636cab');
 
 -- --------------------------------------------------------
 
@@ -425,7 +448,8 @@ INSERT INTO `usercomponent` (`UserID`, `ComponentID`) VALUES
 (23, 54),
 (21, 55),
 (22, 55),
-(23, 55);
+(23, 55),
+(24, 75);
 
 -- --------------------------------------------------------
 
