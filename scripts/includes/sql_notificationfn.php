@@ -52,7 +52,7 @@ function getEntityNameByIssueId($en_id){
 	global $connection;
 
 	$query = $connection->stmt_init();
-	$sql_stmnt = "SELECT Name FROM issue WHERE IssueId = ?";
+	$sql_stmnt = "SELECT name FROM issue WHERE IssueId = ?";
 	
 	if($query->prepare($sql_stmnt)){
 		$query->bind_param("i", $en_id);	
@@ -62,7 +62,7 @@ function getEntityNameByIssueId($en_id){
 		}
 		else {
 			// returns the name of the Issue.
-			return $results[0]['Name'];
+			return $results[0]['name'];
 		}
 	} else {
 		// error happened while fetching the count of notifications

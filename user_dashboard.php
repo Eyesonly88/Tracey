@@ -99,7 +99,12 @@ confirmLogin();
 												echo "<p id=\"notif-msg-{$result['Id']}\">";
 												echo getNotifNameByID($result['TypeId']);
 												echo " [";
-												echo getEntityNameByProjectId($result['TypeEntityId']);
+												if (getNotifNameByID($result['TypeId']) == "IssueAssigned"){
+													echo getEntityNameByIssueId($result['TypeEntityId']);
+												} else {
+													echo getEntityNameByProjectId($result['TypeEntityId']);
+												}
+												
 												echo "] by ";
 												echo getSenderName($result['SenderId']);
 												echo ".</p> ";
@@ -117,11 +122,7 @@ confirmLogin();
 													
 												} 
 												echo "</div>";
-											} else {
-												// don't display notification
-												if (getNotifCountByEmail($_SESSION['email']) == 0)
-													echo "<span>You don't have any notifications.</span>";
-											}
+											} 
 										
 										}
 									} else {

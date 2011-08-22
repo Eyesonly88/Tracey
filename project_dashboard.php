@@ -120,36 +120,41 @@ if (isset($_GET['id'])){
 									<?php
 									// get all notifications for user
 									$resultSet = getAllNotifDetails($_SESSION['email']);
-									foreach ($resultSet as $result) {
-										// print_r($result);
-										// display notification iff its new
-										if ($result['StatusId'] == 1) {
-											echo "<div class=\"notif-msg-block\">";
-											echo "<p id=\"notif-msg-{$result['Id']}\">";
-											echo getNotifNameByID($result['TypeId']);
-											echo " [";
-											echo getEntityNameByProjectId($result['TypeEntityId']);
-											echo "] by ";
-											echo getSenderName($result['SenderId']);
-											echo ".</p> ";
-											
-											if (!(getNotifNameByID($result['TypeId']) == "IssueAssigned")){
+									
+									if (!(empty($resultSet))){
+									
+										foreach ($resultSet as $result) {
+											// print_r($result);
+											// display notification iff its new
+											if ($result['StatusId'] == 1) {
+												echo "<div class=\"notif-msg-block\">";
+												echo "<p id=\"notif-msg-{$result['Id']}\">";
+												echo getNotifNameByID($result['TypeId']);
+												echo " [";
+												if (getNotifNameByID($result['TypeId']) === "IssueAssigned"){
+													echo getEntityNameByIssueId($result['TypeEntityId']);
+												} else {
+													echo getEntityNameByProjectId($result['TypeEntityId']);
+												}
+												echo "] by ";
+												echo getSenderName($result['SenderId']);
+												echo ".</p> ";
 												
-												echo "<form action='' id=\"notif-form\">";
-												echo "<input type=\"hidden\" name=\"NotificationId\" class=\"notif-id-input\" value=\"{$result['Id']}\">";
-												echo "<input type='button' name=\"submit\" id='notif-accept-button' value=\"Accept\">";
-												echo "<input type='button' name=\"submit\" id='notif-reject-button' value=\"Reject\">";
-												echo "</form>";
-												
-											} 
-											echo "</div>";
-										} else {
-											// don't display notification
-											if (getNotifCountByEmail($_SESSION['email']) == 0)
-												echo "<span>You don't have any notifications.</span>";
+												if (!(getNotifNameByID($result['TypeId']) == "IssueAssigned")){
+													
+													echo "<form action='' id=\"notif-form\">";
+													echo "<input type=\"hidden\" name=\"NotificationId\" class=\"notif-id-input\" value=\"{$result['Id']}\">";
+													echo "<input type='button' name=\"submit\" id='notif-accept-button' value=\"Accept\">";
+													echo "<input type='button' name=\"submit\" id='notif-reject-button' value=\"Reject\">";
+													echo "</form>";
+													
+												} 
+												echo "</div>";
+											} 											
+											 
 										}
-										
-										 
+									} else {
+										echo "<p> You don't have any notifications</p>";
 									}
 									?>
 								</span>
