@@ -12,24 +12,28 @@ $(document).ready(function() {
 		
 		var notifForm = $(this).parent();
 		var notifId = notifForm.children('.notif-id-input').val();
+		var projectId = notifForm.children('.project-id-input').val();
+		var emailAddress = notifForm.children('.emailaddress-input').val();
 		var notifMsg = notifForm.parent().children('#notif-msg-'+notifId);
 		var notifCount = $('#notification-icon h3').text();
 		
 		$.ajax({
 			url: 'scripts/notification/notification.php' ,
-			data:  "AcceptId=2&NotificationId=" + notifId,
+			data:  "AcceptId=2&NotificationId=" + notifId + "&ProjectId=" + projectId + "&emailAddress=" + emailAddress,
 			type: 'post',
 			cache: false,
 			dataType: 'text',
 			success: function (data) {
 
 				if(data == 1){
+					alert("success");
 					notifCount = parseInt(notifCount) - 1;
 					$('#notification-icon h3').text(notifCount);
 					notifForm.fadeOut(400);
 					notifMsg.fadeOut(400);
 				} else if (data == -1){
 					// accepting failed	
+					alert("failed");
 				}
 			},
 			error: "Error"

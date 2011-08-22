@@ -1,6 +1,7 @@
 <?php
 include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sanitize.php');
 include_once ($_SERVER['DOCUMENT_ROOT'] . '/scripts/includes/sql_notificationfn.php');
+include_once ($_SERVER['DOCUMENT_ROOT'] . '/scripts/includes/sql_projectfunctions.php');
 
 $callbackMsg = '';
 
@@ -9,9 +10,12 @@ if (isset($_POST['AcceptId'])){
 
 	$StatusId = $_POST['AcceptId'];
 	$NotifId = $_POST['NotificationId'];
+	$ProjectId = $_POST['ProjectId'];
+	$EmailAddress = $_POST['emailAddress'];
 	
 	if(setNotifStatus($StatusId, $NotifId)){
 		// changing status was succesful
+		addUserToProject($ProjectId, $EmailAddress);
 		$callbackMsg = 1;
 		
 	}else{

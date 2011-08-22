@@ -1,6 +1,6 @@
 <?php
-include_once ($_SERVER['DOCUMENT_ROOT'] . '/scripts/includes/sessions.php');
-include_once ($_SERVER['DOCUMENT_ROOT'] . '/scripts/includes/sql_notificationfn.php');
+include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sessions.php');
+include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_notificationfn.php');
 include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_projectfunctions.php');
 
 confirmLogin();
@@ -108,6 +108,8 @@ confirmLogin();
 												if (!(getNotifNameByID($result['TypeId']) == "IssueAssigned")){
 													
 													echo "<form action='' id=\"notif-form\">";
+													echo "<input type=\"hidden\" name=\"ProjectId\" class=\"project-id-input\" value=\"{$result['TypeEntityId']}\">";
+													echo "<input type=\"hidden\" name=\"EmailAddress\" class=\"emailaddress-input\" value=\"{$_SESSION['email']}\">";
 													echo "<input type=\"hidden\" name=\"NotificationId\" class=\"notif-id-input\" value=\"{$result['Id']}\">";
 													echo "<input type='button' name=\"submit\" id='notif-accept-button' value=\"Accept\">";
 													echo "<input type='button' name=\"submit\" id='notif-reject-button' value=\"Reject\">";

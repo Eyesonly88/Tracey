@@ -73,6 +73,14 @@ text-align: center;
 border: none;
 }
 
+.custom #user-box #createProject-container a{
+	/*
+	display: block;
+	width:10%;
+	*/
+}
+
+
 .custom #user-box #createIssue-createComponent-container #createIssue-button{ 
 float:left;
 display:block;
