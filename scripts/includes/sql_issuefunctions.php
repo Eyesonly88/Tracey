@@ -11,6 +11,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_projectfunctions.p
 include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_other.php');
 include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_checks.php');
 include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_prepared.php');
+include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_notificationfn.php');
 
 /*
  * A function that creates an issue for a project component.
