@@ -161,8 +161,16 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_componentfunctions
 		$emailExists = 0;
 		$userinfo = array();
 		$results = '';
+		$userinfoarray = getUserInfo($email, "UserId");
+		$userid = $userinfoarray[0]['UserId'];
 		$query = $connection ->stmt_init();	
-		$sql_getProjects = "SELECT p.ProjectId, p.ProjectName, p.ProjectType, p.ProjectLeader from Project p INNER JOIN User u ON u.UserId = p.ProjectLeader WHERE Email=?";	
+		$sql_getProjects = "SELECT p.ProjectId, p.ProjectName, p.ProjectType, p.ProjectLeader 
+							from Project p 
+							INNER JOIN Component c ON c.ProjectId = p.ProjectId
+							INNER JOIN UserComponent uc ON uc.ComponentId = c.ComponentId
+							INNER JOIN User u ON u.UserId = uc.UserId
+							WHERE u.Email=?
+							AND c.IsDefault = 1";	
 		$query->prepare($sql_getProjects);
 		$query -> bind_param("s", $em);
 		$em = $email;		
@@ -174,6 +182,10 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_componentfunctions
 		
 		$userinfo = $results;		
 		return $userinfo;
+		
+	}
+	
+	function getRelatedProjectsByEmail($email) {
 		
 	}
 	
