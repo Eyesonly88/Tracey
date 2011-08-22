@@ -214,9 +214,21 @@ confirmLogin();
 									}
 										foreach ($resultSet as $result){
 											if ($result['UserId'] == $assigneeId){
-												echo "<option value=\"" . $result['UserId'] ."\" selected>" . $result['FirstName'] . ' ' . $result['LastName'] . "</option>";
+												$fname = $result['FirstName'];
+												$lname = $result['LastName'];
+												if (!empty($fname) && !empty($lname)) {
+													echo "<option value=\"" . $result['UserId'] ."\" selected>" . $result['FirstName'] . ' ' . $result['LastName'] . "</option>"; 
+												} else {
+													echo "<option value=\"" . $result['UserId'] ."\" selected>" . $result['Email'] . "</option>";
+												}
 											} else {
-												echo "<option value=\"" . $result['UserId'] ."\">" . $result['FirstName'] . ' ' . $result['LastName'] . "</option>";
+												$fname = $result['FirstName'];
+												$lname = $result['LastName'];
+												if (!empty($fname) && !empty($lname)) {
+													echo "<option value=\"" . $result['UserId'] ."\" >" . $result['FirstName'] . ' ' . $result['LastName'] . "</option>"; 
+												} else {
+													echo "<option value=\"" . $result['UserId'] ."\" >" . $result['Email'] . "</option>";
+												}
 											}
 										}
 									?>
