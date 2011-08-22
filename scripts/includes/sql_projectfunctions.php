@@ -38,7 +38,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_componentfunctions
 			$projectid = $lastinsertarray[0]['ID'];
 			
 			/* Using the id of the last created project, add a component to this project (this is the default component) */
-			$lastinsertarray = addComponentByProjectId($projectid, $hours, $due);
+			$lastinsertarray = addComponentByProjectId($projectid, $hours, $due, 1);
 			$compid = $lastinsertarray[0]['ID'];
 			addUserToComponentByEmail($compid, $email);
 			return 1;
@@ -181,8 +181,18 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_componentfunctions
 
 		global $connection;
 		$query = $connection->stmt_init();	
-		$sql_addUserToProject = "";
-		$query->prepare($sql_addUserToProject);		
+		$sql_addUserToProject = "SELECT c.ComponentId 
+									FROM Component c INNER JOIN Project p ON c.ProjectId = p.ProjectId
+									WHERE p.ProjectId = ?
+									AND c.IsDefault = 1";
+									
+		$query->prepare($sql_addUserToProject);	
+		$query->bind_param("i", $pid);
+		$pid = $projectid;
+		$comparray = dynamicBindResults($query);
+		$compid = $comparray[0]['ComponentId'];
+		addUserToComponentByEmail($compid, $useremail);
+			
 	}
 	
 	function checkUserBelongsToProject($projectid, $email) {

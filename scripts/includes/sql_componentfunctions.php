@@ -13,17 +13,18 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_checks.php');
 include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_prepared.php');
 
 	/* Adds a component to the specified project @TODO: component table needs a few more fields to be added e.g. 'ComponentName' */
-	function addComponentByProjectId($projectid, $hours, $due){
+	function addComponentByProjectId($projectid, $hours, $due, $isDefault){
 		global $connection;
 		$compid = '';
 		$query = $connection->stmt_init(); 
-		$sql_addComponent = "INSERT INTO Component(name, ProjectId, RequiredHours, DueDate) VALUES('Default', ?, ?, ?)";
+		$sql_addComponent = "INSERT INTO Component(name, ProjectId, RequiredHours, DueDate, IsDefault) VALUES('Default', ?, ?, ?, ?)";
 		$sql_getLastInsertId = "SELECT LAST_INSERT_ID() AS ID";	
 		if ($query->prepare($sql_addComponent)) {		
-			$query->bind_param("ids", $pid, $requiredhours, $duedate);	
+			$query->bind_param("idsi", $pid, $requiredhours, $duedate, $default);	
 			$pid = $projectid;
 			$requiredhours = $hours;
 			$duedate =  date("Y-m-d", strtotime($due));
+			$default = $isDefault;
 			$query->execute();		
 			$query->prepare($sql_getLastInsertId);
 			$lastinsertarray = dynamicBindResults($query);
