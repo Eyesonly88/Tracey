@@ -30,7 +30,10 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_notificationfn.php
 			$query->execute();
 			// send notification for to the receiver of the newly created issue
 			$issueId = mysql_insert_id();
-			sendNotifByIssue($reporterId, $assigneeId, $issueId);
+			
+			$reporterEmail = getUserInfoById($reporterId, "Email");
+			$assigneeEmail = getUserInfoById($assigneeId, "Email");
+			sendNotifByIssue($reporterEmail, $assigneeEmail, $issueId);
 			return true;
 		} else {
 			return false;
