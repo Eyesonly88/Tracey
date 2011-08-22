@@ -14,13 +14,6 @@
     "column" : "second",
     "open" : true,
     "url" : "/widgets/userdashboard_widgets/userissues.php"
-  },
-  {
-    "title" : "Issues Created by You",
-    "id" : "widget3",
-    "column" : "second",
-    "open" : true,
-    "url" : "/widgets/userdashboard_widgets/createdissues.php"
   }
   
   
