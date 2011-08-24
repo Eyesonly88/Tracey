@@ -28,7 +28,7 @@ $projectid = '';
 		$response = $response . '<tbody>';	
 		foreach($result as $row){
 			$response = $response . '<tr>';
-			$response = $response . '<td class="c_id" name="c_id" align="center">' . $row['ComponentId'] . '</td>';
+			$response = $response . '<td class="c_id" name="c_id" align="center">' . $row['Name'] . '</td>';
 			$response = $response . '<td class="c_hours" name="c_hours" align="center">' . $row['RequiredHours'] . '</td>';
 			$response = $response . '<td class="c_date" name="c_date" align="center">' . $row['CreationDate'] . '</td>';
 			$response = $response . '<td class="c_editcomponent" name="c_editcomponent_button" id="edit_component_' . $row['ComponentId'] . '" align="center"><a href="#"> View </a></td>';

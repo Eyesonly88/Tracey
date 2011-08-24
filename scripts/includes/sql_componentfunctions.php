@@ -145,5 +145,18 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_prepared.php');
 			return -1;
 		}
 	}
-
+	
+	function getProjectNameByComponentId($componentid) {
+		global $connection;
+		$query = $connection->stmt_init();
+		$sql_stmnt = "SELECT ProjectName 
+						FROM project p INNER JOIN component c ON c.ProjectId = p.ProjectId
+						WHERE c.ComponentId = ?";
+		$query->prepare($sql_stmnt);
+		$query->bind_param("i", $id);		
+		$id = $componentid;
+		$results = dynamicBindResults($query);
+		return $results[0]['ProjectName'];
+	}
+	
 ?>

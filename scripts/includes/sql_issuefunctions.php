@@ -405,5 +405,31 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_notificationfn.php
 		
 	}
 	
+	function getPriorityNameById($priorityid) {
+		
+		global $connection;
+		$query = $connection->stmt_init();
+		$sql_stmnt = "SELECT Name FROM issuepriority WHERE ID = ?";
+		$query->prepare($sql_stmnt);
+		$query->bind_param("i", $id);		
+		$id = $priorityid;
+		$results = dynamicBindResults($query);
+		return $results[0]['Name'];
+		
+	}
+	
+	function getStatusNameById($statusid) {
+		
+		global $connection;
+		$query = $connection->stmt_init();
+		$sql_stmnt = "SELECT Name FROM issuestatus WHERE ID = ?";
+		$query->prepare($sql_stmnt);
+		$query->bind_param("i", $id);		
+		$id = $statusid;
+		$results = dynamicBindResults($query);
+		return $results[0]['Name'];
+		
+	}
+	
 
 ?>
