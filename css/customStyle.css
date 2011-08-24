@@ -74,10 +74,16 @@ border: none;
 }
 
 .custom #user-box #createProject-container a{
-	/*
-	display: block;
-	width:10%;
-	*/
+	
+display: block;
+width:0;
+height:0;
+float:left;
+margin-left:45%;
+margin-right:auto;
+text-align: center;
+border: none;
+	
 }
 
 
