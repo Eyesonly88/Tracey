@@ -373,15 +373,18 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_notificationfn.php
 	function logIssueHours($issueid, $issuehours, $description, $user) {
 		global $connection;
 		$query = $connection->stmt_init();
-		$sql_stmnt = "INSERT INTO issuehour (`IssueHourId`, `IssueId`, `Hours`, `Description`,  `UserId`) VALUES (NULL, ?, ?, ?,  ?);";
+		$sql_stmnt = "INSERT INTO issuehour (`IssueHourId`, `IssueId`, `Hours`, `Description`, `UserId`, `CreationDate`) VALUES (NULL, ?, ?, ?, ?, ?);";
 		if($query->prepare($sql_stmnt)){
 		
-			$query->bind_param("iisi", $id, $hours, $desc, $userid);		
+			$query->bind_param("iisis", $id, $hours, $desc, $userid, $creationdate);		
 			$id = $issueid;
 			$hours = $issuehours;
 			$desc = $description;
-			
-			//echo "" . $id . " " . $hours . " " . $desc;
+			//$phpdate = getdate();
+			date_default_timezone_set("Pacific/Auckland");
+			$creationdate = date('Y-m-d H:i:s');
+			//$creationdate =  date("Y-m-d", strtotime($due));
+			//echo "" . $id . " " . $hours . " " . $creationdate;
 			
 			$userid = getUserInfo($user,"UserId");	
 			//echo " " . $id . " " . $hours . " " . $desc . " " . $userid;
@@ -397,11 +400,26 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_notificationfn.php
 	function getHoursSpentOnIssue($issueid) {
 		
 		global $connection;
+		$query = $connection->stmt_init();
+		$hours = 0;
+		$sql_stmnt = "SELECT SUM(ih.Hours) AS hours
+						FROM issuehour ih
+						INNER JOIN issue i ON i.IssueId = ih.IssueId
+						WHERE i.IssueId = ?
+						";
 		
-		//@todo: query to calculate the total number of hours spent on an issue
-		// this is calculated by summing up all the hour values of all records inside
-		// the issuehour table for the particular issue (issue id = $issueid)
+		$query->prepare($sql_stmnt);
+		$query->bind_param("i", $id);		
+		$id = $issueid;
 		
+		
+		$result = dynamicBindResults($query);
+		if ($result[0]['hours'] != NULL)	{
+			$hours = $result[0]['hours'];
+		} else {
+			$hours = 0;
+		}
+		return $hours;
 		
 	}
 	

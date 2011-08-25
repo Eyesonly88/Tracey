@@ -303,6 +303,35 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_componentfunctions
 		
 	}
 	
+	function getHoursLoggedByProjectId($projectid) {
+		
+		global $connection;
+		$query = $connection->stmt_init();
+		$hours = 0;
+		$sql_stmnt = "SELECT SUM(ih.Hours) AS hours
+						FROM issuehour ih
+						INNER JOIN issue i ON i.IssueId = ih.IssueId
+						INNER JOIN component c ON c.ComponentId = i.ComponentId
+						INNER JOIN project p ON p.ProjectId = c.ProjectId
+						WHERE p.ProjectId = ?
+						";
+		
+		$query->prepare($sql_stmnt);
+		$query->bind_param("i", $id);		
+		$id = $projectid;
+		
+		$result = dynamicBindResults($query);
+		if ($result[0]['hours'] != NULL)	{
+			$hours = $result[0]['hours'];
+		} else {
+			$hours = 0;
+		}
+		return $hours;
+		
+		
+	}
+	
+	
 	
 	
 	

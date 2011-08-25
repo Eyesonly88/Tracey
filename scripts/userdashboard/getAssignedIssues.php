@@ -12,7 +12,7 @@
  */
 
  	$result = '';
-	$response = '<thead><tr><th>Issue</th><th>Project</th><th>Reporter</th><th>Assignee</th><th>Priority</th><th>Status</th><th>Link</th></tr></thead>';
+	$response = '<thead><tr><th>Issue</th><th>Project</th><th>Reporter</th><th>Assignee</th><th>Priority</th><th>Status</th><th>Hours Logged</th><th>Link</th></tr></thead>';
 	if(isset($_POST['email'])){
 		$emailadd = $_POST['email'];
 		$result = getAssignedIssuesByEmail($emailadd);
@@ -24,7 +24,7 @@
 		$response = '';
 		//$response = '<table class="projlistflex"  border="1" cellpadding="3" cellspacing="0">';
 
-		$response = $response . '<thead><tr><th>Issue</th><th>Project</th><th>Reporter</th><th>Assignee</th><th>Priority</th><th>Status</th><th>Link</th></tr></thead>';
+		$response = $response . '<thead><tr><th>Issue</th><th>Project</th><th>Reporter</th><th>Assignee</th><th>Priority</th><th>Status</th><th>Hours Logged</th><th>Link</th></tr></thead>';
 		$response = $response . '<tbody>';	
 		foreach($result as $row){
 			$reporterEmail = getUserInfoById($row['ReporterId'], "Email");
@@ -48,6 +48,8 @@
 			$response = $response . '<td class="i_assignee" name="i_assignee" align="center">' . $assignee . '</td>';
 			$response = $response . '<td class="i_priority" name="i_priority" align="center">' . getPriorityNameById($row['Priority']) . '</td>';
 			$response = $response . '<td class="i_status" name="i_status" align="center">' . getStatusNameById($row['IssueStatus']) . '</td>';
+			$response = $response . '<td class="i_hours" name="i_hours" align="center">' . getHoursSpentOnIssue($row['IssueId']) . '</td>';
+			
 			$response = $response . '<td class="i_viewissue" name="i_viewissue_button" id="' . $row['IssueId'] . '" align="center"><a id="view_issue' . $row['IssueId'] . '" rel="shadowbox[Mixed];width=900" href="issue.php?id='. $row['IssueId'] . '">View Issue</a></td>';
 			$response = $response . '</tr>';
 		}
