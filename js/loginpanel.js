@@ -74,7 +74,7 @@ function showRegister() {
 	// input field font size
 	if ($.browser.safari) {
 		$('#register-container .register-input').css({
-			'font-size': '.9em'
+			'font-size': '1.5em'
 		});
 	}
 
@@ -231,7 +231,7 @@ function showLogin() {
 	// input field font size
 	if ($.browser.safari) {
 		$('#login-container .login-input').css({
-			'font-size': '.9em'
+			'font-size': '1.5em'
 		});
 	}
 

@@ -214,31 +214,6 @@ if (isset($_GET['id'])){
 								<label>Logged in as <?php	echo $_SESSION['email'];?></label>
 								<label></label>
 								
-								<!--
-								
-								<h3>Invite People</h3>
-									<form action="" id="projectInvite-form">
-									 	
-										<label>Receiver's e-mail:
-										<input type="text" name="receiveremail" id="receiver-email" value=""/>
-										</label>
-										<label>Project:
-											<select name="projectid" id="projectid-selector">
-												<?php 
-													$resultSet = getProjectsByEmail($_SESSION['email']);
-													foreach ($resultSet as $result){
-														echo "<option value=\"" . $result['ProjectId'] ."\">" . $result['ProjectName'] . "</option>";
-													}
-												?>
-											</select>
-											<input type="hidden" name="senderemail" id="sender-email" value="<?php echo $_SESSION['email']; ?>" />
-											<input type="button"  name="submit" value="Invite" id="inv-button" />
-											<p id="confirm-inv-msg"></p>
-										</label>	
-
-								</form>
-								
-								-->
 							</div>
 						</div>
 					</li>
