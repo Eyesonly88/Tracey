@@ -95,7 +95,7 @@ if (isset($_GET['id'])){
 							<a href="#">Help</a>
 						</li>
 						<li>
-							<a href="/scripts/authentication/logout.php">Logout!</a>
+							<a href="/scripts/authentication/logout.php" style="color: orange">Logout!</a>
 						</li>
 					</ul>
 				</div>
