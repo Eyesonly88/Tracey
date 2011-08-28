@@ -91,8 +91,10 @@ confirmLogin();
 					var title = $('form #issue-title').val();
 					var description = $('form #issue-description textarea').val();
 					var component = $('form #issue-component').val();
-					
-					if (action == 0) {
+					if (assignee == -1){
+						alert("Please Choose an assignee from the list before saving!");
+					}else{
+						if (action == 0) {
 						
 						//AJAX call that sends the issue information to modify the issue
 						
@@ -143,7 +145,9 @@ confirmLogin();
 						   }
 					   
 					 	});
-					}				
+					}
+					}
+									
 				});
 		});
 
@@ -204,7 +208,7 @@ confirmLogin();
 						<p>
 							<label for="issue-assignee">Assignee<span class="required"> *</span></label>
 							<select id="issue-assignee" required="required">
-								<option value="1">Select Project Member</option>
+								<option value="-1">Select Project Member</option>
 								
 								<?php 
 									if ($action == 0){
@@ -341,7 +345,7 @@ confirmLogin();
 								
 							?>
 							<label for="issue-startdate">Created</label>
-							<input type="text" id="issue-startdate" required="required" disabled="disabled" value="<?php if ($action == 0){ echo $creationdate; } ?>"/>
+							<input type="text" id="issue-startdate" required="required" disabled="disabled" style="color:black" value="<?php if ($action == 0){ echo $creationdate; } ?>"/>
 						</p>
 						<?php } ?>
 						<?php if ($action != 1) { ?>
