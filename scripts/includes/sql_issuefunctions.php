@@ -24,14 +24,17 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_notificationfn.php
 		$query = $connection->stmt_init();
 		$sql_createIssue = "INSERT INTO issue (`IssueId`, `ComponentId`, `name`, `Description`, `ReporterId`, `AssigneeId`, `IssueType`, `Priority`, `IssueStatus`, `CreationDate`) 
 		VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+		$sql_getLastInsertId = "SELECT LAST_INSERT_ID() AS ID";
 		
 		if ($query->prepare($sql_createIssue)) {
 			$query->bind_param("issiiiiis", $compId, $name, $desc, $reporterId, $assigneeId, $issueTypeId, $PriorityId, $issueStatusId, $cdate);
 			date_default_timezone_set("Pacific/Auckland");
 			$cdate = date('Y-m-d H:i:s');
 			$query->execute();
+			$query->prepare($sql_getLastInsertId);
+			$lastinsertarray = dynamicBindResults($query);
 			// send notification for to the receiver of the newly created issue
-			$issueId = mysql_insert_id();
+			$issueId = $lastinsertarray[0]['ID'];
 			
 			$reporterEmail = getUserInfoById($reporterId, "Email");
 			$assigneeEmail = getUserInfoById($assigneeId, "Email");

@@ -152,6 +152,7 @@ if (isset($_GET['id'])){
 													
 												} 
 												echo "</div>";
+												echo "<div style=\"clear:both;\"></div>";
 											} 											
 											 
 										}

@@ -72,33 +72,31 @@ if (isset($_GET['id'])){
 	</head>
 
 	<body>
-		
-		<!-- Body here -->
-		<div id="projectwrap" class="hourswrap">
-			
-			<h3>Log Issue Hour</h3><BR><BR>
-			<div id="createproject-info-container">
+		<form>
+			<input type="hidden" name="useremail" id="useremail" value="<?php echo $_SESSION['email']; ?>" />
+			<input type="hidden" name="issueid" id="issueid" value="<?php echo $id; ?>" />
+			<div class="box">
 				
-				<div id="project-info">
-					<label><p>Hours Logged:</p>
-						<input type="text" name="hourslogged" id="hourslogged" value=""/>
-					</label>
-					
-					<label><p>Description of Work:</p>
-						<input type="text" name="description" id="description" value=""/>
-	
-					</label>
-
-						<input type="hidden" name="useremail" id="useremail" value="<?php echo $_SESSION['email']; ?>" />
-						<input type="hidden" name="issueid" id="issueid" value="<?php echo $id; ?>" />
-						<input type="button" id="submitlog_btn" name="submit" value="Submit Work Log" />
-						
-					</label>
-				</div>
+				<fieldset class="tabular">
+					<legend>
+						Log Work Hours
+					</legend>
+					<div id="attributes">
+						<p>
+						<label for="hourslogged">Hours Logged<span class="required"> *</span></label>
+						<input type="text" id="hourslogged" required="required"/>
+					</p>
+					<p>
+						<label for="description">Work Description<span class="required"> *</span></label>
+						<input type="text" id="description" required="required" style="width:400px"/>
+					</p>
+					</div>
+				</fieldset>
+				
+				<input type="button" id="submitlog_btn" name="submit" value="Submit Work Log" style="margin-top:1em;"/>
 			</div>
-
-		</div>
-		<div id="hours_statusinfo"></div>
-
+			
+			<div id="hours_statusinfo"></div>
+		</form>
 	</body>
 </html>

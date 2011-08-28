@@ -52,7 +52,7 @@ confirmLogin();
 					</p>
 				</div>
 			</fieldset>
-			<input type="button" value="Create Component" id="confirm_btn"/>
+			<input type="button" value="Create Component" id="confirm_btn" style="margin-top:1em;/>
 		</div>
 		<div id="statusinfo" type="hidden" style="text-align: center;font-size:3em;color: white"></div>
 	</form>
