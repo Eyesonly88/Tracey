@@ -328,7 +328,7 @@ confirmLogin();
 				<div id="log-issue-hours">
 					<p>Click on the log hours button to add the amount of hours you spent on this issue</p>
 					<p>
-						<a id="loghours" rel="shadowbox[Mixed];height=240" href="logissuehour.php?id=150"><input type="button" value="Log Hours" /></a>
+						<a id="loghours" rel="shadowbox[Mixed];height=240" href="logissuehour.php?id=<?php echo $theissueid; ?>"><input type="button" value="Log Hours" /></a>
 					</p>
 					
 				</div>
