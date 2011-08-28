@@ -334,7 +334,7 @@ confirmLogin();
 								//$cdate = date('Y-m-d H:i:s', );
 								if ($issueinfo['CreationDate'] != NULL) {
 									$datetime = strtotime($issueinfo['CreationDate']);
-									$creationdate = date("m/d/y g:i A", $datetime);
+									$creationdate = date("d/m/y g:i A", $datetime);
 								} else {
 									$creationdate = "";
 								}
@@ -351,7 +351,7 @@ confirmLogin();
 								//$cdate = date('Y-m-d H:i:s', );
 								if ($issueinfo['ResolvedDate'] != NULL) {
 									$datetime = strtotime($issueinfo['ResolvedDate']);
-									$resolveddate = date("m/d/y g:i A", $datetime);
+									$resolveddate = date("d/m/y g:i A", $datetime);
 								} else {
 									$resolveddate = "";
 								}
@@ -369,7 +369,7 @@ confirmLogin();
 								//$cdate = date('Y-m-d H:i:s', );
 								if ($issueinfo['LastModificationDate'] != NULL) {
 									$datetime = strtotime($issueinfo['LastModificationDate']);
-									$modificationdate = date("m/d/y g:i A", $datetime);
+									$modificationdate = date("d/m/y g:i A", $datetime);
 								} else {
 									$modificationdate = "";
 								}
