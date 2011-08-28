@@ -182,7 +182,7 @@ confirmLogin();
 		<div id="user-box">
 			
 			<div id="createProject-container">
-				<a rel="shadowbox[Mixed];width=830;height=300;" href="project.php?action=create"><input type="button" id="createProject-button" value="Create Project" /></a>
+				<a rel="shadowbox;width=830;height=300;" href="project.php?action=create"><input type="button" id="createProject-button" value="Create Project" /></a>
 		
 			</div>
 			
