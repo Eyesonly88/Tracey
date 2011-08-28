@@ -344,7 +344,7 @@ font-weight: bold;
       padding-right:0.5em;
       border: 3px solid #282726;
       background: -webkit-gradient( linear, left top, left bottom, from(#e2e2e2), to(#8c8a88), color-stop(0.5, #acadae), color-stop(0.5, #82807e));
-      background: -moz-linear-gradient(top, (#e2e2e2), (#8c8a88));
+      background: -moz-linear-gradient(90deg, (#e2e2e2), (#8c8a88));
       margin: 0 0 3px 0;
       text-shadow: 0px 1px 0 #cecece;
       -webkit-background-origin: padding-box;
@@ -366,11 +366,6 @@ font-weight: bold;
       background: -webkit-gradient( linear, left top, left bottom, from(#aaaee5), to(#10006d), color-stop(0.5, #1F3B97), color-stop(0.5, #081f6f) ); 
     }
 
-.custom input[type=button].cancel {
-      background: -moz-linear-gradient(top, (#5c5c5b), (#1e1b16));
-      background: -webkit-gradient( linear, left top, left bottom, from(#5c5c5b), to(#1e1b16), color-stop(0.2, #1e1b16) ); 
-      margin-top: 6px;
-    }
 /*
  * Iphone Style button for lightbox pages
  */
@@ -384,8 +379,8 @@ input[type=button], input[type=submit], button {
       padding-left:0.5em;
       padding-right:0.5em;
       border: 2px solid #f6f6f6;
-      background: -webkit-gradient( linear, left top, left bottom, from(#e2e2e2), to(#8c8a88), color-stop(0.5, #acadae), color-stop(0.5, #82807e));
-      background: -moz-linear-gradient(top, (#e2e2e2), (#8c8a88));
+      background: -webkit-gradient( linear, left top, left bottom, from(#e2e2e2), to(##c6c5c4), color-stop(0.5, #acadae), color-stop(0.5, #82807e));
+      background: -moz-linear-gradient(90deg, #e2e2e2, #8c8a88)repeat scroll 0 0 transparent;
       margin: 0 0 3px 0;
       text-shadow: 0px 1px 0 #cecece;
       -webkit-background-origin: padding-box;
@@ -407,16 +402,10 @@ input[type=submit]:active, input[type=submit].cancel:active {
 }
 
 input[type=button]:hover, input[type=button].cancel:hover, input[type=submit]:hover, input[type=submit].cancel:hover, button:hover, button.cancel:hover {
-      background: -moz-linear-gradient(top, (#aaaee5), (#10006d));
+      background: -moz-linear-gradient(90deg, #558BCB, #336FB7) repeat scroll 0 0 transparent;
       background: -webkit-gradient( linear, left top, left bottom, from(#aaaee5), to(#10006d), color-stop(0.5, #1F3B97), color-stop(0.5, #081f6f) ); 
     }
-
-input[type=button].cancel, input[type=submit].cancel, button.cancel {
-      background: -moz-linear-gradient(top, (#5c5c5b), (#1e1b16));
-      background: -webkit-gradient( linear, left top, left bottom, from(#5c5c5b), to(#1e1b16), color-stop(0.2, #1e1b16) ); 
-      margin-top: 6px;
-    }
-    
+  
 
 /*
  * New Issue Interface inspired by RedMine & Github Issue interfaces.
