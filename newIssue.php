@@ -71,9 +71,7 @@ confirmLogin();
 		<script src="/libraries/shadowbox/shadowbox.js" type="text/javascript"></script>
 	<script>
 		$(document).ready(function() {
-			$( "#issue-startdate" ).datepicker();
-			$( "#issue-resolveddate" ).datepicker();
-			
+
 			/* This function lets you change the content shown inside a shadowbox to show the content in 'path' */
 				Shadowbox.clearCache();
 				Shadowbox.init({
@@ -331,17 +329,57 @@ confirmLogin();
 						</p>
 						<?php if ($action != 1) { ?>
 						<p>
-							
-							<label for="issue-startdate">Start Date</label>
-							<input type="text" id="issue-startdate" required="required" disabled="disabled" value="<?php if ($action == 0){ echo $issueinfo['CreationDate']; } ?>"/>
+							<?php 
+								date_default_timezone_set("Pacific/Auckland");
+								//$cdate = date('Y-m-d H:i:s', );
+								if ($issueinfo['CreationDate'] != NULL) {
+									$datetime = strtotime($issueinfo['CreationDate']);
+									$creationdate = date("m/d/y g:i A", $datetime);
+								} else {
+									$creationdate = "";
+								}
+								
+							?>
+							<label for="issue-startdate">Created</label>
+							<input type="text" id="issue-startdate" required="required" disabled="disabled" value="<?php if ($action == 0){ echo $creationdate; } ?>"/>
 						</p>
 						<?php } ?>
 						<?php if ($action != 1) { ?>
 						<p>
-							<label for="issue-resolveddate">Resolved Date</label>
-							<input type="text" id="issue-resolveddate" disabled="disabled" />
+							<?php 
+								date_default_timezone_set("Pacific/Auckland");
+								//$cdate = date('Y-m-d H:i:s', );
+								if ($issueinfo['ResolvedDate'] != NULL) {
+									$datetime = strtotime($issueinfo['ResolvedDate']);
+									$resolveddate = date("m/d/y g:i A", $datetime);
+								} else {
+									$resolveddate = "";
+								}
+								
+							?>
+							<label for="issue-resolveddate">Resolved</label>
+							<input type="text" id="issue-resolveddate" disabled="disabled" value="<?php if ($action == 0){ echo $resolveddate; } ?>" />
 						</p>
 						<?php } ?>
+						
+						<?php if ($action != 1) { ?>
+						<p>
+							<?php 
+								date_default_timezone_set("Pacific/Auckland");
+								//$cdate = date('Y-m-d H:i:s', );
+								if ($issueinfo['LastModificationDate'] != NULL) {
+									$datetime = strtotime($issueinfo['LastModificationDate']);
+									$modificationdate = date("m/d/y g:i A", $datetime);
+								} else {
+									$modificationdate = "";
+								}
+								
+							?>
+							<label for="issue-modificationdate">Modified</label>
+							<input type="text" id="issue-modificationdate" disabled="disabled" value="<?php if ($action == 0){ echo $modificationdate; } ?>" />
+						</p>
+						<?php } ?>
+						
 					</div>
 					<div style="clear:both;"></div>
 				</div>
