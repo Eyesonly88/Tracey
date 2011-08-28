@@ -22,11 +22,13 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_notificationfn.php
 	function createIssue($compId, $name, $desc, $reporterId, $assigneeId, $issueTypeId, $PriorityId, $issueStatusId) {
 		global $connection;
 		$query = $connection->stmt_init();
-		$sql_createIssue = "INSERT INTO issue (`IssueId`, `ComponentId`, `name`, `Description`, `ReporterId`, `AssigneeId`, `IssueType`, `Priority`, `IssueStatus`) 
-		VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?);";
+		$sql_createIssue = "INSERT INTO issue (`IssueId`, `ComponentId`, `name`, `Description`, `ReporterId`, `AssigneeId`, `IssueType`, `Priority`, `IssueStatus`, `CreationDate`) 
+		VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 		
 		if ($query->prepare($sql_createIssue)) {
-			$query->bind_param("issiiiii", $compId, $name, $desc, $reporterId, $assigneeId, $issueTypeId, $PriorityId, $issueStatusId);
+			$query->bind_param("issiiiiis", $compId, $name, $desc, $reporterId, $assigneeId, $issueTypeId, $PriorityId, $issueStatusId, $cdate);
+			date_default_timezone_set("Pacific/Auckland");
+			$cdate = date('Y-m-d H:i:s');
 			$query->execute();
 			// send notification for to the receiver of the newly created issue
 			$issueId = mysql_insert_id();
@@ -94,16 +96,57 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_notificationfn.php
 		
 		global $connection;
 		$query = $connection->stmt_init();
+		$previssue = getIssue($issueId);
+		$previd = $previssue[0]['IssueId'];
 		$desc = trim($desc);
-		$sql_stmnt = "UPDATE issue SET ComponentId = ?, name = ?, Description = ?, AssigneeId = ?, ReporterId = ?, IssueType = ?, Priority = ?, IssueStatus = ? WHERE IssueId = ?";
-		if ($query->prepare($sql_stmnt)) {
-			$query->bind_param("issiiiiii", $compId, $name, $desc, $assigneeId, $reporterId, $issueTypeId, $PriorityId, $issueStatusId, $issueId);	
+		if ($issueStatusId == 2 && $previd != 2) {
+			$sql_stmnt = "UPDATE issue 
+						SET	ComponentId = ?, 
+							name = ?, 
+							Description = ?, 
+							AssigneeId = ?, 
+							ReporterId = ?, 
+							IssueType = ?, 
+							Priority = ?, 
+							IssueStatus = ?, 
+							LastModificationDate = ?, 
+							ResolvedDate = ? 
+						WHERE IssueId = ?";
+			if ($query->prepare($sql_stmnt)) {
+			$query->bind_param("issiiiiissi", $compId, $name, $desc, $assigneeId, $reporterId, $issueTypeId, $PriorityId, $issueStatusId, $lmdate, $rdate, $issueId);
+			date_default_timezone_set("Pacific/Auckland");
+			$lmdate = date('Y-m-d H:i:s');	
+			$rdate = date('Y-m-d H:i:s');
 			$query->execute();
 			return true;
+			} else {
+				// update operation failed.
+				return false;
+			}
 		} else {
-			// update operation failed.
-			return false;
+			$sql_stmnt = "UPDATE issue 
+						SET	ComponentId = ?, 
+							name = ?, 
+							Description = ?, 
+							AssigneeId = ?, 
+							ReporterId = ?, 
+							IssueType = ?, 
+							Priority = ?, 
+							IssueStatus = ?, 
+							LastModificationDate = ? 
+						WHERE IssueId = ?";
+			if ($query->prepare($sql_stmnt)) {
+			$query->bind_param("issiiiiisi", $compId, $name, $desc, $assigneeId, $reporterId, $issueTypeId, $PriorityId, $issueStatusId, $lmdate, $issueId);
+			date_default_timezone_set("Pacific/Auckland");
+			$lmdate = date('Y-m-d H:i:s');	
+			$query->execute();
+			return true;
+			} else {
+				// update operation failed.
+				return false;
+			}
 		}
+		
 		
 	}
 	

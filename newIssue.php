@@ -178,9 +178,29 @@ confirmLogin();
 						<p>
 							<label for="issue-status">Status<span class="required"> *</span></label>
 							<select id="issue-status" required="required">
-								<option value="1" selected="selected">Open</option>
-								<option value="2" >Closed</option>
-								<option value="3" >In Progress</option>
+								
+								<?php 
+									$resultSet = getIssueStatuses();
+										foreach ($resultSet as $result){
+											if ($action != 1) {
+												$currentStatus = $issueinfo['IssueStatus'];
+												if ($result['ID'] == $currentStatus){
+													echo "<option value=\"" . $result['ID'] ."\" selected>" . $result['Name'] . "</option>"; 
+													
+												} else {
+													echo "<option value=\"" . $result['ID'] ."\" >" . $result['Name'] . "</option>"; 
+												}
+											} else {
+												if ($result['ID'] == 1){
+													echo "<option value=\"" . $result['ID'] ."\" selected>" . $result['Name'] . "</option>"; 
+													
+												} else {
+													echo "<option value=\"" . $result['ID'] ."\" >" . $result['Name'] . "</option>"; 
+												}
+											}
+										}
+									?>
+								
 							</select>
 						</p>
 						<p>
@@ -254,10 +274,18 @@ confirmLogin();
 								<?php 
 										$resultSet = $issuepriorityarray;
 										foreach ($resultSet as $result){
-											if (($action == 0) && $result['Id'] == $issueinfo['Priority']){
-												echo "<option value=\"" . $result['ID'] ."\" selected>" . $result['Name'] . "</option>"; 
+											if (($action == 0)) {
+												if ($result['ID'] == $issueinfo['Priority']){
+													echo "<option value=\"" . $result['ID'] ."\" selected>" . $result['Name'] . "</option>"; 
+												} else {
+													echo "<option value=\"" . $result['ID'] ."\">" . $result['Name'] . "</option>";
+												}
 											} else {
-												echo "<option value=\"" . $result['ID'] ."\">" . $result['Name'] . "</option>"; 
+												if ($result['ID'] == 2){
+													echo "<option value=\"" . $result['ID'] ."\" selected>" . $result['Name'] . "</option>"; 
+												} else {
+													echo "<option value=\"" . $result['ID'] ."\">" . $result['Name'] . "</option>";
+												}
 											}
 										}
 									?>
@@ -301,14 +329,19 @@ confirmLogin();
 									?>
 							</select>
 						</p>
+						<?php if ($action != 1) { ?>
 						<p>
-							<label for="issue-startdate">Start Date<span class="required"> *</span></label>
-							<input type="text" id="issue-startdate" required="required" value="<?php if ($action == 0){ echo $issueinfo['CreationDate']; } ?>"/>
+							
+							<label for="issue-startdate">Start Date</label>
+							<input type="text" id="issue-startdate" required="required" disabled="disabled" value="<?php if ($action == 0){ echo $issueinfo['CreationDate']; } ?>"/>
 						</p>
+						<?php } ?>
+						<?php if ($action != 1) { ?>
 						<p>
 							<label for="issue-resolveddate">Resolved Date</label>
-							<input type="text" id="issue-resolveddate"/>
+							<input type="text" id="issue-resolveddate" disabled="disabled" />
 						</p>
+						<?php } ?>
 					</div>
 					<div style="clear:both;"></div>
 				</div>
@@ -317,6 +350,7 @@ confirmLogin();
 				<legend>
 					Issue Description
 				</legend>
+				
 				<div id="issue-description">
 					<textarea accesskey="e" cols="60" rows="10"><?php if ($action == 0){echo trim($issueinfo['Description']);} ?></textarea>
 				</div>
