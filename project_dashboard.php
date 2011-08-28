@@ -248,7 +248,7 @@ if (isset($_GET['id'])){
 			
 			<div id="createIssue-createComponent-container">
 				<a rel="shadowbox;width=1100;height=700" href="newIssue.php?action=create"><input type="button" id="createIssue-button" value="Create Issue" /></a>
-				<input type="button" id="createComponent-button" value="Create Component" />
+				<a rel="shadowbox;width=800;height=200" href="newComponent.php"><input type="button" id="createComponent-button" value="Create Component" /></a>
 			</div>
 			
 			
