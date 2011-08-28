@@ -48,8 +48,8 @@
 			$response = $response . '<td class="i_priority" name="i_priority" align="center">' . getPriorityNameById($row['Priority']) . '</td>';
 			$response = $response . '<td class="i_status" name="i_status" align="center">' . getStatusNameById($row['IssueStatus']) . '</td>';
 			$response = $response . '<td class="i_hours" name="i_hours" align="center">' . getHoursSpentOnIssue($row['IssueId']) . '</td>';
-			$response = $response . '<td class="i_lhours" name="i_lhours" align="center"><a id="iloghours" rel="shadowbox[Mixed];height=292;width=810" href="logissuehour.php?id=' . $row['IssueId'] . '">Log Hours</a></td>'; 
-			$response = $response . '<td class="i_viewissue" name="i_viewissue_button' . $row['IssueId'] . '" id="' . $row['IssueId'] . '" align="center"><a id="view_issue' . $row['IssueId'] . '" rel="shadowbox[Mixed];width=900" href="issue.php?id='. $row['IssueId'] . '">View</a></td>';
+			$response = $response . '<td class="i_lhours" name="i_lhours" align="center"><a id="iloghours" rel="shadowbox;height=292;width=810" href="logissuehour.php?id=' . $row['IssueId'] . '">Log Hours</a></td>'; 
+			$response = $response . '<td class="i_viewissue" name="i_viewissue_button' . $row['IssueId'] . '" id="' . $row['IssueId'] . '" align="center"><a id="view_issue' . $row['IssueId'] . '" rel="shadowbox;width=900" href="issue.php?id='. $row['IssueId'] . '">View</a></td>';
 			$response = $response . '</tr>';
 		}
 		$response = $response . '</tbody>';		
