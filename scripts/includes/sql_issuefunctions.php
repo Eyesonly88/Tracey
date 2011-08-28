@@ -94,6 +94,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_notificationfn.php
 		
 		global $connection;
 		$query = $connection->stmt_init();
+		$desc = trim($desc);
 		$sql_stmnt = "UPDATE issue SET ComponentId = ?, name = ?, Description = ?, AssigneeId = ?, ReporterId = ?, IssueType = ?, Priority = ?, IssueStatus = ? WHERE IssueId = ?";
 		if ($query->prepare($sql_stmnt)) {
 			$query->bind_param("issiiiiii", $compId, $name, $desc, $assigneeId, $reporterId, $issueTypeId, $PriorityId, $issueStatusId, $issueId);	

@@ -49,7 +49,7 @@
 			$response = $response . '<td class="i_status" name="i_status" align="center">' . getStatusNameById($row['IssueStatus']) . '</td>';
 			$response = $response . '<td class="i_hours" name="i_hours" align="center">' . getHoursSpentOnIssue($row['IssueId']) . '</td>';
 			$response = $response . '<td class="i_lhours" name="i_lhours" align="center"><a id="iloghours" rel="shadowbox[Mixed];height=292;width=810" href="logissuehour.php?id=' . $row['IssueId'] . '">Log Hours</a></td>'; 
-			$response = $response . '<td class="i_viewissue" name="i_viewissue_button" id="' . $row['IssueId'] . '" align="center"><a id="view_issue' . $row['IssueId'] . '" rel="shadowbox[Mixed];width=900" href="issue.php?id='. $row['IssueId'] . '">View</a></td>';
+			$response = $response . '<td class="i_viewissue" name="i_viewissue_button" id="' . $row['IssueId'] . '" align="center"><a id="view_issue' . $row['IssueId'] . '" rel="shadowbox[Mixed];width=1100;height=800" href="newIssue.php?id='. $row['IssueId'] . '">View</a></td>';
 			$response = $response . '</tr>';
 		}
 		$response = $response . '</tbody>';		

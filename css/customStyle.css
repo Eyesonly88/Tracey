@@ -438,6 +438,21 @@ legend {color: #484848;}
 .box form {
 	display: inline;
 }
+.box #issue-name {
+	text-align: center;
+}
+.box #issue-name h3{
+	font-size:2em;
+	padding:0.5em;
+	float:left;
+	margin-left:25%;
+}
+.box #issue-name input{
+	width: 400px;
+	padding: 0.5em;
+	float:left;
+	margin-top: 0.5em;
+}
 .box{
 padding:6px;
 margin-bottom: 10px;
