@@ -362,7 +362,7 @@ confirmLogin();
 								
 							?>
 							<label for="issue-resolveddate">Resolved</label>
-							<input type="text" id="issue-resolveddate" disabled="disabled" value="<?php if ($action == 0){ echo $resolveddate; } ?>" />
+							<input type="text" id="issue-resolveddate" disabled="disabled" style="color: black" value="<?php if ($action == 0){ echo $resolveddate; } ?>" />
 						</p>
 						<?php } ?>
 						
@@ -380,7 +380,7 @@ confirmLogin();
 								
 							?>
 							<label for="issue-modificationdate">Modified</label>
-							<input type="text" id="issue-modificationdate" disabled="disabled" value="<?php if ($action == 0){ echo $modificationdate; } ?>" />
+							<input type="text" id="issue-modificationdate" disabled="disabled" style="color: black" value="<?php if ($action == 0){ echo $modificationdate; } ?>" />
 						</p>
 						<?php } ?>
 						
