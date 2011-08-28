@@ -17,7 +17,8 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sessions.php');
   Shadowbox.clearCache();
    Shadowbox.init({
 
-   		displayNav: "false"
+   		displayNav: "false",
+   		displayCounter: "false"
   	});
   
   $('#hiddencontents_issue').hide();

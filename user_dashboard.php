@@ -33,7 +33,8 @@ confirmLogin();
 				
 				Shadowbox.clearCache();
 				Shadowbox.init({
-					displayNav: false
+					displayNav: "false",
+					displayCounter: "false"
   				});
   				
 				$(".notifications-form").hide();

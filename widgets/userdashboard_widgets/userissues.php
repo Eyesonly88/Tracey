@@ -16,7 +16,8 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sessions.php');
 <script type="text/javascript">
   Shadowbox.clearCache();
   Shadowbox.init({
-			displayNav: "false"
+			displayNav: "false",
+			displayCounter: "false"
    		 
   	});
   //$("#viewissue_interface").hide();
