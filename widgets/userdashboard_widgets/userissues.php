@@ -14,12 +14,13 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sessions.php');
 <link rel="stylesheet" href="/libraries/shadowbox/shadowbox.css" type="text/css">
 <script src="/libraries/shadowbox/shadowbox.js" type="text/javascript"></script>
 <script type="text/javascript">
-  Shadowbox.clearCache();
+ 
   Shadowbox.init({
 			displayNav: "false",
 			displayCounter: "false"
    		 
   	});
+  	Shadowbox.clearCache();
   //$("#viewissue_interface").hide();
   var currentUser = "";
   getCurrentUser();

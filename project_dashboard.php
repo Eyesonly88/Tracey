@@ -42,11 +42,12 @@ if (isset($_GET['id'])){
 		
 		<script>$(document).ready( function() {
 				
-				Shadowbox.clearCache();
+	
 				Shadowbox.init({
 						displayNav: "false",
 						displayCounter: "false"
   				});
+  				Shadowbox.clearCache();
 				$(".notifications-form").hide();
 				$(".invite-form").hide();
 				$("#notifications").hoverIntent( function() {

@@ -31,12 +31,12 @@ confirmLogin();
 		<script src="/libraries/shadowbox/shadowbox.js" type="text/javascript"></script>
 		<script>$(document).ready( function() {
 				
-				Shadowbox.clearCache();
+			
 				Shadowbox.init({
 					displayNav: "false",
 					displayCounter: "false"
   				});
-  				
+  				Shadowbox.clearCache();
 				$(".notifications-form").hide();
 				
 				$("#notifications").hoverIntent( function() {
