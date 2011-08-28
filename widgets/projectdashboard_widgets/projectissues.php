@@ -14,11 +14,13 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sessions.php');
 <script src="/libraries/shadowbox/shadowbox.js" type="text/javascript"></script>
 <script type="text/javascript">
   
-  Shadowbox.clearCache();
+  
    Shadowbox.init({
 
-   		displayNav: "false"
+   		displayNav: "false",
+   		displayCounter: "false"
   	});
+  	Shadowbox.clearCache();
   
   $('#hiddencontents_issue').hide();
   

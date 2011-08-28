@@ -14,11 +14,13 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sessions.php');
 <link rel="stylesheet" href="/libraries/shadowbox/shadowbox.css" type="text/css">
 <script src="/libraries/shadowbox/shadowbox.js" type="text/javascript"></script>
 <script type="text/javascript">
-  Shadowbox.clearCache();
+ 
   Shadowbox.init({
-			displayNav: "false"
+			displayNav: "false",
+			displayCounter: "false"
    		 
   	});
+  	Shadowbox.clearCache();
   //$("#viewissue_interface").hide();
   var currentUser = "";
   getCurrentUser();
@@ -142,7 +144,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sessions.php');
 
 
 
-<div id="contents"><h4>Issues:</h4>
+<div id="contents">
 
 	<table id="issuelist" class="display" ></table>
 </div>

@@ -42,10 +42,12 @@ if (isset($_GET['id'])){
 		
 		<script>$(document).ready( function() {
 				
-				Shadowbox.clearCache();
+	
 				Shadowbox.init({
-						displayNav: false
+						displayNav: "false",
+						displayCounter: "false"
   				});
+  				Shadowbox.clearCache();
 				$(".notifications-form").hide();
 				$(".invite-form").hide();
 				$("#notifications").hoverIntent( function() {
@@ -245,7 +247,7 @@ if (isset($_GET['id'])){
 		<div id="user-box">
 			
 			<div id="createIssue-createComponent-container">
-				<a rel="shadowbox[Mixed];width=1100;height=800" href="newIssue.php?action=create"><input type="button" id="createIssue-button" value="Create Issue" /></a>
+				<a rel="shadowbox;width=1100;height=700" href="newIssue.php?action=create"><input type="button" id="createIssue-button" value="Create Issue" /></a>
 				<input type="button" id="createComponent-button" value="Create Component" />
 			</div>
 			

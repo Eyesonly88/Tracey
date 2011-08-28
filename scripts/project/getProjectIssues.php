@@ -41,7 +41,7 @@
 			$response = $response . '<td class="i_assignee" name="i_assignee" align="center">' . $assignee . '</td>';
 			$response = $response . '<td class="i_priority" name="i_priority" align="center">' . getPriorityNameById($row['Priority']) . '</td>';
 			$response = $response . '<td class="i_status" name="i_status" align="center">' . getStatusNameById($row['IssueStatus']). '</td>';
-			$response = $response . '<td class="i_p_viewissue" name="i_viewissue_button" id="' . $row['IssueId'] . '" align="center"><a id="view_issue' . $row['IssueId'] . '" rel="shadowbox[Mixed];width=1100;height=800" href="newIssue.php?id='. $row['IssueId'] . '">View Issue</a></td>';
+			$response = $response . '<td class="i_p_viewissue" name="i_viewissue_button" id="' . $row['IssueId'] . '" align="center"><a id="view_issue' . $row['IssueId'] . '" rel="shadowbox;width=1100;height=700" href="newIssue.php?id='. $row['IssueId'] . '">View Issue</a></td>';
 			$response = $response . '</tr>';
 		}
 		$response = $response . '</tbody>';		

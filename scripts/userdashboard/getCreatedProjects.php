@@ -23,7 +23,7 @@
 			$response = $response . '<td class="p_name" name="p_name" align="center">' . '<a href="/project_dashboard.php?id='. $row['ProjectId'] . '">' . $row['ProjectName']. '</a></td>';
 			$response = $response . '<td class="p_leader" name="p_leader" align="center">' . getUserInfoById($row['ProjectLeader'], "Email") . '</td>';
 			$response = $response . '<td class="p_hours" name="p_hours" align="center">' . getHoursLoggedByProjectId($row['ProjectId']) . '</td>';
-			$response = $response . '<td class="p_dashboard_button" name="p_dashboard_button" id="goto_project' . $row['ProjectId'] . '" align="center"><a href="/project_dashboard.php?id=' . $row['ProjectId'] . '"> Dashboard </a></td>';
+			$response = $response . '<td name="p_dashboard_button" class="p_dashboard_button" id="goto_project' . $row['ProjectId'] . '" align="center"><a href="/project_dashboard.php?id=' . $row['ProjectId'] . '"> <input type="button" style="width:100px; height:35px; border-width:1px;" id="viewDashboard-button'. $row['ProjectId'] . '" value="Dashboard" /></a></td>';
 			$response = $response . '</tr>';
 		}
 		$response = $response . '</tbody>';		

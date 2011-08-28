@@ -57,7 +57,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sessions.php');
 	     $(".p_dashboard_button").click(function() { 
 	     	
 	     	$(this).empty();
-	     	$(this).append("Redirecting...");
+	     	$(this).append('<input type="button" style="width:100px; height:35px; border-width:1px;" value="Redirecting..." />');
 	     	
 	     });
 	   }
