@@ -144,7 +144,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sessions.php');
 
 
 
-<div id="contents"><h4>Issues:</h4>
+<div id="contents">
 
 	<table id="issuelist" class="display" ></table>
 </div>
