@@ -327,10 +327,63 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_componentfunctions
 			$hours = 0;
 		}
 		return $hours;
-		
-		
+			
 	}
 	
+	function getRecentWorkLogsByProjectId($projectid) {
+			
+		global $connection;
+		$query = $connection->stmt_init();
+		$log = 0;
+		$sql_stmnt = "SELECT ih.IssueHourId AS ID, ih.CreationDate, ih.Hours, i.IssueId, c.ComponentId, p.ProjectName, ih.UserId
+						FROM issuehour ih
+						INNER JOIN issue i ON i.IssueId = ih.IssueId
+						INNER JOIN component c ON c.ComponentId = i.ComponentId
+						INNER JOIN project p ON p.ProjectId = c.ProjectId
+						WHERE p.ProjectId = ?
+						ORDER BY ih.CreationDate
+						LIMIT 10
+						";
+		
+		$query->prepare($sql_stmnt);
+		$query->bind_param("i", $id);		
+		$id = $projectid;
+		
+		$result = dynamicBindResults($query);
+		if ($result != NULL)	{
+			$log = $result;
+		} else {
+			$log = '';
+		}
+		return $log;
+	}
+	
+	function getAllWorkLogsByProjectId($projectid) {
+			
+		global $connection;
+		$query = $connection->stmt_init();
+		$log = 0;
+		$sql_stmnt = "SELECT ih.IssueHourId AS ID, ih.CreationDate, ih.Hours, i.IssueId, c.ComponentId, p.ProjectName, ih.UserId
+						FROM issuehour ih
+						INNER JOIN issue i ON i.IssueId = ih.IssueId
+						INNER JOIN component c ON c.ComponentId = i.ComponentId
+						INNER JOIN project p ON p.ProjectId = c.ProjectId
+						WHERE p.ProjectId = ?
+						ORDER BY ih.CreationDate ASC
+						";
+		
+		$query->prepare($sql_stmnt);
+		$query->bind_param("i", $id);		
+		$id = $projectid;
+		
+		$result = dynamicBindResults($query);
+		if ($result != NULL)	{
+			$log = $result;
+		} else {
+			$log = '';
+		}
+		return $log;
+	}
 	
 	
 	

@@ -46,7 +46,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sessions.php');
   		"bPaginate": false,
 		"bLengthChange": false,
 		"bFilter": true,
-		"bSort": false,
+		"bSort": true,
 		"bInfo": false,
 		"bAutoWidth": false,
 		"bStateSave": true, 
@@ -189,7 +189,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sessions.php');
 
 </style>
 
-<div id="contents"><h4>Issues:</h4>
+<div id="contents">
 	<input type="hidden" id="projectid" value=<?php echo $_SESSION['projectid']; ?> />
 	<div id="title"></div>
 	<table id="projectlist2" class="display" ></table>

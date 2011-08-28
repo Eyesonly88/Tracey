@@ -6,7 +6,7 @@
 	
 	$email = '';
 	$result = '';
-	$response = '<thead><tr><th>Issue</th><th>Project</th><th>Reporter</th><th>Assignee</th><th>Priority</th><th>Status</th><th>Link</th></tr></thead>';
+	$response = '<thead><tr><th>Issue</th><th>Title</th><th>Assignee</th><th>Priority</th><th>Status</th><th>Link</th></tr></thead>';
 	if (isset($_POST['id'])){
 		$projectid = $_POST['id'];		
 		$result = getIssuesByProjectId($projectid);
@@ -17,7 +17,7 @@
 		$response = '';
 		//$response = '<table class="projlistflex"  border="1" cellpadding="3" cellspacing="0">';
 
-		$response = $response . '<thead><tr><th>Issue</th><th>Project</th><th>Reporter</th><th>Assignee</th><<th>Priority</th><th>Status</th><th>Link</th></tr></thead>';
+		$response = $response . '<thead><tr><th>Issue</th><th>Title</th><th>Assignee</th><<th>Priority</th><th>Status</th><th>Link</th></tr></thead>';
 		$response = $response . '<tbody>';	
 		foreach($result as $row){
 			$reporterEmail = getUserInfoById($row['ReporterId'], "Email");
@@ -36,12 +36,11 @@
 			
 			$response = $response . '<tr>';
 			$response = $response . '<td class="i_id" name="p_id" align="center">' . $row['IssueId'] . '</td>';
-			$response = $response . '<td class="i_component" name="i_component" align="center">' . getProjectNameByComponentId($row['ComponentId']) . '</td>';
-			$response = $response . '<td class="i_reporter" name="i_reporter" align="center">' . $reporter . '</td>';
+			$response = $response . '<td class="i_name" name="i_name" align="center">' . $row['name'] . '</td>';
 			$response = $response . '<td class="i_assignee" name="i_assignee" align="center">' . $assignee . '</td>';
 			$response = $response . '<td class="i_priority" name="i_priority" align="center">' . getPriorityNameById($row['Priority']) . '</td>';
 			$response = $response . '<td class="i_status" name="i_status" align="center">' . getStatusNameById($row['IssueStatus']). '</td>';
-			$response = $response . '<td class="i_p_viewissue" name="i_viewissue_button" id="' . $row['IssueId'] . '" align="center"><a id="view_issue' . $row['IssueId'] . '" rel="shadowbox;width=1100;height=700" href="newIssue.php?id='. $row['IssueId'] . '">View Issue</a></td>';
+			$response = $response . '<td class="i_p_viewissue" name="i_viewissue_button" id="' . $row['IssueId'] . '" align="center"><a id="view_issue' . $row['IssueId'] . '" rel="shadowbox;width=1100;height=700" href="newIssue.php?id='. $row['IssueId'] . '"><input type="button"  style="width:80px; height:35px; border-width:1px;" id="viewIssue-button'. $row['IssueId'] . '" value="View" /></a></td>';
 			$response = $response . '</tr>';
 		}
 		$response = $response . '</tbody>';		

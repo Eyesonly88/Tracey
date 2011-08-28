@@ -165,7 +165,7 @@ confirmLogin();
 			
 			<div id="issue-name">
 				
-					<h3>Issue Name</h3>
+					<h3>Issue Title</h3>
 					<input type="text" id="issue-title" value="<?php if ($action == 0) { echo $issueinfo['name']; } ?>"/>
 				
 			</div>

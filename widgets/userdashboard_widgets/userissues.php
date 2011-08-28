@@ -149,7 +149,8 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sessions.php');
 	<table id="issuelist" class="display" ></table>
 </div>
 
-
+<BR/>
+<BR/>
 
 </div>
 

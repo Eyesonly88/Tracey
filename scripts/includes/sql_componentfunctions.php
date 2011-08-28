@@ -17,14 +17,16 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_prepared.php');
 		global $connection;
 		$compid = '';
 		$query = $connection->stmt_init(); 
-		$sql_addComponent = "INSERT INTO Component(name, ProjectId, RequiredHours, DueDate, IsDefault) VALUES('Default', ?, ?, ?, ?)";
+		$sql_addComponent = "INSERT INTO Component(name, ProjectId, RequiredHours, DueDate, IsDefault, CreationDate) VALUES('Default', ?, ?, ?, ?, ?)";
 		$sql_getLastInsertId = "SELECT LAST_INSERT_ID() AS ID";	
 		if ($query->prepare($sql_addComponent)) {		
-			$query->bind_param("idsi", $pid, $requiredhours, $duedate, $default);	
+			$query->bind_param("idsis", $pid, $requiredhours, $duedate, $default, $cdate);	
 			$pid = $projectid;
 			$requiredhours = $hours;
 			$duedate =  date("Y-m-d", strtotime($due));
 			$default = $isDefault;
+			date_default_timezone_set("Pacific/Auckland");
+			$cdate = date('Y-m-d H:i:s');
 			$query->execute();		
 			$query->prepare($sql_getLastInsertId);
 			$lastinsertarray = dynamicBindResults($query);
@@ -109,7 +111,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_prepared.php');
 		
 		//$result = getUserByEmail($useremail);
 		//$userid = $result['UserId'];
-		$sql_stmt = "SELECT * FROM component c INNER JOIN project p ON c.ProjectID = p.ProjectId WHERE p.ProjectId = ?";
+		$sql_stmt = "SELECT c.ComponentId, c.Name AS Name, c.ProjectId, c.CreationDate AS CreationDate, c.RequiredHours, c.DueDate, c.IsDefault FROM component c INNER JOIN project p ON c.ProjectID = p.ProjectId WHERE p.ProjectId = ?";
 		
 		$query->prepare($sql_stmt);
 		$query->bind_param("i", $id);

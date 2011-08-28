@@ -1,45 +1,42 @@
 <?php
 
-# Widget that displays the components that are a part of a project
+#widget that displays issues related to a project
 
 include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sessions.php');
 
 
 ?>
+<head>
 <link rel="stylesheet" href="/libraries/datatables/media/css/demo_table_jui.css" type="text/css">
 <!--<script src="/libraries/flexigrid/js/flexigrid.js" type="text/javascript"></script> -->
 <script src="/libraries/dataTables/media/js/jquery.dataTables.js" type="text/javascript"></script>
+<link rel="stylesheet" href="/libraries/shadowbox/shadowbox.css" type="text/css">
+<script src="/libraries/shadowbox/shadowbox.js" type="text/javascript"></script>
 <script type="text/javascript">
   
-	
-	var projectid = $('#projectid').val();
-	//alert(projectid);
-	
-	/*
-	
-	function(data){
-          $.each(data.products, function(i,product){
-            content = '<p>' + product.product_title + '</p>';
-            content += '<p>' + product.product_short_description + '</p>';
-            content += '<img src="' + product.product_thumbnail_src + '"/>';
-            content += '<br/>';
-            $(content).appendTo("#product_list");
-          });
-	*/
-	
-	var currentUser = "";
-  getCurrentUser();
-  initialSetup();
+  
+   Shadowbox.init({
+
+   		displayNav: "false",
+   		displayCounter: "false"
+  	});
+  	Shadowbox.clearCache();
+  
+  //alert(issuehtml);
+  var projectid = $('#projectid').val();
+  var currentUser = "";
+  
+  initialSetup4();
   
  
   function setUser(msg){ 
   	currentUser = msg;	
   }
   
-  function setupFlexTable1(){
+  function setupFlexTable3(){
   	
   	/* Apply datatable library to the list of tables. */
-  	$('#componentlist').dataTable({
+  	$('#loglist').dataTable({
   		
   		"bPaginate": false,
 		"bLengthChange": false,
@@ -55,37 +52,22 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sessions.php');
   	//$("#projectlist").fnDraw();
   }
   
-  /* Creates a project (via Ajax) */
- 
 
   
   
-  /* Get the currently logged in user */
-  function getCurrentUser(){
-  	$.ajax({
-  	   cache: "false",
-	   type: "POST",
-	   url: "/scripts/authentication/getCurrentUser.php",
-	   success: function(msg){
-	     setUser(msg);
-	   }
-   
- 	});
-  }
-  
   /* This is the initial function call that is executed when the widget is ready. 
  	Sets up the initial list of projects. */
-  function initGetComponents(id){
+  function initUserProjects4(id){
   $.ajax({
   	   cache: "false",
 	   type: "POST",
-	   url: "/scripts/project/getComponents.php",
+	   url: "/scripts/project/getProjectWorkLog.php",
 	   data: "id="+id,
 	   success: function(msg2){
 	  
-	     $("#componentlist").empty();
-	     $("#componentlist").append(msg2);
-	     setupFlexTable1();
+	     $("#loglist").empty();
+	     $("#loglist").append(msg2);
+	     setupFlexTable3();
 	     
 	   }
    
@@ -94,23 +76,17 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sessions.php');
   
   /* The first initial function call, which calls 2 other 
  	functions to set up the initial state of the widget*/
-  function initialSetup() {
-  $.ajax({
-  	   cache: "false",
-	   type: "POST",
-	   url: "/scripts/authentication/getCurrentUser.php",
-	   success: function(msg){
-	     setUser(msg);
-	     initGetComponents(projectid);
-	     
-	   }
-   
- 	});
- }
+  function initialSetup4() {
  
+	  initUserProjects4(projectid);
+	    
+ 	}
+  
+
+
 
 </script>
-
+</head>
 <style>
   h5 span {
     color:#666666;
@@ -144,16 +120,11 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sessions.php');
 
 </style>
 
-<div id="contents">
-	
-	<h4>Components:</h4>
+<div id="contents2">
 	<input type="hidden" id="projectid" value=<?php echo $_SESSION['projectid']; ?> />
-	<div id="title"></div>
-	<table id="componentlist" class="display" ></table>
-
+	<table id="loglist" class="display" ></table>
 </div>
 
 
-	
 
-<BR /><BR />
+

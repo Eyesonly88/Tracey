@@ -493,5 +493,20 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_notificationfn.php
 		
 	}
 	
+	
+	function getWorkLogById($worklogid) {
+		
+		
+		global $connection;
+		$query = $connection->stmt_init();
+		$sql_stmt = "SELECT * FROM issuehour WHERE IssueHourId = ?";
+		$query->prepare($sql_stmt);
+		$query->bind_param("i", $id);
+		$id = $worklogid;
+		$results = dynamicBindResults($query);
+		return $results;
+		
+	}
+	
 
 ?>
