@@ -38,6 +38,8 @@ confirmLogin();
 					displayCounter: "false"
   				});
   				Shadowbox.clearCache();
+  				
+  				
 				$(".notifications-form").hide();
 				
 				$("#notifications").hoverIntent( function() {
@@ -185,9 +187,9 @@ confirmLogin();
 			
 			<div id="createProject-container">
 				<a rel="shadowbox;width=700;height=250;" href="newProject.php?action=create"><input type="button" id="createProject-button" value="Create Project" /></a>
-		
-			</div>
 			
+			</div>
+				<!--<input type="button" id="refreshwidgets" value="Refresh Widgets" /> -->
 		</div>
 
 		<div id="dashboard" class="dashboard">

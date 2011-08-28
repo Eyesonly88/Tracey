@@ -4,14 +4,30 @@
         $('body').append('<div id="templates"></div>');
         $("#templates").hide();
         $("#templates").load("layouts/user_dash_placeholder.html", initDashboard);
-
+		var dashboard;
+		var startId = 100;
         // call for the themeswitcher
         $('#switcher').themeswitcher();
-
+		
+		var widgetids = new Array();
         // call for the minimal dashboard
+        
+        $('#refreshwidgets').click(function() { 
+        	//alert(widgetids.length);
+        	for (var i = startId; i < (startId + 100); i++) {
+			    var tempwidget = dashboard.getWidget(i);
+			    if (tempwidget != null) { 
+			    	tempwidget.refreshContent();
+			    }
+			    //Do something
+			}
+
+        	
+        });
+        
         function initDashboard() {
-          var startId = 100;
-          var dashboard = $('#dashboard').dashboard({
+          
+          dashboard = $('#dashboard').dashboard({
           	
           	layoutClass:'layout',
           	
@@ -64,9 +80,11 @@
           // binding for a widgets is added to the dashboard
           dashboard.element.live('dashboardAddWidget',function(e, obj){
             var widget = obj.widget;
-
+			
+			var tempid = startId++;
+			widgetids.push(tempid);
             dashboard.addWidget({
-              "id":startId++,
+              "id":tempid,
               "title":widget.title,
               "url":widget.url,
               "metadata":widget.metadata
