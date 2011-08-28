@@ -44,6 +44,7 @@ if (isset($_GET['id'])){
 				
 	
 				Shadowbox.init({
+					
 						displayNav: "false",
 						displayCounter: "false"
   				});

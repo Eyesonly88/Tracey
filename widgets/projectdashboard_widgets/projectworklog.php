@@ -16,7 +16,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sessions.php');
   
   
    Shadowbox.init({
-
+		
    		displayNav: "false",
    		displayCounter: "false"
   	});

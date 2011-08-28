@@ -33,6 +33,7 @@ confirmLogin();
 				
 			
 				Shadowbox.init({
+			
 					displayNav: "false",
 					displayCounter: "false"
   				});
