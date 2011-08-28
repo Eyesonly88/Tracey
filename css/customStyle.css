@@ -322,14 +322,13 @@ font-weight: bold;
 
 .focusField{
         border:solid 2px #F1F4F7;
-        background:#414141;
-        color:#FFFFFF;
+        background:#e4e4e4;
+        color:#505050;
  }
 .idleField{
-        background:#414141;
-        color: #AAAAAA;
-
-        border: solid 2px #251C17;
+        background:#e4e4e4;
+        color: #AAA;
+        
  }
 
 /* iPhone style button */
@@ -372,6 +371,127 @@ font-weight: bold;
       background: -webkit-gradient( linear, left top, left bottom, from(#5c5c5b), to(#1e1b16), color-stop(0.2, #1e1b16) ); 
       margin-top: 6px;
     }
+/*
+ * Iphone Style button for lightbox pages
+ */
+input[type=button], input[type=submit], button {
+	/*float:right;*/
+      font-family: "Helvetica Neue", Helvetica, sans-serif;
+      font-size: 1.3em;
+      font-weight: bold;
+      /*width: 50%;*/
+      height: 50px;
+      padding-left:0.5em;
+      padding-right:0.5em;
+      border: 2px solid #f6f6f6;
+      background: -webkit-gradient( linear, left top, left bottom, from(#e2e2e2), to(#8c8a88), color-stop(0.5, #acadae), color-stop(0.5, #82807e));
+      background: -moz-linear-gradient(top, (#e2e2e2), (#8c8a88));
+      margin: 0 0 3px 0;
+      text-shadow: 0px 1px 0 #cecece;
+      -webkit-background-origin: padding-box;
+      -webkit-background-clip: border-box;
+      -webkit-border-radius: 8px;
+      -moz-background-origin: padding-box;
+      -moz-background-clip: border-box;
+      -moz-border-radius: 8px;
+   }
+
+input[type=button]:hover, input[type=button].cancel,
+input[type=button]:active, input[type=button].cancel:active,
+button:active, button.cancel:active,
+button:hover, button.cancel,
+input[type=submit]:hover, input[type=submit].cancel,
+input[type=submit]:active, input[type=submit].cancel:active {
+      color: #fff;
+      text-shadow: none;
+}
+
+input[type=button]:hover, input[type=button].cancel:hover, input[type=submit]:hover, input[type=submit].cancel:hover, button:hover, button.cancel:hover {
+      background: -moz-linear-gradient(top, (#aaaee5), (#10006d));
+      background: -webkit-gradient( linear, left top, left bottom, from(#aaaee5), to(#10006d), color-stop(0.5, #1F3B97), color-stop(0.5, #081f6f) ); 
+    }
+
+input[type=button].cancel, input[type=submit].cancel, button.cancel {
+      background: -moz-linear-gradient(top, (#5c5c5b), (#1e1b16));
+      background: -webkit-gradient( linear, left top, left bottom, from(#5c5c5b), to(#1e1b16), color-stop(0.2, #1e1b16) ); 
+      margin-top: 6px;
+    }
+    
+
+/*
+ * New Issue Interface inspired by RedMine & Github Issue interfaces.
+ * 
+ * 
+ */
+
+fieldset {border: 1px solid #e4e4e4; margin:0;}
+legend {color: #484848;}
+
+.leftcontent{float:left; width:49%;}
+.rightcontent{float:right; width:49%;}
+
+.box textarea {
+	width:95%;
+	margin:1em;
+	padding: 1em;
+}
+.box form {
+	display: inline;
+}
+.box{
+padding:6px;
+margin-bottom: 10px;
+background-color:#f6f6f6;
+color:#505050;
+line-height:1.5em;
+border: 1px solid #e4e4e4;
+font-size:12px;
+}
+
+.required {color: #bb0000;}
+
+/***** Tabular forms ******/
+.tabular p{
+margin: 0;
+padding: 5px 0 8px 0;
+padding-left: 180px; /*width of left column containing the label elements*/
+height: 1%;
+clear:left;
+}
+
+html>body .tabular p {overflow:hidden;}
+
+.tabular label{
+font-weight: bold;
+float: left;
+text-align: right;
+margin-left: -180px; /*width of left column*/
+width: 175px; /*width of labels. Should be smaller than left column to create some right 
+margin*/
+}
+
+.tabular label.floating{
+font-weight: normal;
+margin-left: 0px;
+text-align: left;
+width: 270px;
+}
+
+.tabular label.block{
+font-weight: normal;
+margin-left: 0px !important;
+text-align: left;
+float: none;
+display: block;
+width: auto;
+}
+
+.tabular label.inline{
+float:none;
+margin-left: 5px !important;
+width: auto;
+}
+
 
 /* Issue Styles and Creating Project*/
 /*
@@ -513,6 +633,8 @@ font-weight: bold;
 	padding-left:1em;
 	margin:1em;
 	color: #000000;
+	text-align: left;
+	
 }
 
 

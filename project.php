@@ -36,7 +36,6 @@ $projecttypes = getAllProjectTypes();
 		<script src="js/jquery.ui.core.js"></script>
 		<script src="js/jquery.ui.widget.js"></script>
 		<script src="js/jquery.ui.datepicker.js"></script>
-		<script src="js/jquery.ui.button.js"></script>
 		<script>
 		
 	$(document).ready( function() {
