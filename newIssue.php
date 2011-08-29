@@ -420,7 +420,7 @@ confirmLogin();
 					</p>
 				</div>
 			</fieldset>
-			<input type="button" value="Save Issue" id="confirm_btn" style="margin-top:1em;/>
+			<input type="button" value="Save Issue" id="confirm_btn" style="margin-top:1em;"/>
 			</div>
 			<div id="statusinfo" type="hidden" style="text-align: center;font-size:3em;color: white"></div>
 			</form>
