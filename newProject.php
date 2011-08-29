@@ -110,7 +110,7 @@ $projecttypes = getAllProjectTypes();
 					</p>
 				</div>
 			</fieldset>
-			<input type="button" id="createconfirm_btn" name="submit" value="Create Project" style="margin-top:1em;/>
+			<input type="button" id="createconfirm_btn" name="submit" value="Create Project" style="margin-top:1em;"/>
 		</div>
 		<div id="statusinfo" type="hidden" style="text-align: center;font-size:3em;color: white"></div>
 	</form>

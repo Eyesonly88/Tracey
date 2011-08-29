@@ -19,21 +19,26 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_userfunctions.php'
 		if (!empty($email)){
 		
 		// Authenticate user
-		$user = checkPass($password,$email);
+		$checkEmail = getUserInfo($email, "UserId");
 		
-			if($user){
-				// authenticated successfully
-				$_SESSION['email'] = $email;
-				$_SESSION['password'] = $password;
-				
-				// redirect user to members page
-				redirect_to('../../user_dashboard.php');
-			}else{
-				// display error message (authenticaion failed)
-				$errorMessage = "Authentication failed";
-				echo $errorMessage;
-			}
-		
+		if (!empty($checkEmail)){
+			$user = checkPass($password,$email);
+			
+				if($user){
+					// authenticated successfully
+					$_SESSION['email'] = $email;
+					$_SESSION['password'] = $password;
+					
+					// redirect user to members page
+					redirect_to('../../user_dashboard.php');
+				}else{
+					// display error message (authenticaion failed)
+					$errorMessage = "Authentication failed";
+					echo $errorMessage;
+				}
+		} else {
+			echo "Email does not exist";
+		}
 		}else{
 			// display error message
 			$errorMessage = "Invalid Input";
