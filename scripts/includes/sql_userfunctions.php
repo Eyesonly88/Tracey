@@ -63,7 +63,9 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_prepared.php');
 			$results = dynamicBindResults($query);
 			//print_r($results);
 		}
-		return 	$results[0]["$param"];
+		if (!empty($results)) {
+			return 	$results[0]["$param"];
+		} else { return ''; }
 	}
 	
 	function getUserInfoById($id, $param){
