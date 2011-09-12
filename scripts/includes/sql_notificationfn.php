@@ -9,6 +9,29 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_other.php');
 include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_checks.php');
 include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_prepared.php');
 
+
+function getPendingInvInfoBySenderId($senderId){
+	global $connection;
+	
+	$query = $connection->stmt_init();
+	
+	$sql_stmnt = "SELECT ReceiverId, TypeEntityId FROM  `notification` WHERE TypeId =1 AND StatusId =1 AND SenderId = ?";
+	if($query->prepare($sql_stmnt)){
+		$query->bind_param("i", $senderId);	
+		$results = dynamicBindResults($query);
+		if (empty($results)) { 	
+			return "";
+		}
+		else {
+			// returns the table results.
+			return $results;
+		}
+	} else {
+		// error happened while fetching the count of notifications
+		return -1;
+	}
+}
+
 /*
  * A function that returns the nickname of the Sender(Creator) of the notification.
  * @return: nothing if there are no notifications

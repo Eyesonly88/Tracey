@@ -204,9 +204,13 @@ if (isset($_GET['id'])){
 											<input type="hidden" name="senderemail" id="sender-email" value="<?php echo $_SESSION['email']; ?>" />
 											<input type="button"  name="submit" value="Invite" id="inv-button"/>
 											<p id="confirm-inv-msg"></p>
+											
 										</label>	
 
 								</form>
+							</div>
+							<div id="pendingInvite-container">
+								<input type="button"  name="pending_invite" value="Show Pending Invites" id="pendinginv-button"/>
 							</div>
 						</div>
 					</li>
