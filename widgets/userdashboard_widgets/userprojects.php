@@ -26,14 +26,14 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sessions.php');
   	/* Apply datatable library to the list of tables. */
   	$('#projectlist').dataTable({
   		
-  		
+  		"bJQueryUI": true,
   		"bPaginate": false,
 		"bLengthChange": false,
 		"bFilter": true,
-		"bSort": false,
-	
+		"bSort": true,
+		"bInfo": false,
 		"bAutoWidth": false,
-		
+		"bStateSave": true, 
 		"bDestroy": true,
 		"oSearch": {"sSearch": ""}
   	
@@ -158,4 +158,4 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sessions.php');
 <table id="projectlist" class="display" ></table>
 	
 </div>
-<BR /><BR />
+

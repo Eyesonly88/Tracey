@@ -42,7 +42,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sessions.php');
   	
   	/* Apply datatable library to the list of tables. */
   	$('#projectlist2').dataTable({
-  		
+  		"bJQueryUI": true,
   		"bPaginate": false,
 		"bLengthChange": false,
 		"bFilter": true,
@@ -56,50 +56,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sessions.php');
   	});
   	//$("#projectlist").fnDraw();
   }
-  
-  /* Creates a project (via Ajax) */
  
-  function setupHandlers(){
-  
-
-   /*$(".i_p_viewissue").click(function(){  
-   		
-   		var issueid = $(this).attr("id");
-   		
-   		var issueJS = "<script type=text/javascript>"+ 
-   				"$('#btn_saveissue').click(function() {"+
-		
-					"alert('hi');"+
-				"});"+
-   		"</scr" + "ipt>";
-   	
-   		//todo: Set up all the handlers in the hidden issue interface, before showing it on the lightbox.
-   		$('#issuenum').empty();
-   		$('#issuenum').append('<h3>Issue: ' + issueid + '</h3>');
-   		
-   		issueobj = $('#hiddencontents_issue');
-   		issuehtml = issueobj.html();
-   		
-   		issueinterface = issueJS + "<body>" + issuehtml + "<button id='btn_saveissue'>Hello there.</button>" + "</body>";
-   		Shadowbox.open({
-        	//content:    generateIssueInterface(issueid),
-        	content:	issueinterface,
-        	player:     "html",
-        	title:      "View Issue",
-        	height:     960,
-        	width:     808
-    	});*/
-    	
-    	//alert (issueinterface);
-    	
-		//$('#btn_saveissue').click(function() { 
-		
-			//alert("SUP!!!!!!");
-		//});
-   		//alert(issueid);
-   //});
-
-  }
   
   
   /* Get the currently logged in user */
@@ -127,7 +84,6 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sessions.php');
 	  
 	     $("#projectlist2").empty();
 	     $("#projectlist2").append(msg2);
-	     setupHandlers();
 	     setupFlexTable2();
 	     
 	   }
