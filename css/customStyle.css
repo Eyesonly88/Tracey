@@ -150,6 +150,10 @@ padding: 0px;
 	float: left;
 	padding-top:0.5em;
 }
+#pendingInvite-container input{
+	margin-top:1em;
+	font-size: 2em;
+}
 /** Login Form and Login Item in Nav **/
 
 #login .login-form { padding: 1em 1.1em 2em 12em; width: 26.9em }
@@ -445,6 +449,12 @@ legend {color: #484848;}
 	float:left;
 	margin-top: 0.5em;
 }
+
+.box #user-col,.box #project-col, .box #status-col{
+	float:left;
+	margin-right:10em;
+}
+
 .box{
 padding:6px;
 margin-bottom: 10px;
