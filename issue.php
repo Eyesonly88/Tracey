@@ -251,8 +251,7 @@ confirmLogin();
 					<label>Component:</label>
 					<select name="reporterid" id="input_component">
 									<?php 
-									
-										
+
 										if ($action == 0){
 											$resultSet = getComponentsByProjectId($projectinfo['ProjectId']);
 										} else {

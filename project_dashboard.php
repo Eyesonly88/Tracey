@@ -108,6 +108,14 @@ if (isset($_GET['id'])){
 					1. Logged in user = Account, Themes, Logout Button.
 					2. Visitor = Login, Register.
 					-->
+					
+					<li id="projectname">
+						<div id="projectname-container">
+							<h3>Project Dashboard for "<?php	$result = getProjectNameById($projectid);
+															 	echo $result[0]['ProjectName'];?>"</h3>	
+						</div>
+					</li>
+					
 					<li id="notifications">
 
 						<div id="notification-icon">
