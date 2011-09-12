@@ -150,9 +150,20 @@ padding: 0px;
 	float: left;
 	padding-top:0.5em;
 }
-#pendingInvite-container input{
-	margin-top:1em;
+#nav #pendingInvite-container a{
+	margin-top:2em;
 	font-size: 2em;
+	display:inherit;
+	padding: 0;
+	height: 0;
+	
+}
+#nav #pendingInvite-container{
+	width:auto;
+	height:auto;
+	background: #251C17;
+	display: inline;
+	
 }
 /** Login Form and Login Item in Nav **/
 
@@ -420,7 +431,7 @@ input[type=button]:hover, input[type=button].cancel:hover, input[type=submit]:ho
  * 
  */
 
-fieldset {border: 1px solid #e4e4e4; margin:0;}
+fieldset {border: 1px solid #e4e4e4; margin:0;height: 100%}
 legend {color: #484848;}
 
 .leftcontent{float:left; width:49%;}
@@ -453,6 +464,7 @@ legend {color: #484848;}
 .box #user-col,.box #project-col, .box #status-col{
 	float:left;
 	margin-right:10em;
+	height: 12em;
 }
 
 .box{
@@ -463,6 +475,7 @@ color:#505050;
 line-height:1.5em;
 border: 1px solid #e4e4e4;
 font-size:12px;
+height: 30em;
 }
 
 .required {color: #bb0000;}
