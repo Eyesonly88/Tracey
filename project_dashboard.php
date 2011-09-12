@@ -206,13 +206,16 @@ if (isset($_GET['id'])){
 											<p id="confirm-inv-msg"></p>
 											
 										</label>	
-
+								
 								</form>
+								
 							</div>
+							<div style="clear: both"></div>
 							<div id="pendingInvite-container">
-								<input type="button"  name="pending_invite" value="Show Pending Invites" id="pendinginv-button"/>
+								<a rel="shadowbox;width=700;height=400" href="pendingInvites.php"><input type="button"  name="pending_invite" value="Show Pending Invites" id="pendinginv-button" style="margin-top:1em;font-size:1em;"/></a>
 							</div>
 						</div>
+						
 					</li>
 					
 					
