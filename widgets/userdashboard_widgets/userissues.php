@@ -35,10 +35,11 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sessions.php');
   	
   	/* Apply datatable library to the list of tables. */
   	$('#issuelist').dataTable({
+  		"bJQueryUI": true,
   		"bPaginate": false,
 		"bLengthChange": false,
 		"bFilter": true,
-		"bSort": false,
+		"bSort": true,
 		"bInfo": false,
 		"bAutoWidth": false,
 		"bStateSave": true, 
@@ -150,8 +151,6 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sessions.php');
 	<table id="issuelist" class="display" ></table>
 </div>
 
-<BR/>
-<BR/>
 
 </div>
 

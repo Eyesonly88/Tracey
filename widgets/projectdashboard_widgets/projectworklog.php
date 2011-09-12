@@ -37,7 +37,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sessions.php');
   	
   	/* Apply datatable library to the list of tables. */
   	$('#loglist').dataTable({
-  		
+  		"bJQueryUI": true,
   		"bPaginate": false,
 		"bLengthChange": false,
 		"bFilter": true,
