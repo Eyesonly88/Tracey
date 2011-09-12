@@ -32,7 +32,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sessions.php');
   		"bPaginate": false,
 		"bLengthChange": false,
 		"bFilter": true,
-		"bSort": false,
+		"bSort": true,
 		"bInfo": false,
 		"bAutoWidth": false,
 		"bStateSave": true, 

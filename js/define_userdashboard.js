@@ -9,21 +9,9 @@
         // call for the themeswitcher
         $('#switcher').themeswitcher();
 		
-		var widgetids = new Array();
-        // call for the minimal dashboard
-        
-        $('#refreshwidgets').click(function() { 
-        	//alert(widgetids.length);
-        	for (var i = startId; i < (startId + 100); i++) {
-			    var tempwidget = dashboard.getWidget(i);
-			    if (tempwidget != null) { 
-			    	tempwidget.refreshContent();
-			    }
-			    //Do something
-			}
 
-        	
-        });
+        
+        
         
         function initDashboard() {
           

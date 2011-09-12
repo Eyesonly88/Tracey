@@ -36,9 +36,9 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_componentfunctions
 			$query->prepare($sql_getLastInsertId);
 			$lastinsertarray = dynamicBindResults($query);
 			$projectid = $lastinsertarray[0]['ID'];
-			
+		
 			/* Using the id of the last created project, add a component to this project (this is the default component) */
-			$lastinsertarray = addComponentByProjectId($projectid, $hours, $due, 1);
+			$lastinsertarray = addComponentByProjectId($projectid, $hours, $due, 1, $user);
 			$compid = $lastinsertarray[0]['ID'];
 			addUserToComponentByEmail($compid, $email);
 			return 1;

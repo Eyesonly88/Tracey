@@ -131,11 +131,11 @@ confirmLogin();
 
 								if(msg == "1") {
 									$(".box").hide("slow");
-									$("#statusinfo").append("<h2> Issue created. </h2><BR />");
+									$("#statusinfo").append("<h2> Issue created. Click outside the window to return to the dashboard. </h2><BR />");
 									$("#statusinfo").show("slow");
 								} else {
 									$(".box").hide("slow");
-									$("#statusinfo").append("<h2> Something went horribly wrong: " + msg + "</h2><BR />");
+									$("#statusinfo").append("<h2> Something went horribly wrong: " + msg + ". Click outside the window to return to the dashboard.</h2><BR /> ");
 									$("#statusinfo").show("slow");
 								}
 								// setupFlexTable2();
@@ -150,7 +150,7 @@ confirmLogin();
 
 	</script>
 </head>
-<body>
+<body style="overflow: hidden">
 	<input type='hidden' id="issueid" value="<?php
 	if($action == 0) { echo $issueid;
 	}

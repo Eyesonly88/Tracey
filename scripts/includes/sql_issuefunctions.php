@@ -511,5 +511,36 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_notificationfn.php
 		
 	}
 	
+	function getUserComponentIssuesById($userid, $projectid) {
+		
+		global $connection;
+		$query = $connection->stmt_init();
+		$sql_stmt = "	SELECT DISTINCT 
+						i.IssueId
+						, i.ComponentId
+						, i.ReporterId
+						, i.AssigneeId
+						, i.IssueType
+						, i.Priority
+						, i.CreationDate
+						, i.IssueStatus
+						, i.ResolvedDate
+						, i.LastModificationDate
+						, i.Description
+						, i.Name
+						FROM issue i
+						INNER JOIN usercomponent uc ON uc.ComponentId = i.ComponentId
+						INNER JOIN component c ON c.ComponentId = uc.ComponentId
+						WHERE uc.UserId = ?
+						AND c.ProjectId = ?";
+		$query->prepare($sql_stmt);
+		$query->bind_param("ii", $id, $pid);
+		$id = $userid;
+		$pid = $projectid;
+		$results = dynamicBindResults($query);
+		return $results;
+		
+		
+	}
 
 ?>

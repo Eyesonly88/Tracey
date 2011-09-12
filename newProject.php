@@ -77,7 +77,7 @@ $projecttypes = getAllProjectTypes();
 		</script>
 	
 </head>
-<body>
+<body style="overflow: hidden">
 	<form>
 		<input type="hidden" name="projectLeaderEmail" id="projectLeader-email" value="<?php echo $_SESSION['email']; ?>" />
 		<div class="box">

@@ -7,10 +7,10 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sessions.php');
 
 ?>
 <head>
-<link rel="stylesheet" href="/libraries/datatables/media/css/demo_table_jui.css" type="text/css">
+
 
 <!--<script src="/libraries/flexigrid/js/flexigrid.js" type="text/javascript"></script> -->
-<script src="/libraries/dataTables/media/js/jquery.dataTables.js" type="text/javascript"></script>
+
 <link rel="stylesheet" href="/libraries/shadowbox/shadowbox.css" type="text/css">
 <script src="/libraries/shadowbox/shadowbox.js" type="text/javascript"></script>
 <script type="text/javascript">
@@ -80,8 +80,8 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sessions.php');
 	   data: "email="+email,
 	   success: function(msg2){
 	  
-	     $("#issuelist").empty();
-	     $("#issuelist").append(msg2);
+	     $("#issuelist").html(msg2);
+	   
 
 	     setupFlexTable2();
 	          

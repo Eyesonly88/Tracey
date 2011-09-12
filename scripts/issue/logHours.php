@@ -17,9 +17,15 @@ if (isset($_POST['id']) && isset($_POST['hours']) && isset($_POST['desc']) && is
 	$description = $_POST['desc'];
 	$user = $_POST['user'];
 	
+	if (empty($issueid) || empty($hours) ||  empty($user))  {
+		
+		$logresult = -1;
+	} else {
+	
 	//echo "" . $issueid . " " . $hours . " " . $description . " " . $user;
 	
-	$logresult = logIssueHours($issueid, $hours, $description, $user);	
+		$logresult = logIssueHours($issueid, $hours, $description, $user);	
+	}
 }
 
 echo $logresult;

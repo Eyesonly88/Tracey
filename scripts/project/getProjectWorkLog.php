@@ -36,7 +36,7 @@
 			$response = $response . '<td class="w_hours" name="w_hours" align="center">' . $row['Hours'] . '</td>';
 			$response = $response . '<td class="w_date" name="w_date" align="center">' . $row['CreationDate'] . '</td>';
 			
-			$response = $response . '<td class="w_p_viewlog" name="w_viewlog_button" id="w' . $row['ID'] . '" align="center"><a id="view_log' . $row['IssueId'] . '" rel="shadowbox;width=1100;height=175" href="worklog.php?id='. $row['ID'] . '"><input type="button"  style="width:80px; height:35px; border-width:1px;" id="viewLog-button'. $row['ID'] . '" value="View Log" /></a></td>';
+			$response = $response . '<td class="w_p_viewlog" name="w_viewlog_button" id="w' . $row['ID'] . '" align="center"><a id="view_log' . $row['IssueId'] . '" rel="shadowbox;width=700;height=160" href="worklog.php?id='. $row['ID'] . '"><input type="button"  style="width:80px; height:35px; border-width:1px;" id="viewLog-button'. $row['ID'] . '" value="View Log" /></a></td>';
 			$response = $response . '</tr>';
 		}
 		$response = $response . '</tbody>';		

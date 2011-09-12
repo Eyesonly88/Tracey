@@ -11,12 +11,14 @@ confirmLogin();
 	<head>
 		<meta http-equiv="content-type" content="text/html; charset=utf-8">
 		<title>User Dashboard</title>
-
+		<link rel="stylesheet" href="/libraries/shadowbox/shadowbox.css" type="text/css">
+		<script src="/libraries/shadowbox/shadowbox.js" type="text/javascript"></script>
 		<link rel="stylesheet" type="text/css" href="css/customStyle.css" />
 		<link rel="stylesheet" type="text/css" href="css/dashboardui.css" />
 		<link rel="stylesheet" type="text/css" href="libraries/dashboard/themes/default/jquery-ui-1.8.2.custom.css" />
 		<script type="text/javascript" src="libraries/dashboard/lib/jquery-1.4.2.min.js"></script>
 		<script type="text/javascript" src="libraries/dashboard/lib/jquery-ui-1.8.2.custom.min.js"></script>
+			
 		<script type="text/javascript" src="libraries/dashboard/jquery.dashboard.js"></script>
 		<script type="text/javascript" src="libraries/dashboard/lib/themeroller.js"></script>
 		<link rel="stylesheet" href="/libraries/datatables/media/css/demo_table_jui.css" type="text/css">
@@ -27,8 +29,8 @@ confirmLogin();
 		<script src="js/define_userdashboard.js"></script>
 		<script src="js/notification.js"></script>
 		<script src="js/invite.js"></script>
-		<link rel="stylesheet" href="/libraries/shadowbox/shadowbox.css" type="text/css">
-		<script src="/libraries/shadowbox/shadowbox.js" type="text/javascript"></script>
+		<script src="/libraries/dataTables/media/js/jquery.dataTables.js" type="text/javascript"></script>
+	
 		<script>$(document).ready( function() {
 				
 			
@@ -186,7 +188,7 @@ confirmLogin();
 		<div id="user-box">
 			
 			<div id="createProject-container">
-				<a rel="shadowbox;width=700;height=250;" href="newProject.php?action=create"><input type="button" id="createProject-button" value="Create Project" /></a>
+				<a rel="shadowbox;width=700;height=225;" href="newProject.php?action=create"><input type="button" id="createProject-button" value="Create Project" /></a>
 			
 			</div>
 				<!--<input type="button" id="refreshwidgets" value="Refresh Widgets" /> -->

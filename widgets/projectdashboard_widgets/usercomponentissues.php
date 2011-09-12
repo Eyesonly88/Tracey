@@ -1,31 +1,44 @@
 <?php
+
+#widget that displays issues related to a project
+
 include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sessions.php');
 
 
 ?>
-
-<!--<link rel="stylesheet" href="/libraries/flexigrid/css/flexigrid.css" type="text/css"> -->
-
-<script src="/widgets/userdashboard_widgets/widgetjs/userprojects.js" type="text/javascript"></script>
+<head>
+<!--<link rel="stylesheet" href="/libraries/datatables/media/css/demo_table_jui.css" type="text/css">-->
 <!--<script src="/libraries/flexigrid/js/flexigrid.js" type="text/javascript"></script> -->
 
-
-
+<link rel="stylesheet" href="/libraries/shadowbox/shadowbox.css" type="text/css">
+<script src="/libraries/shadowbox/shadowbox.js" type="text/javascript"></script>
 <script type="text/javascript">
   
+  
+   Shadowbox.init({
+
+   		displayNav: "false",
+   		displayCounter: "false"
+  	});
+  	Shadowbox.clearCache();
+  
+
+  //alert(issuehtml);
+  var projectid = $('#projectid29').val();
+  var email = $('#useremail29').val();
   var currentUser = "";
   getCurrentUser();
   initialSetup();
+  
  
   function setUser(msg){ 
   	currentUser = msg;	
   }
   
-  function setupFlexTable(){
+  function setupFlexTable29(){
   	
   	/* Apply datatable library to the list of tables. */
-  	$('#projectlist').dataTable({
-  		
+  	$('#projectlist29').dataTable({
   		"bJQueryUI": true,
   		"bPaginate": false,
 		"bLengthChange": false,
@@ -40,30 +53,8 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sessions.php');
   	});
   	//$("#projectlist").fnDraw();
   }
+ 
   
-  
-  /* Get list of projects created by the user (via Ajax) */
-  function getUserProjects(user){
-  	$.ajax({
-  	   cache: "false",
-	   type: "POST",
-	   url: "/scripts/userdashboard/getCreatedProjects.php",
-	   data: "email="+user,
-	   success: function(msg2){
-	     $("#projectlist").empty();
-	     $("#projectlist").append(msg2);
-	     setupFlexTable();
-	     
-	     $("#goto_project").click(function() { 
-	     	
-
-	     	$(this).html('<input type="button" style="width:100px; height:35px; border-width:1px;" value="Redirecting..." />');
-	     	return false;
-	     });
-	   }
-   
- 	});
-  }
   
   /* Get the currently logged in user */
   function getCurrentUser(){
@@ -80,23 +71,18 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sessions.php');
   
   /* This is the initial function call that is executed when the widget is ready. 
  	Sets up the initial list of projects. */
-  function initUserProjects(user){
+  function initUserProjects(id){
   $.ajax({
   	   cache: "false",
 	   type: "POST",
-	   url: "/scripts/userdashboard/getCreatedProjects.php",
-	   data: "email="+user,
+	   url: "/scripts/project/getUserComponentIssues.php",
+	   data: "id="+id+"&email="+email,
 	   success: function(msg2){
-	     $("#projectlist").empty();
-	     $("#projectlist").append(msg2);
-	     setupFlexTable();
+	  
+	     $("#projectlist29").html(msg2);
+
+	     setupFlexTable29();
 	     
-	     $(".p_dashboard_button").click(function() { 
-	     	
-	     	$(this).empty();
-	     	$(this).append("Redirecting...");
-	     
-	     });
 	   }
    
  	});
@@ -111,15 +97,18 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sessions.php');
 	   url: "/scripts/authentication/getCurrentUser.php",
 	   success: function(msg){
 	     setUser(msg);
-	     initUserProjects(msg);
+	     initUserProjects(projectid);
 	     
 	   }
    
  	});
  }
-	
-</script>
+  
 
+
+
+</script>
+</head>
 <style>
   h5 span {
     color:#666666;
@@ -154,8 +143,11 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sessions.php');
 </style>
 
 <div id="contents">
-<div id="title"></div>
-<table id="projectlist" class="display" ></table>
-	
+	<input type="hidden" id="projectid29" value=<?php echo $_SESSION['projectid']; ?> />
+	<input type="hidden" id="useremail29" value=<?php echo $_SESSION['email']; ?> />
+	<table id="projectlist29" class="display" ></table>
 </div>
+
+
+
 

@@ -3,7 +3,7 @@
 /* Error codes: one of the required fields were not set.  */ 
 
 include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_projectfunctions.php');
-
+include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_userfunctions.php');
 $projName = '';
 $projLeaderEmail = '';
 $projtype = '';
@@ -25,6 +25,7 @@ if (isset($_POST['due'])) {
 	
 	$duedate = $_POST['due'];
 }
+
 
 $response1 = createProject($projName, $projLeaderEmail, $projtype, $hours, $duedate);
 

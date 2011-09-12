@@ -9,11 +9,12 @@
       "image": ""
     },
   {
-    "title" : "Work Logs",
-    "id" : "widget3",
-    "column" : "second",
-    "open" : true,
-    "url" : "/widgets/projectdashboard_widgets/projectworklog.php"
+  	"id" : "w029",
+    "title" : "Issues from components you belong to", 
+    "description" : "Components of this project.",
+	"creator" : "Tracey",
+    "url" : "widgets/projectdashboard_widgets/usercomponentissues.php",
+    "image": ""
   }
   ]
 }

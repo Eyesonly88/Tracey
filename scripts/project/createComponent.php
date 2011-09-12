@@ -7,30 +7,48 @@
  * for deleting a component: Returns 2.
  * 
 */
-$projectid = '';
+
 
 	include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_projectfunctions.php');
 	include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_issuefunctions.php');
 	include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_userfunctions.php');
 	include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_componentfunctions.php');
 	
+	$projectid = '';
 	$email = '';
 	$result = '';
 	$response = '';
-	if (isset($_POST['id'])){
+	$name = '';
+	$hours = '';
+	$due = '';
+	if (isset($_POST['id']) && isset($_POST['name']) && isset($_POST['email'])){
 		$projectid = $_POST['id'];		
-		addComponentByProjectId($projectid);
-		$result = getComponentsByProjectId($projectid);
+		$name = $_POST['name'];
+		$email = $_POST['email'];
+		$userid = getUserInfo($email, "UserId");
 		
-		if (!empty($result)){
+		if (isset($_POST['due'])) {
+			$due = $_POST['due'];
+		}
+		
+		if (isset($_POST['hours'])) {
+			$hours = $_POST['hours'];
+		}
+		
+		$response = addNamedComponentByProjectId($projectid, $hours, $due, $name, 0, $userid);
+
+		if (!empty($response)) {
 			$response = 1;
 		} else {
 			$response = -1;
 		}
+		
 	} else if (isset($_POST['componentid'])){
 		$componentId = $_POST['componentid'];
 		removeComponent($componentId);
 		$response = 2;
+	} else {
+		$response = -2;
 	}
 	
 	echo $response;

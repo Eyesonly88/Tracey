@@ -12,24 +12,51 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_other.php');
 include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_checks.php');
 include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_prepared.php');
 
-	/* Adds a component to the specified project @TODO: component table needs a few more fields to be added e.g. 'ComponentName' */
-	function addComponentByProjectId($projectid, $hours, $due, $isDefault){
+	/* Adds a DEFAULT component to the specified project @TODO: component table needs a few more fields to be added e.g. 'ComponentName' */
+	function addComponentByProjectId($projectid, $hours, $due, $isDefault, $creator){
 		global $connection;
 		$compid = '';
 		$query = $connection->stmt_init(); 
-		$sql_addComponent = "INSERT INTO Component(name, ProjectId, RequiredHours, DueDate, IsDefault, CreationDate) VALUES('Default', ?, ?, ?, ?, ?)";
+		$sql_addComponent = "INSERT INTO Component(name, ProjectId, RequiredHours, DueDate, IsDefault, CreationDate, Creator) VALUES('Default', ?, ?, ?, ?, ?, ?)";
 		$sql_getLastInsertId = "SELECT LAST_INSERT_ID() AS ID";	
 		if ($query->prepare($sql_addComponent)) {		
-			$query->bind_param("idsis", $pid, $requiredhours, $duedate, $default, $cdate);	
+			$query->bind_param("idsisi", $pid, $requiredhours, $duedate, $default, $cdate, $userid);	
 			$pid = $projectid;
 			$requiredhours = $hours;
 			$duedate =  date("Y-m-d", strtotime($due));
 			$default = $isDefault;
 			date_default_timezone_set("Pacific/Auckland");
 			$cdate = date('Y-m-d H:i:s');
+			$userid = $creator;
 			$query->execute();		
 			$query->prepare($sql_getLastInsertId);
 			$lastinsertarray = dynamicBindResults($query);
+			return $lastinsertarray;
+		}	
+	}
+	
+	function addNamedComponentByProjectId($projectid, $hours, $due, $name, $isDefault, $creator){
+		global $connection;
+		$compid = '';
+		$query = $connection->stmt_init(); 
+		$sql_addComponent = "INSERT INTO Component(name, ProjectId, RequiredHours, DueDate, IsDefault, CreationDate, Creator) VALUES(?, ?, ?, ?, ?, ?, ?)";
+		$sql_getLastInsertId = "SELECT LAST_INSERT_ID() AS ID";	
+		if ($query->prepare($sql_addComponent)) {		
+			$query->bind_param("sidsisi", $cname, $pid, $requiredhours, $duedate, $default, $cdate, $userid);	
+			$cname = $name;
+			$pid = $projectid;
+			$requiredhours = $hours;
+			$duedate =  date("Y-m-d", strtotime($due));
+			$default = $isDefault;
+			date_default_timezone_set("Pacific/Auckland");
+			$cdate = date('Y-m-d H:i:s');
+			$userid = $creator;
+			$query->execute();		
+			$query->prepare($sql_getLastInsertId);
+			$lastinsertarray = dynamicBindResults($query);
+			$compid = $lastinsertarray[0]['ID'];
+			addUserToComponentById($compid, $userid);
+			
 			return $lastinsertarray;
 		}	
 	}
@@ -159,6 +186,53 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_prepared.php');
 		$id = $componentid;
 		$results = dynamicBindResults($query);
 		return $results[0]['ProjectName'];
+	}
+	
+	function getComponentInfoById($componentid) {
+		global $connection;
+		$query = $connection->stmt_init();
+		$sql_stmnt = "	SELECT * 
+						FROM component 
+						WHERE ComponentId = ?";
+		$query->prepare($sql_stmnt);
+		$query->bind_param("i", $id);		
+		$id = $componentid;
+		$results = dynamicBindResults($query);
+		return $results;
+		
+	}
+	
+	function modifyComponentById($componentid, $name, $hours) {
+		
+		global $connection;
+		$query = $connection->stmt_init();
+		$sql_stmnt = "	UPDATE component
+						SET	Name = ?, 
+							RequiredHours = ? 				
+						WHERE ComponentId = ?";
+		$query->prepare($sql_stmnt);
+		$query->bind_param("sii", $cname, $chours, $id);
+		$cname = $name;
+		$chours = $hours;		
+		$id = $componentid;
+		$query->execute();
+		return 1;
+	}
+	
+	function checkUserPartOfComponent($componentid, $userid) {
+		
+		global $connection;
+		$query = $connection->stmt_init();
+		$sql_stmnt = "	SELECT * 
+						FROM usercomponent 
+						WHERE ComponentId = ? AND UserId = ?";
+		$query->prepare($sql_stmnt);
+		$query->bind_param("ii", $id, $uid);		
+		$id = $componentid;
+		$uid = $userid;
+		$results = dynamicBindResults($query);
+		return $results;
+		
 	}
 	
 ?>

@@ -27,6 +27,7 @@ if (isset($_GET['id'])){
 		<link rel="stylesheet" type="text/css" href="css/customStyle.css" />
 		<link rel="stylesheet" type="text/css" href="css/dashboardui.css" />
 		<link rel="stylesheet" type="text/css" href="libraries/dashboard/themes/default/jquery-ui-1.8.2.custom.css" />
+		<link rel="stylesheet" href="/libraries/datatables/media/css/demo_table_jui.css" type="text/css">
 		<script type="text/javascript" src="libraries/dashboard/lib/jquery-1.4.2.min.js"></script>
 		<script type="text/javascript" src="libraries/dashboard/lib/jquery-ui-1.8.2.custom.min.js"></script>
 		<script type="text/javascript" src="libraries/dashboard/jquery.dashboard.js"></script>
@@ -38,6 +39,7 @@ if (isset($_GET['id'])){
 		<script src="js/invite.js"></script>
 		<link rel="stylesheet" href="/libraries/shadowbox/shadowbox.css" type="text/css">
 		<script src="/libraries/shadowbox/shadowbox.js" type="text/javascript"></script>
+		<script src="/libraries/dataTables/media/js/jquery.dataTables.js" type="text/javascript"></script>
 		
 		
 		<script>$(document).ready( function() {
@@ -261,8 +263,8 @@ if (isset($_GET['id'])){
 		<div id="user-box">
 			
 			<div id="createIssue-createComponent-container">
-				<a rel="shadowbox;width=1100;height=700" href="newIssue.php?action=create"><input type="button" id="createIssue-button" value="Create Issue" /></a>
-				<a rel="shadowbox;width=800;height=200" href="newComponent.php"><input type="button" id="createComponent-button" value="Create Component" /></a>
+				<a rel="shadowbox;width=1100;height=620" href="newIssue.php?action=create"><input type="button" id="createIssue-button" value="Create Issue" /></a>
+				<a rel="shadowbox;width=800;height=225" href="newComponent.php"><input type="button" id="createComponent-button" value="Create Component" /></a>
 			</div>
 			
 			

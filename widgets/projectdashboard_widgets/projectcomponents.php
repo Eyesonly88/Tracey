@@ -6,9 +6,9 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sessions.php');
 
 
 ?>
-<link rel="stylesheet" href="/libraries/datatables/media/css/demo_table_jui.css" type="text/css">
+
 <!--<script src="/libraries/flexigrid/js/flexigrid.js" type="text/javascript"></script> -->
-<script src="/libraries/dataTables/media/js/jquery.dataTables.js" type="text/javascript"></script>
+
 <script type="text/javascript">
   
 	
@@ -40,7 +40,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sessions.php');
   	
   	/* Apply datatable library to the list of tables. */
   	$('#componentlist').dataTable({
-  		
+  		"bJQueryUI": true,
   		"bPaginate": false,
 		"bLengthChange": false,
 		"bFilter": true,

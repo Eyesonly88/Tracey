@@ -71,7 +71,7 @@ if (isset($_GET['id'])){
 
 	</head>
 
-	<body>
+	<body style="overflow: hidden">
 		<form>
 			<input type="hidden" name="useremail" id="useremail" value="<?php echo $_SESSION['email']; ?>" />
 			<input type="hidden" name="issueid" id="issueid" value="<?php echo $id; ?>" />
