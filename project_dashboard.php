@@ -105,20 +105,21 @@ if (isset($_GET['id'])){
 					</ul>
 				</div>
 
-				<ul id="nav">
+				<ul id="nav" style="width:100%">
 					<!-- Load Navigation items ..
 					1. Logged in user = Account, Themes, Logout Button.
 					2. Visitor = Login, Register.
 					-->
 					
-					<li id="projectname">
-						<div id="projectname-container">
-							<h3>Project Dashboard for "<?php	$result = getProjectNameById($projectid);
+					<li id="projectname" style="float:left">
+						<div id="projectname-container" ">
+							<h3 style="float:left;">Project: "<?php	$result = getProjectNameById($projectid);
 															 	echo $result[0]['ProjectName'];?>"</h3>	
 						</div>
+						<div style="clear: both"></div>
 					</li>
 					
-					<li id="notifications">
+					<li id="notifications" style="float: right">
 
 						<div id="notification-icon">
 							<h3>
@@ -177,7 +178,7 @@ if (isset($_GET['id'])){
 						</div>
 					</li>
 					
-					<li id="Invite">
+					<li id="Invite" style="float: right">
 						<a href="#">
 						<h3>Invite Members</h3>
 						<span>Invite people to your project</span>
@@ -214,14 +215,14 @@ if (isset($_GET['id'])){
 							</div>
 							<div style="clear: both"></div>
 							<div id="pendingInvite-container">
-								<a rel="shadowbox;width=700;height=400" href="pendingInvites.php"><input type="button"  name="pending_invite" value="Show Pending Invites" id="pendinginv-button" style="margin-top:1em;font-size:1em;"/></a>
+								<a rel="shadowbox;width=700;height=400" href="pendingInvites.php" style="width:50%;display: inline;"><input type="button"  name="pending_invite" value="Show Pending Invites" id="pendinginv-button" style="margin-top:1em;font-size:2em;margin-bottom: 1em;width: 50%;"/></a>
 							</div>
 						</div>
 						
 					</li>
 					
 					
-					<li id="login">
+					<li id="login" style="float: right">
 						<a href="#">
 						<h3>Account Settings</h3>
 						<span>User details</span>
@@ -238,7 +239,7 @@ if (isset($_GET['id'])){
 							</div>
 						</div>
 					</li>
-					<li id="register">
+					<li id="register" style="float: right">
 						<a href="#">
 						<h3>Widgets and Layout</h3>
 						<span>Add widgets or Edit Layout</span>
