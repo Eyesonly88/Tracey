@@ -143,9 +143,9 @@ if (isset($_GET['id'])) {
 					<p>
 						<label for="component-name">Component Name<span class="required"> *</span></label>
 						<?php if ($isView == 1) {
-							echo '<input type="text" id="component-name" required="required" style="width: 400px" value="' . $componentinfo['Name'] . '"/>';
+							echo '<input type="text" id="component-name" required="required" style="width: 400px; color:#000;" value="' . $componentinfo['Name'] . '"/>';
 						} else { ?>
-							<input type="text" id="component-name" required="required" style="width: 400px"/>
+							<input type="text" id="component-name" required="required" style="width: 400px; color:#000;" />
 						<?php } ?>
 					</p>
 					<p>
@@ -177,9 +177,9 @@ if (isset($_GET['id'])) {
 					<p>
 						<label for="component-requiredhours">Required Hours</label>
 						<?php if ($isView == 1) {
-							echo '<input type="text" id="component-requiredhours" value="' . $componentinfo['RequiredHours'] . '"/>';
+							echo '<input type="text" id="component-requiredhours" style="width: 400px; color:#000;" value="' . $componentinfo['RequiredHours'] . '"/>';
 						} else {?>
-							<input type="text" id="component-requiredhours"/>
+							<input type="text" id="component-requiredhours" style="width: 400px; color:#000;" />
 						<?php } ?>
 					</p>
 					<p>

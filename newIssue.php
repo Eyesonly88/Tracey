@@ -351,7 +351,7 @@ confirmLogin();
 							}
 							?>
 							<label for="issue-startdate">Created</label>
-							<input type="text" id="issue-startdate" required="required" disabled="disabled" style="color:black" value="<?php
+							<input type="text" id="issue-startdate" required="required" disabled="disabled" style="color:#000;" value="<?php
 								if($action == 0) { echo $creationdate;
 								}
  ?>"/>
@@ -371,7 +371,7 @@ confirmLogin();
 							}
 							?>
 							<label for="issue-resolveddate">Resolved</label>
-							<input type="text" id="issue-resolveddate" disabled="disabled" style="color: black" value="<?php
+							<input type="text" id="issue-resolveddate" disabled="disabled" style="color: #000;" value="<?php
 								if($action == 0) { echo $resolveddate;
 								}
  ?>" />
@@ -392,7 +392,7 @@ confirmLogin();
 							}
 							?>
 							<label for="issue-modificationdate">Modified</label>
-							<input type="text" id="issue-modificationdate" disabled="disabled" style="color: black" value="<?php
+							<input type="text" id="issue-modificationdate" disabled="disabled" style="color:#000;" value="<?php
 								if($action == 0) { echo $modificationdate;
 								}
  ?>" />
@@ -406,7 +406,7 @@ confirmLogin();
 				<legend>
 					Issue Description
 				</legend>
-				<div id="issue-description">
+				<div id="issue-description" style="color:#000;" >
 					<textarea accesskey="e" cols="60" rows="10"><?php
 					if($action == 0) {echo trim($issueinfo['Description']);
 					}

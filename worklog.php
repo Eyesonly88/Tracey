@@ -72,19 +72,19 @@ if (isset($_GET['id'])){
 				<div id="attributes">
 					<p>
 						<label for="logby">Logged by</label>
-						<input type="text" id="logby" readonly="readonly" style="width: 400px" value="<?php echo $user; ?>"/>
+						<input type="text" id="logby" readonly="readonly" style="width: 400px; color:#000;" value="<?php echo $user; ?>"/>
 					</p>
 					<p>
 						<label for="logdate">Created</label>
-						<input type="text" id="logdate" readonly="readonly" style="width: 400px" value="<?php echo $date; ?>"/>
+						<input type="text" id="logdate" readonly="readonly" style="width: 400px; color:#000;" value="<?php echo $date; ?>"/>
 					</p>
 					<p>
 						<label for="loghours">Hours</label>
-						<input type="text" id="loghours" readonly="readonly" style="width: 400px"  value="<?php echo $hours; ?>" />
+						<input type="text" id="loghours" readonly="readonly" style="width: 400px; color:#000;"  value="<?php echo $hours; ?>" />
 					</p>
 					<p>
 						<label for="logdesc">Description</label>
-						<input type="text" id="logdesc" readonly="readonly" value="<?php echo $desc; ?>" />
+						<input type="text" id="logdesc" readonly="readonly" style="width: 400px; color:#000;"  value="<?php echo $desc; ?>" />
 					</p>
 					
 				</div>
