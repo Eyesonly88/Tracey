@@ -76,12 +76,12 @@ confirmLogin();
 					</ul>
 				</div>
 
-				<ul id="nav">
+				<ul id="nav" style="width: 100%">
 					<!-- Load Navigation items ..
 					1. Logged in user = Account, Themes, Logout Button.
 					2. Visitor = Login, Register.
 					-->
-					<li id="notifications">
+					<li id="notifications" style="float: right">
 
 						<div id="notification-icon">
 							<h3>
@@ -143,7 +143,7 @@ confirmLogin();
 						</div>
 					</li>
 					
-					<li id="login">
+					<li id="login" style="float: right">
 						<a href="#">
 						<h3>Account Settings</h3>
 						<span>User details</span>
@@ -160,7 +160,7 @@ confirmLogin();
 							</div>
 						</div>
 					</li>
-					<li id="register">
+					<li id="register" style="float: right">
 						<a href="#">
 						<h3>Widgets and Layout</h3>
 						<span>Add widgets or Edit Layout</span>
