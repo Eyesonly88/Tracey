@@ -65,15 +65,23 @@ if (isset($_GET['id'])) {
 							   
 							  	success: function(msg){
 							  		//alert(msg);
-								  	if (msg == 1){
-								     	$(".box").hide("slow");
-								     	$("#statusinfo").append("<h2> Changes Saved. Click outside the window to return to the dashboard. </h2><BR />");
-								     	$("#statusinfo").show("slow");
-									} else {
-										$(".box").hide("slow");
-								     	$("#statusinfo").append("<h2> Something went horribly wrong: " + msg + ". Click outside the window to return to the dashboard. </h2><BR />");
-								     	$("#statusinfo").show("slow");
-									}
+								  	if(msg == 1) {
+								
+									$(".box").fadeOut("fast");
+									$(".box").html("<h2>Changes saved. Click outside this window to return to the dashboard.</h2>");
+									$(".box").fadeIn("slow");
+									
+									//$("#statusinfo").append("<h2> Changes Saved. </h2><BR />");
+									//$("#statusinfo").show("slow");
+								} else {
+									//$(".box").hide("slow");
+									//$("#statusinfo").append("<h2> Something went horribly wrong: " + msg + "</h2><BR />");
+									//$("#statusinfo").show("slow");
+								
+									$(".box").fadeOut("fast");
+									$(".box").html("<h2>Something went horribly wrong: " + msg + ". Click outside this window to return to the dashboard.</h2>");
+									$(".box").fadeIn("slow");
+								}
 							    // setupFlexTable2();
 							          
 							   }
@@ -89,15 +97,23 @@ if (isset($_GET['id'])) {
 							   
 							  	success: function(msg){
 							  		//alert(msg);
-								  	if (msg == 1){
-								     	$(".box").hide("slow");
-								     	$("#statusinfo").append("<h2> Changes Saved. Click outside the window to return to the dashboard. </h2><BR />");
-								     	$("#statusinfo").show("slow");
-									} else {
-										$(".box").hide("slow");
-								     	$("#statusinfo").append("<h2> Something went horribly wrong: " + msg + ". Click outside the window to return to the dashboard. </h2><BR />");
-								     	$("#statusinfo").show("slow");
-									}
+								  	if(msg == "1") {
+								
+									$(".box").fadeOut("fast");
+									$(".box").html("<h2>Changes saved. Click outside this window to return to the dashboard.</h2>");
+									$(".box").fadeIn("slow");
+									
+									//$("#statusinfo").append("<h2> Changes Saved. </h2><BR />");
+									//$("#statusinfo").show("slow");
+								} else {
+									//$(".box").hide("slow");
+									//$("#statusinfo").append("<h2> Something went horribly wrong: " + msg + "</h2><BR />");
+									//$("#statusinfo").show("slow");
+								
+									$(".box").fadeOut("fast");
+									$(".box").html("<h2>Something went horribly wrong: " + msg + ". Click outside this window to return to the dashboard.</h2>");
+									$(".box").fadeIn("slow");
+								}
 							    // setupFlexTable2();
 							          
 							   }
