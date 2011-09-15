@@ -65,7 +65,7 @@ if (isset($_GET['id'])) {
 		<div class="box">
 			<fieldset class="tabular">
 				<legend>
-					Create New Component
+					Join Component
 				</legend>
 				<div id="attributes">
 					<p>
