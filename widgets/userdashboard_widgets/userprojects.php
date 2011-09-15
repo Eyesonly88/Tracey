@@ -35,6 +35,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sessions.php');
 		"bAutoWidth": false,
 		"bStateSave": true, 
 		"bDestroy": true,
+		"bDeferRender": true,
 		"oSearch": {"sSearch": ""}
   	
   	});

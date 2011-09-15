@@ -283,7 +283,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_componentfunctions
 		$userinfo = array();
 		$results = '';
 		$query = $connection ->stmt_init();	
-		$sql_getProjects = "SELECT u.UserId, u.FirstName, u.LastName, u.Email 
+		$sql_getProjects = "SELECT DISTINCT u.UserId, u.FirstName, u.LastName, u.Email 
 							FROM project p
 							INNER JOIN component c ON c.ProjectId = p.ProjectId
 							INNER JOIN usercomponent uc ON uc.ComponentID = c.ComponentId
