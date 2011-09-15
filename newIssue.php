@@ -421,21 +421,26 @@ confirmLogin();
  ?></textarea>
 				</div>
 			</fieldset>
+			<?php if ($action != 1) {?>
 			<fieldset class="tabular">
 				<legend>
 					Log Hours
 				</legend>
 				<div id="log-issue-hours">
+					
 					<p>
 						Click on the log hours button to add the amount of hours you spent on this issue
 					</p>
+					
 					<p>
 						<a id="loghours" rel="shadowbox;height=240" href="logissuehour.php?id=<?php echo $theissueid;?>">
 						<input type="button" value="Log Hours" />
 						</a>
 					</p>
+					
 				</div>
 			</fieldset>
+			<?php } ?>
 			<input type="button" value="Save Issue" id="confirm_btn" style="margin-top:1em;"/>
 			</div>
 			<div id="statusinfo" type="hidden" style="text-align: center;font-size:3em;color: white"></div>
