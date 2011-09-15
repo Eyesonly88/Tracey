@@ -384,6 +384,7 @@ font-weight: bold;
       padding-right:0.5em;
       border: 3px solid #282726;
       background: -webkit-gradient( linear, left top, left bottom, from(#e2e2e2), to(#8c8a88), color-stop(0.6, #bbbbbb), color-stop(0.2, #ffffff));
+      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#8c8a88'); /* for IE */
       background: -moz-linear-gradient(90deg, (#e2e2e2), (#8c8a88));
       margin: 0 0 3px 0;
       text-shadow: 0px 1px 0 #cecece;
@@ -404,6 +405,7 @@ font-weight: bold;
 .custom input[type=button]:hover, .custom input[type=button].cancel:hover {
       background: -moz-linear-gradient(top, (#aaaee5), (#10006d));
       background: -webkit-gradient( linear, left top, left bottom, from(#aaaee5), to(#10006d), color-stop(0.5, #1F3B97), color-stop(0.5, #081f6f) ); 
+      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#aaaee5', endColorstr='#10006d'); /* for IE */
     }
 
 /*
@@ -420,6 +422,7 @@ input[type=button], input[type=submit], button {
       padding-right:0.5em;
       border: 2px solid #f6f6f6;
       background: -webkit-gradient( linear, left top, left bottom, from(#e2e2e2), to(#8c8a88), color-stop(0.6, #bbbbbb), color-stop(0.2, #ffffff));
+      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#8c8a88'); /* for IE */
       background: -moz-linear-gradient(90deg, #e2e2e2, #8c8a88)repeat scroll 0 0 transparent;
       margin: 0 0 3px 0;
       text-shadow: 0px 1px 0 #cecece;
@@ -444,6 +447,7 @@ input[type=submit]:active, input[type=submit].cancel:active {
 input[type=button]:hover, input[type=button].cancel:hover, input[type=submit]:hover, input[type=submit].cancel:hover, button:hover, button.cancel:hover {
       background: -moz-linear-gradient(90deg, #558BCB, #336FB7) repeat scroll 0 0 transparent;
       background: -webkit-gradient( linear, left top, left bottom, from(#aaaee5), to(#10006d), color-stop(0.5, #1F3B97), color-stop(0.5, #081f6f) ); 
+      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#aaaee5', endColorstr='#10006d'); /* for IE */
     }
   
 
