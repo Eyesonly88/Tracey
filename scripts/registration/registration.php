@@ -75,7 +75,7 @@ if (isset($_POST['password'])) {
 	return "";
 }
 
-if (isset($_POST('nickname'))) {
+if (isset($_POST['nickname'])) {
 	$nick = $_POST['nickname'];
 }
 $type = "1";

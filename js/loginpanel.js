@@ -135,7 +135,7 @@ function prepareRegister() {
 									
 								$('#register-container form').fadeIn(200);
 								$('#register-container .register-content').animate({
-									height: '180px'});
+									height: '350px'});
 									
 								$('#register-container .register-title').fadeOut(400);
 								$('#register-container .register-loading').fadeOut(200);
@@ -366,6 +366,7 @@ function validateRegister(){
 	
 	message = '';
 	
+	var nickname = $('#register-container #register-nickname').val();
 	var email = $('#register-container #register-email').val();
 	var nickname = $('#register-container #register-nickname').val();
 	var password = $('#register-container #register-password').val();
@@ -377,8 +378,13 @@ function validateRegister(){
 			message += 'Email is invalid.';
 		}
 	}
-	if (!nickname) { 
+	if(!nickname) { 
 		message += 'Nickname is required';
+	} else { 
+		if (!validateNick(nickname)) {
+			message += 'Nickname is invalid.';
+		}
+		
 	}
 	if (!password) { 
 		message += 'Password is required';
@@ -452,6 +458,18 @@ function validateEmail(email) {
 	if (!/^[-a-zA-Z0-9\.]*$/.test(domain) || domain.indexOf(".") === -1)
 		return false;	
 
+	return true;
+		
+}
+
+function validateNick(nick) { 
+	
+		
+
+	// Make sure domain contains only valid characters and at least one period
+	if (!/^[-a-zA-Z0-9\.]*$/.test(nick)){
+		return false;	
+	}
 	return true;
 		
 }

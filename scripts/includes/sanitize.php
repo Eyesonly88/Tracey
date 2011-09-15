@@ -18,7 +18,7 @@ function sanitizeCheck($input) {
 	$invalid = 0;
 	if (preg_match($search, $input)){ 	
 		$invalid = 1;	
-		echo "Malicious code found";
+		//echo "Malicious code found";
 	}
 	return $invalid;
 } 
@@ -32,7 +32,7 @@ function sanitize($input) {
 	foreach($search as $regex) {
 		if (preg_match($regex, $output)){ 	
 			$output = "";
-			echo 'Input sanitized <BR />';	
+			//echo 'Input sanitized <BR />';	
 			return $output;
 		}
 	}
