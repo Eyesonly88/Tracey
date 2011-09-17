@@ -14,7 +14,7 @@
 	$projectid = '';
 	$email = '';
 	$result = '';
-	$response = '<thead><tr><th>Component</th><th>Required Hours</th><th>Due Date</th><th>Link</th><th>Join</th></tr></thead>';
+	$response = '<thead><tr><th>Component</th><th>Required Hours</th><th>Created</th><th>Link</th><th>Join</th></tr></thead>';
 	if (isset($_POST['id'])){
 		$projectid = $_POST['id'];		
 		$result = getComponentsByProjectId($projectid);
@@ -25,7 +25,7 @@
 		$response = '';
 		//$response = '<table class="projlistflex"  border="1" cellpadding="3" cellspacing="0">';
 
-		$response = $response . '<thead><tr><th>Component</th><th>Required Hours</th><th>Due Date</th><th>View</th><th>Join</th></tr></thead>';
+		$response = $response . '<thead><tr><th>Component</th><th>Required Hours</th><th>Created</th><th>View</th><th>Join</th></tr></thead>';
 		$response = $response . '<tbody>';	
 		foreach($result as $row){
 			$ismember = 0;
