@@ -15,6 +15,7 @@
 include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sessions.php');
 include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_issuefunctions.php');
 include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_userfunctions.php');
+include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_notificationfn.php');
 include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_projectfunctions.php');
 
 $currentuser = '';
@@ -89,6 +90,7 @@ if (!empty($reporterId) && !empty($assigneeId)  && !empty($name) && !empty($comp
 	}
 	
 	$modifyissueresult = modifyIssue($issueid, $component, $name, $description, $reporterId, $assigneeId, $issuetype, $priority, $issuestatus);
+	getNotifIdFromIssueId($issueid,$reporterId,$assigneeId);
 	
 	if (!($modifyissueresult)){
 		echo "-4";

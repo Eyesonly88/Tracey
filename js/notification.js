@@ -7,7 +7,7 @@
 
 $(document).ready(function() {
 	
-
+	
 	$('#notifications-container form #notif-accept-button').click(function (e) {
 		
 		var notifForm = $(this).parent();
@@ -52,6 +52,34 @@ $(document).ready(function() {
 		$.ajax({
 			url: 'scripts/notification/notification.php' ,
 			data: "RejectId=3&NotificationId=" + notifId,
+			type: 'post',
+			cache: false,
+			dataType: 'text',
+			success: function (data) {
+
+				if(data == 1){
+					notifCount = parseInt(notifCount) - 1;
+					$('#notification-icon h3').text(notifCount);
+					notifForm.fadeOut(400);
+					notifMsg.fadeOut(400);
+				} else if (data == -1){
+					// rejecting failed
+				}
+			},
+			error: "Error"
+		});
+	});
+	
+	$('#notifications-container form #notif-ok-button').click(function (e) {
+		
+		var notifForm = $(this).parent();
+		var notifId = notifForm.children('.notif-id-input').val();
+		var notifMsg = notifForm.parent().children('#notif-msg-'+notifId);
+		var notifCount = $('#notification-icon h3').text();
+		
+		$.ajax({
+			url: 'scripts/notification/notification.php' ,
+			data: "IssueAccepted=2&NotificationId=" + notifId,
 			type: 'post',
 			cache: false,
 			dataType: 'text',

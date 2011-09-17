@@ -38,6 +38,19 @@ if (isset($_POST['AcceptId'])){
 		// chaning status failed
 		$callbackMsg = -1;
 	}
+} else if (isset($_POST['IssueAccepted'])){
+	// reject notification
+	
+	$StatusId = $_POST['IssueAccepted'];
+	$NotifId = $_POST['NotificationId'];
+	
+	if(setNotifStatus($StatusId, $NotifId)){
+		// changing status was succesful
+		$callbackMsg = 1;
+	}else{
+		// chaning status failed
+		$callbackMsg = -1;
+	}
 }
 
 echo $callbackMsg;

@@ -9,7 +9,23 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_other.php');
 include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_checks.php');
 include_once($_SERVER['DOCUMENT_ROOT'].'/scripts/includes/sql_prepared.php');
 
-
+function getNotifIdFromIssueId($issueID, $reporter, $assignee){
+	
+	global $connection;
+	
+	$query = $connection->stmt_init();
+	$sql_stmnt = "UPDATE notification SET StatusId = 2 WHERE TypeEntityId = ? AND SenderId = ? AND ReceiverId = ?";
+	
+	if($query->prepare($sql_stmnt)){
+		$query->bind_param("iii", $issueID,$reporter,$assignee);	
+		$query->execute();
+		return true;
+	}else {
+		// update operation failed.
+		return false;
+	}
+	
+}
 function getPendingInvInfoBySenderId($senderId){
 	global $connection;
 	
@@ -204,7 +220,7 @@ function getAllNotifDetails($email){
 	$userID = $result['UserId'];
 	
 	$query = $connection->stmt_init();
-	$sql_stmnt = "SELECT * FROM notification WHERE ReceiverId = ?";
+	$sql_stmnt = "SELECT * FROM notification WHERE ReceiverId = ? AND StatusId = 1";
 	
 	if($query->prepare($sql_stmnt)){
 		$query->bind_param("i", $userID);	

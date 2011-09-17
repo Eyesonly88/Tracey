@@ -134,43 +134,55 @@ if (isset($_GET['id'])){
 									<?php
 									// get all notifications for user
 									$resultSet = getAllNotifDetails($_SESSION['email']);
-									
 									if (!(empty($resultSet))){
-									
+										
 										foreach ($resultSet as $result) {
 											// print_r($result);
 											// display notification iff its new
-											if ($result['StatusId'] == 1) {
+											
+												// Displaying the notification message
 												echo "<div class=\"notif-msg-block\">";
 												echo "<p id=\"notif-msg-{$result['Id']}\">";
 												echo getNotifNameByID($result['TypeId']);
 												echo " [";
-												if (getNotifNameByID($result['TypeId']) === "IssueAssigned"){
+												if (getNotifNameByID($result['TypeId']) == "IssueAssigned"){
 													echo getEntityNameByIssueId($result['TypeEntityId']);
 												} else {
 													echo getEntityNameByProjectId($result['TypeEntityId']);
 												}
+												
 												echo "] by ";
 												echo getSenderName($result['SenderId']);
 												echo ".</p> ";
 												
+												// Displaying the notification buttons (form)
 												if (!(getNotifNameByID($result['TypeId']) == "IssueAssigned")){
 													
 													echo "<form action='' id=\"notif-form\">";
+													echo "<input type=\"hidden\" name=\"ProjectId\" class=\"project-id-input\" value=\"{$result['TypeEntityId']}\">";
+													echo "<input type=\"hidden\" name=\"EmailAddress\" class=\"emailaddress-input\" value=\"{$_SESSION['email']}\">";
 													echo "<input type=\"hidden\" name=\"NotificationId\" class=\"notif-id-input\" value=\"{$result['Id']}\">";
 													echo "<input type='button' name=\"submit\" id='notif-accept-button' value=\"Accept\">";
 													echo "<input type='button' name=\"submit\" id='notif-reject-button' value=\"Reject\">";
 													echo "</form>";
 													
-												} 
+												} else {
+													echo "<form action='' id=\"notif-form\">";
+													echo "<input type=\"hidden\" name=\"IssueId\" class=\"issue-id-input\" value=\"{$result['TypeEntityId']}\">";
+													echo "<input type=\"hidden\" name=\"EmailAddress\" class=\"emailaddress-input\" value=\"{$_SESSION['email']}\">";
+													echo "<input type=\"hidden\" name=\"NotificationId\" class=\"notif-id-input\" value=\"{$result['Id']}\">";
+													echo "<input type='button' name=\"submit\" id='notif-ok-button' value=\"Ok\">";
+													echo "</form>";
+												}
 												echo "</div>";
 												echo "<div style=\"clear:both;\"></div>";
-											} 											
-											 
+											
+										
 										}
 									} else {
 										echo "<p> You don't have any notifications</p>";
 									}
+									
 									?>
 								</span>
 
