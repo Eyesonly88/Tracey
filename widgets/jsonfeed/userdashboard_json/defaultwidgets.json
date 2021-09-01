@@ -1,0 +1,22 @@
+{
+"layout": "layout2",
+"data" : [
+  {
+    "title" : "Projects Memberships",
+    "id" : "widget1",
+    "column" : "first",
+    "open" : true,
+    "url" : "/widgets/userdashboard_widgets/userprojects.php"
+  },
+  {
+    "title" : "Issues Assigned to You",
+    "id" : "widget2",
+    "column" : "second",
+    "open" : true,
+    "url" : "/widgets/userdashboard_widgets/userissues.php"
+  }
+  
+  
+  
+]
+}

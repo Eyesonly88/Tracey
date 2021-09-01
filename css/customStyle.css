@@ -1,0 +1,840 @@
+* { padding: 0; margin: 0; }
+a {
+outline: none;
+}
+a, a:hover {
+text-decoration: none;
+}
+body {
+color: #3D3D3D;
+
+font-family: Helvetica, Arial, sans-serif;
+font-size: 10px;
+}
+h1, h2, h3, h6 {
+font-weight:bold;
+}
+.custom {
+background-attachment: scroll;
+background-clip: border-box;
+background-color: transparent;
+/*background-image: url(../images/bg.png);*/
+background:#E2D2AE;
+background-origin: padding-box;
+width: 100%;
+height: 800px;
+margin-bottom: 0px;
+margin-left: 0px;
+margin-right: 0px;
+margin-top: 0px;
+padding-bottom: 0px;
+padding-left: 0px;
+padding-right: 0px;
+padding-top: 0px;
+font-size: 10px;
+
+}
+.custom .page {
+background: transparent ;
+margin: 0 auto;
+padding-right: 0em;
+padding-left: 0em;
+padding-top: 0em;
+height: inherit
+}
+
+/* User Box Area */
+.custom #user-box { 
+width:	inherit;
+height:	110px;
+margin: 0px;
+padding: 0px;
+}
+
+.custom #user-box #createIssue-createComponent-container, .custom #user-box #createProject-container{ 
+float:none;
+display:block;
+margin-left:auto;
+margin-right:auto;
+margin-top:2em;
+/*width:25%;*/
+text-align: center;
+font-size: 1.75em;
+border: none;
+}
+
+.custom #user-box #createProject-container #createProject-button{
+float:none;
+display:block;
+margin-left:42.5%;
+margin-right:auto;
+/*width:40%;*/
+text-align: center;
+border: none;
+}
+
+.custom #user-box #createProject-container a{
+	
+display: block;
+width:0;
+height:0;
+float:left;
+margin-left:45%;
+margin-right:auto;
+text-align: center;
+border: none;
+	
+}
+
+
+.custom #user-box #createIssue-createComponent-container #createIssue-button{ 
+float:left;
+display:block;
+margin-left:36%;
+margin-right:auto;
+/*width:40%;*/
+text-align: center;
+border: none;
+}
+
+.custom #user-box #createIssue-createComponent-container #createComponent-button{ 
+float:left;
+margin-left:1em;
+/*width:50%;*/
+text-align: center;
+border: none;
+}
+
+/* Header Area */
+
+/* the header background area is currently black/red. Can be easily changed to whatever we decide on. */
+.custom #header-area { background: url(../images/tracey_header_area_brown2.png) repeat-x ;
+width:	inherit;
+height:	110px;
+margin: 0px;
+padding: 0px;
+}
+
+.custom #header { position: relative ; height:	inherit; padding: 0;}
+
+/* Incase we add a logo */
+.custom #logo { float: left }
+
+
+/* TOP MENU -> Home, About, Help */
+
+.custom .menu { position: absolute; top: 1.4em; right: 14.1em; width: auto; list-style: none ; margin: 0px; padding: 0px;}
+    .custom .menu li { margin-left: 2.5em ; position: relative; float: left; color:#F5F5E5;border-color: #DDD;}
+    .custom .menu a { background: none; font-size: 1.6em; letter-spacing: normal; padding: 0; text-shadow: 1px 1px 1px #000; text-transform: none ;color: #DADADA;border-color: #DDD;}
+
+
+/* MAIN NAV MENU (SHARED STYLES)-> Login, Register or Account, Themes .. */
+
+#nav { float: right; list-style: none; margin-top: 5em ;font-size: 10px;}
+    #nav li { float: left; margin-left: 1em; position: relative; padding-right: 1em }
+        #nav li a { display: block; height: 4.4em; padding: .8em 1.1em }
+            #nav li a:hover, #login:hover, #register:hover, #createProject:hover, #Invite:hover { background: #251C17 url(images/nav_over.png) repeat-x top }
+    #nav h3 { color: #372823; font-size: 2.4em; line-height: 1.1em; text-align:right; }
+        #nav a:hover h3, #login:hover h3, #register:hover h3, #createProject:hover h3, #Invite:hover h3 { color: #F1F4F7; font-size:2.5em; }
+    #nav span { color: #000000; font-size: 1.75em; text-align:right; }
+        #nav a:hover span, #login:hover span, #register:hover span, #createProject:hover span, #Invite:hover span { color: #F1F4F7; }
+    #nav li a:hover, #login:hover a, #register:hover a { }
+    
+#nav .login-form, #nav .register-form, #nav .notifications-form, #nav .createProject-form, #nav .invite-form { background: #251C17; border: .35em solid rgba(0, 0, 0, .3); border-top: 0; display: none; float: left; right: -.3em; position: absolute; top: 6em; z-index: 10; -moz-border-radius-bottomleft: .6em; -moz-border-radius-bottomright: .6em; -webkit-border-bottom-left-radius: .6em; -webkit-border-bottom-right-radius: .6em }
+    #nav .login-form a, #nav .register-form a { display: inline; height: auto; padding: 0; text-shadow: none }
+        #nav .login-form a:hover, #nav .register-form a:hover { background: none; border: 0; margin: 0 }
+
+#login:hover, #register:hover, #notifications:hover, #createProject:hover, #Invite:hover { -moz-box-shadow: 0 0 7px #222; -webkit-box-shadow: 0 0 7px #222 }
+
+#nav li#projectname #projectname-container h3{
+	float: left;
+	padding-top:0.5em;
+}
+#pendingInvite-container input{
+	margin-top:1em;
+	font-size: 2em;
+}
+
+}
+
+#nav #pendingInvite-container a{
+
+  margin-top:2em;
+
+   font-size: 2em;
+
+  display:inherit;
+
+  padding: 0;
+
+  height: 0;
+
+  
+
+}
+
+#nav #pendingInvite-container{
+
+  width:auto;
+
+  height:auto;
+
+  background: #251C17;
+
+  display: inline;
+
+ 
+
+ }
+
+/** Login Form and Login Item in Nav **/
+
+#login .login-form { padding: 1em 1.1em 2em 12em; width: 26.9em }
+    #login #lost-pwd{display: block;
+float: left;
+clear: right;
+padding: 15px 5px 0;
+font-size: 0.95em;
+text-decoration: underline;}
+#login .login-form h3, #register .register-form h3 { font-size: 3em; font-weight: bold; line-height: .8em; text-shadow: 1px 1px 1px #FFF; text-transform: none ; text-align: left;}
+
+#login label { 
+		color: #F1F4F7; font-size: 1.45em; line-height: 1.2em; margin-top: .7em; text-shadow: 1px 1px 1px #251C17; float: left;
+		padding-top: 8px; clear: both; width: 280px; display: block;
+}
+
+
+
+
+
+#login input.field, #register input.field {
+background: #AF9F7B;
+margin-right: 5px;
+margin-top: 4px;
+width: 175px;
+color: #251C17;
+height: 16px;
+padding: 6px;
+-moz-border-radius: 3px;
+-webkit-border-radius: 3px;
+border-radius: 3px;
+}
+
+#login input.bt_login {
+width: 74px;
+background: transparent url(../images/bt_login.png) no-repeat 0 0;
+}
+
+#login input.bt_login, #register input.bt_register{
+display: block;
+float: left;
+clear: left;
+height: 24px;
+text-align: center;
+cursor: pointer;
+border: none;
+font-weight: bold;
+
+}
+
+#login a{
+	color: #15ADFF;
+}
+
+#nav #login a.go { float: right; padding: .3em .5em }
+#nav #login a.go:hover { text-shadow: none }
+
+
+/** Register Form and Register Item **/
+
+#register .register-form { padding: 0em 1.1em 2em 12em; width: 26.9em }
+#register label { 
+		color: #F1F4F7; font-size: 1.45em; line-height: 1.2em; margin-top: .7em; text-shadow: 1px 1px 1px #251C17; float: left;
+		padding-top: 8px; clear: both; width: 280px; display: block;
+}
+
+
+#register input.bt_register {
+	  	width: 94px; color: white; background: transparent url(../images/bt_register.png) no-repeat 0 0; 
+}
+
+#nav #register a.go { float: right; padding: .3em .5em }
+#nav #register a.go:hover { text-shadow: none }
+
+#login-container .login-loading {background:url(../images/loading6.gif) no-repeat; height:55px; margin:-14px 0 0 190px; padding:0; position:absolute; width:54px; z-index:8000; }
+#login-container .login-message {text-align:center; color:#F1F4F7;}
+#login-container .login-error {font-size:14px; font-weight:bold; line-height:18px; margin: 10px 0; color:#F1F4F7; width:175px;display: block; text-align: center; float: left; clear: left;}
+#login-container .login-title {color:#F1F4F7;}
+#login-container .login-error {font-size:14px; font-weight:bold; line-height:18px; margin: 10px 0; color:#F1F4F7; width:175px;display: block; text-align: center; float: left; clear: left;}
+
+
+#register-container .register-loading {background:url(../images/loading6.gif) no-repeat; height:55px; margin:-14px 0 0 190px; padding:0; position:absolute; width:54px; z-index:8000; }
+#register-container .register-message {text-align:center; color:#F1F4F7;}
+#register-container .register-error {font-size:14px; font-weight:bold; line-height:18px; margin: 10px 0; color:#F1F4F7; width:175px;display: block; text-align: center; float: left; clear: left;}
+#register-container .register-title {color:#F1F4F7;}
+#register-container .register-error {font-size:14px; font-weight:bold; line-height:18px; margin: 10px 0; color:#F1F4F7; width:175px;display: block; text-align: center; float: left; clear: left;}
+
+
+/* Invitation styles */
+
+#Invite .invite-form { padding: 0em 1.1em 2em 1em; width: 47em ; }
+#Invite .invite-form label {
+	font-size:3em;
+	margin-top:1em;
+	margin-right:1em;
+	float:left;
+	color:white;
+}
+#Invite .invite-form input[type=text]{
+	margin-top:0.1em;
+	font-size:0.5em;
+	padding:0.5em;
+	float:none;
+}
+#Invite .invite-form select {
+	margin-right: 0.5em;
+	margin-top:0.3em;
+	margin-left:0.5em;
+	font-size:0.5em;
+	padding:0.3em;
+	float:none;
+}
+#Invite .invite-form option{
+	font-size:1em;
+	text-align:center;	
+}
+
+#Invite .invite-form input[type=button] {
+	margin-right: 0.5em;
+	float:none;
+	border:none;
+}
+/* Notifications Form and Notification Items */
+
+#notifications .notifications-form { padding: 0em 1.1em 2em 1em; width: 47em ; }
+
+#notifications .notif-msg-block {
+	display:block;
+	float:left;
+}
+
+#notifications #notification-icon {
+	background-image: url(../images/cardboard.png);
+	background-repeat: no-repeat;
+	height:60px;
+	width: 80px;
+	
+}
+#notifications #notification-icon h3{
+	text-align: center;
+}
+#notifications #notifications-content p{
+	float:left;
+	margin-right:1em;
+	margin-top:1em;
+	/*display: block;*/
+}
+#notifications #notifications-content input[type=button]{
+	float:left;
+	/*margin-bottom:1em; 
+	display: block;*/
+}
+
+/* Create Project Styles */
+
+#createProject .createProject-form { padding: 0em 1.1em 2em 12em; width: 26.9em }
+#createProject label { 
+		color: #F1F4F7; font-size: 1.45em; line-height: 1.2em; margin-top: .7em; text-shadow: 1px 1px 1px #251C17; float: left;
+		padding-top: 8px; clear: both; width: 280px; display: block;
+}
+
+/* Dashboard Styles */
+
+#switcher {
+	margin: 1em;
+	width: 100px;
+	height: 15px;
+}
+#switcher span{
+	font-size: 1.0em;
+}
+
+
+.focusField{
+        border:solid 2px #F1F4F7;
+        background:#e4e4e4;
+        color:#505050;
+ }
+.idleField{
+        background:#e4e4e4;
+        color: #AAA;
+        
+ }
+
+/* iPhone style button */
+
+.custom input[type=button] {
+	/*float:right;*/
+      font-family: "Helvetica Neue", Helvetica, sans-serif;
+      font-size: 1.3em;
+      font-weight: bold;
+      /*width: 50%;*/
+      height: 50px;
+      padding-left:0.5em;
+      padding-right:0.5em;
+      border: 3px solid #282726;
+      background: -webkit-gradient( linear, left top, left bottom, from(#e2e2e2), to(#8c8a88), color-stop(0.6, #bbbbbb), color-stop(0.2, #ffffff));
+      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#8c8a88'); /* for IE */
+      background: -moz-linear-gradient(90deg, (#e2e2e2), (#8c8a88));
+      margin: 0 0 3px 0;
+      text-shadow: 0px 1px 0 #cecece;
+      -webkit-background-origin: padding-box;
+      -webkit-background-clip: border-box;
+      -webkit-border-radius: 8px;
+      -moz-background-origin: padding-box;
+      -moz-background-clip: border-box;
+      -moz-border-radius: 8px;
+   }
+
+.custom input[type=button]:hover, .custom input[type=button].cancel,
+.custom input[type=button]:active, .custom input[type=button].cancel:active {
+      color: #fff;
+      text-shadow: none;
+}
+
+.custom input[type=button]:hover, .custom input[type=button].cancel:hover {
+      background: -moz-linear-gradient(top, (#aaaee5), (#10006d));
+      background: -webkit-gradient( linear, left top, left bottom, from(#aaaee5), to(#10006d), color-stop(0.5, #1F3B97), color-stop(0.5, #081f6f) ); 
+      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#aaaee5', endColorstr='#10006d'); /* for IE */
+    }
+
+/*
+ * Iphone Style button for lightbox pages
+ */
+input[type=button], input[type=submit], button {
+	/*float:right;*/
+      font-family: "Helvetica Neue", Helvetica, sans-serif;
+      font-size: 1.3em;
+      font-weight: bold;
+      /*width: 50%;*/
+      height: 50px;
+      padding-left:0.5em;
+      padding-right:0.5em;
+      border: 2px solid #f6f6f6;
+      background: -webkit-gradient( linear, left top, left bottom, from(#e2e2e2), to(#8c8a88), color-stop(0.6, #bbbbbb), color-stop(0.2, #ffffff));
+      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#8c8a88'); /* for IE */
+      background: -moz-linear-gradient(90deg, #e2e2e2, #8c8a88)repeat scroll 0 0 transparent;
+      margin: 0 0 3px 0;
+      text-shadow: 0px 1px 0 #cecece;
+      -webkit-background-origin: padding-box;
+      -webkit-background-clip: border-box;
+      -webkit-border-radius: 8px;
+      -moz-background-origin: padding-box;
+      -moz-background-clip: border-box;
+      -moz-border-radius: 8px;
+   }
+
+input[type=button]:hover, input[type=button].cancel,
+input[type=button]:active, input[type=button].cancel:active,
+button:active, button.cancel:active,
+button:hover, button.cancel,
+input[type=submit]:hover, input[type=submit].cancel,
+input[type=submit]:active, input[type=submit].cancel:active {
+      color: #fff;
+      text-shadow: none;
+}
+
+input[type=button]:hover, input[type=button].cancel:hover, input[type=submit]:hover, input[type=submit].cancel:hover, button:hover, button.cancel:hover {
+      background: -moz-linear-gradient(90deg, #558BCB, #336FB7) repeat scroll 0 0 transparent;
+      background: -webkit-gradient( linear, left top, left bottom, from(#aaaee5), to(#10006d), color-stop(0.5, #1F3B97), color-stop(0.5, #081f6f) ); 
+      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#aaaee5', endColorstr='#10006d'); /* for IE */
+    }
+  
+
+/*
+ * New Issue Interface inspired by RedMine & Github Issue interfaces.
+ * 
+ * 
+ */
+
+fieldset {border: 1px solid #e4e4e4; margin:0;}
+legend {color: #484848;}
+
+.leftcontent{float:left; width:49%;}
+.rightcontent{float:right; width:49%;}
+
+.box textarea {
+	width:95%;
+	margin:1em;
+	padding: 1em;
+}
+.box form {
+	display: inline;
+}
+.box #issue-name {
+	text-align: center;
+}
+.box #issue-name h3{
+	font-size:2em;
+	padding:0.5em;
+	float:left;
+	margin-left:25%;
+}
+.box #issue-name input{
+	width: 400px;
+	padding: 0.5em;
+	float:left;
+	margin-top: 0.5em;
+}
+
+.box #user-col,.box #project-col, .box #status-col{
+	float:left;
+	margin-right:10em;
+}
+
+.box{
+padding:6px;
+margin-bottom: 10px;
+background-color:#f6f6f6;
+color:#505050;
+line-height:1.5em;
+border: 1px solid #e4e4e4;
+font-size:12px;
+}
+
+.required {color: #bb0000;}
+
+/***** Tabular forms ******/
+.tabular p{
+margin: 0;
+padding: 5px 0 8px 0;
+padding-left: 180px; /*width of left column containing the label elements*/
+height: 1%;
+clear:left;
+}
+
+html>body .tabular p {overflow:hidden;}
+
+.tabular label{
+font-weight: bold;
+float: left;
+text-align: right;
+margin-left: -180px; /*width of left column*/
+width: 175px; /*width of labels. Should be smaller than left column to create some right 
+margin*/
+}
+
+.tabular label.floating{
+font-weight: normal;
+margin-left: 0px;
+text-align: left;
+width: 270px;
+}
+
+.tabular label.block{
+font-weight: normal;
+margin-left: 0px !important;
+text-align: left;
+float: none;
+display: block;
+width: auto;
+}
+
+.tabular label.inline{
+float:none;
+margin-left: 5px !important;
+width: auto;
+}
+
+
+/* Issue Styles and Creating Project*/
+/*
+ * IssueWrap contains everything
+ * Each container in the issuewrap div contains 3 components (Title, Edit button, box containig the content)
+ * The comment container is different from the other 3 containers in that it doesn't need Edit button (instead it has Submit button)
+ * The SPAN element is representing the edit/submit button because it allows for having nice effects and works on multiple browsers such as I.E
+ * 
+ */
+
+#projectwrap label, #componentwrap label{
+	color: #372823; font-size: 1.45em; line-height: 1.2em;float: left;
+	clear: both; width: 350px; height: 50px;display: block; 
+}
+#projectwrap label select, .custom #componentwrap label select{
+	color: #372823; 
+	font-size: 1em; 
+	line-height: 1.2em;
+	float: right;
+}
+
+#projectwrap label input[type=text], #componentwrap label input[type=text]{
+	float:right;
+	margin-bottom:.5em;
+	padding:.5em;
+	background: #372823;
+	color: white;
+}
+#projectwrap label p, .custom #componentwrap label p{
+	float:left;
+	margin-right:3em;
+}
+.custom #issuewrap, #projectwrap, #componentwrap{
+	display: inline-block;
+	background: white;
+	border: 0.3em solid #372823;
+	margin-left: 0em;
+	margin-top: 0em;
+	width:800px;
+	padding-bottom:5em;
+}
+.custom #issuewrap #input_title{
+	padding:0.5em;
+	width:300px;
+}
+
+.custom #issuewrap #issue-loghours-container{
+	width: 600px;
+	height: 100px; 
+	margin-left: 9em;
+	
+}
+
+.custom #issuewrap #issue-info-container, #projectwrap #createproject-info-container, #componentwrap #createcomponent-info-container{
+	width: 600px;
+	height: 150px; 
+	margin-left: 9em;
+	
+}
+.custom #issuewrap #issue-confirm-button button{
+	display: inline-block;
+	padding:0.5em;
+	margin-top:3em;
+	margin-right:8em;
+	float:right;
+	width: 100px;
+}
+.custom #issuewrap #issue-desc-container{
+	width: 600px;
+	height: 150px; 
+	margin-left: 9em;
+	margin-top: 10em;
+	margin-bottom:2em;
+}
+.custom #issuewrap #issue-attach-container{
+	width: 600px;
+	height: 150px; 
+	margin-left: 9em;
+	margin-top: 9em;
+}
+
+.custom #issuewrap #issue-comment-container{
+	width: 600px;
+	height: 100px; 
+	margin-right: 11em;
+	margin-top: 6em;
+	float: right;
+}
+.custom #issuewrap #issue-info-container #issue-info{
+	background: #F8F8F8;
+	border-bottom-left-radius: 0.5em;
+	border-bottom-right-radius: 0.5em;
+	border: 0.3em solid gray;
+	width: inherit;
+	height: inherit;
+	padding-top:1em;
+}
+.custom #issuewrap #issue-info-container #issue-info label{
+	float:left;
+	padding-bottom:1em;
+	padding-top:0.3em;
+	padding-left:1em;
+	font-size: 1.5em;
+	
+}
+.custom #issuewrap #issue-info-container #issue-info #issue-dates label{
+	float:left;
+	position:relative;
+	padding-bottom:1em;
+	padding-top:0.3em;
+	margin-left:0.01em;
+	padding-right:4em;
+	font-size: 1.5em;
+	
+}
+.custom #issuewrap #issue-info-container #issue-info select{
+	float:left;
+	margin-left:1em;
+	margin-bottom:0.8em;
+	margin-right:0.5em;
+	margin-top:0.2em;
+	position: relative;
+}
+
+.custom #issuewrap #issue-desc-container #issue-desc{
+	background: #F8F8F8;
+	border-bottom-left-radius: 0.5em;
+	border-bottom-right-radius: 0.5em;
+	border: 0.3em solid gray;
+	width: inherit;
+	height: inherit;
+	padding-bottom:1em;
+}
+
+.custom #issuewrap #issue-desc-container #issue-desc textarea{
+	width: 555px;
+	height: 120px;
+	padding-top:1em;
+	padding-left:1em;
+	margin:1em;
+	color: #000000;
+	text-align: left;
+	
+}
+
+
+.custom #issuewrap #issue-attach-container #issue-attach{
+	background: #F8F8F8;
+	border-bottom-left-radius: 0.5em;
+	border-bottom-right-radius: 0.5em;
+	border: 0.3em solid gray;
+	width: inherit;
+	height: inherit;
+	float: left;
+	position: relative;
+}
+
+.custom #issuewrap #issue-comment-container #issue-create-comment{
+	background: #F8F8F8 ;
+	border-top-left-radius: 0.5em;
+	border-top-right-radius: 0.5em;
+	width: inherit;
+	height: inherit;
+}
+
+.custom #issuewrap #issue-comment-container #issue-create-comment textarea{
+	width: 555px;
+	height: 60px;
+	padding-top:1em;
+	padding-left:1em;
+	margin:1em;
+	color: #000000;
+}
+.custom #issuewrap #issue-comment-container span{
+	/*float: left;*/
+	display: inline-block;
+	/*padding-left:0.5em;
+	padding-bottom:0.2em;
+	padding-right:0.5em;
+	padding-top:0.2em;*/
+	padding:0.5em;
+	font-size: large;
+	float: right;
+	border: 0.2em solid #F8F8F8;
+	border-bottom: none;
+	border-bottom-left-radius: 0.5em;
+	border-bottom-right-radius: 0.5em;
+	background: white;
+}
+
+.custom #issuewrap #issue-info-container h3, #issue-desc-container h3, #issue-attach-container h3{
+	display: inline-block;
+	padding:0.2em;
+	font-size: large;
+	text-align: left;
+}
+.custom #issuewrap #issue-info-container span{
+	/*float: left;*/
+	display: inline-block;
+	padding-left:0.5em;
+	padding-bottom:0.2em;
+	padding-right:0.5em;
+	padding-top:0.2em;
+	font-size: large;
+	float: right;
+	border: 0.2em solid gray;
+	border-bottom: none;
+	border-top-left-radius: 0.5em;
+	border-top-right-radius: 0.5em;
+	background: white;
+}
+.custom #issuewrap #issue-desc-container span{
+	/*float: left;*/
+	display: inline-block;
+	margin-top:0.6em;
+	padding-left:0.5em;
+	padding-bottom:0.2em;
+	padding-right:0.5em;
+	padding-top:0.2em;
+	font-size: large;
+	float: right;
+	border: 0.2em solid gray;
+	border-bottom: none;
+	border-top-left-radius: 0.5em;
+	border-top-right-radius: 0.5em;
+	background: white;
+}
+
+.custom #issuewrap #issue-attach-container span{
+	/*float: left;*/
+	display: inline-block;
+	position: relative;	
+	padding-left:0.5em;
+	padding-bottom:0.2em;
+	padding-right:0.5em;
+	padding-top:0.2em;
+	font-size: large;
+	margin-top:0.6em;
+	float: right;
+	border: 0.2em solid gray;
+	border-bottom: none;
+	border-top-left-radius: 0.5em;
+	border-top-right-radius: 0.5em;
+	background: white;
+}
+
+.custom #issuewrap #issue-attach-container #issue-attach{
+	display: inline-block;
+	padding-left:0.5em;
+	padding-bottom:0.2em;
+	padding-right:0.5em;
+	padding-top:0.2em;
+}
+
+.custom #issuewrap h3,  #projectwrap h3, .custom #componentwrap h3  {
+	text-align: center;
+	font-size: large;
+	padding:0.5em;
+}
+
+/* Clone of iphone type button - to use in a class */
+
+.create_btn {
+	float:right;
+      font-family: "Helvetica Neue", Helvetica, sans-serif;
+      font-size: 1.3em;
+      font-weight: bold;
+      width: 50%;
+      height: 50px;
+      border: 3px solid #282726;
+      background: -webkit-gradient( linear, left top, left bottom, from(#e2e2e2), to(#8c8a88), color-stop(0.5, #acadae), color-stop(0.5, #82807e) );
+      margin: 0 0 3px 0;
+      text-shadow: 0px 1px 0 #cecece;
+      -webkit-background-origin: padding-box;
+      -webkit-background-clip: border-box;
+      -webkit-border-radius: 8px;
+    }
+
+.create_btn:hover, .create_btn.cancel,
+.create_btn:active, .create_btn.cancel:active {
+      color: #fff;
+      text-shadow: none;
+}
+
+.create_btn:hover, .create_btn.cancel:hover {
+      background: -webkit-gradient( linear, left top, left bottom, from(#aaaee5), to(#10006d), color-stop(0.5, #1F3B97), color-stop(0.5, #081f6f) );
+    }
+
+.create_btn.cancel {
+      background: -webkit-gradient( linear, left top, left bottom, from(#5c5c5b), to(#1e1b16), color-stop(0.2, #1e1b16) );
+      margin-top: 6px;
+    }

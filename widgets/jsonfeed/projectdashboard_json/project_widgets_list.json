@@ -1,0 +1,20 @@
+{
+  "data" : [
+    {
+      "id" : "w02",
+      "title" : "Project Components",
+      "description" : "Components of this project.",
+      "creator" : "Tracey",
+      "url" : "widgets/projectdashboard_widgets/projectcomponents.php",
+      "image": ""
+    },
+  {
+  	"id" : "w029",
+    "title" : "Issues from components you belong to", 
+    "description" : "Components of this project.",
+	"creator" : "Tracey",
+    "url" : "widgets/projectdashboard_widgets/usercomponentissues.php",
+    "image": ""
+  }
+  ]
+}

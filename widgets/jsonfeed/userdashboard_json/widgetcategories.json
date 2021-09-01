@@ -1,0 +1,16 @@
+{
+"category": [
+  {
+    "id":1,
+    "title" : "Project Widgets",
+    "amount" : 2,
+    "url" : "/widgets/jsonfeed/userdashboard_json/project_widgets_list.json"
+  },
+  {
+    "id":2,
+    "title" : "Issue Widgets",
+    "amount": 2,
+    "url" : "/widgets/jsonfeed/userdashboard_json/issue_widgets_list.json"
+  }
+]
+}

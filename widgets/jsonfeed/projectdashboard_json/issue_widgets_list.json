@@ -1,0 +1,13 @@
+{
+  "data" : [
+    {
+      "id" : "w04",
+      "title" : "Project Issues",
+      "description" : "Issues related to this project",
+      "creator" : "Tracey",
+      "url" : "widgets/projectdashboard_widgets/projectissues.php",
+      "image": ""
+    }
+  ]
+}
+
